@@ -1,0 +1,174 @@
+\chapter{Statistics}
+\todo{Solve problem with bold greek letters}
+\section{Basics of statistical learning}
+Almost every problem in ML and data science starts
+with the same ingredients: a dataset $\mathbf{X}$, a model $g(\mathbf{θ})$,
+which is a function of the parameters $\mathbf{θ}$, and a cost function $\mathbf{\mC}(\mathbf{X}, g(\mathbf{θ}))$ that allows us to judge how well the
+model $g(\mathbf{θ})$ explains the observations $\mathbf{X}$. The model is fit
+by finding the values of $\mathbf{θ}$ that minimize the cost function.
+\subsection{Language}
+We begin with an unknown function
+$y = f (x)$ and fix a \emph{hypothesis set} $\mH$ consisting of all functions we are willing to consider, defined also on the domain of $f$ . This set may be uncountably infinite (e.g. if
+there are real-valued parameters to fit). The choice of
+which functions to include in $\mH$ usually depends on our
+intuition about the problem of interest. The function
+$f (x)$ produces a set of pairs $(x_i , y_i ), i = 1 . . . N$ , which
+serve as the observable data. Our goal is to select a function from the hypothesis set $h \in \mH$ that approximates
+$f (x)$ as best as possible, namely, we would like to find
+$h \in \mH$ such that $h \approx f$ in some strict mathematical
+sense which we specify below. If this is possible, we say
+that we \emph{learned} $f (x)$. But if the function $f (x)$ can, in
+principle, take any value on \emph{unobserved inputs}, how is it
+possible to learn in any meaningful sense ?\\
+The answer is that learning is possible in the restricted
+sense that the fitted model will probably perform approximately as well on new data as it did on the training data.
+Once an appropriate error function E is chosen for the
+problem under consideration (e.g. sum of squared errors
+in linear regression), we can define two distinct performance measures of interest. The in-sample error, E in ,
+and the out-of-sample or generalization error, E out
+\subsubsection{Set-up}
+Consider a
+dataset $\mD = (\mathbf{X}, \mathbf{y})$ consisting of the $N$ pairs of independent and dependent variables. Let us assume that the
+true data is generated from a noisy model
+\be 
+y = f (x) + \epsilon
+\ee 
+where $\epsilon$ is normally distributed with mean zero and standard deviation $\sigma_\epsilon$, i.e. the ’noise’.
+Assume that we have a statistical procedure (e.g. least-
+squares regression) for forming a predictor $f (\mathbf{x}; \hat{\mathbf{θ}})$ that
+gives the prediction of our model for a new data point $\mathbf{x}$.
+This estimator is chosen by minimizing a cost function
+which we take to be the squared error
+\be 
+\label{eq:statCostFct}
+\mC(\mathbf{y}, f(\mathbf{X}; \mathbf{θ})) = \sum_i (y_i - f(x_i; \mathbf{θ}))^2.
+\ee 
+Therefore, the estimates for the parameters
+\be 
+\hat{\mathbf{θ}} =\arg \min_{θ} \mC(\mathbf{y}, f(\mathbf{X};\mathbf{θ}) )
+\ee 
+are a function of the dataset, $\mD$. We would obtain a
+different error $\mC( \mathbf{y}_j , f (\mathbf{X}_j ; \hat{\mathbf{θ}}_{\mD_j}))$ for each dataset $\mD_j =
+(\mathbf{y}_j , \mathbf{X}_j )$ in a universe of possible datasets obtained by
+drawing $N$ samples from the true data distribution. We
+denote an expectation value over all of these datasets as
+$\mathbb{E}_{\mD}$.
+
+
+\begin{mybox}{Errors}
+	Combining these expressions,
+	we see that the expected \emph{out-of-sample error}
+	\be 
+	 E_{out} := \mathbb{E}_{\mD,\epsilon}[\mC(\mathbf{y}, f (\mathbf{X}; \hat{\mathbf{θ}}_{\mD} ))],
+	\ee 
+	 can be decomposed as
+	 \be 
+	E_{out} = \text{Bias}^2 + \text{Var} + \text{Noise},
+	\ee
+	with
+	\begin{align*}
+	\text{Noise}&=\sum_i \sigma^2_\epsilon,\; \text{Var}=\sum_i \mathbb{E}_{\mD}[(f (\mathbf{x}_i ; \hat{\mathbf{θ}}_{\mD} ) − \mathbb{E}_{\mD}[f (\mathbf{x}_i ; \hat{\mathbf{{θ}}}_{\mD})])^2 ],\\
+	\text{Bias}^2&=\sum_i (f (\mathbf{x}_i ) − \mathbb{E}_{\mD}[f ((\mathbf{x}_i ;\hat{(\mathbf{θ}}_{\mD} )])^2.
+	\end{align*}
+	The variance measures how much our estimator fluctuates due
+	to finite-sample effects and the bias measures the deviation of the expectation value of
+	our estimator (i.e. the asymptotic value of our estimator
+	in the infinite data limit) from the true value.
+\end{mybox}
+\begin{mybox}{Bias-variance trade-off}
+	The bias-variance tradeoff summarizes the fundamental tension in machine learning, particularly supervised
+	learning, between the complexity of a model and the
+	amount of training data needed to train it. Since data
+	is often limited, in practice it is often useful to use a
+	less-complex model with higher bias – a model whose
+	asymptotic performance is worse than another model –
+	because it is easier to train and less sensitive to sampling
+	noise arising from having a finite-sized training dataset
+	(smaller variance).\\
+	Thus, to minimize $E_{out}$ and maximize our predic-
+	tive power, it may be more suitable to use a more bi-
+\end{mybox}
+
+\section{Gradient descent}
+\subsection{Simple gradient descent}
+
+As always in the context of ML, we want to minimize the cost function $E(\mathbf{θ})=\mC(\mathbf{X},g(\mathbf{θ}))$.
+\begin{mybox}{Gradient descent}
+The simplest gradient descent (GD) algorithm is characterized by the following \emph{update rule} for the parameters $\mathbf{θ}$. Initialize the parameters to some value $\mathbf{θ}_0$ and iteratively update the parameters according to the equation
+\be
+\label{eq:gdsimple}
+\mathbf{v}_t = \eta_t \nabla_{θ} E(\mathbf{θ}_t),\quad \mathbf{θ}_{t+1} = \mathbf{θ}_t-\mathbf{v}_t
+\ee 
+where we have introduced the \emph{learning rate} $\eta_t$, that controls how big a step we should take in the direction of the gradient at time step $t$.
+\end{mybox}
+For sufficiently small choice of $\eta_t$, this method will converge to a \emph{local minimum} of the cost function, however this is computationally expensive. In practice, one usually specifies a ’schedule’ that decreases $\eta_t$ at long times (common schedules include power law and exponential decay in time).\footnote{Note that  Newton's method is a first-order approximation of GD method, which is not practical as it is a computationally expensive algorithm. However, Newton's method automatically adjusts the step size so that one takes larger steps in flat directions with small curvature and smaller steps in steep directions with large curavture. This gives an intuition of how to modify GD methods to get better results.}
+The simple GD has the following limitations
+\begin{enumerate}
+\item GD finds local minima of the cost function.\\
+Because in ML we are often dealing with extremely rugged landscapes with many local minima, this can lead to poor performance.
+\item Gradients are computationally expensive to calculate for large datasets.
+\item GD is very sensitive to choices of the learning rates.\\
+Ideally, we would ’adaptively’ choose the learning rates to match the landscape.
+\item GD treats all directions in parameter space uniformly.
+\item GD is sensitive to initial conditions.
+\item GD can take exponential time to escape saddle points, even with random initialization..
+\end{enumerate}
+These limitiations lead to generalized GD methods which form the backbone of much of modern DL and NN.
+\subsection{Modified gradient descent}
+\subsubsection{Stochastic gradient descent (SGD) with mini-batches}
+\begin{mybox}{SGD}
+		In SGD, we replace the actual gradient over the full data at each gradient descent step by an approximation to the gradient computed using a minibatch. This introduces stochasticity and decreases the chance that our fitting algorithm gets stuck in isolated local minima, as you cycle over all minibatches one at a time.\\
+The update rule is
+	\be
+	\label{eq:gdstochastic}
+	\mathbf{v}_t=\eta_t \nabla_{θ} E^{MB}(\mathbf{θ}),\quad \mathbf{θ}_{t+1} = \mathbf{θ}_t-\mathbf{v}_t.
+	\ee 
+\end{mybox}
+\subsubsection{Algorithm gradient descent with momentum}
+\marginpar{It has been argues that first-order methods (with appropriate initial conditions) can perform comparable to more expensive second-order methods, especially in the context of comples DL models.}
+\begin{mybox}{GDM}
+Introduce a ’momentum’ term into SGD which serves as a memory of the direction we are moving in parameter space. This helps the GD algorithm to gain speed in directions with persistent but small gradients even in the presence of stochasticity, while suppressing oscillations in high-curvature directions. The update rules is
+\be 
+\label{eq:gdmomentum}
+\mathbf{v}_t = \gamma \mathbf{v}_{t-1}+\eta_t \nabla_{θ} E^{MB}(\mathbf{θ}_t), \quad \mathbf{θ}_{t+1} = \mathbf{θ}_t-\mathbf{v}_t,
+\ee
+where we have introduced a momentum parameter $\gamma \in [0,1]$. 
+\end{mybox}
+\subsubsection{Methods that use the second moment of the gradient}
+We would like to adaptively change the step size to match the landscape. This can be accomplished by tracking not only the gradient, but also the second moment of the gradient\footnote{Similar but avoiding the Hessian, which encodes local curvatures via second derivatives, as in Newton's method.}
+\begin{mybox}{RMSprop}
+	In addition to keeping a running average of the first moment of the gradient, we also keep track of the second moment denoted by $\mathbf{s}_t=\mathbb{E}[\mathbf{g}^2_t]$. The update rule is 
+	\be
+	\label{eq:gdRMSprop}
+	\mathbf{g}_t=\nabla_{θ} E(\mathbf{θ}),\; \mathbf{s}_t=\beta \mathbf{s}_{t-1} + (1-\beta) \mathbf{g}^2_t,\; \mathbf{θ}_{t+1}=\mathbf{θ}_t - \eta_t \frac{\mathbf{g}_t}{\sqrt{\mathbf{s}_t+\epsilon}},
+		\ee 
+		where $\beta$ controls the averaging time of the second moment and is typically taken to be about $\beta=0.9$, $\eta_t$ is typically chosen to be $10^{-3}$, and $\epsilon\propto 10^{-8}$ is a small regularization constant to prevent divergencies. It is clear from this formula that the learning rate is reduced in directions where the gradient is consistently large.
+\end{mybox}
+\begin{mybox}{ADAM}
+	In ADAM, we keep a running average of both the first and second moment of the gradient and use this information to adaptively change the learning rate for different parameters. In addition to keeping a running average of the second moments of the gradient (i.e $\mathbf{m}_t= \mathbb{E}[\mathbf{g}_t], \mathbf{s}_t=\mathbb{E}[\mathbf{g}^2_t]$), ADAM performs an additional bias correction to account for the fact that we are estimating the first two moments of the gradient using a running average (denoted by the hat in the update rule). The update rule is given by (where multiplication and division are once again understood to be element-wise operations)
+	\begin{align}
+		\label{eq:gdADAM}
+		\mathbf{g}_t &= \nabla_{θ} E(\mathbf{θ}), \quad \mathbf{m}_t =\beta_1 \mathbf{m}_{t-1} + (1-\beta_1) \mathbf{g}_t, \\
+		\mathbf{s}_t &=\beta_2 \mathbf{s}_{t-1} + (1-\beta_2) \mathbf{g}^2_t,\quad \hat{\mathbf{m}}_t = \frac{\mathbf{m}}{1-(\beta_1)^t},\nonumber \\
+		\hat{\mathbf{s}}_t &= \frac{\mathbf{s}_t}{1-(\beta_2)^t},\quad \mathbf{θ_{t+1}} = \mathbf{θ}_t - \eta_t \frac{\hat{\mathbf{m}}}{\sqrt{\hat{\mathbf{s}}_t} +\epsilon}\nonumber,
+	\end{align}
+where $\beta_1$ and $\beta_2$ set the memory lifetimes of the first and second moment (typically $\beta_{1,2} =\{0.9,0.99\}$ respectively).
+\end{mybox}
+The learning rates for RMSprop and ADAM can be set significantly higher than other methods due to their adaptive step sizes. For this reason, ADAM and RMSprop tend to be much quicker at navigating the landscape than simple momentum based methods.\footnote{Note that in some cases trajectories might not end up at the global minimum. This kind of landscape structure is generic in high-dimensional spaces where saddle points proliferate.}
+\subsection{Practical tips for using GD}
+Employ these tips for getting the best performance from GD based algorithms, especially in the context of deep neural networks (DNN)
+\begin{enumerate}
+	\item Randomize the data when making mini-batches.\\
+	Otherwise, the GD method can fit spurious correlations resulting from the order in which data is presented.
+	\item Transform your inputs.\\
+	One simple trick for minimizing problems in difficult landscapes is to standardize the data by subtracting the mean and normalizing the variance of input variables. Whenever possible, also decorrelate the inputs. 
+	\item Monitor the out-of-sample performance.\\
+	Always monitor the performance of your model on a validation set (a small portion of the training data that is held out of the training process to serve as a proxy for the test set). If the validation error starts increasing then the model is beginning to overfit. Terminate the learning process. This \emph{early stopping} significantly improves performance in many settings.
+	\item Adaptive optimization methods do not always have good generalization.\\
+	Recent studies have shown that adaptive methods such as ADAM, RMSprop , and AdaGrad tend to have poor generalization to SGD or SGD with momentum, particularly in the high-dimensional limit (i.e. the number of parameters exceeds the number of data points). Although it is not clear at this state why sophisticated methods (e.g. ADAM, RMSprop, AdaGrad)  perform so well in training DNN such as generative adversarial networks (GANs), simpler procedures like properly-tuned plain SGD may work equally well or better in some applications.
+\end{enumerate}
+
+
+
+
+\section{Overview of Bayesian Inference}

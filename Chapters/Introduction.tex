@@ -1,0 +1,146 @@
+\chapter{Introduction}
+\section{Intro to AI}
+This is about considering the relationship between AI and ML.
+\begin{enumerate}
+	\item AI includes machine learning, but machine learning does't fully define AI. 
+	\item The main point of confusion between learning and intelligence is that people assume that simply because a machine gets better at its job (\emph{learning}) it is also aware (\emph{intelligence}). Nothing supports this view of machine learning. The same phenomenon occurs when people assume that a computer is purposely causing problems for them. The computer can not assign emotions and therefore acts only upon the input provided and the instruction contained within an application to process that input. A true AI will eventually occur when computers can finally emulate the clever combination used by nature
+	\begin{enumerate}
+		\item \emph{Genetics}:\\
+		Slow learning from one generation to the next.
+		\item \emph{Teaching}:\\
+		Fast learning from organized sources.
+		\item \emph{Exploration}:\\
+		Spontaneous learning through media and interactions with others.
+	\end{enumerate}
+	\item ML is only part of what a system requires to become an AI. The ML portion of the picture enables an AI to perform these tasks:
+	\begin{enumerate}
+		\item Adapt to new circumstances that the original developer did not envision
+		\item Detect patterns in all sorts of data sources
+		\item Create new behaviours based on the recognized patters
+		\item Make decisions based on the success or failure of the behaviours.
+	\end{enumerate}
+	The use of algorithms to manipulate data is the centrepiece of ML. To prove successful, a ML sessions must use an appropriate algorithm to achieve a desired result. In addition, the data must lend itself to analysis using the desired algorithm, or it requires a careful preparation by scientists. \\
+	AI encompasses many other disciplines to simulate the thought process successfully. In addition to ML, AI normally includes 
+	\begin{enumerate}
+		\item Natural language processing: The act of allowing language input and putting it into a form that a computer can use.
+		\item Natural language understanding: The act of deciphering the language in order to act upon the meaning it provides.
+		\item Knowledge representation: The ability to store information that makes fast access possible.
+		\item Planning (in the form of goal seeking): The ability to use stored information to draw conclusions in near real time (almost at the moment it happens, but with a slight delay so short that only computer notices).
+		\item Robotics: The ability to act upon requests from a user in some physical form
+	\end{enumerate}
+	
+\end{enumerate}
+\subsection{On governance/policy}
+As scientists continue to work with a technology and turn hypotheses into theories, the technology becomes related more to engineering than science. As the rules governing a technology become clear, groups of experts work together to define these rules in written form. The result is \emph{specifications} ( a set of rules that everyone agrees upon). Eventually, implementations of the specifications become \emph{standards} that a governing body, such as the IEEE (Institute of Electrical and Electronics Engineers) or a combination of the ISO/IEC (International Organization for Standardization/international Electrotechnical Comission), manages. AI and ML have both been around long enough to create specifications, but you currently won't find any standards for either technology.
+
+\subsection{ML}
+\subsubsection{What is ML -- the schools of thought}
+Statistics and ML have a lot in common and statistics represents one of the five \emph{tribes} (schools of thought) that make ML feasible. The five tribes are
+\begin{enumerate}
+	\item Symbolists:\\
+	The origin of this tribe is in logic and philosophy. This group relies on inverse deduction to solve problems.
+	\item Connectionists:\\
+	The origin of this tribe is neuroscience. This group relies on backpropagation to solve problems.\\
+	This tribe strives to reproduce the brain's functions using silicon instead of neurons. Essentially, each of the neurones (created as an algorithm that models the real-world counterpart) solves a small piece of the problem, and the use of many neurons in parallel solves the problem as a whole.\\
+	The use of \emph{backpropagation}, or backward propagation of errors, seeks to determine the conditions under which errors are removed from networks built to resemble the human neurons by changing the \emph{weights} (how much a particular input figures into the result) and \emph{biases} (which features are selected) of the network. The goal is to continue changing the weights and biases until such time as the actual output matches the target output. At this point, the artificial neuron fires and passes its solution along to the next neuron in line. The solution created by just one neuron is only part of the whole solution. Each neuron passes information to the net neuron in line until the group of neurons creates a final output.
+	\item Evolutionaries: \\
+	The origin of this tribe is in evolutionary biology. This group relies on genetic programming to solve problems.\\
+	The evolutionaries rely on the principles of evolution to solve problems. In other words, this strategy is based on the survival of the fittest (removing any solutions that don't match the desired output). A fitness funciton determines the viability of each function in solving a problem.\\
+	Using a tree structure, the solution method looks for the best solution based on function output. The winner of each level of evolution gets to build the next-level functions. The idea is that the next level will get closer to solving the problem but may not solve it completely, which means that another level is needed. This particular tribes relies heavily on recursion and languages that strongly support recursion to solve problems. An interesting output of this strategy has been algorithms that evolve: One generation of algorithms actually builds the next generation.
+	\item Bayesians:\\
+	The origin of this tribe is in statistics. This group relies on probabilistic inference to solve problems.\\
+	The Bayesians use various statistical methods to solve problems. Given that statistical methods can create more than one apparently correct solution, the choice of a function becomes one of determining which function has the highest probability of succeeding. For example, when using these techniques, you can accept a set of symptoms as input and decide the probability that a particular disease will result from the symptoms as output. Given that multiple diseases have the same symptoms, the probability is important because a user will see some in which a lower probability output is actually the correct output for a given circumstance.\\
+	Ultimately, this tribe supports the idea of never quite trusting any hypothesis (a result that someone has given you) completely without seeing the evidence used to make it (the input the other person used to make the hypothesis). Analyzing the evidence proves or disproves the hypothesis that it supports. Consequently, it is not possible to determine which disease someone has until you test all the symptoms. One of the most recognizable outputs from this tribe is the spam filter.
+	\item Analogizers:\\
+	The origin of this tribe is in psychology. This group relies on kernel machines to solve problems.\\
+	The analogyzers use kernel machines to recognize patterns in data. By recognizing the pattern of one set of inputs and comparing it to the pattern of a known output, you can create a problem solution. The goal is to use similarity to determine the best solution to a problem. It is the kind of reasoning that determines that using a particular solution worked in a given circumstance at some previous time; therefore, using that solution for a similar set of circumstances should also work. One of the most recognizable outputs from this tribe is recommender systems like in Amazon.
+\end{enumerate}
+The ultimate goal of ML is to combine the technologies and strategies embraced by the five tribes to create a single algorithm (the \emph{master algorithm}) that can learn anything.\\
+ML for dummies is following Bayesian approach.
+\subsubsection{What means training ?}
+\begin{mybox}{}
+	In machine learning you have inputs and you know the desired result. However, you do not know what function to apply to create the desired result. Training provides a learner algorithm with all sorts of examples of the desired inputs and results expected from those inputs. The learner then uses this input to create a function. In other words, training is the process whereby the learner algorithm maps a flexible function to the data. The output is typically the probability of a certain class or a numeric value.\\
+	Note that we are basically talking about the function of a narrow AI, specific to one problem.
+\end{mybox}
+The secret to ML is generalization, the goal is to generalize the output function so that it works on data beyond the training set.\\
+To create this generalized function, the learner algorithm relies on just three components:
+\begin{enumerate}
+	\item Representation:\\
+	The learner algorithm creates a \emph{model}, which is a function that will produce a given result for specific inputs. The representation is a set of models that a learner algorithm can learn. In other words, the learner algorithm must create a model that will produce the desired results from the input data. If the learner algorithm can't perform this task, it can't learn from the data and the data is outside the hypothesis space of the learner algorithm. Part of the representation is to discover which \emph{features} (data elements within the data source) to use for the learning process.
+	\item Evaluation:\\
+	The learner can create more than one model. However, it does not know the difference between good and bad models. An evaluation function determines which of the models works best in creating a desired result from a set of inputs. The evaluation function scores the models because more than one model could provide the required results.
+	\item Optimization:\\
+	At some point, the training process produces a set of models that can generally output the right result for a given set of inputs. At this point, the training process searches through these models to determine which one works best. The best model is then output as the result of the training process.
+\end{enumerate}
+\subsubsection{Intriccacies with}
+\begin{enumerate}
+	\item Cleaning the data also lends a certain amount of artistics quality to the result. The cleaned dataset used by one scientist for ML tasks may not precisely match the cleaned datasets used by another.
+	\item When working in a ML environment, you also have the problem of input data to consider. For example, the microphone found in one smartphone won't produce precisely the same input data that a microphone in another smartphone will. The characteristics of the microphones differ, yet the result of interpreting the vocal commands provided by the user must remain the same.
+\end{enumerate}
+
+\subsection{Big Data}
+\section{Math basics}
+\subsection{Different possible types of learning}
+\subsubsection{Supervised learning}
+\emph{Supervised learning} occurs when an algorithm learns from example data and associated target responses that can consist of numeric values or string labels, such as classes or tags, in order to later predict the correct response when posed with new examples. The supervised approach is indeed similar to human learning under the supervision of a teacher. The teacher provides good examples for the student to memorize, and the student then derives general rules from these specific examples.\\
+You need to distinguish between regression problems, whose target is a numeric value, and classification problems, whose target is a qualitative variable, such as a class or tag. E.g. a regression task determines the average prices of houses in the Boston area, and classification tasks distinguishes between kinds of iris flowers based on their sepal and petal measures. 
+\subsubsection{Unsupervised learning}
+\emph{Unsupervised learning} occurs when an algorithm learns from plain examples without any associated response, leaving to the algorithm to determine the data patterns on its own. This type of algorithm tends to restructure the data into something else, such as new features that may represent a class or a new series of uncorrelated values. They are quite useful in providing humans with insights into the meaning of data and new useful inputs to supervised ML algorithms. As a kind of learning, it resembles the methods humans use to figure out that certain objects or events are from the same class, such as by observing the degree of similarity between objects. Some recommendation systems that you find on the web in the form of marketing automation are based on this type of learning. The marketing automation algorithm derives its suggestions from what you have bought in the past. The recommendations are based on an estimation of what group of customers you resemble the most and then inferring your likely preferences based on that group.
+
+\subsubsection{Reinforcement learning}
+\emph{Reinforcement learning}
+occurs when you present the algorithm with examples that lack labels, as in unsupervised learning. However, you can accompany an example with positive or negative feedback according to the solution the algorithm proposes. Reinforcement learning is connected to applications for which the algorithm must make decisions (so the product is prescriptive, not just descriptive, as in unsupervised learning), and the decisions bear consequences. In the human world, it is just like learning by trial and error. Errors help you learn because they have a penalty added.\\
+An interesting example occurs when computers learn to play video games by themselves. In this case, an application presents the algorithm with examples of specific situations. The application lets the algorithm know the outcome of actions it takes, and learning occurs while trying to avoid what it discovers to be dangerous and to pursue survival. The program is initially clumsy and unskilled but steadily improves with training until it becomes a champion.
+\subsubsection{On the learning process}
+\begin{mybox}{}
+	Even though supervised learning is the most popular and frequently used, all ML algorithms respond to the same logic. The central idea is that you can represent reality using a mathematical function that the algorithm does not know in advance but can guess after having seen some data. You can express reality and all its challenging complexity in terms of unknown mathematical functions that ML algorithms find and make advantageous. This concept it the core idea for all kinds of ML algorithms.
+\end{mybox}
+The objective of a supervised classifier is to assign a class to an example after having examined some characteristics of the example itself. Such characteristics are called \emph{features}, and they can be both quantitative (numeric values) or qualitative (string labels). To assign classes correctly, the classifier must first examine a certain number of known examples closely (examples that already have a class assigned to them), each one accompanied by the same kinds of features as the examples that do not have classes. The training phase involves observation of many examples by the classifier that helps it learn so that it can provide an answer in terms of a class when it sees an example without a class later.
+\begin{example}
+	To give an idea of what happens in the training process, imagine a child learning to distinguish trees from other objects. Before the child can do so in an independent fashion, a teacher presents the child with a certain number of tree images, complete with all the facts that make a tree distinguishable from other objects of the world. Such facts could be features such as its material(wood), its parts (trunk, branches, leaves or needles, roots), and location (planted into the soil). The child produces an idea of what a tree looks like by contrasting the display of tree features with the images of other different objects, such as pieces of furniture that are made of wood but do not share other characteristics with a tree.
+\end{example}
+A ML classifier works the same. It builds its cognitive capabilities by creating a mathematical formulation, called a \emph{target function}, that includes all the given features ion a way that creates a function that can distinguish one class from another. Assume a target function, which can express the characteristics of a tree, to exist. In such a case, a ML classifier can look for its representation as a replica or as an approximation (a different function that works alike). Being able to express such a target function is the representation capability of the classifier.\\
+The representation process takes place via \emph{mapping}, where you discover the construction of a function by observing its outputs. A successful mapping in ML is similar to a child internalizing the idea of an object. She understands the abstract rules derived from the facts of the world in an effective way so that when she sees a tree she immediately recognizes it.\\
+The set of all the potential functions that the learning algorithm can figure out is called the \emph{hypothesis space}. We call the resulting classifier with all its set parameters a \emph{hypothesis}. The hypothesis space must contain all the parameter variants of all the ML algorithms that you want to try to map to an unknown function when solving a classification problem. Different algorithms can have different hypothesis spaces. What really matters is that the hypothesis space contains the target function (or its approximation, which is a different but similar function).
+\begin{definition}
+	In ML, someone has to provide the right learning algorithms, supply some nonlernable parameters (called \emph{hyper-parameters}), choose a set of examples to learn from, and select the features that accompany the examples. Just as a child can't always learn to distinguish between right and wrong if left alone in the world, so ML algorithms need human beings to learn successfully.
+\end{definition}
+Note that noise in real-world data is the norm. Many extraneous factors and errors that occur when recording data distort the values  of the features. A good ML algorithm should distinguish the signals that can map back to the target function from extraneous noise.
+\subsection{Cost function}
+The driving force behind optimization in ML is the response from a function internal to the algorithm, called the \emph{cost function}. You may see other terms used in some contexts, such as \emph{loss function, objective function, scoring function,} or, \emph{error function,} but the cost function is an evaluation function that measures how well the ML algorithm maps the target function that it is striving to guess. In addition, a cost function determines how well a ML algorithm performs in a supervised prediction or an unsupervised optimization problem.\\
+The evaluation function works by comparing the algorithm predictions against the actual outcome recorded from the real world. Comparing a prediction against its real value using a cost function determines the algorithm's error level, keeping errors low is optimal. The cost function transmits what is actually important and meaningful for your purposes to the learning algorithm.
+\begin{example}
+	When the problem is to predict who will likely become ill from a certain disease, you prize algorithms that can score a high probability of singling out people who have the same characteristics and actually did become ill later. Based on the severity of the illness, you may also prefer that the algorithm wrongly chooses some people who don't get ill after all rather than miss the people who actually do get ill.
+\end{example}
+When an algorithm uses a cost function directly in the optimization process, the cost function is used internally. Given that algorithms are set to work with certain cost functions, the optimization objective may differ from your desired objective. In such a case, you measure the results using an external cost function that, for clarity of terminology, you call an \emph{error function} or \emph{loss function} (if it has to be minimized) or a \emph{scoring function} (if it has to be maximized).
+\\
+With respect to your target, a good practice is to define the cost function that works the best in solving your problem, and then to figure out which algorithms work best in optimizing it to define the hypothesis space you want to test. When you work with algorithms that don't allow the cost function you want, you can still indirectly influence their optimization process by fixing their hyper-parameters and selecting your input features with respect to your cost function. Finally, when you've gathered all the algorithm results, you evaluate them by using your chosen cost function and then decide on the final hypothesis with the best result from your chosen error function.
+\begin{mybox}{}
+	Deciding on the cost function is a really important and fundamental task because it determines how the algorithm behaves after learning and how it handles the problem you want to solve. Never rely on default options, but always ask yourself what you want to achieve using ML and check what cost function can best represent the achievement.
+\end{mybox}
+If you need to pick a cost function, ML explanations introduce a range of error functions for regression and classification, comprising root mean squared errors, log loss, accuracy, precision, recall, and area under the curve.
+\subsubsection{An example: The gradient descent algorithm}
+Gradient descent works out a solution by starting from a random solution when given a set of parameters (a data matrix made of features and a response). It then proceeds in various iterations using the feedback from the cost function, thus changing its parameters with values that gradually improve the initial random solution and lower the error. Even though the optimization may take a large number of iterations before reaching a good mapping, it relies on changes that improve the response cost function most (lower error) during each iteration. There can be local minima where the process may get stuck and cannot continue its descent. \\
+You can visualize the optimization process as a walk in high mountains, with the parameters being the different paths to descend to the valley. A gradient descent optimization occurs at each step. At each iteration, the algorithm chooses the path that reduces error the most, regardless of the direction taken. The idea is that if steps aren't too large (causing the algorithm to jump over the target), always following the most downward direction will result in finding the lowest place. Unfortunately, this result does not always occurs because the algorithm can arrive at intermediate valleys, creating the illusion that it has reached the target. However, in most cases, gradient descent leads the ML algorithm to discover the right hypothesis for successfully mapping the problem. Given the optimization process's random initialization , running the optimization many times is good practice. This means trying different sequences of descending paths and not getting stuck in the same local minimum.\\
+When working with repeated updates of its parameters base on mini-batches and single examples, the gradient descent takes the name \emph{stochastic gradient descent}.
+\\
+\begin{mybox}{}
+	ML boils down to an optimization problem in which you look for a global minimum given a certain cost function.
+\end{mybox}
+\subsection{Data processing}
+When operating with data within the limits of the computer's memory (RAM), you are working in \emph{core memory}. Algorithms that work with core memory are called \emph{batch algorithms}.\\
+If the data set is too big to fit into the standard memory of a single computer you could the following.
+\begin{enumerate} 
+	\item Subsample: \\
+	Data is reshaped by a selection of cases (and sometimes even features) based on statistical sampling into a more manageable, yet reduced, data matrix. Clearly, reducing the amount of data can't always provide exactly the same results as when globally analysing it. A successful subsampling must correctly use statistical sampling, by employing random or stratified sample drawings.
+	\begin{definition}
+		In \emph{random sampling}, you create a sample by randomly choosing the examples that appear as part of the sample. The larger the sample, the more likely he sample will resemble the original structure and variety of data, but even with few drawn examples, the results are often acceptable, both in terms of representation of the original data and for ML purposes.
+	\end{definition}
+	\begin{definition}
+		In \emph{stratified sampling}, you control the final distribution of the target variable or of certain features in data that you deem critical for successfully replicating the characteristics of your complete data. A classic example is to draw a sample in a classroom made up of different proportions of males and females in order to guess the average height. If females are, on average, shorter than and in smaller proportion to males, you want to draw a sample that repliates the same proportion in order to obtain a reliable estimate of the average height. If you sample only males by mistake, you'll overestimate the average height. Using prior insight with sampling (such as knowing that gender can matter in height guessing) helps a lot in obtaining samples that are suitable for ML.
+	\end{definition}
+	After you choose a sampling strategy, you have to draw a subsample of enough examples, given your memory limitations, to represent the variety of data. Data with high dimensionality, characterized by many cases and many features, is more difficult to subsample because it needs a much larger sample, which may not even fit into your core memory.
+	\item Network parallelism:\\
+	Split data into multiple computers that are connected in a network. Each computer handles part of the data for optimization. You cannot split all ML algorithms into separable processes.
+	\item Rely on out-of-core algorithms, which work by keeping data on the storage device and feeding it in chunks into computer memory for processing. The feeding process is called \emph{streaming}. Because the chunks are smaller than the core memory, the algorithm can handle them properly and use them for updating the ML algorithm optimization. After the update, the system discards them in favour of new chunks, which the algorithm uses for learning. This process goes on repetitively until there are no more chunks. Chunks can be small, and the process ic called \emph{mini-batching}, or they can even be constituted by just a single example, called \emph{online learning}.
+\end{enumerate}
