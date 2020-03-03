@@ -28,36 +28,44 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.2.1.2}{Unsupervised learning}}{8}{subsubsection.1.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.2.1.3}{Reinforcement learning}}{8}{subsubsection.1.2.1.3}
+\contentsline {subsubsection}{\numberline {1.2.1.3}{Reinforcement learning}}{9}{subsubsection.1.2.1.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.2.1.4}{On the learning process}}{9}{subsubsection.1.2.1.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.2}{Cost function}}{10}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.2}{Cost function}}{11}{subsection.1.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.2.2.1}{An example: The gradient descent algorithm}}{11}{subsubsection.1.2.2.1}
+\contentsline {subsubsection}{\numberline {1.2.2.1}{An example: The gradient descent algorithm}}{12}{subsubsection.1.2.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.3}{Data processing}}{12}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.3}{Data processing}}{13}{subsection.1.2.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}{Statistics}}{15}{chapter.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}{Basics of statistical learning}}{15}{section.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.1}{Language}}{15}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.1}{Difference between estimation and prediction}}{15}{subsection.2.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.1.1}{Set-up}}{15}{subsubsection.2.1.1.1}
+\contentsline {subsubsection}{\numberline {2.1.1.1}{Contrasting the two}}{15}{subsubsection.2.1.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}{Gradient descent}}{17}{section.2.2}
+\contentsline {subsection}{\numberline {2.1.2}{Language}}{16}{subsection.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}{Simple gradient descent}}{17}{subsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.1.2.1}{Set-up}}{16}{subsubsection.2.1.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.2}{Modified gradient descent}}{18}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.2}{Gradient descent}}{18}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.2.2.1}{Stochastic gradient descent (SGD) with mini-batches}}{18}{subsubsection.2.2.2.1}
+\contentsline {subsection}{\numberline {2.2.1}{Simple gradient descent}}{18}{subsection.2.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.2.2.2}{Algorithm gradient descent with momentum}}{18}{subsubsection.2.2.2.2}
+\contentsline {subsection}{\numberline {2.2.2}{Modified gradient descent}}{19}{subsection.2.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.2.2.1}{Stochastic gradient descent (SGD) with mini-batches}}{19}{subsubsection.2.2.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.2.2.2}{Algorithm gradient descent with momentum}}{19}{subsubsection.2.2.2.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.2.2.3}{Methods that use the second moment of the gradient}}{19}{subsubsection.2.2.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.3}{Practical tips for using GD}}{20}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.3}{Practical tips for using GD}}{21}{subsection.2.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}{Overview of Bayesian Inference}}{20}{section.2.3}
+\contentsline {section}{\numberline {2.3}{Overview of Bayesian Inference}}{21}{section.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.1}{Language}}{22}{subsection.2.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.2}{Calculations}}{23}{subsection.2.3.2}
