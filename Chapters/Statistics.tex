@@ -3,11 +3,72 @@ We limit our focus to supervised and unsupervised learning if not specified othe
 \todo{Solve problem with bold greek letters}
 \section{More formal introduction into the idea of Machine Learning}
 \subsection{Problem set-up and recipe}
+\label{subsec:recipeML}
+Problems in ML typically involve inference about complex systems where we do not know the exact form of the mathematical model that describes the system. It is therefore not uncommon to have multiple candidate models that need to be compared.
 \subsubsection{Ingredients}
-Many problems in ML and data science start with the same ingredients. The first ingredient is the dataset $\mD=(\mX,\mathbf{y})$ where $\mX$ is a matrix of independent 
-
-
-
+Many problems in ML and data science start with the same ingredients. The first ingredient is the dataset $\mD=(\mX,\mathbf{y})$ where $\mX$ is a matrix of independent variables and $\mathbf{y}$ is a vector of dependent variables. The second is the model $f(\mx;\mt)$, which is a function $f:\mx \rightarrow y$ of the \emph{parameters} $\mt$. That is, $f$ is a function used to predict an output from a vector of input variables. 
+\marginpar{Using polynomial models (i.e. polynomials of different order) in polynomial regressions, we can think of each term in the polynomial as a ’feature’ (i.e. a,b are features for $f_1(x)=a x^2+bx$) in our model, then increasing the order of the polynomial we fit increases the number of features.}
+\begin{mybox}{Model class}
+	To make predictions, we will consider a family of functions $f_{\alpha}(x,\mt_\alpha)$ that depend on some parameters $\mt_\alpha$. These functions represent the \emph{model class} that we are using to model the data and make predictions. Note that we choose the model class without knowing the function $f(x)$. The $f_\alpha(x;\mt_\alpha)$ encode the \emph{features} we choose to represent the data. Different models (e.g. $\alpha=1,2,3$) can contain different number of parameters, then the models have different \emph{model complexity}.
+\end{mybox}
+The final ingredient is the \emph{cost function} $\mC(\my,f(\mX;\mt))$ that allow us to judge how well the model performs on the observations $\my$. The model is fit by finding the value of $\mt$ that minimizes the cost function. For example, one commonly used cost function is the squared error. Minimizing the squared error cost function is known as the method of least squares, and is typically appropriate for experiments with Gaussian measurement errors.
+\subsubsection{Recipe}
+\begin{enumerate} 
+\item The \emph{first step} in the analysis is to \emph{randomly} divide the dataset $\mD$ into two mutually exclusive groups $\mD_{train}$ and $\mD_{test}$ called the training and test sets. The fact that this must be the first step should be heavily emphasized - performing some analysis (such as using the data to select important variables) before partitioning the data is a common pitfall that can lead to incorrect conclusions. Typically, the majority of the data are partitioned into the training set (e.g. $90\%$) with the remainder going into the test set. 
+\begin{mybox}{Cross evaluation}
+	Therefore, to learn the parameters $\mt_\alpha$, we will train our models on a \emph{training dataset} and then test the effectiveness of the model on a \textbf{different} dataset, the \emph{test dataset}.
+\end{mybox}
+\item The model is fit by minimizing the cost function using only the data in the training set $\hat{\mt}= \arg \min_{θ}\{\mC(\my_{train}, f(\mX_{train};\mt) )\}$.
+\item Finally, the performance of the model is evaluated by computing the cost function using the test set $\mC(\my_{test},f(\mX_{test};\hat{\mt}))$. 
+\end{enumerate}
+\subsection{Performance evaluation}
+\subsubsection{Ingredients for performance evaluation}
+\begin{mybox}{Measure for evaluating performance}
+	The value of the cost function for the best fit model on the training set is called the \emph{in-sample error}
+	\be 
+	\label{eq:errorInsample}
+	E_{in}=\mC(\my_{train},f(\mX_{train};\mt))
+	\ee 
+	and the value of the cost function on the test set is called the \emph{out-of-sample error}
+	\be 
+	\label{eq:errorOutsample}
+	E_{out}= \mC(\my_{test},f(\mX_{test};\mt)).
+	\ee 
+	One of the most important observations we can make is that \textbf{the out-of-sample error is almost always greater than the in-sample error}
+	\be 
+	\label{eq:errorComparison}
+	E_{out} \geq E_{in}.
+	\ee 
+	Comparison of candidate models is usually done by using $E_{out}$. The model that minimizes this out-of-sample error is chosen as the best model (i.e. model selection).
+\end{mybox}
+Note that once we select the best model on the basis of its performance on $E_{out}$, the real-world performance of the winning model should be expected to be slightly worse because the test data was now used in the fitting procedure.\\
+Splitting the data into mutually exclusive training and test sets provides an unbiased estimate for the predictive performance of the model - this is known as \emph{cross-validation}.
+\begin{mybox}{Pitfalls for performance evaluation}
+	It may be at first surprising that the model that has the lowest out-of-sample error $E_{out}$ usually \emph{does not} have the lowest in-sample Error $E_{in}$. Therefore, if our goal is to obtain a model that is useful for prediction, we may not want to choose the model that provides the best explanation for the current observations. At first glance, the observation that the model providing the best explanation for the current dataset probably will not provide the best explanation for future datasets is very counter-intuitive. \\
+Moreover, the discrepancy between $E_{in}$ and $E_{ou}$ becomes more and more important, as the complexity of our data, and the models we use to make predictions, grows. As the number of parameters in the model increases, we are forced to work in high-dimensional spaces. The ’curse of dimensionality’ ensures that many phenomena that are absent or rare in low-dimensional spaces become generic.
+\end{mybox}
+\subsubsection{How to effectively do the performance evaluation}
+It turns out that for complicated models studied in ML, predicting and fitting are very different things.\\
+	Models that give the best fit to existing data do not necessarily make the best predictions even for simple tasks. At small sample sizes, noise can create fluctuations in the data that look like genuine patterns. Simple models (like a linear function) cannot represent complicated patterns in the data, so they are forced to ignore the fluctuations and to focus on the larger trends. 
+\begin{mybox}{Overfitting}
+Complex models with many parameters can capture both the global trends and noise-generated patters at the same time. IN this case, the model can be tricked into thinking that the noise encodes real information. This problem is called \emph{overfitting} and leads to a steep drop-off in predictive performance.\\
+We can guard against overfitting in two ways:
+\begin{enumerate}
+	\item We can use less expensive models with fewer parameters, or
+	\item we can collect more data so that the likelihood that the noise appears patterned decreases.
+\end{enumerate}
+\end{mybox}
+\begin{mybox}{Bias-Variance tradeoff}
+	The \emph{bias-variance} tradeoff is used in our countermeasures against overfitting. What is it ?\\When the amount of training data is limited, one can often get better predictive power performance by using a less expressive model rather than the more complex model. The simpler model has more ’bias’ but is less dependent on the particular realization of the training dataset, i.e. less ’variance’. Therefore, even though the correct model is guaranteed to have better predictive performance for an infinite amount of training data (less bias), the training errors stemming from finite-size sampling (variance) can cause simpler models to outperform the more complex model when sampling is limited.
+\end{mybox}
+These two concepts are now discussed in more detail, for that we introduce another quantity and then look explicitly at the components of our theory causing problems for different complexity regimes.
+\begin{mybox}{Bias}
+	The bias represents the best our model could do if we had an infinite amount of training data to beat down sampling noise. The bias is a property of the kind of functions, or model class, we are using to approximate $f(x)$. In general, the more complex the model class we use, the smaller the bias. However, we do not generally have an infinite amount of data. For this reason, to get best predictive power it is better to minimize the out-of-sample error, $E_{out}$, rather than the bias. 
+\end{mybox}
+How can we get a better idea of what is the true object to minimize to get bets results ? \\
+The Bias-Variance tradeoff is implicitly encoded in the in-and out-of-sample errors. We will therefore draw from statistical learning theory to get a better understanding of what it is we ought to be doing to achieve best practices.\\
+The out-of-sample error will decrease with the number of data points. As the number of data points gets large, the sampling noise decreases and the training data set becomes more representative of the true distribution from which the data is drawn. For this reason, in the infinite data limit, the in-sample and out-of-sample error must approach the same value, which is called the ’bias’ of our model.
+\subsection{title}
 
 
 
@@ -25,12 +86,7 @@ Many problems in ML and data science start with the same ingredients. The first 
 
 
 \section{Basics of statistical learning}
-Statistical modeling revolves around estimation or prediction.\\
-Almost every problem in ML and data science starts
-with the same ingredients: a dataset $\mathbf{X}$, a model $g(\mathbf{θ})$,
-which is a function of the parameters $\mathbf{θ}$, and a cost function $\mathbf{\mC}(\mathbf{X}, g(\mathbf{θ}))$ that allows us to judge how well the
-model $g(\mathbf{θ})$ explains the observations $\mathbf{X}$. The model is fit
-by finding the values of $\mathbf{θ}$ that minimize the cost function.
+Statistical modeling revolves around estimation or prediction.
 \subsection{Difference between estimation and prediction}
 Note first and foremost that techniques in ML tend to be more focused on prediction rather than estimation, which means that we will mostly treat prediction problems in this compendium. This is for example because an artificially intelligent agent needs to be able to recognize objects in its surroundings and predict the behaviour of its environment in order to make informed choices.\\
 \subsubsection{Contrasting the two}
