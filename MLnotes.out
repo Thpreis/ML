@@ -17,10 +17,10 @@
 \BOOKMARK [2][-]{subsection.2.1.1}{2.1.1\040Problem\040set-up\040and\040recipe}{section.2.1}% 17
 \BOOKMARK [2][-]{subsection.2.1.2}{2.1.2\040Performance\040evaluation}{section.2.1}% 18
 \BOOKMARK [2][-]{subsection.2.1.3}{2.1.3\040title}{section.2.1}% 19
-\BOOKMARK [1][-]{section.2.2}{2.2\040Basics\040of\040statistical\040learning}{chapter.2}% 20
+\BOOKMARK [1][-]{section.2.2}{2.2\040Statistics}{chapter.2}% 20
 \BOOKMARK [2][-]{subsection.2.2.1}{2.2.1\040Difference\040between\040estimation\040and\040prediction}{section.2.2}% 21
-\BOOKMARK [2][-]{subsection.2.2.2}{2.2.2\040Language}{section.2.2}% 22
-\BOOKMARK [2][-]{subsection.2.2.3}{2.2.3\040Mathematical\040foundations\040of\040the\040bias-variance\040tradeoff}{section.2.2}% 23
+\BOOKMARK [2][-]{subsection.2.2.2}{2.2.2\040Mathematical\040motivation\040to\040presented\040key\040ideas}{section.2.2}% 22
+\BOOKMARK [2][-]{subsection.2.2.3}{2.2.3\040Mathematical\040set-up\040of\040every\040problem\040ever}{section.2.2}% 23
 \BOOKMARK [1][-]{section.2.3}{2.3\040Gradient\040descent}{chapter.2}% 24
 \BOOKMARK [2][-]{subsection.2.3.1}{2.3.1\040Simple\040gradient\040descent}{section.2.3}% 25
 \BOOKMARK [2][-]{subsection.2.3.2}{2.3.2\040Modified\040gradient\040descent}{section.2.3}% 26

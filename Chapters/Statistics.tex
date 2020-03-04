@@ -64,7 +64,7 @@ We can guard against overfitting in two ways:
 	\label{subsubsec:biasvariancetradeoff}
 	The \emph{bias-variance} tradeoff is used in our countermeasures against overfitting. What is it ?\\When the amount of training data is limited, one can often get better predictive power performance by using a less expressive model rather than the more complex model. The simpler model has more ’bias’ but is less dependent on the particular realization of the training dataset, i.e. less ’variance’. Therefore, even though the correct model is guaranteed to have better predictive performance for an infinite amount of training data (less bias), the training errors stemming from finite-size sampling (variance) can cause simpler models to outperform the more complex model when sampling is limited.
 \end{mybox}
-The bias-variance tradeoff is one of the key concepts in ML and therefore discussed quantitatively in more detail in \ref{subsubsec:biasvariancetradeoff} and qualitatively in \ref{subsec:biasvarianceMathematical}.\\
+The bias-variance tradeoff is one of the key concepts in ML and therefore discussed quantitatively in more detail in \ref{subsubsec:biasvariancetradeoff} and qualitatively in \ref{subsubsec:biasvarianceMathematical}.\\
 These two concepts are now discussed in more detail, for that we introduce another quantity and then look explicitly at the components of our theory causing problems for different complexity regimes.
 \begin{mybox}{Bias}
 	The bias represents the best our model could do if we had an infinite amount of training data to beat down sampling noise. The bias is a property of the kind of functions, or model class, we are using to approximate $f(x)$. In general, the more complex the model class we use, the smaller the bias. However, we do not generally have an infinite amount of data. For this reason, to get best predictive power it is better to minimize the out-of-sample error, $E_{out}$, rather than the bias. 
@@ -114,7 +114,7 @@ Another way to understand this tradeoff is the following. Due to sampling noise 
 
 
 
-\section{Basics of statistical learning}
+\section{Statistics}
 Statistical modelling revolves around estimation or prediction.
 \subsection{Difference between estimation and prediction}
 Note first and foremost that techniques in ML tend to be more focused on prediction rather than estimation, which means that we will mostly treat prediction problems in this compendium. This is for example because an artificially intelligent agent needs to be able to recognize objects in its surroundings and predict the behaviour of its environment in order to make informed choices.\\
@@ -126,7 +126,7 @@ Now we perform an experiment to obtain a dataset $\mX$ and use these data to fit
 \end{mybox}
 
 
-\subsection{Language}
+\subsection{Mathematical motivation to presented key ideas}
 We begin with an unknown function
 $y = f (x)$ and fix a \emph{hypothesis set} $\mH$ consisting of all functions we are willing to consider, defined also on the domain of $f$ . This set may be uncountably infinite (e.g. if
 there are real-valued parameters to fit). The choice of
@@ -150,8 +150,8 @@ How can we evaluate the performance of our model then ?\\
 As discussed in \ref{subsec:performanceeval}, once an appropriate error function $E$ is chosen for the
 problem under consideration (e.g. sum of squared errors
 in linear regression), we can define the in-and out-of-sample error to then minimize the out-of-sample error, with the variance-bias tradeoff in mind, to achieve robust predictions.
-\subsection{Mathematical foundations of the bias-variance tradeoff}
-\label{subsec:biasvarianceMathematical}
+\subsubsection{Mathematical foundations of the bias-variance tradeoff}
+\label{subsubsec:biasvarianceMathematical}
 Here we give a mathematical motivation to the bias-variance tradeoff discussed in \ref{subsubsec:biasvariancetradeoff}.\\
 Consider a
 dataset $\mD = (\mathbf{X}, \mathbf{y})$ consisting of the $N$ pairs of independent and dependent variables. Let us assume that the
@@ -213,6 +213,56 @@ This gives us a mathematical tradeoff of the concepts discussed in \ref{subsec:p
 	noise arising from having a finite-sized training dataset
 	(smaller variance).
 \end{mybox}
+\subsection{Mathematical set-up of every problem ever}
+As described quantitatively in \ref{subsec:recipeML}, every problem in ML can be designed via a recipe which is presented now qualitatively.\\
+\subsubsection{Set-up of the notation}
+Suppose we are given a dataset with $n$ samples $\mD = \{(y_i,\mx^{(i)} )\}^n_{i=1}$, where $\mx^{(i)}$ is the $i$-th observation vector while $y_i$ is its corresponding (scalar) response. We assume that every sample has $p$ \emph{features}, namely,
+\bse 
+\mx^{(i)} \in \mR^p.
+\ese  
+Let $f$ be the true function/model that generated these samples via
+\bse 
+y_i ) = f(\mx^{(i)}, \mathbf{w}_{true}) + \epsilon_i,
+\ese 
+where $\mathbf{w}_{true}\in \mR^p$ is a \emph{parameter} vector and $\epsilon_i$ is some i.i.d. white noise with zero mean and finite variance. Conventionally, we cast all samples in an $n\times p$ matrix, the \emph{design matrix}
+\bse 
+\mX \in \mR^{n\times p}
+\ese 
+with the rows 
+\bse 
+\mX_{i,:} = \mx^{(i)} \in \mR^p,\quad i =1,\dots,n
+\ese 
+being \emph{observations} and the columns
+\bse 
+\mX_{:,j} \in \mR^n,\quad j=1,\dots,p 
+\ese 
+being measured \emph{features}.\\
+Bear in mind that this function $f$ is neer known to us explicitly, though in practice we usually presume its functional form.
+
+
+
+
+
+
+
+
+
+\subsubsection{Set-up of the problem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Gradient descent}
 \label{sec:gd}
