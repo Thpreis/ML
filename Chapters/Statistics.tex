@@ -48,6 +48,8 @@ Splitting the data into mutually exclusive training and test sets provides an un
 	It may be at first surprising that the model that has the lowest out-of-sample error $E_{out}$ usually \emph{does not} have the lowest in-sample Error $E_{in}$. Therefore, if our goal is to obtain a model that is useful for prediction, we may not want to choose the model that provides the best explanation for the current observations. At first glance, the observation that the model providing the best explanation for the current dataset probably will not provide the best explanation for future datasets is very counter-intuitive. \\
 Moreover, the discrepancy between $E_{in}$ and $E_{ou}$ becomes more and more important, as the complexity of our data, and the models we use to make predictions, grows. As the number of parameters in the model increases, we are forced to work in high-dimensional spaces. The ’curse of dimensionality’ ensures that many phenomena that are absent or rare in low-dimensional spaces become generic.
 \end{mybox}
+A comment on the difference between the in-and out-of-sample errors:\\
+There is a fundamental difference between minimizing the in-sample error and minimizing the out-of-sample error. The underlying reason for this is that the training data may not be representative of the full data distribution. From a Bayesian point of view, as David MacKay likes to repeat: \emph{We can't make predictions without making assumptions}. Thus, it is sensible to introduce priors that reflect the fact that we are likely to be undersampled (especially in high dimensions).
 \subsubsection{How to effectively do the performance evaluation}
 It turns out that for complicated models studied in ML, predicting and fitting are very different things.\\
 	Models that give the best fit to existing data do not necessarily make the best predictions even for simple tasks. At small sample sizes, noise can create fluctuations in the data that look like genuine patterns. Simple models (like a linear function) cannot represent complicated patterns in the data, so they are forced to ignore the fluctuations and to focus on the larger trends. 
@@ -68,7 +70,7 @@ The bias-variance tradeoff is one of the key concepts in ML and therefore discus
 These two concepts are now discussed in more detail, for that we introduce another quantity and then look explicitly at the components of our theory causing problems for different complexity regimes.
 \begin{mybox}{Bias}
 	The bias represents the best our model could do if we had an infinite amount of training data to beat down sampling noise. The bias is a property of the kind of functions, or model class, we are using to approximate $f(x)$. In general, the more complex the model class we use, the smaller the bias. However, we do not generally have an infinite amount of data. For this reason, to get best predictive power it is better to minimize the out-of-sample error, $E_{out}$, rather than the bias. 
-\end{mybox}
+\end{mybox}\footnote{This stems from the the law of large number. This is a theorem that describes the result of performing the same experiment a large number of times. According to the law, the average of the results obtained from a large number of trials should be close to the expected value and will tend to become closer to the expected value as more trials are performed}
 How can we get a better idea of what is the true object to minimize to get bets results ? \\
 The Bias-Variance tradeoff is implicitly encoded in the in-and out-of-sample errors. We will therefore draw from statistical learning theory in the following to get a better understanding of what it is we ought to be doing to achieve best practices.\\
 \subsubsection{Where do the insights about how to do best practices come from ?}
@@ -80,7 +82,7 @@ The out-of-sample error will decrease with the number of data points. As the num
 	\caption{}
 	\label{fig:errorbehaviour}
 \end{figure}
-Compare the behaviour of both errors with increasing number of data points, left graph of \ref{fig:errorbehaviour}, and the out-of-sample error with increasing model complexity, right graph of \ref{fig:errorbehaviour}. As for the left graph, we can look at the difference between the generalization ($E_{out}$) and training error ($E_{in}$), the big curly bracket. It measures how well our in-sample error reflects the out-of-sample error, and measures how much worse we would do on a new data set compared to our training data. For this reason, the difference between these error is precisely the quantity that measures the difference between fitting and predicting. \emph{Models with a large difference between the in-sample and out-of-sample errors are said to \textbf{overfit} the data}. 
+Compare the behaviour of both errors with increasing number of data points, left graph of \ref{fig:errorbehaviour}, and the out-of-sample error with increasing model complexity, right graph of \ref{fig:errorbehaviour}. As for the left graph, we can look at the difference between the generalization ($\abs{E_{in}-E_{out}}$) and training error ($E_{in}$), the big curly bracket. It measures how well our in-sample error reflects the out-of-sample error, and measures how much worse we would do on a new data set compared to our training data. For this reason, the difference between these error is precisely the quantity that measures the difference between fitting and predicting. \emph{Models with a large difference between the in-sample and out-of-sample errors are said to \textbf{overfit} the data}. 
 \begin{mybox}{}
 	One of the lessons of statistical learning theory is that it is not enough to simply minimize the training error, because the out-of-sample error can still be large.
 \end{mybox}
@@ -236,8 +238,16 @@ being \emph{observations} and the columns
 \bse 
 \mX_{:,j} \in \mR^n,\quad j=1,\dots,p 
 \ese 
-being measured \emph{features}.\\
-Bear in mind that this function $f$ is neer known to us explicitly, though in practice we usually presume its functional form.
+being measured \emph{features}(i.e. feature predictors).\\
+Bear in mind that this function $f$ is never known to us explicitly, though in practice we usually presume its functional form.
+\begin{example}
+	For example, in \emph{linear regression}, we assume
+	\bse 
+	y_i = f(\mx^{(i)};\mathbf{w}_{true}) + \epsilon_i= \mathbf{w}^T_{true} \mathbf{x}^{(i)} + \epsilon_i
+	\ese 
+	for some unknown but fixed $\mathbf{w}_{true}\in \mR^p$.
+\end{example}
+
 
 
 
@@ -248,15 +258,24 @@ Bear in mind that this function $f$ is neer known to us explicitly, though in pr
 
 
 \subsubsection{Set-up of the problem}
+We want to find a function $g$ with parameters $\mathbf{w}$ fit to the data $\mD$ that can best approximate $f$. This is done when we have found a $\hat{\mathbf{w}}$ such that $g(\mx;\hat{\mathbf{w}})$ yields our best estimate of $f$. Now we can use this $g$ to make predictions about the response $y_0$ for a new data point $\mx_0$.\\
+Therefore:\\
+Fitting a given set of samples $(y_i,\mx_i)$ means relating the independent variables $\mx_i$ to their responses $y_i$. The next step is to assume some \emph{models} that might explain the measurements and measuring their performance, i.e. finding the function $g$ such that
+\bse 
+y_i = g(\mx_i;\mathbf{w}).
+\ese 
+We call $g(\mx^{(i)},\mathbf{w})$ the \emph{predictor}. Recall that the optimal choice of predictor depends on, among many other things, the functions used to fit the data and the underlying noise level.
+We then try to minimize the errors made in explaing the given set of measurements based on our model $g$ by tuning the parameters $\mathbf{w}$. To do so, we need to first define the error function (formally called the  \emph{loss function}) that characterizes the deviation of our prediction form the actual response
 
 
 
 
-
-
-
-
-
+\subsubsection{On statistical language}
+As described above, a ML or statistics problem is defined via a optimization (minimization) problem of an error function, the solution to this is given by some estimator
+\be 
+\hat{\mw}_{Problem} = \arg \min_{\mw \in \mR^p} \mC(\mX, g(\mw,\my)).
+\ee 
+The bias (or bias function) of an estimator is the difference between this estimator's expected value and the true value of the parameter being estimated.
 
 
 
@@ -409,17 +428,104 @@ The denominator is difficult in practice such that one normally uses Markov Chai
 	\ee 
 	In MLE we therefore choose the parameters that maximize the probability of seeing the observed data given our generative model.
 \end{mybox}
+\subsection{Bayesian view on regularization}
+As discussed in \ref{subsec:performanceeval}, \emph{we can't make predictions without making assumptions}. Thus, it is sensible to introduce priors that reflect the fact that we are likely to be undersampled (especially in high dimensions).\\
+We can supplement an error function with a regularizer that prevents overfitting. From a Bayesian point of view, the regularization can be thought of as a prior on parameters. Minimizing the combined in-sample error $+$ regularization terms is the same as the \emph{Maximum a posteriori probability} (MAP) estimate in Bayesian regression (the parameters at which the posterior probability distribution is peaked). Note that in a true Bayesian approach, we should not use the mode of the posterior but the average over all possible choices of parameters weighted by their posterior probability. In practice, this is often not done (for computational and practical reasons).
+\section{Linear regression}
+
+\subsection{Least-square regressions}
+We'll consider ordinary least squares regression problem in which the "error function" is defined as the square from the deviation of our linear predictor to the true response. 
+\begin{mybox}{OLS}
+\emph{Ordinary least squares linear regression} (OLS) is defined as the minimization of the $L_2$ norm of the difference between the response $y_i$ and the predictor $g(\mx^{(i)};\mathbf{w})=\mathbf{w}^T \mx^{(i)}$:
+\be 
+\label{eq:lregOLS}
+\min_{\mw \in \mR^p} \norm{\mX \mw -\my}^2_2 = \min_{\mw \in \mR^p}\sum_{i=1}^n (\mw^T \mx^{(i)} - y_i)^2.
+\ee
+Where \ref{eq:lregOLS} is the minimization of the loss function of OLS.\\
+We are looking to find the parameters $\mw$ which minimize the $_2$ error. Geometrically speaking, the predictor function $g$ defines a hyperplane in $\mR^p$. Minimizing the least squares error is therefore equivalent to minimizing the sum of all projections (i.e. residuals) for all points$\mx^{(i)}$ to this hyperplane. If $\rank (\mX)=p$ , namely, the feature predictors  $\mX_{:,1},\dots,\mX_{:,p}$  are linearly independent, then there exists unique solution to this problem, which we denote as $\hat{\mw}_{LS}$:
+\be 
+\label{eq:lregOLSsolution}
+\hat{\mw}_{LS} = \arg \min_{\mw \in \mR^p} \norm{\mX \mw - \my}^2_2 = (\mX^T \mX )^{-1} \mX^T \my,
+\ee 
+where we have assumed that $\mX^T\mX$ is inertible, which is often the case when $n\gg p$ (i.e. method works if number of data points exceeds number of features). The best fit of our data $\mX$ is
+\be 
+\label{eq:lregOLbestfit}
+\hat{\my} = \mX \hat{\mw}_{LS} = \underbrace{\mX (\mX^T \mX)^{-1} \mX^T}_{\equiv P_{\mX}},
+\ee 
+where $P_{\mX}$ is the projection matrix which acts on $\my$ and projects it onto the column space of $\mX$, which is spanned by the predictors $\mX_{:,1},\dots,\mX_{:,p}$.
+\end{mybox}
+Note how we found the optimal solution $\hat{\mw}_{LS}$ in one shot, without doing any sort of iterative optimization.\\
+What are the errors of OLS such that we can evaluate its performance according to \ref{subsec:performanceeval} ?\footnote{As we have seen, the difference between learning and fitting lies in the prediction on ’unseen’ data.}\\
+We find that the average \emph{generalization error} for this method to be
+\be 
+\abs{\bar{E}_{in}-\bar{E}_{out}} = \sigma^2 \abs{(1-\frac{p}{n}) -(1+\frac{p}{n})}= 2 \sigma^2 \frac{p}{n}.
+\ee 
+\begin{mybox}{}
+	This implies: If we have $p\gg n$ (i.e. high-dimensional data), the generalization error is extremely large, meaning the model is not learning. Even when we have $p\approx n$, we might still not learn well due to the intrinsic noise $\sigma^2$.
+\end{mybox}
+One way to ameliorate this is to use regularization. We will mainly focus on two forms of regularization which are introduced in the following:\\
+the first one employs an $L_2$ penalty and is called \emph{Ridge regression}, while the second uses an $L_1$ penalty and is called $LASSO$.
+\subsection{Regularized Least-square regressions}
+
+\subsubsection{Ridge-Regression}
+\begin{mybox}{Ridge-Regression}
+	We now add to the least squares loss function a \emph{regularizer} defined as as the $L_2$ norm of the parameter vector we wish to optimize over. In Ridge-Regression, the regularization penalty is taken to be the $L_2$-norm of the parameters 
+	\be 
+	E_{Ridge} = \lambda \norm{\mw}^2_2 = \lambda \mw^T\mw = \lambda \sum_{\gamma=1}^p w_\gamma w_\gamma.
+	\ee 
+	Thus, the model is fit by minimizing the sum of the in-sample error and the regularization term
+	\be 
+	\label{eq:lregRidge}
+	\hat{\mw}_{Ridge} (\lambda) = \arg \min_{\mw \in \mR^p}\left(\norm{\mX \mw - \my}^2_2 + \lambda \norm{\mw}^2_2\right)
+	\ee 
+	Notice that the parameter $\lambda$ controls how much we weigh the fit and regularization term.
+	The solution/estimate is found by differentiating w.r.t $\mw$
+	\be 
+	\label{eq:lregRidgeSol}
+	\hat{\mw}_{Ridge}(\lambda)=\frac{\hat{\mw}_{LS}}{1+\lambda} 
+	\ee 
+	where the  equality via \ref{eq:lregOLSsolution} holds for orthogonal $\mX$. This implies that the ridge estimate is merely the least squares estimate scaled by a factor $(1+\lambda)^{-1}$.
+	This problem is equivalent to the following \emph{constrained} optimization problem
+	\be 
+	\hat{\mw}_{Ridge}(t) ) \arg \min_{\mw \in \mR^p: \norm{\mw}^2_2 \leq t} \norm{\mX \mw -\my}^2_.2.
+	\ee 
+	Thus, by adding a regularization term, $\lambda \norm{\mw}^2_2$, to our least squares loss function, we are effectively constraining the magnitude of the parameter vector learned from the data. The solution
+\end{mybox}
+One can furthermore derive a relation (via singular value decomposition (SVD) on X) between the fitted vector $\hat{\my}=\mX\hat{\mw}_{Ridge}$ and the prediction made by least squares linear regression
+\be 
+\hat{y}_{Ridge} =\mX \hat{\mw}_{Ridge} \leq \mX \hat{\my} \equiv \hat{\my}_{LS}.
+\ee 
+It is clear that in order to compute the fitted vector $\hat{\my}$, both Ridge and least squares linear regression have to project $\my$ to the column space of $\mX$. The only difference is that Ridge regression further shrinks each basis component $j$ by a factor $d^2_j/(d^2_j+\lambda)$, where $d_1\geq d_2\geq \dots d_p \geq 0$ are the singular values of $\mX$.
 
 
+\subsubsection{LASSO and Sparse Regression}
+\begin{mybox}{LASSO}
 
-
-
-
-
-
-
-
-
+	We will also be interested in the case where the penalty is the L1-norm of the parameters (sum of absolute values of parameters). This is called LASSO.
+	ELASSO=λ||w||1=λ∑γ=1p|wγ|.
+	Now we add an $L_1$ regularization penalty, conventionally called ’least absolute shrinkage and selection operator’ (LASSO). The penalty is the $L_1$-norm of the parameters (sum of absolute values of parameters)
+	\be 
+	E_{LASSO}= \lambda \norm{\mw}_1 = \lambda_{\gamma=1}^p \abs{\mw_\gamma}
+	\ee 
+	LASSO in the penalized form is defined by the following regularized regression problem
+	\be 
+	\label{eq:lregLASSO}
+	\hat{\mw}_{LASSO}(\lambda) = \arg \min_{\mw \in \mR^p} \norm{\mX \mw - \my }^2_2 + \lambda \norm{\mw}_1.
+	\ee 
+	Obtaining a solution is not that easy, assuming $\mX$ to be orthogonal one finds a so-called threshold function (compare \ref{fig:lassovsridge})
+	\be 
+	\label{eq:lregLASSOSol}
+	\hat{w}^{LASSO}_j(\lambda)= \text{sign}(\hat{w}^{LS}_j)\left[\abs{\hat{w}^{LS}_j}-\lambda\right]_+
+	\ee 
+	where $(x)_+$ denotes the positive part of $x$ and $\hat{w}^{LS}_j$ is the $j$th component of \ref{eq:lregOLSsolution}.\\
+	In general, LASSO tends, in contrast to Ridge, to given sparse solutions, meaning many components of $\hat{\mw}_{LASSO}$ are zero.
+\end{mybox}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{gfx/LassoVsRidge}
+	\caption{}
+	\label{fig:lassovsridge}
+\end{figure}
 
 
 

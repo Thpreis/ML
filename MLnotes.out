@@ -28,3 +28,6 @@
 \BOOKMARK [1][-]{section.2.4}{2.4\040Overview\040of\040Bayesian\040Inference}{chapter.2}% 28
 \BOOKMARK [2][-]{subsection.2.4.1}{2.4.1\040Language}{section.2.4}% 29
 \BOOKMARK [2][-]{subsection.2.4.2}{2.4.2\040Calculations}{section.2.4}% 30
+\BOOKMARK [1][-]{section.2.5}{2.5\040Linear\040regression}{chapter.2}% 31
+\BOOKMARK [2][-]{subsection.2.5.1}{2.5.1\040Least-square\040regressions}{section.2.5}% 32
+\BOOKMARK [2][-]{subsection.2.5.2}{2.5.2\040Regularized\040Least-square\040regressions}{section.2.5}% 33
