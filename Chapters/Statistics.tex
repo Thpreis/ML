@@ -22,6 +22,7 @@ The final ingredient is the \emph{cost function} $\mC(\my,f(\mX;\mt))$ that allo
 \item Finally, the performance of the model is evaluated by computing the cost function using the test set $\mC(\my_{test},f(\mX_{test};\hat{\mt}))$. 
 \end{enumerate}
 \subsection{Performance evaluation}
+\label{subsec:performanceeval}
 \subsubsection{Ingredients for performance evaluation}
 \begin{mybox}{Measure for evaluating performance}
 	The value of the cost function for the best fit model on the training set is called the \emph{in-sample error}
@@ -51,6 +52,7 @@ Moreover, the discrepancy between $E_{in}$ and $E_{ou}$ becomes more and more im
 It turns out that for complicated models studied in ML, predicting and fitting are very different things.\\
 	Models that give the best fit to existing data do not necessarily make the best predictions even for simple tasks. At small sample sizes, noise can create fluctuations in the data that look like genuine patterns. Simple models (like a linear function) cannot represent complicated patterns in the data, so they are forced to ignore the fluctuations and to focus on the larger trends. 
 \begin{mybox}{Overfitting}
+	\label{subsubsec:overfitting}
 Complex models with many parameters can capture both the global trends and noise-generated patters at the same time. IN this case, the model can be tricked into thinking that the noise encodes real information. This problem is called \emph{overfitting} and leads to a steep drop-off in predictive performance.\\
 We can guard against overfitting in two ways:
 \begin{enumerate}
@@ -59,15 +61,42 @@ We can guard against overfitting in two ways:
 \end{enumerate}
 \end{mybox}
 \begin{mybox}{Bias-Variance tradeoff}
+	\label{subsubsec:biasvariancetradeoff}
 	The \emph{bias-variance} tradeoff is used in our countermeasures against overfitting. What is it ?\\When the amount of training data is limited, one can often get better predictive power performance by using a less expressive model rather than the more complex model. The simpler model has more ’bias’ but is less dependent on the particular realization of the training dataset, i.e. less ’variance’. Therefore, even though the correct model is guaranteed to have better predictive performance for an infinite amount of training data (less bias), the training errors stemming from finite-size sampling (variance) can cause simpler models to outperform the more complex model when sampling is limited.
 \end{mybox}
+The bias-variance tradeoff is one of the key concepts in ML and therefore discussed quantitatively in more detail in \ref{subsubsec:biasvariancetradeoff} and qualitatively in \ref{subsec:biasvarianceMathematical}.\\
 These two concepts are now discussed in more detail, for that we introduce another quantity and then look explicitly at the components of our theory causing problems for different complexity regimes.
 \begin{mybox}{Bias}
 	The bias represents the best our model could do if we had an infinite amount of training data to beat down sampling noise. The bias is a property of the kind of functions, or model class, we are using to approximate $f(x)$. In general, the more complex the model class we use, the smaller the bias. However, we do not generally have an infinite amount of data. For this reason, to get best predictive power it is better to minimize the out-of-sample error, $E_{out}$, rather than the bias. 
 \end{mybox}
 How can we get a better idea of what is the true object to minimize to get bets results ? \\
-The Bias-Variance tradeoff is implicitly encoded in the in-and out-of-sample errors. We will therefore draw from statistical learning theory to get a better understanding of what it is we ought to be doing to achieve best practices.\\
+The Bias-Variance tradeoff is implicitly encoded in the in-and out-of-sample errors. We will therefore draw from statistical learning theory in the following to get a better understanding of what it is we ought to be doing to achieve best practices.\\
+\subsubsection{Where do the insights about how to do best practices come from ?}
 The out-of-sample error will decrease with the number of data points. As the number of data points gets large, the sampling noise decreases and the training data set becomes more representative of the true distribution from which the data is drawn. For this reason, in the infinite data limit, the in-sample and out-of-sample error must approach the same value, which is called the ’bias’ of our model.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{gfx/IMG_20200303_180633}
+	\caption{}
+	\label{fig:errorbehaviour}
+\end{figure}
+Compare the behaviour of both errors with increasing number of data points, left graph of \ref{fig:errorbehaviour}, and the out-of-sample error with increasing model complexity, right graph of \ref{fig:errorbehaviour}. As for the left graph, we can look at the difference between the generalization ($E_{out}$) and training error ($E_{in}$), the big curly bracket. It measures how well our in-sample error reflects the out-of-sample error, and measures how much worse we would do on a new data set compared to our training data. For this reason, the difference between these error is precisely the quantity that measures the difference between fitting and predicting. \emph{Models with a large difference between the in-sample and out-of-sample errors are said to \textbf{overfit} the data}. 
+\begin{mybox}{}
+	One of the lessons of statistical learning theory is that it is not enough to simply minimize the training error, because the out-of-sample error can still be large.
+\end{mybox}
+Considering the right graph, model  complexity is, in many cases, related to the number of parameters we are using to approximate the true function $f(x)$. If we consider a training dataset of a fixed size, $E_{out}$ will be a non-monotonic function of the model complexity, and is generally minimized for models with \emph{intermediate} complexity. The underlying reason for this is that, even though using a more complicated model always reduces the bias, at some point the model becomes too complex for the amount of training data and the generalization error becomes large due to high variance.
+\begin{mybox}{}
+Thus, to minimize $E_{out}$ and maximize our predictive power, it may be more suitable to use a more biased model with small variance than a less-biased model with large variance. This is is, again, the \emph{bias-variance} tradeoff we introduced above.
+\end{mybox} 
+Another way to understand this tradeoff is the following. Due to sampling noise from having finite size data sets, the learned models will differ for each choice of training sets. In general, more complex models need a larger amount of training data. For this reason, the fluctuations in the learned models (variance) will be much larger for the more complex model than the simpler model. However, if we consider the asymptotic performance as we increase the size of the training set (the bias), it is clear that the complex model will eventually perform better than the simpler model. Thus, depending on the amount of training data, it may \textbf{be more favourable to use a less comples, high-bias model to make predictions}.
+
+
+
+
+
+
+
+
 \subsection{title}
 
 
@@ -86,14 +115,14 @@ The out-of-sample error will decrease with the number of data points. As the num
 
 
 \section{Basics of statistical learning}
-Statistical modeling revolves around estimation or prediction.
+Statistical modelling revolves around estimation or prediction.
 \subsection{Difference between estimation and prediction}
 Note first and foremost that techniques in ML tend to be more focused on prediction rather than estimation, which means that we will mostly treat prediction problems in this compendium. This is for example because an artificially intelligent agent needs to be able to recognize objects in its surroundings and predict the behaviour of its environment in order to make informed choices.\\
 \subsubsection{Contrasting the two}
 Estimation and prediction problems can be cast into a common conceptual framework. In both cases, we choose some observable quantity $\mathbf{x}$ of the system we are studying (e.g. an interference pattern) that is related to some parameters $\mt$ (e.g. the speed of light) of a model $p(\mathbf{x}|\mt)$ that describes the probability of observing $\mathbf{x}$ given $\mt$.\\
 Now we perform an experiment to obtain a dataset $\mX$ and use these data to fit the model. Typically,  ’fitting’ the model involves finding $\hat{\mt}$ that provides the best explanation for the data. IN the case when ’fitting’ refers to the method of least squares, the estimated parameters maximize the probability of observing the data (i.e., $\hat{\mt}=\arg \max_{\mt}\{p(\mX|\mt) \}$).\\
 \begin{mybox}{Estimation vs Prediction}
-	\emph{Estimation problems} are concered with the accuracy of $\hat{\mt}$, whereas \emph{prediction problems} are concerned with the ability of the model to predict new observations (i.e., the accuracy of $p(\mathbf{x}|\hat{\mt})$. Although the goals of estimation and prediction are related, they often lead to different approaches.
+	\emph{Estimation problems} are concerned with the accuracy of $\hat{\mt}$, whereas \emph{prediction problems} are concerned with the ability of the model to predict new observations (i.e., the accuracy of $p(\mathbf{x}|\hat{\mt})$. Although the goals of estimation and prediction are related, they often lead to different approaches.
 \end{mybox}
 
 
@@ -107,17 +136,23 @@ $f (x)$ produces a set of pairs $(x_i , y_i ), i = 1 . . . N$ , which
 serve as the observable data. Our goal is to select a function from the hypothesis set $h \in \mH$ that approximates
 $f (x)$ as best as possible, namely, we would like to find
 $h \in \mH$ such that $h \approx f$ in some strict mathematical
-sense which we specify below. If this is possible, we say
-that we \emph{learned} $f (x)$. But if the function $f (x)$ can, in
+sense which we specify below. 
+\begin{mybox}{}
+If this is possible, we say
+that we \emph{learned} $f (x)$. 
+\end{mybox}
+But if the function $f (x)$ can, in
 principle, take any value on \emph{unobserved inputs}, how is it
 possible to learn in any meaningful sense ?\\
 The answer is that learning is possible in the restricted
 sense that the fitted model will probably perform approximately as well on new data as it did on the training data.
-Once an appropriate error function E is chosen for the
+How can we evaluate the performance of our model then ?\\
+As discussed in \ref{subsec:performanceeval}, once an appropriate error function $E$ is chosen for the
 problem under consideration (e.g. sum of squared errors
-in linear regression), we can define two distinct performance measures of interest. The in-sample error, E in ,
-and the out-of-sample or generalization error, E out
-\subsubsection{Set-up}
+in linear regression), we can define the in-and out-of-sample error to then minimize the out-of-sample error, with the variance-bias tradeoff in mind, to achieve robust predictions.
+\subsection{Mathematical foundations of the bias-variance tradeoff}
+\label{subsec:biasvarianceMathematical}
+Here we give a mathematical motivation to the bias-variance tradeoff discussed in \ref{subsubsec:biasvariancetradeoff}.\\
 Consider a
 dataset $\mD = (\mathbf{X}, \mathbf{y})$ consisting of the $N$ pairs of independent and dependent variables. Let us assume that the
 true data is generated from a noisy model
@@ -166,6 +201,7 @@ $\mathbb{E}_{\mD}$.
 	our estimator (i.e. the asymptotic value of our estimator
 	in the infinite data limit) from the true value.
 \end{mybox}
+This gives us a mathematical tradeoff of the concepts discussed in \ref{subsec:performanceeval} and in particular in \ref{fig:errorbehaviour}.
 \begin{mybox}{Bias-variance trade-off}
 	The bias-variance tradeoff summarizes the fundamental tension in machine learning, particularly supervised
 	learning, between the complexity of a model and the
@@ -175,9 +211,7 @@ $\mathbb{E}_{\mD}$.
 	asymptotic performance is worse than another model –
 	because it is easier to train and less sensitive to sampling
 	noise arising from having a finite-sized training dataset
-	(smaller variance).\\
-	Thus, to minimize $E_{out}$ and maximize our predic-
-	tive power, it may be more suitable to use a more bi-
+	(smaller variance).
 \end{mybox}
 
 \section{Gradient descent}
