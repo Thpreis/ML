@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  4 MAR 2020 17:21
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  5 MAR 2020 14:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -5317,6 +5317,12 @@ Overfull \hbox (5.82976pt too wide) in paragraph at lines 71--71
 er []  
  []
 
+
+Overfull \hbox (36.65398pt too wide) in paragraph at lines 119--119
+ [][] []\TU/TeXGyrePagella(0)/m/n/10.95 Regularized Least-square regressions-fr
+equentist []  
+ []
+
 )
 \tf@toc=\write9
 \openout9 = `MLnotes.toc'.
@@ -7006,12 +7012,19 @@ Package microtype Info: Character `―' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/m/n/5'.
 (microtype)             Ignoring protrusion settings for this character.
 [16]
+Overfull \hbox (4.36342pt too wide) in paragraph at lines 51--53
+\TU/TeXGyrePagella(0)/m/n/10.95 likes to repeat: \TU/TeXGyrePagella(0)/m/it/10.
+95 We can’t make predictions without making assumptions\TU/TeXGyrePagella(0)/m/
+n/10.95 . Thus,
+ []
+
+
 Overfull \hbox (23.04971pt too wide) has occurred while \output is active
  []|[]|
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 72--74
+Underfull \hbox (badness 10000) in paragraph at lines 73--76
 
  []
 
@@ -7096,76 +7109,87 @@ Overfull \hbox (23.04971pt too wide) has occurred while \output is active
  []
 
 [19]
-Overfull \hbox (11.47458pt too wide) in paragraph at lines 91--92
+Overfull \hbox (11.47458pt too wide) in paragraph at lines 93--94
 []\TU/TeXGyrePagella(0)/m/n/10.95 Another way to understand this tradeoff is th
 e following. Due to sampling
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--121
+Underfull \hbox (badness 10000) in paragraph at lines 122--123
 
  []
 
-
-Underfull \hbox (badness 2809) in paragraph at lines 125--126
+[20]
+Underfull \hbox (badness 2809) in paragraph at lines 127--128
 []\TU/TeXGyrePagella(0)/m/it/10.95 Estimation problems \TU/TeXGyrePagella(0)/m/
 n/10.95 are concerned with the accuracy of $[]$,
  []
 
 
-Overfull \hbox (18.38614pt too wide) in paragraph at lines 122--126
+Overfull \hbox (18.38614pt too wide) in paragraph at lines 124--128
 \TU/TeXGyrePagella(0)/m/n/10.95 maximize the probability of observing the data 
 (i.e., $[] [] [] [][][][][][][][][][]$). 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--126
+Underfull \hbox (badness 10000) in paragraph at lines 124--128
 
  []
 
-[20] [21]
-Overfull \hbox (9.44026pt too wide) detected at line 198
+[21]
+Overfull \hbox (9.44026pt too wide) detected at line 200
 []
  []
 
 [22]
-Underfull \hbox (badness 10000) in paragraph at lines 217--218
+Underfull \hbox (badness 10000) in paragraph at lines 219--220
 
  []
 
 [23] [24] [25] [26] [27] [28]
-Overfull \hbox (1.48999pt too wide) in paragraph at lines 364--366
+Overfull \hbox (1.48999pt too wide) in paragraph at lines 385--387
 \TU/TeXGyrePagella(0)/m/n/10.95 Recent studies have shown that adaptive methods
  such as ADAM,
  []
 
 
-Overfull \hbox (16.39568pt too wide) in paragraph at lines 364--366
+Overfull \hbox (16.39568pt too wide) in paragraph at lines 385--387
 \TU/TeXGyrePagella(0)/m/n/10.95 simpler procedures like properly-tuned plain SG
 D may work equally
  []
 
 
-Overfull \hbox (1.6506pt too wide) in paragraph at lines 373--374
+Overfull \hbox (1.6506pt too wide) in paragraph at lines 394--395
 \TU/TeXGyrePagella(0)/m/n/10.95 Bayesian inference provides a set of principles
  and procedures for learn-
  []
 
-[29] [30] [31] [32]
-Underfull \hbox (badness 1152) in paragraph at lines 478--480
+[29] [30] [31]
+Overfull \hbox (12.41174pt too wide) in paragraph at lines 484--485
+[]\TU/TeXGyrePagella(0)/m/n/10.95 Using the assumption that samples are i.i.d.,
+ we can write the \TU/TeXGyrePagella(0)/m/it/10.95 log-likelihood
+ []
+
+[32]
+Overfull \hbox (8.34648pt too wide) in paragraph at lines 509--511
+\TU/TeXGyrePagella(0)/m/n/10.95 thought of as a prior on parameters. Minimizing
+ the combined in-sample
+ []
+
+[33] [34] [35]
+Underfull \hbox (badness 1152) in paragraph at lines 595--597
 \TU/TeXGyrePagella(0)/m/n/10.95 Thus, by adding a regularization term, $[][][]$
 , to our least
  []
 
-[33]
-Underfull \hbox (badness 2762) in paragraph at lines 490--491
-[]\TU/TeXGyrePagella(0)/m/n/10.95 Now we add an $[][]$ regularization penalty, 
-conventionally
- []
-
+[36]
 File: gfx/LassoVsRidge.jpg Graphic file (type bmp)
 <gfx/LassoVsRidge.jpg>
-) [34]
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[37]) [38] [39]
 \tf@thm=\write14
 \openout14 = `MLnotes.thm'.
 
@@ -7409,12 +7433,12 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59153 strings out of 493007
- 1218903 string characters out of 6136718
- 2019683 words of memory out of 5000000
- 62123 multiletter control sequences out of 15000+600000
+ 59194 strings out of 493007
+ 1219764 string characters out of 6136718
+ 2025683 words of memory out of 5000000
+ 62164 multiletter control sequences out of 15000+600000
  546514 words of font info for 145 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
  83i,23n,136p,10510b,5117s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (38 pages).
+Output written on MLnotes.pdf (43 pages).

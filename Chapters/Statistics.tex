@@ -278,9 +278,25 @@ As described above, a ML or statistics problem is defined via a optimization (mi
 The bias (or bias function) of an estimator is the difference between this estimator's expected value and the true value of the parameter being estimated.
 
 
+\subsection{Language of optimization problems}
+\subsubsection{Convexity}
+Recall that a set $C\subset\mR^n$ is called \emph{convex} if any  $x,y\in C$  and  $t\in [0,1]$,
+\bse 
+tx + (1-t) y \in C.
+\ese 
 
+In other words, every line segments joining  $x,y$  lies entirely in  $C$ .
 
+A function $f:\mR^n \rightarrow \mR$ is called \emph{convex} if its domain $\text{dom}(f)$  is a convex set and for any  $x,y\in \text{dom}(f)$  and $ t\in[0,1]$ ,
+\bse 
+f(tx+(1-t)y) \leq t f(x) + (1-t) f(y).
+\ese 
 
+In other words, the function lies below the line segment joining $ f(x)$  and $ f(y)$ . This function  $f$  is called \emph{strictly convex} if this inequality holds strictly for  $x \neq y$  and  $t \in (0,1)$ .
+\begin{mybox}{}
+Why is convexity important? \\
+\textbf{For convex functions, any local minimizer is a global minimizer}. Algorithmically, this means that in the minimization (optimization) procedure, as long as we're "going down the hill" and agree to stop when we can't go any further, then we've hit the global minimum. In addition to this, there's a menagerie of beautiful theory regarding convex duality and optimality, which gives us a way of understanding the solutions even before solving the problem itself.
+\end{mybox}
 
 
 \section{Gradient descent}
@@ -378,7 +394,12 @@ Employ these tips for getting the best performance from GD based algorithms, esp
 Bayesian inference provides a set of principles and procedures for learning from data and for describing uncertainty.
 \subsection{Language}
 \begin{mybox}{Likelihood function}
-The \emph{likelihood function} $p(\mX|\mt)$ describes the probability of observing a dataset $\mX$ for a given value of the unknown parameters $\mt$. It is a function of the parameters $\mt$ with the data $\mX$ held fixed. Furthermore, it is determined by the model and the measurement noise.
+The \emph{likelihood function} 
+\be
+\label{eq:bayesLikelihoodFct}
+p(\mX|\mt)
+\ee 
+ describes the probability of observing a dataset $\mX$ for a given value of the unknown parameters $\mt$. It is a function of the parameters $\mt$ with the data $\mX$ held fixed. Furthermore, it is determined by the model and the measurement noise.
 \end{mybox}
 \begin{mybox}{Prior distribution}
 	The \emph{prior distribution} $p(\mt)$ describes any knowledge that we have about the parameters before we collect the data.
@@ -393,23 +414,48 @@ The \emph{likelihood function} $p(\mX|\mt)$ describes the probability of observi
 	\end{enumerate}
 There is another not so important prior, the \emph{hierarchical prior}. This describes the process of choosing a hyperparameter by defining a prior distribution for it (via an uninformative prior) and then averaging the posterior distribution over all choices of the hyperparameter.
 \end{mybox}
-Using an informative prior tends to decrease the variance of the posterior distribution while, potentially, increasing its bias. It is beneficial if the decrease in variance is larger than the increase in bias. In high-dimensional problems, it is reasonabe to assume that many of the parameters will not be strongly relevant. Therefore, many of the parameters of the model will be zero or close to zero. We can express this belief using two commonly used priors.
+Using an informative prior tends to decrease the variance of the posterior distribution while, potentially, increasing its bias. It is beneficial if the decrease in variance is larger than the increase in bias. In high-dimensional problems, it is reasonable to assume that many of the parameters will not be strongly relevant. Therefore, many of the parameters of the model will be zero or close to zero. We can express this belief using two commonly used priors.
 \begin{mybox}{Two informative priors commonly employed}
 	The \emph{Gaussian prior} is used to express the assumption that many of the parameters will be small 
 	\be 
-	\label{eq:bayesGprior}
+	\label{eq:bayesGaussianprior}
 	p(\mt|\lambda) = \prod_j \sqrt{\frac{\lambda}{2 \pi}} e^{- \lambda \theta^2_j},
 	\ee
 	where $\lambda$ is a \emph{hyperparameter}. The \emph{Laplace prior} is used to express the assumption that many of the parameters will be zero
 	\be 
-	\label{eq:bayesLprior}
+	\label{eq:bayesLaplacianprior}
 	p(\mt|\lambda) = \prod_j \frac{\lambda}{2} e^{-\lambda \abs{\theta_j}}.
 	\ee 
 	The hyperparameter can either be chose via a hierarchical prior employing MCMC or  by simply finding a good value of $\lambda$ using an optimization procedure (see linear regression).
 \end{mybox}
+Indeed, a Gaussian prior is the \emph{conjugate prior} that gives a Gaussian posterior. For a given likelihood, conjugacy guarantees the preservation of prior distribution at the posterior level.
+\begin{example}
+	For example, for a Gaussian (Geometric) likelihood with a Gaussian (Beta) prior, the posterior distribution is still a Gaussian (Beta) distribution.
+\end{example}
 \begin{mybox}{hyperparameters}
 	A \emph{hyperparameter} or \emph{nuisance variable} is a parameter whose value is set before the learning process begins. By contrast, the values of other \emph{parameters} are derived via training.
 \end{mybox}
+
+\subsubsection{Connecting statistics and bayesian framework}
+To connect a statistical model to the Bayesian framework, we often write the model as
+\be 
+\label{eq:bayesianFreqConnectionModel}
+p(y|\mx,\mt) = \mathcal{N}(y|\mu(\mx),\sigma^2(\mx)).
+\ee 
+In other words, our model is defined by a conditional probability that depends not only on data $\mx$ but on some model parameters $\mt$.
+\begin{example}
+	For example, if the mean is a linear function of $\mx$ given by $\mu = \mx^T \mw$, and the variance is fixed $\sigma^2(\mx) = \sigma^2$, then $\mt=(\mw,\sigma^2)$.
+\end{example}
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Calculations}
 \begin{mybox}{Bayes' rule}
@@ -420,20 +466,78 @@ Using an informative prior tends to decrease the variance of the posterior distr
 	\ee
 \end{mybox}
 The denominator is difficult in practice such that one normally uses Markov Chain Monte Carlo (MCMC) to draw random samples from $p(\mt|\mX)$.
-\begin{mybox}{Maximum Likelihood Estimation (MLE)}
-	Many common statistical procedures such as least-square fitting can be cast as MLE. In MLE, one chooses the parameters $\hat{\mt}$ that maxmimize the likelihood (or equivalently the log-likelihood since log is a monotonic function) of the observed data:
+\subsection{Estimation}
+\subsubsection{Maximum Likelihood estimation}
+In statistics, many problems rely on estimation of some parameters of interest.
+\begin{example}
+	For example, suppose we are given the height data of $20$ junior students from a regional high school, but what we are interested in is the average height of all high school juniors in the whole country. It is conceivable that the data we are given are not representative of the student population as a whole.
+\end{example}
+It is therefore necessary to devise a systematic way to perform reliable estimation. Here we present the \emph{maximum likelihood estimation} (MLE), and show that MLE for $\mt$ is the one that minimizes the mean squared error (MSE) used in \ref{eq:lregOLS}.
+\begin{mybox}{MLE}
+	Many common statistical procedures such as least-square fitting can be cast as MLE. In MLE, one chooses the parameters $\hat{\mt}$ that maximizes the likelihood (or equivalently the log-likelihood since log is a monotonic function) of the observed data $\mX$ (or equivalently $\mD$):
 	\be 
 	\label{eq:bayesMLE}
 	\hat{\mt}= \arg \max_{\mt} \log p(\mX |\mt).
 	\ee 
 	In MLE we therefore choose the parameters that maximize the probability of seeing the observed data given our generative model.
 \end{mybox}
+Using the assumption that samples are i.i.d., we can write the \emph{log-likelihood} as 
+\be 
+\label{eq:bayesLogLikelihood}
+l(\mt) \equiv \log p(\mD|\mt) = \sum_{i=1}^n \log p(y_i|\mx^{(i)},\mt).
+\ee 
+Note that the conditional dependence of the response variable $y_i$ on the independent variable $\mx^{(i)}$ in the likelihood function is made explicit since, in most applications, the observed value of data, $y_i$, is predicted based on $\mx^{(i)}$ using a model that is assumed to be a probability distribution that depends on unknown parameter $\mt$. This distribution, when endowed with $\mt$, can, as we hope, potentially explain our prediction on $y_i$. By definition, such distribution is the likelihood function \ref{eq:bayesLikelihoodFct}. We stress that this notation does \emph{not} imply $\mx^{(i)}$ is unknown . it is still part of the observed data!
+\subsubsection{Maximum-a-Posteriori estimation}
+\ref{eq:bayesMLE} provides the tools for computing the posterior distribution $p(\mt|\mX)$, which uses probability as a framework for expressing our knowledge about the parameters $\mt$. In most cases, however, we need to summarize our knowledge and pick a single ’best’ value for the parameters. In principle, the specific value of the parameters should be chosen to maximize a utility function. In practice, however, we usually use on of two choices:
+\begin{enumerate}
+	\item The posterior mean, or  \emph{Bayes estimate}
+	\be 
+	\label{eq:bayesBayesEstimate}
+	\expval{\mt} = \int \md \mt \mt p(\mt |\mX),
+	\ee 
+	or
+	\item the posterior mode, also called the \emph{maximum-a-posteriori} (MAP) estimate
+	\be 
+	\label{eq:bayesMAPestimate}
+	\hat{\mt}_{MAP} = \arg \max_{\mt} p(\mt |\mX).
+	\ee 
+	This estimate gives the parameters at which the posterior probability distribution is peaked
+\end{enumerate}
+While the Bayes estimate minimizes the mean-squared error, MAP estimate is often used instead because it is easier to compute.
+
 \subsection{Bayesian view on regularization}
 As discussed in \ref{subsec:performanceeval}, \emph{we can't make predictions without making assumptions}. Thus, it is sensible to introduce priors that reflect the fact that we are likely to be undersampled (especially in high dimensions).\\
-We can supplement an error function with a regularizer that prevents overfitting. From a Bayesian point of view, the regularization can be thought of as a prior on parameters. Minimizing the combined in-sample error $+$ regularization terms is the same as the \emph{Maximum a posteriori probability} (MAP) estimate in Bayesian regression (the parameters at which the posterior probability distribution is peaked). Note that in a true Bayesian approach, we should not use the mode of the posterior but the average over all possible choices of parameters weighted by their posterior probability. In practice, this is often not done (for computational and practical reasons).
+We can supplement an error function with a regularizer that prevents overfitting. From a Bayesian point of view, the regularization can be thought of as a prior on parameters. Minimizing the combined in-sample error $+$ regularization terms is the same as the \emph{Maximum a posteriori probability} (MAP) estimate in Bayesian regression \ref{eq:bayesMAPestimate}. Note that in a true Bayesian approach, we should not use the mode of the posterior but the average over all possible choices of parameters weighted by their posterior probability. In practice, this is often not done (for computational and practical reasons).
+\subsubsection{MAP estimator in the context of regularization}
+ Instead of maximizing the the log-likelihood \ref{eq:bayesLogLikelihood} to obtain a good estimator \ref{eq:bayesMLE},  let us maximize the log posterior $\log p(\mt|\mD)$, which we can get via Bayes' rule \ref{eq:bayesrule}. Then, the MAP estimator becomes 
+\be 
+\hat{\mt}_{MAP} \equiv \arg \max_{\mt} \log p(\mD|\mt) + \log p(\mt).
+\ee 
+A common choice for the prior $p(\mt)$ is the Gaussian distribution. Consider the Gaussian prior \ref{eq:bayesGaussianprior} with zero mean and variance $\tau^2$, namely
+\bse 
+p(\mw) =\prod_j \mathcal{N}(w_j|0,\tau^2).
+\ese 
+Then, we can recast the MAP estimator into
+\begin{align}
+	\label{eq:bayesMAPestimatorGaussianPrior}
+	\hat{\mt}_{MAP} &= \arg \max_{\mt} \left[ -\frac{1}{2 \sigma^2} \sum_{i=1}^n (y_i-\mw^T \mx^{(i)} )^2 - \frac{1}{2 \tau^2 } \sum_{j=1}^n w^2_j\right]\nonumber \\
+	&= \arg \max_{\mt} \left[- \frac{1}{2 \sigma^2} \norm{\mX \mw -\my }^2_2 - \frac{1}{2\tau^2} \norm{\mw}^2_2\right].
+\end{align}
+This is used later on to cast linear regression into bayesian language, \ref{subsec:lregBayesian}.
+
+
+
+
+
+
+
+
+
+
+
 \section{Linear regression}
 
-\subsection{Least-square regressions}
+\subsection{Least-square regressions -frequentist}
 We'll consider ordinary least squares regression problem in which the "error function" is defined as the square from the deviation of our linear predictor to the true response. 
 \begin{mybox}{OLS}
 \emph{Ordinary least squares linear regression} (OLS) is defined as the minimization of the $L_2$ norm of the difference between the response $y_i$ and the predictor $g(\mx^{(i)};\mathbf{w})=\mathbf{w}^T \mx^{(i)}$:
@@ -465,7 +569,7 @@ We find that the average \emph{generalization error} for this method to be
 \end{mybox}
 One way to ameliorate this is to use regularization. We will mainly focus on two forms of regularization which are introduced in the following:\\
 the first one employs an $L_2$ penalty and is called \emph{Ridge regression}, while the second uses an $L_1$ penalty and is called $LASSO$.
-\subsection{Regularized Least-square regressions}
+\subsection{Regularized Least-square regressions-frequentist}
 
 \subsubsection{Ridge-Regression}
 \begin{mybox}{Ridge-Regression}
@@ -505,7 +609,7 @@ It is clear that in order to compute the fitted vector $\hat{\my}$, both Ridge a
 	ELASSO=λ||w||1=λ∑γ=1p|wγ|.
 	Now we add an $L_1$ regularization penalty, conventionally called ’least absolute shrinkage and selection operator’ (LASSO). The penalty is the $L_1$-norm of the parameters (sum of absolute values of parameters)
 	\be 
-	E_{LASSO}= \lambda \norm{\mw}_1 = \lambda_{\gamma=1}^p \abs{\mw_\gamma}
+	E_{LASSO}= \lambda \norm{\mw}_1 = \lambda \sum_{\gamma=1}^p \abs{\mw_\gamma}
 	\ee 
 	LASSO in the penalized form is defined by the following regularized regression problem
 	\be 
@@ -527,8 +631,30 @@ It is clear that in order to compute the fitted vector $\hat{\my}$, both Ridge a
 	\label{fig:lassovsridge}
 \end{figure}
 
+\subsubsection{A note on LASSO and Ridge}
+Note that both LASSO and Ridge regression are convex in  $\mw$ . What's more, Ridge is actually a strictly convex problem (assuming  $\lambda >0$ ) due to presence of $L_2$ penality. In fact, this is always true regardless of  $\mX$  and so the ridge regression solution is always well-defined.
+
+In contrast, LASSO is not always strictly convex and hence by convexity theory, it need not have a unique solution. The LASSO solution is unique under general conditions, for example, when  $\mX$  has columns in general position. To mitigate this, one can define a modified problem called the elastic net such that the function we want to minimize is always strictly convex:
+\bse 
+\min_{\mw \in \mR^p}\norm{\mX \mw -\my}^2_2 + \lambda \norm{\mw}_1+\delta \norm{\mw}^2_2
+\ese 
+where  $λ,δ\geq 0$  are regularization parameters. Now aside from uniqueness of the solution, the elastic net combines some of the desirable properties (e.g. prediction) of ridge regression with the sparsity properties of the LASSO.
 
 
+\subsection{Bayesian formulation of linear regression}
+\label{subsec:lregBayesian}
+In the formal statistical treatment of regression, the goal is to estimate the \emph{conditional expectation} of the depndent variable given the value of the independent variable (sometimes called the covariate). To connect linear regression to the Bayesian framework, we use \ref{eq:bayesianFreqConnectionModel}. In combination with \ref{eq:bayesLogLikelihood}, we get
+\bse 
+l(\mt)=-\frac{1}{2\sigma^2} \sum_{i=1}^n(y_i-\mw^T \mx^{(i)})^2-\frac{n}{2} \log(2 \pi  \sigma^2) = -\frac{1}{2\sigma^2} \norm{\mX \mw -\my}^2_2 + const.
+\ese
+\begin{mybox}{} 
+By comparing this with \ref{eq:lregOLSsolution}, it is clear that 
+ performing least squares is the same as maximizing the log-likelihood of this model.
+\end{mybox}
 
-
-
+ \subsubsection{Regularization }
+ What about adding regularization?
+ \begin{mybox}{}
+ The MAP estimate  \ref{eq:bayesMAPestimate} corresponds to regularized linear regression, where the choice of prior determines the type of regularization.
+ \end{mybox}
+The equivalence between MAP estimation with a Gaussian prior and Ridge regression is established by comparing \ref{eq:bayesMAPestimatorGaussianPrior} and Ridge regression \ref{eq:lregRidgeSol} with $\lambda \equiv \sigma^2/\tau^2$. An analogous derivation holds for LASSO \todo{todo ?}.

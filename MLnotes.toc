@@ -74,32 +74,56 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.2.3.2}{Set-up of the problem}}{24}{subsubsection.2.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}{Gradient descent}}{25}{section.2.3}
+\contentsline {subsubsection}{\numberline {2.2.3.3}{On statistical language}}{25}{subsubsection.2.2.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}{Simple gradient descent}}{25}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.2.4}{Language of optimization problems}}{25}{subsection.2.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.2}{Modified gradient descent}}{26}{subsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.2.4.1}{Convexity}}{25}{subsubsection.2.2.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.3.2.1}{Stochastic gradient descent (SGD) with mini-batches}}{26}{subsubsection.2.3.2.1}
+\contentsline {section}{\numberline {2.3}{Gradient descent}}{26}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.3.2.2}{Algorithm gradient descent with momentum}}{26}{subsubsection.2.3.2.2}
+\contentsline {subsection}{\numberline {2.3.1}{Simple gradient descent}}{26}{subsection.2.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.2}{Modified gradient descent}}{27}{subsection.2.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.3.2.1}{Stochastic gradient descent (SGD) with mini-batches}}{27}{subsubsection.2.3.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.3.2.2}{Algorithm gradient descent with momentum}}{27}{subsubsection.2.3.2.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.3.2.3}{Methods that use the second moment of the gradient}}{27}{subsubsection.2.3.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.3}{Practical tips for using GD}}{28}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.3}{Practical tips for using GD}}{29}{subsection.2.3.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.4}{Overview of Bayesian Inference}}{29}{section.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.1}{Language}}{29}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.1}{Language}}{30}{subsection.2.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.2}{Calculations}}{31}{subsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.1.1}{Connecting statistics and bayesian framework}}{31}{subsubsection.2.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}{Linear regression}}{32}{section.2.5}
+\contentsline {subsection}{\numberline {2.4.2}{Calculations}}{32}{subsection.2.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}{Least-square regressions}}{32}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.4.3}{Estimation}}{32}{subsection.2.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.2}{Regularized Least-square regressions}}{33}{subsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.4.3.1}{Maximum Likelihood estimation}}{32}{subsubsection.2.4.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.5.2.1}{Ridge-Regression}}{33}{subsubsection.2.5.2.1}
+\contentsline {subsubsection}{\numberline {2.4.3.2}{Maximum-a-Posteriori estimation}}{33}{subsubsection.2.4.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.5.2.2}{LASSO and Sparse Regression}}{34}{subsubsection.2.5.2.2}
+\contentsline {subsection}{\numberline {2.4.4}{Bayesian view on regularization}}{33}{subsection.2.4.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.4.4.1}{MAP estimator in the context of regularization}}{34}{subsubsection.2.4.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.5}{Linear regression}}{34}{section.2.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.5.1}{Least-square regressions -frequentist}}{34}{subsection.2.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.5.2}{Regularized Least-square regressions-frequentist}}{36}{subsection.2.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.5.2.1}{Ridge-Regression}}{36}{subsubsection.2.5.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.5.2.2}{LASSO and Sparse Regression}}{37}{subsubsection.2.5.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.5.2.3}{A note on LASSO and Ridge}}{37}{subsubsection.2.5.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.5.3}{Bayesian formulation of linear regression}}{38}{subsection.2.5.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.5.3.1}{Regularization }}{38}{subsubsection.2.5.3.1}
