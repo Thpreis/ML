@@ -86,6 +86,7 @@ We can guard against overfitting in two ways:
 	\item We can use less expensive models with fewer parameters, or
 	\item we can collect more data so that the likelihood that the noise appears patterned decreases.
 \end{enumerate}
+The relative degree of overfitting: This information is contained in the difference in accuracy of our model on the training  and test datasets.
 \end{mybox}
 \begin{mybox}{Bias-Variance tradeoff}
 	\label{subsubsec:biasvariancetradeoff}
@@ -176,8 +177,8 @@ How can we evaluate the performance of our model then ?\\
 As discussed in \ref{subsec:performanceeval}, once an appropriate error function $E$ is chosen for the
 problem under consideration (e.g. sum of squared errors
 in linear regression), we can define the in-and out-of-sample error to then minimize the out-of-sample error, with the variance-bias tradeoff in mind, to achieve robust predictions.
-\subsubsection{Mathematical foundations of the bias-variance tradeoff}
-\label{subsubsec:biasvarianceMathematical}
+\subsubsection{Bias-Variance Decomposition for one Classifier}
+\label{subsubsec:biasvarianceMathematicaloneClassifier}
 Here we give a mathematical motivation to the bias-variance tradeoff discussed in \ref{subsubsec:biasvariancetradeoff}.\\
 Consider a
 dataset $\mD = (\mx, \mathbf{y})$ consisting of the $N$ pairs of independent and dependent variables. Let us assume that the
@@ -239,6 +240,68 @@ This gives us a mathematical tradeoff of the concepts discussed in \ref{subsec:p
 	noise arising from having a finite-sized training dataset
 	(smaller variance).
 \end{mybox}
+\subsubsection{Bias-Variance Decomposition for Ensembles}
+\label{subsubsec:biasvarianceMathematicalEnsemble}
+We will discuss the bias-variance tradeoff in the context of continuous predictions such as regression \ref{sec:linearRegression}. However, many of the intuitions and ideas discussed here also carry over to classification tasks, cf. \ref{sec:logisticRegression}. Consider a data set consisting of data $\mX_{\mL}=\{(y_j,\mx_j),j=1\dots n \}$ as above. Assume that we have a statistical procedure (e.g. OLS \ref{eq:lregOLS})) for forming a predictor $\hat{g}_{\mL}(\mx)$ that gives the prediction of our model for a new data point $\mx$ given that we trained the model using a dataset $\mL$. We will now, however, consider an ensemble of estimators $\{\hat{g}_{\mL}(\mx_i)\}$. Given a dataset $\mX_{\mL}$ and hyper-parameters $\mt$ that parametrize members of our ensemble, we will consider a procedure that deterministically generates a model $\hat{g}_{\mL}(\mx_i,\mt)$ given $\mX_{\mL}$ and $\mt$. We assume that the $\mt$ includes some random parameters that introduce stochasticity into our ensemble (e.g. an initial condition for stochastic gradient descent or a random subset of features or data points used for training.) Concretely, with a given dataset $\mL$ one has a learning algorithm $\mA$ that generates a model $\mA(\mt,\mL)$ based on a deterministic procedure which introduced stochasticity through $\mt$ in its execution on dataset $\mL$. \\
+We will be concerned with the expected prediction error of the \emph{aggregate ensemble predictor}
+\be 
+\label{eq:biasvarianceAggregateEnsemblePredictor}
+\hat{g}^A_{\mL}(\mx_i,\{\mt\} ) = \frac{1}{M} \sum_{n=1}^M \hat{g}_{\mL}(\mx_i,\mt_m).
+\ee 
+For future reference, let us define the mean, variance and covariance (i.e. the connected correlation function in the language of physics), and the normalized correlation coefficient of a single randomized model $\hat{g}_{\mL}(\mx,\mt_m)$ as 
+\begin{align}
+	\label{eq:biasvarianceDefinitionsMoments}
+	\mathbb{E}_{\mL,\mt_m}[\hat{g}_{\mL}(\mx,\mt_m)] &= \mu_{\mL,\mt_m}(\mx) \nonumber \\
+	\mathbb{E}_{\mL,\mt_m}[\hat{g}_{\mL}(\mx,\mt_m)^2]- \mathbb{E}_{\mL,\mt_m}[\hat{g}_{\mL}(\mx,\mt)]^2 &= \sigma^2_{\mL,\mt_m}(\mx) \nonumber \\
+	\mathbb{E}_{\mL,\mt_m}[\hat{g}_{\mL}(\mx,\mt_m) \hat{g}_{\mL}(\mx,\mt_{m^\prime})] -\mathbb{E}_{\mt}[\hat{g}_{\mL}(\mx,\mt_m) ]^2 &= C_{\mL,\mt_m,\mt_{m^\prime}} (\mx) \nonumber \\
+	\rho(\mx) &= \frac{C_{\mL,\mt_m,\mt_{m^\prime}}(\mx) }{\sigma^2_{\mL,\mt}}.
+\end{align}
+Note that the expectation $\mathbb{E}_{\mL,\mt_m}[\cdot]$ is computed over the joint distribution of $\mL$ and $\mt_m$. Also by definition, we assume $m\neq m^\prime$.\\
+Now, we can, as in \ref{subsubsec:biasvarianceMathematicaloneClassifier}, define the expected generalization (out-of-sample) error for the ensemble 
+\begin{align}
+\label{eq:biasvarianceGeneralizationErrorEnsemble}
+\mathbb{E}_{\mL,\mt_m}[C(\mX,\hat{g}^A_{\mL}(\mx))] &= \mathbb{E}_{\mL,\epsilon,\mt} \left[ \sum_i (\my_i - \hat{g}^A_{\mL} (\mx_i,\{\mt\} ))^2\right]\nonumber \\
+&= Bias^2(\mx_i) + Var(\mx_i)+ \sum_i \sigma^2_{\epsilon_i},
+\end{align}
+where one defines the bias of an aggregate predictor 
+\be 
+\label{eq:biasvarianceBiasEnesemble}
+Bias^2(\mx) \equiv \left(f(\mx) - \mathbb{E}_{\mL,\mt}[\hat{g}^A_{\mL} (\mx,\{\mt\}) ]\right)^2
+\ee 
+and the variance as
+\bse 
+Var(\mx) = \\mathbb{E}_{\mL,\mt}\left[ (\hat{g}^A_{\mL}(\mx,\{\mt\}) - \mathbb{E}_{\mL,\mt}[\hat{g}^A_{\mL}(\mx,\{\mt\})])^2 \right]. 
+\ese 
+So far the calculation for ensembles is almost identical to that of a single estimator, compare \ref{subsubsec:biasvarianceMathematicaloneClassifier}.
+\begin{mybox}{Crux of Bias-Variance for Ensembles}
+	However, since the aggregate estimator is a sum of estimators, its variance implicitly depends on the correlations between the individual estimators in the ensemble. One finds
+	\be 
+	\label{eq:biasvarianceVarianceEnsembleCrux}
+	Var(\mx) = \rho(\mx) \sigma^2_{\mL,\mt} + \frac{1-\rho(\mx)}{M} \sigma^2_{\mL,\mt}.
+	\ee 
+	This \ref{eq:biasvarianceVarianceEnsembleCrux} is the key to understanding the power of random ensembles. Notice that by using large ensembles ($M\rightarrow \infty$), we can significantly reduce the variance, and for completely random ensembles where the models are uncorrelated ($\rho(\mx)=0$), maximally suppresses the variance !\\
+	Thus, reducing the aggregate predictor beats down fluctuations due to finite-sample effects. They key, as \ref{eq:biasvarianceVarianceEnsembleCrux} indicates, is to \textbf{decorrelate the models as much as possible while still using a very large ensemble.}
+\end{mybox}
+\begin{mybox}{What does this do to the bias ?}
+One can be worried that this comes at the expense of a very large bias. This turns out not to be the case. When models in the ensemble are completely random, the bias of the aggregate predictor is just the expected bias of a single model 
+\bse 
+Bias^2(\mx) = (f(\mx) - \mu_{\mL,\mt})^2.
+\ese 
+\textbf{Thus, for a random ensemble one can always add more models without increasing the bias.}
+\end{mybox}
+
+Therefore, the correlation between models that constitute the ensemble is the key property here. It is important for two reasons. First, holding the ensemble size fixed, averaging the predictions of correlated models reduces the variance less than averaging uncorrelated models. Second, in some cases, correlations between models within an ensemble can result in an \emph{increase} in bias, offsetting any potential reduction in variance gained from ensemble averaging.\\
+This will be discussed in the context of bagging \ref{subsec:ensemblesBagging}
+
+
+
+
+
+
+
+
+
+
 \subsection{Mathematical set-up of every problem ever}
 As described quantitatively in \ref{subsec:recipeML}, every problem in ML can be designed via a recipe which is presented now qualitatively.\\
 \subsubsection{Set-up of the notation}
@@ -248,7 +311,7 @@ Suppose we are given a dataset with $n$ samples $\mD = \{(y_i,\mx^{(i)} )\}^n_{i
 \ese  
 Let $f$ be the true function/model that generated these samples via
 \bse 
-y_i ) = f(\mx^{(i)}, \mw_{true}) + \epsilon_i,
+y_i  = f(\mx^{(i)}, \mw_{true}) + \epsilon_i,
 \ese 
 where $\mw_{true}\in \mR^p$ is a \emph{parameter} vector and $\epsilon_i$ is some i.i.d. white noise with zero mean and finite variance. Conventionally, we cast all samples in an $n\times p$ matrix, the \emph{design matrix}
 \bse 
@@ -422,6 +485,13 @@ Using the assumption that samples are i.i.d., we can write the \emph{log-likelih
 l(\mt) \equiv \log p(\mD|\mt) = \sum_{i=1}^n \log p(y_i|\mx^{(i)},\mt).
 \ee 
 Note that the conditional dependence of the response variable $y_i$ on the independent variable $\mx^{(i)}$ in the likelihood function is made explicit since, in most applications, the observed value of data, $y_i$, is predicted based on $\mx^{(i)}$ using a model that is assumed to be a probability distribution that depends on unknown parameter $\mt$. This distribution, when endowed with $\mt$, can, as we hope, potentially explain our prediction on $y_i$. By definition, such distribution is the likelihood function \ref{eq:bayesLikelihoodFct}. We stress that this notation does \emph{not} imply $\mx^{(i)}$ is unknown . it is still part of the observed data!
+\begin{mybox}{Error function}
+The negative of the log-likelihood gives us the error function
+\be 
+\label{eq:bayesErrorFct}
+E(\mt)=-l(\mt).
+\ee 
+\end{mybox}
 \subsubsection{Maximum-a-Posteriori estimation}
 \ref{eq:bayesMLE} provides the tools for computing the posterior distribution $p(\mt|\mX)$, which uses probability as a framework for expressing our knowledge about the parameters $\mt$. In most cases, however, we need to summarize our knowledge and pick a single ’best’ value for the parameters. In principle, the specific value of the parameters should be chosen to maximize a utility function. In practice, however, we usually use on of two choices:
 \begin{enumerate}
@@ -561,6 +631,7 @@ Employ these tips for getting the best performance from GD based algorithms, esp
 
 
 \section{Linear regression}
+\label{sec:linearRegression}
 
 \subsection{Least-square regressions -frequentist}
 We'll consider ordinary least squares regression problem in which the "error function" is defined as the square from the deviation of our linear predictor to the true response. 
@@ -634,7 +705,7 @@ It is clear that in order to compute the fitted vector $\hat{\my}$, both Ridge a
 \begin{mybox}{}
 	It is considered good practice to always check the performance for the given model and data as a function of $\lambda$.
 \end{mybox}
-
+If increasing $\lambda$  simply degrades performance, we are most likely not undersampled.
 \subsubsection{LASSO and Sparse Regression}
 \begin{mybox}{LASSO}
 	Now we add an $L_1$ regularization penalty, conventionally called ’least absolute shrinkage and selection operator’ (LASSO). The penalty is the $L_1$-norm of the parameters (sum of absolute values of parameters)
@@ -809,9 +880,11 @@ Here we define logistic regression and discuss the minimization of its correspon
 	\label{eq:logregCrossEntropyMinimized}
 	0 = \mathbf{\nabla} \mC(\mathbb{w}) = \sum_{i=1}^n \left[\sigma(\mathbb{x}^T_i \mathbb{w}) - y_i\right]\mathbb{x}_i.
 	\ee 
+	In words, the gradient points in the sum of training example directions weighted by the difference between the true label and the probability of predicting that label.
 	Equation \ref{eq:logregCrossEntropyMinimized} defines a transcendental equation for $\mathbb{w}$, the solution of which, unlike linear regression, cannot be written in a closed form. For this reason, one must use numerical methods such as \ref{sec:gd} to solve this optimization problem.
-\end{mybox}
+\end{mybox}\footnote{However, as a word of caution, note there is a generic instability in the MLE procedure for linearly separable data)}
 In the notebooks, one looks at two examples to train a logistic regressor to classify binary data.
+We call \emph{one-hot} a group of bits where only one bit is $1$ and all others $0$, i.e. representing states: $\ket{1}=(1,0,\dots,0), \ket{2}=(0,1,0,\dots,0)$.
 \subsubsection{On the 2d Ising example}
 Given an Ising state, we would like to classify whether it belongs to the ordered or the disordered phase, without any additional information other than the spin configuration itself. This categorical ML problem is well suited for logistic regression, and will thus consist of recognizing whether a given state is ordered by looking at its bit configurations. Notice that, for the purposes of logistic regression, the $2D$ spin state of the Ising model will be flattened out to a $1D$ array, so it will not be possible to learn information about the structure of the contiguous ordered $2D$ domains. SUch information can be incorporated using deep convolutional neural networks.\\
 We use both ordered and disordered states to train the logistic regressor and, once the supervised training procedure is complete, we will evaluate the performance of our classification model on unseen ordered, disordered, and near-critical states. Here, we deploy the \emph{liblinear} routine (the default for Scikit' s logistic regression) and stochastic gradient descent to optimize the logistic regression cost function with $L_2$ regularization. We define the accuracy of the classifier as the percentage of correctly classified data points. Comparing the accuracy on the training and test data, we can study the degree of overfitting.\\
@@ -838,6 +911,39 @@ In this section we generalize logistic regression to the case of multiple catego
 
 
 
+\section{Ensemble Methods - On combining models}
+\label{sec:ensembles}
+\subsection{Introduction}
+Ensemble methods combine predictions from multiple, often weak, statistical models to improve predictive performance. Ensemble methods, such as random forests, and boosted gradient trees, such as XGBoost, undergird many of the winning entries in data science competitions such as Kaggle, especially on structured datasets. Note that Neural Networks generally perform better than ensemble methods on unstructured data, images and audio. Even in the context of NN, it is common to combine predictions from multiple neural networks to increase performance on tough image classification tasks.
+\subsubsection{Motivation}
+We will give an overview of ensemble methods and provide rules of thumb for when and why they work.\\
+On one hand, the idea of training multiple models and then using a weighted sum of the predictions of all these models is very natural. On the other hand, one can also imagine that the ensemble predictions can be much worse than the predictions from each of the individual models that constitute the ensemble, especially when pooling reinforces weak but correlated deficiencies in each of the individual predictors. Thus, it is important to understand when we expect ensemble methods to work.\\
+As we saw in \ref{subsubsec:biasvarianceMathematicalEnsemble}, the key to determining when ensemble methods work is the degree of correlation between the models in the ensemble.
+\subsubsection{Benefits of Ensemble Methods before diving in}
+Three distinct shortcomings that are fixed by ensemble methods are: statistical, computational, and representational.\\
+The first reason is statistical. When the learning set is too small, a learning algorithm can typically find several models in the hypothesis space $\mH$ that all give the same performance on the training data. Provided their predictions are uncorrelated, averaging several models reduces the risk of choosing the wrong hypothesis. The second reason is computational. Many learning algorithms rely on some greedy assumption or local search that may get stuck in local optima. As such, an ensemble made of individual models built from many different starting points may provide a better approximation of the true unknown function than any of the single models. Finally, the third reason is representational. In most cases, for a learning set of finite size, the true function cannot be represented ba any of the candidate models in $\mH$. By combining several models in an ensemble, it may be possible to expand the space of representable functions and to better model the true function.\\
+\\ 
+The increase in representational power of ensembles comes from the fact that it is more advantageous to combine a group of simple hypotheses than to utilize a single arbitrary linear classifier. This of course comes with the price of introducing more parameters to our learning procedure. But if the problem itself can never be learned through a simple hypothesis, then there is no reason to avoid applying a more complex model. Since ensemble methods reduce the variance and are often easier to train than a single complex model, they are a powerful way of increasing representational power (also called expressivity in the ML literature).\\
+\\
+How should we construct ensembles ?\\
+\begin{enumerate}
+	\item Try to randomize ensemble construction as much as possible to reduce the correlations between predictors in the ensemble. This ensures that our variance will be reduced while minimizing an increase in bias due to correlated errors.
+	\item The ensembles will work best for procedures where the error of the predictor is dominated by the variance and not the bias. Thus, these methods are especially well suited for unstable procedures whose results are sensitive o small changes in the training dataset.
+	\item Although the discussion above was derived in the context of continuous predictors such as regression, the basic intuition behind ensembles applies equally well to classification tasks. Using an ensemble allows one to reduce the variance by averaging the result of many independent classifiers. As with regression, this procedure works best for unstable predictors for which error are dominated by variance due to finite sampling rather than bias.
+\end{enumerate}
+
+
+
+\subsection{Bagging}
+\label{subsec:ensemblesBagging}
+\subsubsection{Bootstrapping}
+\subsection{Random Forests}
+\label{subsec:ensemblesRandomForest}
+\subsection{Gradient Boosted Trees and XGBoost}
+\label{subsec:ensemblesGBoostedTreesandXGBoost}
+\subsection{Different methods}
+Bagging, boosting, random forests, and gradient boosted trees such as XGBoost.
+\subsubsection{Bagging}
 
 
 
@@ -850,12 +956,8 @@ In this section we generalize logistic regression to the case of multiple catego
 
 
 
-
-
-
-
-
-
+\section{In Introduction to Feed-Forward Deep Neural Networks (DNNS)}
+\label{sec:dnn}
 
 
 \chapter{Ideas for problems to work on}
