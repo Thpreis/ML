@@ -100,10 +100,10 @@ Employ these tips for getting the best performance from GD based algorithms, esp
 \subsection{Least-square regressions -frequentist}
 We'll consider ordinary least squares regression problem in which the "error function" is defined as the square from the deviation of our linear predictor to the true response. 
 \begin{mybox}{OLS}
-\emph{Ordinary least squares linear regression} (OLS) is defined as the minimization of the $L_2$ norm of the difference between the response $y_i$ and the predictor $g(\mx^{(i)};\mw)=\mw^T \mx^{(i)}$:
+\emph{Ordinary least squares linear regression} (OLS) is defined as the minimization of the $L_2$ norm of the difference between the response $y_i$ and the predictor $g(\mx^{(i)};\mathbb{w})=\mathbb{w}^T \mx^{(i)}$:
 \be 
 \label{eq:lregOLS}
-\min_{\mw \in \mR^p} \norm{\mX \mw -\my}^2_2 = \min_{\mw \in \mR^p}\sum_{i=1}^n (\mw^T \mx^{(i)} - y_i)^2.
+\min_{\mathbb{w} \in \mR^p} \norm{\mX \mathbb{w} -\my}^2_2 = \min_{\mathbb{w} \in \mR^p}\sum_{i=1}^n (\mw^T \mx^{(i)} - y_i)^2.
 \ee
 Where \ref{eq:lregOLS} is the minimization of the loss function of OLS.\\
 We are looking to find the parameters $\mw$ which minimize the $_2$ error. Geometrically speaking, the predictor function $g$ defines a hyperplane in $\mR^p$. Minimizing the least squares error is therefore equivalent to minimizing the sum of all projections (i.e. residuals) for all points$\mx^{(i)}$ to this hyperplane. If $\rank (\mX)=p$ , namely, the feature predictors  $\mX_{:,1},\dots,\mX_{:,p}$  are linearly independent, then there exists unique solution to this problem, which we denote as $\hat{\mw}_{LS}$:
@@ -281,7 +281,7 @@ In many cases, it is favourable to work with a soft classifier.
 	A threshold function is a function that maps its input $\mx$ (a real-valued vector) to an output value $f(x)$ (a single binary value).
 One simple way to get a discrete output is to have sign (or threshold) functions that map the output of a linear regressor to $\{0,1\}$. The following are possible:
 \begin{enumerate}
-	\item The \emph{sign} function 
+	\item Step functions (perceptrons) given by the \emph{sign} function 
 \be
 \label{eq:logRegsign}
 \sigma(s_i)=\text{sign}(s_i)= \left\{\begin{array}{ll}
@@ -289,16 +289,39 @@ One simple way to get a discrete output is to have sign (or threshold) functions
 	0 & \text{otherwise} \\
 \end{array}  \right\}
 \ee
-is employed for hard classification.
-\item The \emph{logistic} (or \emph{sigmoid}) function
+are employed for hard classification.
+\item The \emph{logistic} (or \emph{sigmoid}) function (i.e. Fermi functions)
 \be 
 \label{eq:logRegSigmoid}
 \sigma(s) = \frac{1}{1+e^{-s}}, \quad 1-\sigma(s) = \sigma(-s).
 \ee 
+\item The hyperbolic tangent 
+\todo{Put definition here}
+\be 
+\label{eq:logRegHyperbolicTangent}
+\tanh(z) 
+\ee 
+\item Rectified linear units (ReLUs) 
+\item Leaky rectified linear unity (leaky ReLUs)
+\item Exponential linear units (ELUs)
 \end{enumerate} 
-\subsection{Perceptron - a motivation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Perceptron Learning Algorithm (PLA)}
 Before delving into the details of logistic regression, it is helpful to consider a slightly simpler classifier.
-\begin{mybox}{Perceptron}
+\begin{mybox}{Perceptron crude idea}
 	Consider a linear classifier that categorizes examples using a weighted linear-combination of the features and an additive offset:
 	\be 
 	\label{eq:logRegPerceptron}
@@ -307,9 +330,25 @@ Before delving into the details of logistic regression, it is helpful to conside
 	where we use the short-hand notation $\mathbf{\mathbb{x}}_i=(1,\mx_i)$ and $\mathbf{\mathbb{w}}=(b_0,\mw)$. This function takes values on the entire real axis. IN the case of logistic regression, however, the labels $y_i$ are discrete variables. Using the sign function \ref{eq:logRegsign} to create discrete outputs via hard classification, we obtain the \emph{perceptron} model.\\
 	In the modern sense, the perceptron is an algorithm for learning a binary classifier called a  \emph{threshold function}, see \ref{subsubsec:thresholdfct}.
 \end{mybox}
+\subsubsection{The algorithm}
 
 
+Suppose that we're given a set of $N$ observations each bearing $p$ features, $\mx_n=(x_1^{(n)},\cdots, x_p^{(n)})\in\mathbb{R}^p$, $n=1,\cdots, N$. The goal of binary classification is to relate these observations to their corresponding binary label $y_n \in\{+1,-1\}$. Concretely, this amounts to finding a function $h: \mathbb{R}^p\rightarrow \{+1,-1\}$ such that $h(\mx_n)$ is ideally the same as $y_n$. 
+\begin{mybox}{Perceptron} 
+	A \emph{perceptron} accomplishes this feat by utilizing a set of weights $\mathbb{w}=(w_0,w_1,\cdots, w_d)\in\mathbb{R}^{p+1}$ to construct $h$ so that labelling is done through
+\be 
+	h(\textbf{x}_n)=\text{sign }\left(w_0+\sum_{i=1}^p w_ix_i^{(n)}\right) =\text{sign }(\mathbb{w}^T\mathbb{x}_n),
+	\ee 
+	
+	where $\mathbb{x}_n=(1,x_1^{(n)},\cdots, x_p^{(n)}) = (1,\mx_n)$. The perceptron can be viewed as the zero-temperature limit of the logistic regression where the sigmoid (Fermi-function) becomes a step function.
+	
+\end{mybox}
 
+PLA begins with randomized weights. It then selects a point from the training set at random. If this point, say, $\textbf{x}_n$, is misclassified, namely, $y_n\neq \text{sign }(\mathbb{w}^T\mathbb{x}_n)$, weights are updated according to 
+\be 
+\mathbb{w}\leftarrow \mathbb{w}+ y_n\mathbb{x}_n
+\ee 
+Otherwise, $\textbf{w}$ is preserved and PLA moves on to select another point. This procedure continues until a specified threshold is met, after which PLA outputs $h$. It is clear that PLA is an online algorithm since it does not treat all available data at the same time. Instead, it learns the weights as it progress along data points in the training set one-by-one. The update rule is built on the intuition that whenever a mistake is encountered, it corrects its weights by moving towards the right direction. 
 
 
 
@@ -356,6 +395,7 @@ Similar to the linear regression examples, we find that there exists a sweet spo
 \subsubsection{SUSY }
 Here we will use logistic regression in an attempt to find the relative probability that an event is from a signal or a background. Is a good classification problem with noisy data, how to discriminate against the background ? Some signal events look background-like, and some background events look signal-like to our discriminator.
 \subsection{SoftMax regression}
+\label{subsec:logregSoftMax}
 In this section we generalize logistic regression to the case of multiple categories which is called \emph{SoftMax regression}. This is a multi-class classification problem \ref{subsubsec:classMultiClass}.
 \begin{mybox}{SoftMax regression}
 	The probability of $\mx_i$ being in class $m^\prime$ is given by
@@ -484,7 +524,9 @@ In order to create an ensemble of decision trees, we must introduce a randomizat
 	\item Only use a different random subset of the featues at each split in the tree. This \emph{feature bagging} is the distinguishing characteristic of random forests. Using feature bagging reduces correlations between decision trees that can arise when only a few features are strongly predictive of the class label. 
 	\item Extremized random forests (ERF) combine ordinary and feature bagging with an extreme randomization procedure where splitting is done randomly instead of using optimality criteria. Even though this reduces the predictive ower of each individual decision tree, it still often improves the predictive power of the ensemble because it dramatically reduces correlations between members and prevents overfitting.
 \end{enumerate}
-
+\begin{mybox}{Why are they cool}
+	RFs are largely immune to overfitting problems even as the number of estimators in the ensemble becomes large.
+\end{mybox}
 
 
 
@@ -520,15 +562,104 @@ where $M$ is the number of members of the ensemble, and $\mathcal{F}=\{g(\mx) = 
 	The cost function is composed of two terms, a term that measures the goodness of predictions on each datapoint, $l_i(y_i,\hat{y}_i)$, which is assumed to be differentiable and convec, and for each tree in the ensemble, a regularization term $\Omega(g_j)$ that does not depend on the data 
 	\be 
 	\label{eq:ensemblesXGBoostCostfct}
-	\mC (\mX,g_A) =
+	\mC (\mX,g_A) =\sum_{i=1}^N l(y_i,\hat{y}_i) + \sum_{j=1}^M \Omega(g_j),
 	\ee 
+	where the index $i$ runs over data points and the index $j$ runs over decision trees in our ensemble. In XGBoost, the regularization function is chosen to be
+	\be 
+	\Omega(g) = \gamma T + \frac{\lambda}{2}\norm{\mw}^2_2,
+	\ee 
+	with $\gamma$ and $\lambda$ regularization parameters that must be chosen appropriately. Notice that this regularization penalizes both large weights on the leaves (similar to $L^2$-regularization) and having large partitions with many leaves.
 \end{mybox}
+As in boosting, we form the ensemble iteratively. For this reason, we define a family of predictors $\hat{y}^{(t)}_i$ as 
+\be 
+\hat{y}^{(t)}_i = \sum_{j=1}^t g_j(\mx_i) = \hat{y}^{(t-1)}_i + g_t(\mx_i).
+\ee
+Note that by definition $y^{(M)}_i=g_A(\mx_i)$. 
+\begin{mybox}{}
+The central idea is that for large $t$, each decision tree is a small perturbation to the predictor (of order $1/T$) and hence we can perform a Taylor expansion on our loss function to second order
+\be 
+\mC_t =\sum_{i=1}^N l(y_i,\hat{y}^{(t-1)}_i + g_t(\mx_i)) + \Omega(g_t) \approx \mC_{t-1} + \Delta \mC_t,
+\ee 
+where 
+\bse \Delta \mC_t = a_i g_t(\mx_i) + \half b_i g_t(\mx_i)^2 + \Omega(g_t).
+\ese 
+We then choose the $t$-th decision tree $g_t$ to minimize $\Delta \mC_t$, one finds
+\be 
+\Delta \mC^{opt}_t = - \half \sum_{j=1}^T \frac{A^2_j}{B_j+\lambda} + \gamma T,
+\ee 
+where $B_j=\sum_{i\in I_j}, A_j = \sum_{i\in I_j} a_i$, with the set of points that get mapped to leaf $j$ $I_j = \{i | q_t(\mx_i)=j \}$.
+\end{mybox}
+It is clear that $\Delta \mC^{opt}_t$ measures the in-sample performance of $g_t$ and we should find the decision tree that minimizes this value. In principle, one could enumerate all possible trees over the data and find the tree that minimizes $\Delta \mC^{opt}_t$. However, in practice this is impossible. Instead, an approximate greedy algorithm is run that optimizes one level of the tree at a time by trying to find optimal splits of the data. This leads to a tree that is a good local minimum of $\Delta\mC^{opt}_t$ which is then added to the ensemble.\\
+\\
+As a note about the sketch above, in practice additional regularization such as \emph{shrinkage} and \emph{feature subsampling} is used. In addition, there are many numerical and technical tricks used for the approximate algorithm and how to find splits of the data that give good decision trees.
 
-
-
+\begin{mybox}{Fscore}
+	One nice feature of ensemble methods such as XGBoost is that they automatically allow us to calculate feature scores (\emph{Fscores}) that rank the importance of various features for classification. The higher the Fscore, the more important the feature for classification.
+\end{mybox}
 
 \section{In Introduction to Feed-Forward Deep Neural Networks (DNNS)}
 \label{sec:dnn}
+ Neural networks are one of the most powerful and widely-used supervised learning techniques. Deep Neural Networks (DNNs) got rebranded as ’Deep Learning’ and have become the workhorse technique for many image and speech recognition based ML tasks. The large-scale industrial deplyoment of DNNs has given rise to a number of high-level libraries and packages (Caffe, Keras, Pytorch, Tensorflow, etx.).\\
+ Conceptually, it is helpful to divide NNs into four categories 
+ \begin{enumerate}
+ 	\item General purpose NNs for supervised learning,
+ 	\item NNs designed specifically for image processing, the most prominent example of this class being Convolutional NNs (CNNs), 
+ 	\item NNs for sequential data such as Recurrent NNs (RNNs), and
+ 	\item NNs for unsupervised learning such as Deep Boltzmann Machines.
+ \end{enumerate}
+This section deals with the first two categories.\footnote{Though increasingly important for many applications such as audio and speech recognition, for now we omit a discussion of sequential data and RNNs. Look at \href{https://colah.github.io/posts/2015-08-Understanding-LSTMs/}{Chris Olah's blog} for an introduction to RNNs and LSTM networks.}
+Results for modern NNs are largely empirical and heuristic and lack a firm theoretical footing. Therefore, in this review we (for now) only give the fundamentals.
+
+\subsection{Neural Network Basics}
+Neural networks (also called neural nets) are neural-inspired nonlinear models for supervised learning. Neural nets can be viewed as natural, more powerful extensions of supervised learning methods such as linear \ref{sec:linearRegression} and logistic regression \ref{sec:logisticRegression} and soft-max methods \ref{subsec:logregSoftMax}.
+\subsubsection{The basic building block: neurons}
+\begin{mybox}{Neurons}
+The basic unit of a neural net is a stylized \emph{neuron} $i$ that takes a vector of $d$ input features $\mx=(x_1,x_2,\dots,x_d)$ and produces a scalar output $a_i(\mx)$. 
+\end{mybox}
+A neural network consists of many such neurons stacked into layers, with the output of one layer serving as the input for the next \todo{Inut figurre 35}. The first layer in the neural net is called the \emph{input layer}, the middle layers are often called \emph{hidden layers}, and the final layer is called the \emph{output layer}.\\
+The exact function $a_i$ varies depending on the type of non-linearity used in the NN. However, in essentially all cases $a_i$ can be decomposed into a linear operation that weights the relative importance of the various inputs, and a non-linear transformation $\sigma_i(z)$ which is usually the same for all neurons\footnote{I.e. a threshhold function which squishes the sum of all $a_i$ into a number between $0$ and $1$, cf. \ref{subsubsec:thresholdfct}.} The linear transformation in almost all NNs takes the form of a dot product with a set of neuron-specific weights $\mw^{(i)} = (w^{(i)}_1,w^{(i)}_2,\dots,w^{(i)}_d)$ followed by re-centring with a neuron-specific bias $b^{(i)}$:
+\be 
+z^{(i)} = \mw^{(i)} \cdot \mx ü+ b^{(i)} = \mathbb{x}^T \cdot \mathbb{w}^{(i)},
+\ee 
+where $\mathbb{x}=(1,\mx)$ and $\mathbb{w}^{(i)} = (b^{(i)}, \mw^{(i)} )$.
+\begin{mybox}{Choosing the right non-linearity}
+ In terms of $z^{(i)}$ and the non-linear function $\sigma_i(z)$, we can write the full input-output function as 
+\be 
+a_i(\mx) = \sigma_i ( z^{(i)}).
+\ee 
+Historical choices of nonlinearities include step-functions (perceptrons), sigmoids (i.e. Fermi functions), and the hyperbolic tangent, cf. \ref{subsubsec:thresholdfct}. More recently, it has become more common to use rectified linear units (ReLUs), leaky rectified linear units (leaky ReLUs), and exponential linear units (ELUs). Different choice of non-linearities lead to different computational and training properties for neurons. The underlying reason for this is that we train neural nets using gd based methods, cf. \ref{sec:gd}, that require us to take derivatives of the neural input-output function with respect to the weights $\mw^{(i)}$ and the bias $b^{(i)}$.
+\end{mybox}
+Notice that the derivatives of the aforementioned non-linearities $\sigma(z)$ have very different properties. The derivative of the perceptron is zero everywhere except where the input is zero. This discontinuous behaviour makes it impossible to train perceptrons using gradient descent. For this reason, until recently the most popular choice of non-linearity was the $\tanh$ function or a sigmoid/Fermi function. However, this choice of non-linearity has a major drawback. When the input weights become large, as they often do in traingin, the activation functions saturates and the derivative of the output w.r.t. the weights tends to zero since $\partial \sigma /\partial z \rightarrow 0$ for $z\gg 1$. Such \emph{vanishing gradients} are a feature of any saturating function, making it harder to train deep networks. In contrast, for a non-saturating function such as ReLUs or ELUs, the gradients stay finite even for large inputs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \chapter{Ideas for problems to work on}

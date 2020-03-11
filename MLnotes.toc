@@ -158,42 +158,48 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.7.2.1}{On threshold function functions}}{47}{subsubsection.2.7.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.7.3}{Perceptron - a motivation}}{47}{subsection.2.7.3}
+\contentsline {subsection}{\numberline {2.7.3}{Perceptron Learning Algorithm (PLA)}}{47}{subsection.2.7.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.7.4}{Definition of logistic regression - Bayesian}}{48}{subsection.2.7.4}
+\contentsline {subsubsection}{\numberline {2.7.3.1}{The algorithm}}{48}{subsubsection.2.7.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.7.4.1}{On the 2d Ising example}}{49}{subsubsection.2.7.4.1}
+\contentsline {subsection}{\numberline {2.7.4}{Definition of logistic regression - Bayesian}}{49}{subsection.2.7.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.7.4.2}{SUSY }}{49}{subsubsection.2.7.4.2}
+\contentsline {subsubsection}{\numberline {2.7.4.1}{On the 2d Ising example}}{50}{subsubsection.2.7.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.7.5}{SoftMax regression}}{49}{subsection.2.7.5}
+\contentsline {subsubsection}{\numberline {2.7.4.2}{SUSY }}{50}{subsubsection.2.7.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.8}{Ensemble Methods - On combining models}}{50}{section.2.8}
+\contentsline {subsection}{\numberline {2.7.5}{SoftMax regression}}{50}{subsection.2.7.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.8.1}{Introduction}}{50}{subsection.2.8.1}
+\contentsline {section}{\numberline {2.8}{Ensemble Methods - On combining models}}{51}{section.2.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.8.1.1}{Motivation}}{50}{subsubsection.2.8.1.1}
+\contentsline {subsection}{\numberline {2.8.1}{Introduction}}{51}{subsection.2.8.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.8.1.2}{Benefits of Ensemble Methods before diving in}}{51}{subsubsection.2.8.1.2}
+\contentsline {subsubsection}{\numberline {2.8.1.1}{Motivation}}{51}{subsubsection.2.8.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.8.2}{Aggregate predictor methods - Bagging and Boosting}}{52}{subsection.2.8.2}
+\contentsline {subsubsection}{\numberline {2.8.1.2}{Benefits of Ensemble Methods before diving in}}{52}{subsubsection.2.8.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.8.2.1}{Bagging}}{52}{subsubsection.2.8.2.1}
+\contentsline {subsection}{\numberline {2.8.2}{Aggregate predictor methods - Bagging and Boosting}}{53}{subsection.2.8.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.8.2.2}{Boosting}}{54}{subsubsection.2.8.2.2}
+\contentsline {subsubsection}{\numberline {2.8.2.1}{Bagging}}{53}{subsubsection.2.8.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.8.3}{Random Forests}}{55}{subsection.2.8.3}
+\contentsline {subsubsection}{\numberline {2.8.2.2}{Boosting}}{55}{subsubsection.2.8.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.8.4}{Gradient Boosted Trees and XGBoost}}{55}{subsection.2.8.4}
+\contentsline {subsection}{\numberline {2.8.3}{Random Forests}}{56}{subsection.2.8.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.8.4.1}{XGBoost}}{56}{subsubsection.2.8.4.1}
+\contentsline {subsection}{\numberline {2.8.4}{Gradient Boosted Trees and XGBoost}}{57}{subsection.2.8.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.9}{In Introduction to Feed-Forward Deep Neural Networks (DNNS)}}{57}{section.2.9}
+\contentsline {subsubsection}{\numberline {2.8.4.1}{XGBoost}}{57}{subsubsection.2.8.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}{Ideas for problems to work on}}{59}{chapter.3}
+\contentsline {section}{\numberline {2.9}{In Introduction to Feed-Forward Deep Neural Networks (DNNS)}}{60}{section.2.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}{Physics problems}}{59}{section.3.1}
+\contentsline {subsection}{\numberline {2.9.1}{Neural Network Basics}}{60}{subsection.2.9.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.1}{Cosmology}}{59}{subsection.3.1.1}
+\contentsline {subsubsection}{\numberline {2.9.1.1}{The basic building block: neurons}}{60}{subsubsection.2.9.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.2}{QFT}}{59}{subsection.3.1.2}
+\contentsline {chapter}{\numberline {3}{Ideas for problems to work on}}{63}{chapter.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}{Physics problems}}{63}{section.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.1}{Cosmology}}{63}{subsection.3.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.2}{QFT}}{63}{subsection.3.1.2}
