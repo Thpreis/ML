@@ -100,90 +100,100 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.3.4.1}{MAP estimator in the context of regularization}}{33}{subsubsection.2.3.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}{Gradient descent}}{33}{section.2.4}
+\contentsline {section}{\numberline {2.4}{Mathematical tools}}{33}{section.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.1}{Simple gradient descent}}{33}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.1}{Sampling methods}}{33}{subsection.2.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.2}{Modified gradient descent}}{34}{subsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.1.1}{Empirical Bootstrapping}}{33}{subsubsection.2.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.4.2.1}{Stochastic gradient descent (SGD) with mini-batches}}{34}{subsubsection.2.4.2.1}
+\contentsline {subsection}{\numberline {2.4.2}{Algorithms}}{35}{subsection.2.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.4.2.2}{Algorithm gradient descent with momentum}}{35}{subsubsection.2.4.2.2}
+\contentsline {subsubsection}{\numberline {2.4.2.1}{Decision Trees}}{35}{subsubsection.2.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.4.2.3}{Methods that use the second moment of the gradient}}{35}{subsubsection.2.4.2.3}
+\contentsline {section}{\numberline {2.5}{Gradient descent}}{36}{section.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.3}{Practical tips for using GD}}{37}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.5.1}{Simple gradient descent}}{36}{subsection.2.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}{Linear regression}}{37}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.2}{Modified gradient descent}}{37}{subsection.2.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}{Least-square regressions -frequentist}}{37}{subsection.2.5.1}
+\contentsline {subsubsection}{\numberline {2.5.2.1}{Stochastic gradient descent (SGD) with mini-batches}}{37}{subsubsection.2.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.2}{Regularized Least-square regressions-frequentist}}{39}{subsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.5.2.2}{Algorithm gradient descent with momentum}}{37}{subsubsection.2.5.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.5.2.1}{Ridge-Regression}}{40}{subsubsection.2.5.2.1}
+\contentsline {subsubsection}{\numberline {2.5.2.3}{Methods that use the second moment of the gradient}}{37}{subsubsection.2.5.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.5.2.2}{LASSO and Sparse Regression}}{41}{subsubsection.2.5.2.2}
+\contentsline {subsection}{\numberline {2.5.3}{Practical tips for using GD}}{39}{subsection.2.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.5.2.3}{A note on LASSO and Ridge}}{42}{subsubsection.2.5.2.3}
+\contentsline {section}{\numberline {2.6}{Linear regression}}{39}{section.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.5.2.4}{Another note being a general comment on regularization}}{42}{subsubsection.2.5.2.4}
+\contentsline {subsection}{\numberline {2.6.1}{Least-square regressions -frequentist}}{39}{subsection.2.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.5.2.5}{A general perspective on regularizers}}{43}{subsubsection.2.5.2.5}
+\contentsline {subsection}{\numberline {2.6.2}{Regularized Least-square regressions-frequentist}}{41}{subsection.2.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.3}{Bayesian formulation of linear regression}}{43}{subsection.2.5.3}
+\contentsline {subsubsection}{\numberline {2.6.2.1}{Ridge-Regression}}{42}{subsubsection.2.6.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.5.3.1}{Regularization }}{43}{subsubsection.2.5.3.1}
+\contentsline {subsubsection}{\numberline {2.6.2.2}{LASSO and Sparse Regression}}{43}{subsubsection.2.6.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.4}{Outlook from linear regression}}{44}{subsection.2.5.4}
+\contentsline {subsubsection}{\numberline {2.6.2.3}{A note on LASSO and Ridge}}{44}{subsubsection.2.6.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.6}{Logistic Regression}}{44}{section.2.6}
+\contentsline {subsubsection}{\numberline {2.6.2.4}{Another note being a general comment on regularization}}{44}{subsubsection.2.6.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.6.1}{Mathematical set-up}}{44}{subsection.2.6.1}
+\contentsline {subsubsection}{\numberline {2.6.2.5}{A general perspective on regularizers}}{45}{subsubsection.2.6.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.6.1.1}{Binary classification}}{44}{subsubsection.2.6.1.1}
+\contentsline {subsection}{\numberline {2.6.3}{Bayesian formulation of linear regression}}{45}{subsection.2.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.6.1.2}{Multi-class classification}}{44}{subsubsection.2.6.1.2}
+\contentsline {subsubsection}{\numberline {2.6.3.1}{Regularization }}{45}{subsubsection.2.6.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.6.2}{Classifiers}}{45}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.4}{Outlook from linear regression}}{46}{subsection.2.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.6.2.1}{On threshold function functions}}{45}{subsubsection.2.6.2.1}
+\contentsline {section}{\numberline {2.7}{Logistic Regression}}{46}{section.2.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.6.3}{Perceptron - a motivation}}{45}{subsection.2.6.3}
+\contentsline {subsection}{\numberline {2.7.1}{Mathematical set-up}}{46}{subsection.2.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.6.4}{Definition of logistic regression - Bayesian}}{46}{subsection.2.6.4}
+\contentsline {subsubsection}{\numberline {2.7.1.1}{Binary classification}}{46}{subsubsection.2.7.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.6.4.1}{On the 2d Ising example}}{47}{subsubsection.2.6.4.1}
+\contentsline {subsubsection}{\numberline {2.7.1.2}{Multi-class classification}}{46}{subsubsection.2.7.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.6.4.2}{SUSY }}{47}{subsubsection.2.6.4.2}
+\contentsline {subsection}{\numberline {2.7.2}{Classifiers}}{47}{subsection.2.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.6.5}{SoftMax regression}}{47}{subsection.2.6.5}
+\contentsline {subsubsection}{\numberline {2.7.2.1}{On threshold function functions}}{47}{subsubsection.2.7.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.7}{Ensemble Methods - On combining models}}{48}{section.2.7}
+\contentsline {subsection}{\numberline {2.7.3}{Perceptron - a motivation}}{47}{subsection.2.7.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.7.1}{Introduction}}{48}{subsection.2.7.1}
+\contentsline {subsection}{\numberline {2.7.4}{Definition of logistic regression - Bayesian}}{48}{subsection.2.7.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.7.1.1}{Motivation}}{48}{subsubsection.2.7.1.1}
+\contentsline {subsubsection}{\numberline {2.7.4.1}{On the 2d Ising example}}{49}{subsubsection.2.7.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.7.1.2}{Benefits of Ensemble Methods before diving in}}{49}{subsubsection.2.7.1.2}
+\contentsline {subsubsection}{\numberline {2.7.4.2}{SUSY }}{49}{subsubsection.2.7.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.7.2}{Bagging}}{50}{subsection.2.7.2}
+\contentsline {subsection}{\numberline {2.7.5}{SoftMax regression}}{49}{subsection.2.7.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.7.2.1}{Bootstrapping}}{50}{subsubsection.2.7.2.1}
+\contentsline {section}{\numberline {2.8}{Ensemble Methods - On combining models}}{50}{section.2.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.7.3}{Random Forests}}{50}{subsection.2.7.3}
+\contentsline {subsection}{\numberline {2.8.1}{Introduction}}{50}{subsection.2.8.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.7.4}{Gradient Boosted Trees and XGBoost}}{50}{subsection.2.7.4}
+\contentsline {subsubsection}{\numberline {2.8.1.1}{Motivation}}{50}{subsubsection.2.8.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.7.5}{Different methods}}{50}{subsection.2.7.5}
+\contentsline {subsubsection}{\numberline {2.8.1.2}{Benefits of Ensemble Methods before diving in}}{51}{subsubsection.2.8.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.7.5.1}{Bagging}}{50}{subsubsection.2.7.5.1}
+\contentsline {subsection}{\numberline {2.8.2}{Aggregate predictor methods - Bagging and Boosting}}{52}{subsection.2.8.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.8}{In Introduction to Feed-Forward Deep Neural Networks (DNNS)}}{50}{section.2.8}
+\contentsline {subsubsection}{\numberline {2.8.2.1}{Bagging}}{52}{subsubsection.2.8.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}{Ideas for problems to work on}}{51}{chapter.3}
+\contentsline {subsubsection}{\numberline {2.8.2.2}{Boosting}}{54}{subsubsection.2.8.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}{Physics problems}}{51}{section.3.1}
+\contentsline {subsection}{\numberline {2.8.3}{Random Forests}}{55}{subsection.2.8.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.1}{Cosmology}}{51}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {2.8.4}{Gradient Boosted Trees and XGBoost}}{55}{subsection.2.8.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.2}{QFT}}{51}{subsection.3.1.2}
+\contentsline {subsubsection}{\numberline {2.8.4.1}{XGBoost}}{56}{subsubsection.2.8.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.9}{In Introduction to Feed-Forward Deep Neural Networks (DNNS)}}{57}{section.2.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}{Ideas for problems to work on}}{59}{chapter.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}{Physics problems}}{59}{section.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.1}{Cosmology}}{59}{subsection.3.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.2}{QFT}}{59}{subsection.3.1.2}

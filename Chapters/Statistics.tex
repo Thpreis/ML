@@ -536,414 +536,50 @@ This is used later on to cast linear regression into bayesian language, \ref{sub
 
 
 
+\section{Mathematical tools}
+\label{sec:math}
+\subsection{Sampling methods}
 
-\section{Gradient descent}
-\label{sec:gd}
-\subsection{Simple gradient descent}
-
-As always in the context of ML, we want to minimize the cost function $E(\mathbf{θ})=\mC(\mx,g(\mathbf{θ}))$.
-\begin{mybox}{Gradient descent}
-The simplest gradient descent (GD) algorithm is characterized by the following \emph{update rule} for the parameters $\mathbf{θ}$. Initialize the parameters to some value $\mathbf{θ}_0$ and iteratively update the parameters according to the equation
-\be
-\label{eq:gdsimple}
-\mathbf{v}_t = \eta_t \nabla_{θ} E(\mathbf{θ}_t),\quad \mathbf{θ}_{t+1} = \mathbf{θ}_t-\mathbf{v}_t
+\subsubsection{Empirical Bootstrapping}
+\label{subsubsec:ensemblesBootstrapping}
+Empirical bootstrapping is a method to enlarge a sparse dataset, we use it in bagging, cf. \ref{subsubsec:ensemblesBagging}.\\
+Suppose we are given a finite set of $n$ data points $\mD=\{X_1,\dots,X_n\}$ as training samples and our job is to construct measures of confidence for our sample estimates (e.g. the confidence interval or mean-squared error of sample median estimator). To do so, one first samples $n$ points \textbf{with replacement} from $\mD$ to get a new set $\mD^{*(1)}=\{X^{*(1)}_1,\dots,X^{*(1)}_n\}$. called a \textbf{bootstrap sample}, which possibly contains repetitive elements. Then we repeat the same procedure to get in total $B$ such sets: 
+\bse 
+\mD^{*(1)},\dots, \mD^{*(B)}.
+\ese 
+The next step is to use these $B$ bootstrap sets to get the \textbf{bootstrap estimate} of the quantitfy of interest. For example, let $M^{*(k)}_n=$Median$(\mD^{*(k)})$ be the sample median of bootstrap data $\mD^{*(k)}$. Then we can construct the variance of the distribution of bootstrap medians as
+\be 
+\label{eq:ensemblesBootrapingVariance}
+\hat{Var}_B(M_n)=\frac{1}{B-1} \sum_{k=1}^B \left[M^{*(k)}_n-\bar{M}^{*}_n\right]^2 = \sigma^2 \stackrel{n\rightarrow \infty}{\longrightarrow} \frac{1}{n}
 \ee 
-where we have introduced the \emph{learning rate} $\eta_t$ (one hyperparameter of the model), that controls how big a step we should take in the direction of the gradient at time step $t$.
-\end{mybox}
-For sufficiently small choice of $\eta_t$, this method will converge to a \emph{local minimum} of the cost function, however this is computationally expensive. In practice, one usually specifies a ’schedule’ that decreases $\eta_t$ at long times (common schedules include power law and exponential decay in time).\footnote{Note that  Newton's method is a first-order approximation of GD method, which is not practical as it is a computationally expensive algorithm. However, Newton's method automatically adjusts the step size so that one takes larger steps in flat directions with small curvature and smaller steps in steep directions with large curavture. This gives an intuition of how to modify GD methods to get better results.}
-The simple GD has the following limitations
-\begin{enumerate}
-\item GD finds local minima of the cost function.\\
-Because in ML we are often dealing with extremely rugged landscapes with many local minima, this can lead to poor performance.
-\item Gradients are computationally expensive to calculate for large datasets.
-\item GD is very sensitive to choices of the learning rates.\\
-Ideally, we would ’adaptively’ choose the learning rates to match the landscape.
-\item GD treats all directions in parameter space uniformly.
-\item GD is sensitive to initial conditions.
-\item GD can take exponential time to escape saddle points, even with random initialization..
-\end{enumerate}
-These limitiations lead to generalized GD methods which form the backbone of much of modern DL and NN.
-\subsection{Modified gradient descent}
-\subsubsection{Stochastic gradient descent (SGD) with mini-batches}
-\begin{mybox}{SGD}
-		In SGD, we replace the actual gradient over the full data at each gradient descent step by an approximation to the gradient computed using a minibatch. This introduces stochasticity and decreases the chance that our fitting algorithm gets stuck in isolated local minima, as you cycle over all minibatches one at a time.\\
-The update rule is
-	\be
-	\label{eq:gdstochastic}
-	\mathbf{v}_t=\eta_t \nabla_{θ} E^{MB}(\mathbf{θ}),\quad \mathbf{θ}_{t+1} = \mathbf{θ}_t-\mathbf{v}_t.
-	\ee 
-\end{mybox}
-\subsubsection{Algorithm gradient descent with momentum}
-\marginpar{It has been argues that first-order methods (with appropriate initial conditions) can perform comparable to more expensive second-order methods, especially in the context of comples DL models.}
-\begin{mybox}{GDM}
-Introduce a ’momentum’ term into SGD which serves as a memory of the direction we are moving in parameter space. This helps the GD algorithm to gain speed in directions with persistent but small gradients even in the presence of stochasticity, while suppressing oscillations in high-curvature directions. The update rules is
-\be 
-\label{eq:gdmomentum}
-\mathbf{v}_t = \gamma \mathbf{v}_{t-1}+\eta_t \nabla_{θ} E^{MB}(\mathbf{θ}_t), \quad \mathbf{θ}_{t+1} = \mathbf{θ}_t-\mathbf{v}_t,
-\ee
-where we have introduced a momentum parameter $\gamma \in [0,1]$. 
-\end{mybox}
-\begin{mybox}{NAG}
-	A final widely used variant of gradient descent with momentum is called the Nesterov accelerated gradient (NAG). In NAG, rather than calculating the gradient at the current position, one calculates the gradient at the position momentum will carry us to at time  $t+1$ , namely, $ θ_t−γ v_{t−1}$ . Thus, the update becomes
-	\be 
-	\label{eq:gdNAG}
-	\mathbf{v}_t = \gamma \mathbf{v}_t + \eta_t \nabla_{θ} E(\mathbf{θ}_t-\gamma \mathbf{v}_{t-1}),\quad \mathbf{θ}_{t+1} = \mt_{t}-\mathbf{v}_t.
-	\ee 
-\end{mybox}
-\subsubsection{Methods that use the second moment of the gradient}
-We would like to adaptively change the step size to match the landscape. This can be accomplished by tracking not only the gradient, but also the second moment of the gradient\footnote{Similar but avoiding the Hessian, which encodes local curvatures via second derivatives, as in Newton's method.}
-\begin{mybox}{Root-mean-square propagation - RMSprop}
-	In addition to keeping a running average of the first moment of the gradient, we also keep track of the second moment denoted by $\mathbf{s}_t=\mathbb{E}[\mathbf{g}^2_t]$. The update rule is 
-	\be
-	\label{eq:gdRMSprop}
-	\mathbf{g}_t=\nabla_{θ} E(\mathbf{θ}),\; \mathbf{s}_t=\beta \mathbf{s}_{t-1} + (1-\beta) \mathbf{g}^2_t,\; \mathbf{θ}_{t+1}=\mathbf{θ}_t - \eta_t \frac{\mathbf{g}_t}{\sqrt{\mathbf{s}_t+\epsilon}},
-		\ee 
-		where $\beta$ controls the averaging time of the second moment and is typically taken to be about $\beta=0.9$, $\eta_t$ is typically chosen to be $10^{-3}$, and $\epsilon\propto 10^{-8}$ is a small regularization constant to prevent divergencies. It is clear from this formula that the learning rate is reduced in directions where the gradient is consistently large.
-\end{mybox}
-\begin{mybox}{ADAM}
-	In ADAM, we keep a running average of both the first and second moment of the gradient and use this information to adaptively change the learning rate for different parameters. In addition to keeping a running average of the second moments of the gradient (i.e $\mathbf{m}_t= \mathbb{E}[\mathbf{g}_t], \mathbf{s}_t=\mathbb{E}[\mathbf{g}^2_t]$), ADAM performs an additional bias correction to account for the fact that we are estimating the first two moments of the gradient using a running average (denoted by the hat in the update rule). The update rule is given by (where multiplication and division are once again understood to be element-wise operations)
-	\begin{align}
-		\label{eq:gdADAM}
-		\mathbf{g}_t &= \nabla_{θ} E(\mathbf{θ}), \quad \mathbf{m}_t =\beta_1 \mathbf{m}_{t-1} + (1-\beta_1) \mathbf{g}_t, \\
-		\mathbf{s}_t &=\beta_2 \mathbf{s}_{t-1} + (1-\beta_2) \mathbf{g}^2_t,\quad \hat{\mathbf{m}}_t = \frac{\mathbf{m}}{1-(\beta_1)^t},\nonumber \\
-		\hat{\mathbf{s}}_t &= \frac{\mathbf{s}_t}{1-(\beta_2)^t},\quad \mathbf{θ_{t+1}} = \mathbf{θ}_t - \eta_t \frac{\hat{\mathbf{m}}}{\sqrt{\hat{\mathbf{s}}_t} +\epsilon}\nonumber,
-	\end{align}
-where $\beta_1$ and $\beta_2$ set the memory lifetimes of the first and second moment (typically $\beta_{1,2} =\{0.9,0.99\}$ respectively, $\epsilon,\eta_t$ are same as in RMSprop).
-\end{mybox}
-The learning rates for RMSprop and ADAM can be set significantly higher than other methods due to their adaptive step sizes. For this reason, ADAM and RMSprop tend to be much quicker at navigating the landscape than simple momentum based methods.\footnote{Note that in some cases trajectories might not end up at the global minimum. This kind of landscape structure is generic in high-dimensional spaces where saddle points proliferate.}
-\subsection{Practical tips for using GD}
-Employ these tips for getting the best performance from GD based algorithms, especially in the context of deep neural networks (DNN)
-\begin{enumerate}
-	\item Randomize the data when making mini-batches.\\
-	Otherwise, the GD method can fit spurious correlations resulting from the order in which data is presented.
-	\item Transform your inputs.\\
-	One simple trick for minimizing problems in difficult landscapes is to standardize the data by subtracting the mean and normalizing the variance of input variables. Whenever possible, also decorrelate the inputs. 
-	\item Monitor the out-of-sample performance.\\
-	Always monitor the performance of your model on a validation set (a small portion of the training data that is held out of the training process to serve as a proxy for the test set). If the validation error starts increasing then the model is beginning to overfit. Terminate the learning process. This \emph{early stopping} significantly improves performance in many settings.
-	\item Adaptive optimization methods do not always have good generalization.\\
-	Recent studies have shown that adaptive methods such as ADAM, RMSprop , and AdaGrad tend to have poor generalization to SGD or SGD with momentum, particularly in the high-dimensional limit (i.e. the number of parameters exceeds the number of data points). Although it is not clear at this state why sophisticated methods (e.g. ADAM, RMSprop, AdaGrad)  perform so well in training DNN such as generative adversarial networks (GANs), simpler procedures like properly-tuned plain SGD may work equally well or better in some applications.
-\end{enumerate}
+where 
+\bse 
+\bar{M}^{*}_n=\frac{1}{B} \sum_{k=1}^{B} M^{*(k)}_n
+\ese 
+is the mean of the median of all bootstrap samples.
+\\
+For $n\rightarrow\infty$, it was shown that the distribution of the bootstrap estimate will be a Gaussian centred around $\hat{M}_n(\mD)=$Median$(X_1,\dots,X_n)$ with standard deviation proportional to $1/\sqrt{n}$. This mean that the bootstrap distribution $\hat{M}^*_n-\hat{M}_n$ approximates fairly well the sampling distribution $\hat{M}_n-M$ from which we obtain the training data $\mD$. Note that $m$ is the median based on which the true distribution $\mD$ is generated. In other words, if we plot the histogram of $\{M^{*(k)}_n \}^B_{k=1}$, we will see that in the large $n$ limit it can be well fitted by a Gaussian which sharp peaks at $\hat{M}_n(\mD)$ and vanishing variance whose definition is given by \ref{eq:ensemblesBootrapingVariance}.
 
-
-
-
-
-
-
-\section{Linear regression}
-\label{sec:linearRegression}
-
-\subsection{Least-square regressions -frequentist}
-We'll consider ordinary least squares regression problem in which the "error function" is defined as the square from the deviation of our linear predictor to the true response. 
-\begin{mybox}{OLS}
-\emph{Ordinary least squares linear regression} (OLS) is defined as the minimization of the $L_2$ norm of the difference between the response $y_i$ and the predictor $g(\mx^{(i)};\mw)=\mw^T \mx^{(i)}$:
-\be 
-\label{eq:lregOLS}
-\min_{\mw \in \mR^p} \norm{\mX \mw -\my}^2_2 = \min_{\mw \in \mR^p}\sum_{i=1}^n (\mw^T \mx^{(i)} - y_i)^2.
-\ee
-Where \ref{eq:lregOLS} is the minimization of the loss function of OLS.\\
-We are looking to find the parameters $\mw$ which minimize the $_2$ error. Geometrically speaking, the predictor function $g$ defines a hyperplane in $\mR^p$. Minimizing the least squares error is therefore equivalent to minimizing the sum of all projections (i.e. residuals) for all points$\mx^{(i)}$ to this hyperplane. If $\rank (\mX)=p$ , namely, the feature predictors  $\mX_{:,1},\dots,\mX_{:,p}$  are linearly independent, then there exists unique solution to this problem, which we denote as $\hat{\mw}_{LS}$:
-\be 
-\label{eq:lregOLSsolution}
-\hat{\mw}_{LS} = \arg \min_{\mw \in \mR^p} \norm{\mX \mw - \my}^2_2 = (\mX^T \mX )^{-1} \mX^T \my,
-\ee 
-where we have assumed that $\mX^T\mX$ is inertible, which is often the case when $n\gg p$ (i.e. method works if number of data points exceeds number of features). The best fit of our data $\mX$ is
-\be 
-\label{eq:lregOLbestfit}
-\hat{\my} = \mX \hat{\mw}_{LS} = \underbrace{\mX (\mX^T \mX)^{-1} \mX^T}_{\equiv P_{\mX}},
-\ee 
-where $P_{\mX}$ is the projection matrix which acts on $\my$ and projects it onto the column space of $\mX$, which is spanned by the predictors $\mX_{:,1},\dots,\mX_{:,p}$.
-\end{mybox}
-Note how we found the optimal solution $\hat{\mw}_{LS}$ in one shot, without doing any sort of iterative optimization.\\
-What are the errors of OLS such that we can evaluate its performance according to \ref{subsec:performanceeval} ?\footnote{As we have seen, the difference between learning and fitting lies in the prediction on ’unseen’ data.}\\
-We find that the average \emph{generalization error} for this method to be
-\be 
-\abs{\bar{E}_{in}-\bar{E}_{out}} = \sigma^2 \abs{(1-\frac{p}{n}) -(1+\frac{p}{n})}= 2 \sigma^2 \frac{p}{n}.
-\ee 
-\begin{mybox}{}
-	This implies: If we have $p\gg n$ (i.e. high-dimensional data), the generalization error is extremely large, meaning the model is not learning. Even when we have $p\approx n$, we might still not learn well due to the intrinsic noise $\sigma^2$.
-\end{mybox}
-One way to ameliorate this is to use regularization. We will mainly focus on two forms of regularization which are introduced in the following:\\
-the first one employs an $L_2$ penalty and is called \emph{Ridge regression}, while the second uses an $L_1$ penalty and is called $LASSO$.
-\subsection{Regularized Least-square regressions-frequentist}
-Due to poor generalization, regularization is necessary, in particular  in the \emph{high-dimensional limit} ($p\gg n$). Regularization typically leads to better generalization. 
-\begin{mybox}{Idea behind regularization}
-	Due to the equivalence between the constrained and penalized form of regularized regression, we can regard the regularized regression problem as an un-regularized problem but on a \emph{constrained set of parameters}. Since the size of the allowed parameter space (e.g. $\mw \in \mR^p$ when un-regularized vs. $\mw \in C \subset \mR^p$ when regularized) is roughly a proxy for model complexity, solving the regularized problem is in effect \textbf{solving the un-regularized problem with a smaller model complexity class}. This implies that we are \textbf{less likely to overfit}.
-\end{mybox}
-Why is that so ?\\
-Let's say you are a young Physics student taking a laboratory class where the goal of the experiment is to measure the behaviour of several different pendula and use that to predict the formula (i.e. model) that determines the period of oscillation. In you investigation you would probably recod many things in an effort to give yourself the best possible chance of determining the unknown relationship, perhaps writing down the temperature of the room, any air currents, if the table were vibrating, etc. What you have done is create a high-dimensional dataset for yourself. However you actually possess an even higher-dimensional dataset than you probably would admit to yourself, e.g. whether it is Alice's birthday or whether you found a penny this morning, but you almost assuredly haven't written these down in your notebook. Why not ? The reason is because \emph{you entered the classroom with strongly held \textbf{prior beliefs} that none of those things affect the physics which takes place in that room}. What is serving you here is the \emph{intuition} that probably only a few things matter in the physics of pendula. Hence again you are approaching the experiment with prior beliefs about how many features you will need to pay attention to in order to predict what will happen when you swing an unknown pendulum.\\
-The point is that we live in a high-dimensional world of information and while we have good intuition about what to write down in our notebook for well-known problems, often in the field of ML we cannot say with any confidence a priori \emph{what} the small list of things to write down will be, but we can at least \textbf{use regularization to help us enforce that the list not be too long} so that we don't end up predicting that the period of a pendulum depends on Bob having a cold on Wednesdays.
-\subsubsection{Ridge-Regression}
-\begin{mybox}{Ridge-Regression}
-	We now add to the least squares loss function a \emph{regularizer} defined as as the $L_2$ norm of the parameter vector we wish to optimize over. In Ridge-Regression, the regularization penalty is taken to be the $L_2$-norm of the parameters 
-	\be 
-	E_{Ridge} = \lambda \norm{\mw}^2_2 = \lambda \mw^T\mw = \lambda \sum_{\gamma=1}^p w_\gamma w_\gamma.
-	\ee 
-	Thus, the model is fit by minimizing the sum of the in-sample error and the regularization term
-	\be 
-	\label{eq:lregRidge}
-	\hat{\mw}_{Ridge} (\lambda) = \arg \min_{\mw \in \mR^p}\left(\norm{\mX \mw - \my}^2_2 + \lambda \norm{\mw}^2_2\right)
-	\ee 
-	Notice that the parameter $\lambda$ controls how much we weigh the fit and regularization term.
-	The solution/estimate is found by differentiating w.r.t $\mw$
-	\be 
-	\label{eq:lregRidgeSol}
-	\hat{\mw}_{Ridge}(\lambda)=\frac{\hat{\mw}_{LS}}{1+\lambda} 
-	\ee 
-	where the  equality via \ref{eq:lregOLSsolution} holds for orthogonal $\mX$. This implies that the ridge estimate is merely the least squares estimate scaled by a factor $(1+\lambda)^{-1}$.
-	This problem is equivalent to the following \emph{constrained} optimization problem
-	\be 
-	\hat{\mw}_{Ridge}(t) ) \arg \min_{\mw \in \mR^p: \norm{\mw}^2_2 \leq t} \norm{\mX \mw -\my}^2_.2.
-	\ee 
-	Thus, by adding a regularization term, $\lambda \norm{\mw}^2_2$, to our least squares loss function, we are effectively constraining the magnitude of the parameter vector learned from the data. The solution
-\end{mybox}
-One can furthermore derive a relation (via singular value decomposition (SVD) on X) between the fitted vector $\hat{\my}=\mX\hat{\mw}_{Ridge}$ and the prediction made by least squares linear regression
-\be 
-\hat{y}_{Ridge} =\mX \hat{\mw}_{Ridge} \leq \mX \hat{\my} \equiv \hat{\my}_{LS}.
-\ee 
-It is clear that in order to compute the fitted vector $\hat{\my}$, both Ridge and least squares linear regression have to project $\my$ to the column space of $\mX$. The only difference is that Ridge regression further shrinks each basis component $j$ by a factor $d^2_j/(d^2_j+\lambda)$, where $d_1\geq d_2\geq \dots d_p \geq 0$ are the singular values of $\mX$.
-\begin{mybox}{}
-	It is considered good practice to always check the performance for the given model and data as a function of $\lambda$.
-\end{mybox}
-If increasing $\lambda$  simply degrades performance, we are most likely not undersampled.
-\subsubsection{LASSO and Sparse Regression}
-\begin{mybox}{LASSO}
-	Now we add an $L_1$ regularization penalty, conventionally called ’least absolute shrinkage and selection operator’ (LASSO). The penalty is the $L_1$-norm of the parameters (sum of absolute values of parameters)
-	\be 
-	E_{LASSO}= \lambda \norm{\mw}_1 = \lambda \sum_{\gamma=1}^p \abs{\mw_\gamma}
-	\ee 
-	LASSO in the penalized form is defined by the following regularized regression problem
-	\be 
-	\label{eq:lregLASSO}
-	\hat{\mw}_{LASSO}(\lambda) = \arg \min_{\mw \in \mR^p} \norm{\mX \mw - \my }^2_2 + \lambda \norm{\mw}_1.
-	\ee 
-	Obtaining a solution is not that easy, assuming $\mX$ to be orthogonal one finds a so-called threshold function (compare \ref{fig:lassovsridge})
-	\be 
-	\label{eq:lregLASSOSol}
-	\hat{w}^{LASSO}_j(\lambda)= \text{sign}(\hat{w}^{LS}_j)\left[\abs{\hat{w}^{LS}_j}-\lambda\right]_+
-	\ee 
-	where $(x)_+$ denotes the positive part of $x$ and $\hat{w}^{LS}_j$ is the $j$th component of \ref{eq:lregOLSsolution}.\\
-	In general, LASSO tends, in contrast to Ridge, to given sparse solutions, meaning many components of $\hat{\mw}_{LASSO}$ are zero. Looking at the behaviour of weights of LASSO and Ridge depending on the regularization parameter, one observes that LASSO, unlike Ridge, sets feature weights to zero leading to sparsity.
-\end{mybox}
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{gfx/LassoVsRidge}
+	\includegraphics[width=0.7\linewidth]{gfx/Bootstrapping}
 	\caption{}
-	\label{fig:lassovsridge}
+	\label{fig:bootstrapping}
 \end{figure}
-\begin{mybox}{On the hyperparameter}
-	The regularization parameter $\lambda$ affects the weights (features) the model (LASSO, Ridge) learns on a data set.
-\end{mybox}
-
-\subsubsection{A note on LASSO and Ridge}
-Note that both LASSO and Ridge regression are convex in  $\mw$ . What's more, Ridge is actually a strictly convex problem (assuming  $\lambda >0$ ) due to presence of $L_2$ penality. In fact, this is always true regardless of  $\mX$  and so the ridge regression solution is always well-defined.
-
-In contrast, LASSO is not always strictly convex and hence by convexity theory, it need not have a unique solution. The LASSO solution is unique under general conditions, for example, when  $\mX$  has columns in general position. To mitigate this, one can define a modified problem called the elastic net such that the function we want to minimize is always strictly convex:
-\bse 
-\min_{\mw \in \mR^p}\norm{\mX \mw -\my}^2_2 + \lambda \norm{\mw}_1+\delta \norm{\mw}^2_2
-\ese 
-where  $λ,δ\geq 0$  are regularization parameters. Now aside from uniqueness of the solution, the elastic net combines some of the desirable properties (e.g. prediction) of ridge regression with the sparsity properties of the LASSO.
-\subsubsection{Another note being a general comment on regularization}
-Comparing the performance of OLS, LASSO and Ridge for the $1D$ Ising model via the coefficient of determination \ref{eq:errorR2} by looking at the parameter space of the hyperparameter $\lambda$, one can draw the following conclusions.\\
-Choosing whether to use Ridge or LASSO regression turns out to be similar to fixing gauge degrees of freedom.
-\begin{mybox}{Picking a regularization scheme}
-	Different regularization schemes can lead to learning equivalent models but in different ’gauges’. Any information we have about the symmetry of the unknown model that generated the data should be reflected in the definition of the model and the choice of regularization.
-\end{mybox}
-
-\subsubsection{A general perspective on regularizers}
-\begin{mybox}{On the hyperparameter}
-	The \textbf{hyperparameter} $\lambda$ involved in e.g. LASSO and Ridge is usually predetermined, which means that it is not part of the regression process. Our learning performance and solution depends strongly on $\lambda$, thus it is vital to choose it properly. As discussed in \ref{subsec:priors}, one approach is to assume an \emph{uninformative prior} on the hyper-parameters, $p(\lambda)$, and average the posterior over all choices of $\lambda$ following this distribution. However, this comes with a large computational cost. Therefore, is is simpler to choose the regularization parameter through some optimization procedure.
+Figure \ref{fig:bootstrapping} shows the procedure of empirical bootstrapping. 
+\begin{mybox}{Bootstrapping - Summary}
+	The goal is to assess the accuracy of a statistical quantity of interest, which in the main text is illustrated as the sample median $\hat{M}_m(\mD)$. We start from a given dataset $\mD$ and bootstrap $B$ size $n$ datasets $\mD^{*(1)},\dots,\mD^{*(B)}$ called the bootstrap samples. Then we compute the statistical quantity of interest on these bootstrap samples to get the median $M^{*(k)}_n$, for $k=1,\dots,B$. These are then used to evaluate the accuracy of $\hat{M}_n(\mD)$. It can be shown that in the $n\rightarrow\infty$ limit the distribution of $M^{*(k)}_n$ would be a Gaussian centred around $\hat{M}_n(\mD)$ with variance $\sigma^2$ defined by \ref{eq:ensemblesBootrapingVariance}.
 \end{mybox}
 
 
-
-
-
-
-\subsection{Bayesian formulation of linear regression}
-\label{subsec:lregBayesian}
-In the formal statistical treatment of regression, the goal is to estimate the \emph{conditional expectation} of the depndent variable given the value of the independent variable (sometimes called the covariate). To connect linear regression to the Bayesian framework, we use \ref{eq:bayesianFreqConnectionModel}. In combination with \ref{eq:bayesLogLikelihood}, we get
-\bse 
-l(\mt)=-\frac{1}{2\sigma^2} \sum_{i=1}^n(y_i-\mw^T \mx^{(i)})^2-\frac{n}{2} \log(2 \pi  \sigma^2) = -\frac{1}{2\sigma^2} \norm{\mX \mw -\my}^2_2 + const.
-\ese
-\begin{mybox}{} 
-By comparing this with \ref{eq:lregOLSsolution}, it is clear that 
- performing least squares is the same as maximizing the log-likelihood of this model.
-\end{mybox}
-
- \subsubsection{Regularization }
- What about adding regularization?
- \begin{mybox}{}
- The MAP estimate  \ref{eq:bayesMAPestimate} corresponds to regularized linear regression, where the choice of prior determines the type of regularization.
- \end{mybox}
-The equivalence between MAP estimation with a Gaussian prior and Ridge regression is established by comparing \ref{eq:bayesMAPestimatorGaussianPrior} and Ridge regression \ref{eq:lregRidgeSol} with $\lambda \equiv \sigma^2/\tau^2$. An analogous derivation holds for LASSO \todo{todo ?}.
-
-\subsection{Outlook from linear regression}
-Linear regression can be applied to model non-linear relationships between input and response. This can be done by replacing the input $\mx$ with some non-linear function $\phi(\mx)$. Note that doing so preserves the linearity as a function of the parameters $\mw$, since the model is defined by their inner product $\phi^T(\mx) \mw$. This method is known as \emph{basis function expansion}.\footnote{Look into ML for physicists review for references.}
-
-
-
-
-
-
-
-\section{Logistic Regression}
-\label{sec:logisticRegression}
-So far we have focused on learning from datasets for which there is a ’continuous’ output. However, a wide variety of problems, such as \emph{classification}, are concerned with outcomes taking the form of discrete variables (i.e. \emph{categories}).
-\begin{example}
-	For example, we may want to detect if there is a cat or a dog in an image.
-\end{example}
-We will now introduce \emph{logistic regression} which deals with binary, dichotomous outcomes (.e.g. True or False, Success or Failure,etc.).
-\subsection{Mathematical set-up}
-\subsubsection{Binary classification}
-\label{subsubsec:classBinary}
-Throughout this section, we consider the case where the dependent variables $y_i\in \Z$ are discrete and only take values from $m=0,\dots,M-1$ (which enumerate the $M$ classes). The goal is to predict output classes from the design matrix $\mX\in \mR^{n\times  p}$ made of $n$ samples, each of which bears $p$ features. The primary goal is to identify the classes to which new unseen samples belong.
-\subsubsection{Multi-class classification}
-\label{subsubsec:classMultiClass}
-For multi-class classification, we can not only look at binary classification (in which the labels are dichotomous variables). One approach is to treat the label as a vector $\my_i\in \Z^M_2$, namely a binary string of length $M$ with only one component of $y_i$ being $1$ and the rest zero.
-\begin{example}
-	For example, $\my_i=(1,0,\dots,0)$ means data the sample $\mx_i$ belongs to class $1$.
-\end{example}
-
-
-
-
-\subsection{Classifiers}
-Given $\mx_i$, the classifier returns the probability of being in category $m$. The following perceptron is an example of \emph{hard} classification, each datapoint is assigned to a category (i.e. $y_i=0$ or $y_i=1$). A \emph{soft} classifier on the other hand gives the probability of a given category as an output.\\
-The classifiers do this by using threshold functions, which are discussed in the following \ref{subsubsec:thresholdfct}.\\
-In many cases, it is favourable to work with a soft classifier.
-\subsubsection{On threshold function functions}
-\label{subsubsec:thresholdfct}
-	A threshold function is a function that maps its input $\mx$ (a real-valued vector) to an output value $f(x)$ (a single binary value).
-One simple way to get a discrete output is to have sign (or threshold) functions that map the output of a linear regressor to $\{0,1\}$. The following are possible:
-\begin{enumerate}
-	\item The \emph{sign} function 
-\be
-\label{eq:logRegsign}
-\sigma(s_i)=\text{sign}(s_i)= \left\{\begin{array}{ll}
-	1 & \text{if } s_i\geq 0 \\
-	0 & \text{otherwise} \\
-\end{array}  \right\}
-\ee
-is employed for hard classification.
-\item The \emph{logistic} (or \emph{sigmoid}) function
-\be 
-\label{eq:logRegSigmoid}
-\sigma(s) = \frac{1}{1+e^{-s}}, \quad 1-\sigma(s) = \sigma(-s).
-\ee 
-\end{enumerate} 
-\subsection{Perceptron - a motivation}
-Before delving into the details of logistic regression, it is helpful to consider a slightly simpler classifier.
-\begin{mybox}{Perceptron}
-	Consider a linear classifier that categorizes examples using a weighted linear-combination of the features and an additive offset:
-	\be 
-	\label{eq:logRegPerceptron}
-	s_i = \mx^T_i \mw + b_0  \equiv \mathbf{\mathbb{x}}^T_i \mathbf{\mathbb{w}},
-	\ee 
-	where we use the short-hand notation $\mathbf{\mathbb{x}}_i=(1,\mx_i)$ and $\mathbf{\mathbb{w}}=(b_0,\mw)$. This function takes values on the entire real axis. IN the case of logistic regression, however, the labels $y_i$ are discrete variables. Using the sign function \ref{eq:logRegsign} to create discrete outputs via hard classification, we obtain the \emph{perceptron} model.\\
-	In the modern sense, the perceptron is an algorithm for learning a binary classifier called a  \emph{threshold function}, see \ref{subsubsec:thresholdfct}.
-\end{mybox}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Definition of logistic regression - Bayesian}
-This is a binary classification problem, see \ref{subsubsec:classBinary}.
-Here we define logistic regression and discuss the minimization of its corresponding cost function (the \emph{cross entropy}). 
-\begin{mybox}{Logistic regression}
-	Logistic regression is the canonical example of a soft classifier. In logistic regression, the probability that a data point $\mx_i$ belongs to a category $y_i = \{0,1\}$ is given by 
-	\begin{align*}
-		P(y_i=1|\mx_i,\mt)&= \frac{1}{1+e^{-\mathbf{\mathbb{x}}^T_i \mt}} = \sigma(\mathbf{\mathbb{x}}^T_i \mathbf{\mathbb{w}})\\
-		P(y_i=0|\mx_i,\mt) &= 1-P(y_i=1|\mx_i,\mt)
-	\end{align*}
-	where $\mt = \mathbf{\mathbb{w}}$ are the weights we wish to learn from the data. The cost function of logistic regression, the \emph{cross entropy}, is found to be
-	\be 
-	\label{eq:logregCrossEntropy}
-	\mC(\mathbf{\mathbb{w}} )= \sum_{i=1}^n \left[-y_i \log \sigma(\mathbf{\mathbb{x}}^T_i \mathbf{\mathbb{w}}) -(1-y_i) \log\left(1-\sigma(\mathbf{\mathbb{x}}^T_i \mathbf{\mathbb{w}})\right)\right].
-	\ee 
-	In practice, we usually implement the cross-entropy (like in linear regression) with additional regularization terms, usually $L_1$ and $L_2$ regularization.
-\end{mybox}
-\begin{mybox}{Minimizing the cross entropy}
-	The cross entropy is a convex function of the weights $\mathbb{w}$ and, therefore, any local minimizer is a global minimizer. Minimizing this cost function leads to 
-	\be 
-	\label{eq:logregCrossEntropyMinimized}
-	0 = \mathbf{\nabla} \mC(\mathbb{w}) = \sum_{i=1}^n \left[\sigma(\mathbb{x}^T_i \mathbb{w}) - y_i\right]\mathbb{x}_i.
-	\ee 
-	In words, the gradient points in the sum of training example directions weighted by the difference between the true label and the probability of predicting that label.
-	Equation \ref{eq:logregCrossEntropyMinimized} defines a transcendental equation for $\mathbb{w}$, the solution of which, unlike linear regression, cannot be written in a closed form. For this reason, one must use numerical methods such as \ref{sec:gd} to solve this optimization problem.
-\end{mybox}\footnote{However, as a word of caution, note there is a generic instability in the MLE procedure for linearly separable data)}
-In the notebooks, one looks at two examples to train a logistic regressor to classify binary data.
-We call \emph{one-hot} a group of bits where only one bit is $1$ and all others $0$, i.e. representing states: $\ket{1}=(1,0,\dots,0), \ket{2}=(0,1,0,\dots,0)$.
-\subsubsection{On the 2d Ising example}
-Given an Ising state, we would like to classify whether it belongs to the ordered or the disordered phase, without any additional information other than the spin configuration itself. This categorical ML problem is well suited for logistic regression, and will thus consist of recognizing whether a given state is ordered by looking at its bit configurations. Notice that, for the purposes of logistic regression, the $2D$ spin state of the Ising model will be flattened out to a $1D$ array, so it will not be possible to learn information about the structure of the contiguous ordered $2D$ domains. SUch information can be incorporated using deep convolutional neural networks.\\
-We use both ordered and disordered states to train the logistic regressor and, once the supervised training procedure is complete, we will evaluate the performance of our classification model on unseen ordered, disordered, and near-critical states. Here, we deploy the \emph{liblinear} routine (the default for Scikit' s logistic regression) and stochastic gradient descent to optimize the logistic regression cost function with $L_2$ regularization. We define the accuracy of the classifier as the percentage of correctly classified data points. Comparing the accuracy on the training and test data, we can study the degree of overfitting.\\
-Similar to the linear regression examples, we find that there exists a sweet spot for the SGD regularization strength $\lambda$ that results in optimal performance of the logistic regressor.
-\subsubsection{SUSY }
-Here we will use logistic regression in an attempt to find the relative probability that an event is from a signal or a background. Is a good classification problem with noisy data, how to discriminate against the background ? Some signal events look background-like, and some background events look signal-like to our discriminator.
-\subsection{SoftMax regression}
-In this section we generalize logistic regression to the case of multiple categories which is called \emph{SoftMax regression}. This is a multi-class classification problem \ref{subsubsec:classMultiClass}.
-\begin{mybox}{SoftMax regression}
-	The probability of $\mx_i$ being in class $m^\prime$ is given by
-	\be
-	\label{eq:logregSoftMaxfct} 
-	P(y_{im^\prime} =1 | \mx_i,\{\mathbb{w}_k\}^{M-1}_{k=0})=\frac{e^{-\mathbb{x}^T_i \mathbb{w}_{m^\prime}}}{\sum_{m=0}^{M-1} e^{-\mathbb{x}^T_i \mathbb{w}_m}},
-	\ee 
-	where $y_{im^\prime} \equiv [\my_i]_{m^\prime}$ refers to the $m^\prime$-th component of vector $\my_i$. This is known as the \emph{SoftMax} function. The generalized cost function reads
-	\begin{align}
-	\label{eq:logregSoftMaxcostFct}
-	\mC(\mathbb{w}) &= - \sum_{i=1}^n \sum_{m=0}^{M-1} \left[ y_{im} \log P(y_{im}=1|\mx_i, \mathbb{w}_m) \right.. \\
-	&\left. + (1-y_{im }) \log\left(1-P(y_{im} =1 |\mx_i ,\mathbb{w}_m)\right)\right],
-	\end{align} 
-	which reduces to the cross entropy \ref{eq:logregCrossEntropy} for $M=1$, i.e. for only two possible classes.
-\end{mybox}
-
-
-
-
-\section{Ensemble Methods - On combining models}
-\label{sec:ensembles}
-\subsection{Introduction}
-Ensemble methods combine predictions from multiple, often weak, statistical models to improve predictive performance. Ensemble methods, such as random forests, and boosted gradient trees, such as XGBoost, undergird many of the winning entries in data science competitions such as Kaggle, especially on structured datasets. Note that Neural Networks generally perform better than ensemble methods on unstructured data, images and audio. Even in the context of NN, it is common to combine predictions from multiple neural networks to increase performance on tough image classification tasks.
-\subsubsection{Motivation}
-We will give an overview of ensemble methods and provide rules of thumb for when and why they work.\\
-On one hand, the idea of training multiple models and then using a weighted sum of the predictions of all these models is very natural. On the other hand, one can also imagine that the ensemble predictions can be much worse than the predictions from each of the individual models that constitute the ensemble, especially when pooling reinforces weak but correlated deficiencies in each of the individual predictors. Thus, it is important to understand when we expect ensemble methods to work.\\
-As we saw in \ref{subsubsec:biasvarianceMathematicalEnsemble}, the key to determining when ensemble methods work is the degree of correlation between the models in the ensemble.
-\subsubsection{Benefits of Ensemble Methods before diving in}
-Three distinct shortcomings that are fixed by ensemble methods are: statistical, computational, and representational.\\
-The first reason is statistical. When the learning set is too small, a learning algorithm can typically find several models in the hypothesis space $\mH$ that all give the same performance on the training data. Provided their predictions are uncorrelated, averaging several models reduces the risk of choosing the wrong hypothesis. The second reason is computational. Many learning algorithms rely on some greedy assumption or local search that may get stuck in local optima. As such, an ensemble made of individual models built from many different starting points may provide a better approximation of the true unknown function than any of the single models. Finally, the third reason is representational. In most cases, for a learning set of finite size, the true function cannot be represented ba any of the candidate models in $\mH$. By combining several models in an ensemble, it may be possible to expand the space of representable functions and to better model the true function.\\
-\\ 
-The increase in representational power of ensembles comes from the fact that it is more advantageous to combine a group of simple hypotheses than to utilize a single arbitrary linear classifier. This of course comes with the price of introducing more parameters to our learning procedure. But if the problem itself can never be learned through a simple hypothesis, then there is no reason to avoid applying a more complex model. Since ensemble methods reduce the variance and are often easier to train than a single complex model, they are a powerful way of increasing representational power (also called expressivity in the ML literature).\\
+\subsection{Algorithms}
+\subsubsection{Decision Trees}
+\label{subsubsec:ensemblesRFDecisionTree}
+Decision trees are high-variance, weak classifiers that can be easily randomized, and as such, are ideally suited for ensemble-based methods.
+They are employed for random forests, cf. \ref{subsec:ensemblesRandomForest}.\\
+A decision tree uses a series of questions to hierarchically partition the the data. Each branch of the decision tree consists of a question that splits the data into smaller subsets with the leaves (end points) of the tree corresponding to the ultimate partitions of the data. When using decision trees for classification, the goal is to construct trees such that the partitions are informative about the class label. It is clear that more complex decision trees lead to finer partitions that give improved performance on the training set. However, this \textbf{generally leads to over-fitting}, limiting the out-of-sample performance. For this reason, in practice almost all decision trees use some form of regularization (e.g. maximum depth for the tree) to control complexity and reduce overfitting. Decision trees also have extremely high variance, and are often extremely sensitive to many details of the training data. This is not surprising since decision trees are learned by partitioning the training data. Therefore, \textbf{individual decision trees are weak classifiers.}\\
 \\
-How should we construct ensembles ?\\
-\begin{enumerate}
-	\item Try to randomize ensemble construction as much as possible to reduce the correlations between predictors in the ensemble. This ensures that our variance will be reduced while minimizing an increase in bias due to correlated errors.
-	\item The ensembles will work best for procedures where the error of the predictor is dominated by the variance and not the bias. Thus, these methods are especially well suited for unstable procedures whose results are sensitive o small changes in the training dataset.
-	\item Although the discussion above was derived in the context of continuous predictors such as regression, the basic intuition behind ensembles applies equally well to classification tasks. Using an ensemble allows one to reduce the variance by averaging the result of many independent classifiers. As with regression, this procedure works best for unstable predictors for which error are dominated by variance due to finite sampling rather than bias.
-\end{enumerate}
-
-
-
-\subsection{Bagging}
-\label{subsec:ensemblesBagging}
-\subsubsection{Bootstrapping}
-\subsection{Random Forests}
-\label{subsec:ensemblesRandomForest}
-\subsection{Gradient Boosted Trees and XGBoost}
-\label{subsec:ensemblesGBoostedTreesandXGBoost}
-\subsection{Different methods}
-Bagging, boosting, random forests, and gradient boosted trees such as XGBoost.
-\subsubsection{Bagging}
+However, these same properties make them ideal for incorporation in an ensemble method.\\
 
 
 
@@ -956,14 +592,15 @@ Bagging, boosting, random forests, and gradient boosted trees such as XGBoost.
 
 
 
-\section{In Introduction to Feed-Forward Deep Neural Networks (DNNS)}
-\label{sec:dnn}
 
 
-\chapter{Ideas for problems to work on}
-\section{Physics problems}
-\subsection{Cosmology}
-\begin{enumerate}
-	\item Maybe write a classification logistic regressor, or deep CNN to classify where dark matter halos have their boundary. It is very difficult to define a boundary of such a spread out object with confidence, maybe find criteria via classification ML technique ?
-\end{enumerate}
-\subsection{QFT}
+
+
+
+
+
+
+
+
+
+
