@@ -29,6 +29,7 @@ Ideally, we would ’adaptively’ choose the learning rates to match the landsc
 These limitiations lead to generalized GD methods which form the backbone of much of modern DL and NN.
 \subsection{Modified gradient descent}
 \subsubsection{Stochastic gradient descent (SGD) with mini-batches}
+\label{subsubsec:gdSGD}
 \begin{mybox}{SGD}
 		In SGD, we replace the actual gradient over the full data at each gradient descent step by an approximation to the gradient computed using a minibatch. This introduces stochasticity and decreases the chance that our fitting algorithm gets stuck in isolated local minima, as you cycle over all minibatches one at a time.\\
 The update rule is
@@ -396,12 +397,19 @@ Similar to the linear regression examples, we find that there exists a sweet spo
 Here we will use logistic regression in an attempt to find the relative probability that an event is from a signal or a background. Is a good classification problem with noisy data, how to discriminate against the background ? Some signal events look background-like, and some background events look signal-like to our discriminator.
 \subsection{SoftMax regression}
 \label{subsec:logregSoftMax}
-In this section we generalize logistic regression to the case of multiple categories which is called \emph{SoftMax regression}. This is a multi-class classification problem \ref{subsubsec:classMultiClass}.
+In this section we generalize logistic regression to the case of multiple categories which is called \emph{SoftMax regression}. This is a multi-class classification problem \ref{subsubsec:classMultiClass}.\\
+For general categorical data, $y$ can then take on $M$ values so that $y\in \{0,1,\dots, M-1 \}$. For each datapoint $i$, define a vector $y_{im} \equiv [\my_i]_{m}$, whichs refers to the $m^\prime$-th component of vector $\my_i$, called a \emph{one-hot} vector, such that
+\be
+y_{im} = \left\{ \begin{array}{ll}
+	1, & \text{if } y_i = m \\
+	0, & \text{otherwise}. \\
+\end{array}	\right\}
+\ee 
 \begin{mybox}{SoftMax regression}
 	The probability of $\mx_i$ being in class $m^\prime$ is given by
 	\be
 	\label{eq:logregSoftMaxfct} 
-	P(y_{im^\prime} =1 | \mx_i,\{\textbf{w}_k\}^{M-1}_{k=0})=\frac{e^{-\textbf{x}^T_i \textbf{w}_{m^\prime}}}{\sum_{m=0}^{M-1} e^{-\textbf{x}^T_i \textbf{w}_m}},
+	\hat{y}_{im (\tw) = p(yi=m^\prime | \tx_i;\tw) \equiv }P(y_{im^\prime} =1 | \mx_i,\{\textbf{w}_k\}^{M-1}_{k=0})=\frac{e^{-\textbf{x}^T_i \textbf{w}_{m^\prime}}}{\sum_{m=0}^{M-1} e^{-\textbf{x}^T_i \textbf{w}_m}},
 	\ee 
 	where $y_{im^\prime} \equiv [\my_i]_{m^\prime}$ refers to the $m^\prime$-th component of vector $\my_i$. This is known as the \emph{SoftMax} function. The generalized cost function reads
 	\begin{align}
@@ -691,9 +699,35 @@ For example, modern NNs for image segmentation often incorporate ’skip connect
 
 \subsubsection{Training deep networks}
 \label{subsubsec:deepTraining}
+\begin{mybox}{Training procedure}
+	The training procedure is the same as we used for training simpler supervised learning algorithms such as logistic and linear regression, compare \ref{subsec:recipeML}:\\
+	Construct a cost/loss function and then use gradient descent to minimize the cost function and find the optimal weights and biases. 
+\end{mybox}
+NNs differ from these simpler supervised procedures in that generally they contain multiple hidden layers that make taking the gradient computationally more difficult, this will be discussed in more detail via the \emph{backpropagation} algorithm for computing gradients in \ref{subsubsec:deepBackpropagation}.\\
+\\
+Like all supervised learning procedures, the first thing one must do to train a NN is to specify a loss function. Given a data point $(\tx_i,y_i)$, $\tx_i \in \mR^{d+1}$, the NN makes a prediction $\hat{y}_i(\tw)$, where $\tw$ are the parameters of the NN. Recall that in most cases, the top output layer of our NN is either a continuous predictor or a classifier that makes discrete (categorical) predictions. Depending on whether one wants to make continuous or categorical predictions, one must utilize a different kind of loss function.
+\begin{enumerate} 
+\item For continuous data, the loss functions that are commonly used to train NNs are identical to those used in linear regression:
+\begin{enumerate}
+	\item One is the mean squared error
+	\be 
+	\label{eq:deepCostSquaredError}
+	E(\tw) = \frac{1}{n}\sum_{i=1}^n (y_i-\hat{y}_i(\tw) )^2, 
+	\ee 
+	where $n$ is the number of data points,
+	\item and the mean-absolute error (i.e. $L_1$ norm) 
+	\be 
+	\label{eq:deepCostAbsoluteError} 
+	E(\tw) = \frac{1}{n} \sum_i \abs{y_i - \hat{y}_i(\tw)}.
+		\ee 
+\end{enumerate}
+The full cost function often includes terms that implement regularization (e.g. $L_1$ or $L_2$ regularizers).
+\item For categorical data, the most commonly used loss function is the cross-entropy (\ref{eq:logregCrossEntropy} and \ref{eq:logregSoftMaxcostFct}), since the output layer is often taken to be a logistic classifier for binary data with two types of labels, or a soft-max classifier if there are more than two types of labels. As usual, these loss functions are often supplemented by aditional terms that implement regularization.
+\end{enumerate}
+Having defined an architecture and a cost function, we must now train the model. Similar to other supervised learning methods, we make use of gradient-descend based methods \ref{sec:gd} to optimize the cost function. Recall that the basic idea of GD is to update the parameters $\tw$ to move in the direction of the gradient of the cost function $\nabla_{\tw} E(\tw)$.\footnote{Most modern NN packages, such as Keras, allow te user to specify which of the optimizers discussed in \ref{sec:gd} they would like to use in order to train the NN. Depending on the architecture, data, and computation resources, different optimizers may work better on the problem, though vanilla SGD \ref{subsubsec:gdSGD} is a good first choice.}
 
-
-
+\subsubsection{The Backpropagation algorithm}
+\label{subsubsec:deepBackpropagation}
 
 
 
