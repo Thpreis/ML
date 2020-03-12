@@ -100,10 +100,10 @@ Employ these tips for getting the best performance from GD based algorithms, esp
 \subsection{Least-square regressions -frequentist}
 We'll consider ordinary least squares regression problem in which the "error function" is defined as the square from the deviation of our linear predictor to the true response. 
 \begin{mybox}{OLS}
-\emph{Ordinary least squares linear regression} (OLS) is defined as the minimization of the $L_2$ norm of the difference between the response $y_i$ and the predictor $g(\mx^{(i)};\mathbb{w})=\mathbb{w}^T \mx^{(i)}$:
+\emph{Ordinary least squares linear regression} (OLS) is defined as the minimization of the $L_2$ norm of the difference between the response $y_i$ and the predictor $g(\mx^{(i)};\textbf{w})=\textbf{w}^T \mx^{(i)}$:
 \be 
 \label{eq:lregOLS}
-\min_{\mathbb{w} \in \mR^p} \norm{\mX \mathbb{w} -\my}^2_2 = \min_{\mathbb{w} \in \mR^p}\sum_{i=1}^n (\mw^T \mx^{(i)} - y_i)^2.
+\min_{\textbf{w} \in \mR^p} \norm{\mX \textbf{w} -\my}^2_2 = \min_{\textbf{w} \in \mR^p}\sum_{i=1}^n (\mw^T \mx^{(i)} - y_i)^2.
 \ee
 Where \ref{eq:lregOLS} is the minimization of the loss function of OLS.\\
 We are looking to find the parameters $\mw$ which minimize the $_2$ error. Geometrically speaking, the predictor function $g$ defines a hyperplane in $\mR^p$. Minimizing the least squares error is therefore equivalent to minimizing the sum of all projections (i.e. residuals) for all points$\mx^{(i)}$ to this hyperplane. If $\rank (\mX)=p$ , namely, the feature predictors  $\mX_{:,1},\dots,\mX_{:,p}$  are linearly independent, then there exists unique solution to this problem, which we denote as $\hat{\mw}_{LS}$:
@@ -325,9 +325,9 @@ Before delving into the details of logistic regression, it is helpful to conside
 	Consider a linear classifier that categorizes examples using a weighted linear-combination of the features and an additive offset:
 	\be 
 	\label{eq:logRegPerceptron}
-	s_i = \mx^T_i \mw + b_0  \equiv \mathbf{\mathbb{x}}^T_i \mathbf{\mathbb{w}},
+	s_i = \mx^T_i \mw + b_0  \equiv \mathbf{\textbf{x}}^T_i \mathbf{\textbf{w}},
 	\ee 
-	where we use the short-hand notation $\mathbf{\mathbb{x}}_i=(1,\mx_i)$ and $\mathbf{\mathbb{w}}=(b_0,\mw)$. This function takes values on the entire real axis. IN the case of logistic regression, however, the labels $y_i$ are discrete variables. Using the sign function \ref{eq:logRegsign} to create discrete outputs via hard classification, we obtain the \emph{perceptron} model.\\
+	where we use the short-hand notation $\mathbf{\textbf{x}}_i=(1,\mx_i)$ and $\mathbf{\textbf{w}}=(b_0,\mw)$. This function takes values on the entire real axis. IN the case of logistic regression, however, the labels $y_i$ are discrete variables. Using the sign function \ref{eq:logRegsign} to create discrete outputs via hard classification, we obtain the \emph{perceptron} model.\\
 	In the modern sense, the perceptron is an algorithm for learning a binary classifier called a  \emph{threshold function}, see \ref{subsubsec:thresholdfct}.
 \end{mybox}
 \subsubsection{The algorithm}
@@ -335,18 +335,18 @@ Before delving into the details of logistic regression, it is helpful to conside
 
 Suppose that we're given a set of $N$ observations each bearing $p$ features, $\mx_n=(x_1^{(n)},\cdots, x_p^{(n)})\in\mathbb{R}^p$, $n=1,\cdots, N$. The goal of binary classification is to relate these observations to their corresponding binary label $y_n \in\{+1,-1\}$. Concretely, this amounts to finding a function $h: \mathbb{R}^p\rightarrow \{+1,-1\}$ such that $h(\mx_n)$ is ideally the same as $y_n$. 
 \begin{mybox}{Perceptron} 
-	A \emph{perceptron} accomplishes this feat by utilizing a set of weights $\mathbb{w}=(w_0,w_1,\cdots, w_d)\in\mathbb{R}^{p+1}$ to construct $h$ so that labelling is done through
+	A \emph{perceptron} accomplishes this feat by utilizing a set of weights $\textbf{w}=(w_0,w_1,\cdots, w_d)\in\mathbb{R}^{p+1}$ to construct $h$ so that labelling is done through
 \be 
-	h(\textbf{x}_n)=\text{sign }\left(w_0+\sum_{i=1}^p w_ix_i^{(n)}\right) =\text{sign }(\mathbb{w}^T\mathbb{x}_n),
+	h(\textbf{x}_n)=\text{sign }\left(w_0+\sum_{i=1}^p w_ix_i^{(n)}\right) =\text{sign }(\textbf{w}^T\textbf{x}_n),
 	\ee 
 	
-	where $\mathbb{x}_n=(1,x_1^{(n)},\cdots, x_p^{(n)}) = (1,\mx_n)$. The perceptron can be viewed as the zero-temperature limit of the logistic regression where the sigmoid (Fermi-function) becomes a step function.
+	where $\textbf{x}_n=(1,x_1^{(n)},\cdots, x_p^{(n)}) = (1,\mx_n)$. The perceptron can be viewed as the zero-temperature limit of the logistic regression where the sigmoid (Fermi-function) becomes a step function.
 	
 \end{mybox}
 
-PLA begins with randomized weights. It then selects a point from the training set at random. If this point, say, $\textbf{x}_n$, is misclassified, namely, $y_n\neq \text{sign }(\mathbb{w}^T\mathbb{x}_n)$, weights are updated according to 
+PLA begins with randomized weights. It then selects a point from the training set at random. If this point, say, $\textbf{x}_n$, is misclassified, namely, $y_n\neq \text{sign }(\textbf{w}^T\textbf{x}_n)$, weights are updated according to 
 \be 
-\mathbb{w}\leftarrow \mathbb{w}+ y_n\mathbb{x}_n
+\textbf{w}\leftarrow \textbf{w}+ y_n\textbf{x}_n
 \ee 
 Otherwise, $\textbf{w}$ is preserved and PLA moves on to select another point. This procedure continues until a specified threshold is met, after which PLA outputs $h$. It is clear that PLA is an online algorithm since it does not treat all available data at the same time. Instead, it learns the weights as it progress along data points in the training set one-by-one. The update rule is built on the intuition that whenever a mistake is encountered, it corrects its weights by moving towards the right direction. 
 
@@ -367,24 +367,24 @@ Here we define logistic regression and discuss the minimization of its correspon
 \begin{mybox}{Logistic regression}
 	Logistic regression is the canonical example of a soft classifier. In logistic regression, the probability that a data point $\mx_i$ belongs to a category $y_i = \{0,1\}$ is given by 
 	\begin{align*}
-		P(y_i=1|\mx_i,\mt)&= \frac{1}{1+e^{-\mathbf{\mathbb{x}}^T_i \mt}} = \sigma(\mathbf{\mathbb{x}}^T_i \mathbf{\mathbb{w}})\\
+		P(y_i=1|\mx_i,\mt)&= \frac{1}{1+e^{-\mathbf{\textbf{x}}^T_i \mt}} = \sigma(\mathbf{\textbf{x}}^T_i \mathbf{\textbf{w}})\\
 		P(y_i=0|\mx_i,\mt) &= 1-P(y_i=1|\mx_i,\mt)
 	\end{align*}
-	where $\mt = \mathbf{\mathbb{w}}$ are the weights we wish to learn from the data. The cost function of logistic regression, the \emph{cross entropy}, is found to be
+	where $\mt = \mathbf{\textbf{w}}$ are the weights we wish to learn from the data. The cost function of logistic regression, the \emph{cross entropy}, is found to be
 	\be 
 	\label{eq:logregCrossEntropy}
-	\mC(\mathbf{\mathbb{w}} )= \sum_{i=1}^n \left[-y_i \log \sigma(\mathbf{\mathbb{x}}^T_i \mathbf{\mathbb{w}}) -(1-y_i) \log\left(1-\sigma(\mathbf{\mathbb{x}}^T_i \mathbf{\mathbb{w}})\right)\right].
+	\mC(\mathbf{\textbf{w}} )= \sum_{i=1}^n \left[-y_i \log \sigma(\mathbf{\textbf{x}}^T_i \mathbf{\textbf{w}}) -(1-y_i) \log\left(1-\sigma(\mathbf{\textbf{x}}^T_i \mathbf{\textbf{w}})\right)\right].
 	\ee 
 	In practice, we usually implement the cross-entropy (like in linear regression) with additional regularization terms, usually $L_1$ and $L_2$ regularization.
 \end{mybox}
 \begin{mybox}{Minimizing the cross entropy}
-	The cross entropy is a convex function of the weights $\mathbb{w}$ and, therefore, any local minimizer is a global minimizer. Minimizing this cost function leads to 
+	The cross entropy is a convex function of the weights $\textbf{w}$ and, therefore, any local minimizer is a global minimizer. Minimizing this cost function leads to 
 	\be 
 	\label{eq:logregCrossEntropyMinimized}
-	0 = \mathbf{\nabla} \mC(\mathbb{w}) = \sum_{i=1}^n \left[\sigma(\mathbb{x}^T_i \mathbb{w}) - y_i\right]\mathbb{x}_i.
+	0 = \mathbf{\nabla} \mC(\textbf{w}) = \sum_{i=1}^n \left[\sigma(\textbf{x}^T_i \textbf{w}) - y_i\right]\textbf{x}_i.
 	\ee 
 	In words, the gradient points in the sum of training example directions weighted by the difference between the true label and the probability of predicting that label.
-	Equation \ref{eq:logregCrossEntropyMinimized} defines a transcendental equation for $\mathbb{w}$, the solution of which, unlike linear regression, cannot be written in a closed form. For this reason, one must use numerical methods such as \ref{sec:gd} to solve this optimization problem.
+	Equation \ref{eq:logregCrossEntropyMinimized} defines a transcendental equation for $\textbf{w}$, the solution of which, unlike linear regression, cannot be written in a closed form. For this reason, one must use numerical methods such as \ref{sec:gd} to solve this optimization problem.
 \end{mybox}\footnote{However, as a word of caution, note there is a generic instability in the MLE procedure for linearly separable data)}
 In the notebooks, one looks at two examples to train a logistic regressor to classify binary data.
 We call \emph{one-hot} a group of bits where only one bit is $1$ and all others $0$, i.e. representing states: $\ket{1}=(1,0,\dots,0), \ket{2}=(0,1,0,\dots,0)$.
@@ -401,13 +401,13 @@ In this section we generalize logistic regression to the case of multiple catego
 	The probability of $\mx_i$ being in class $m^\prime$ is given by
 	\be
 	\label{eq:logregSoftMaxfct} 
-	P(y_{im^\prime} =1 | \mx_i,\{\mathbb{w}_k\}^{M-1}_{k=0})=\frac{e^{-\mathbb{x}^T_i \mathbb{w}_{m^\prime}}}{\sum_{m=0}^{M-1} e^{-\mathbb{x}^T_i \mathbb{w}_m}},
+	P(y_{im^\prime} =1 | \mx_i,\{\textbf{w}_k\}^{M-1}_{k=0})=\frac{e^{-\textbf{x}^T_i \textbf{w}_{m^\prime}}}{\sum_{m=0}^{M-1} e^{-\textbf{x}^T_i \textbf{w}_m}},
 	\ee 
 	where $y_{im^\prime} \equiv [\my_i]_{m^\prime}$ refers to the $m^\prime$-th component of vector $\my_i$. This is known as the \emph{SoftMax} function. The generalized cost function reads
 	\begin{align}
 	\label{eq:logregSoftMaxcostFct}
-	\mC(\mathbb{w}) &= - \sum_{i=1}^n \sum_{m=0}^{M-1} \left[ y_{im} \log P(y_{im}=1|\mx_i, \mathbb{w}_m) \right.. \\
-	&\left. + (1-y_{im }) \log\left(1-P(y_{im} =1 |\mx_i ,\mathbb{w}_m)\right)\right],
+	\mC(\textbf{w}) &= - \sum_{i=1}^n \sum_{m=0}^{M-1} \left[ y_{im} \log P(y_{im}=1|\mx_i, \textbf{w}_m) \right.. \\
+	&\left. + (1-y_{im }) \log\left(1-P(y_{im} =1 |\mx_i ,\textbf{w}_m)\right)\right],
 	\end{align} 
 	which reduces to the cross entropy \ref{eq:logregCrossEntropy} for $M=1$, i.e. for only two possible classes.
 \end{mybox}
@@ -597,7 +597,7 @@ As a note about the sketch above, in practice additional regularization such as 
 	One nice feature of ensemble methods such as XGBoost is that they automatically allow us to calculate feature scores (\emph{Fscores}) that rank the importance of various features for classification. The higher the Fscore, the more important the feature for classification.
 \end{mybox}
 
-\section{In Introduction to Feed-Forward Deep Neural Networks (DNNS)}
+\section{An Introduction to Feed-Forward Deep Neural Networks (DNNS)}
 \label{sec:dnn}
  Neural networks are one of the most powerful and widely-used supervised learning techniques. Deep Neural Networks (DNNs) got rebranded as ’Deep Learning’ and have become the workhorse technique for many image and speech recognition based ML tasks. The large-scale industrial deplyoment of DNNs has given rise to a number of high-level libraries and packages (Caffe, Keras, Pytorch, Tensorflow, etx.).\\
  Conceptually, it is helpful to divide NNs into four categories 
@@ -613,44 +613,84 @@ Results for modern NNs are largely empirical and heuristic and lack a firm theor
 \subsection{Neural Network Basics}
 Neural networks (also called neural nets) are neural-inspired nonlinear models for supervised learning. Neural nets can be viewed as natural, more powerful extensions of supervised learning methods such as linear \ref{sec:linearRegression} and logistic regression \ref{sec:logisticRegression} and soft-max methods \ref{subsec:logregSoftMax}.
 \subsubsection{The basic building block: neurons}
+\label{subsubsec:dnnNeurons}
 \begin{mybox}{Neurons}
 The basic unit of a neural net is a stylized \emph{neuron} $i$ that takes a vector of $d$ input features $\mx=(x_1,x_2,\dots,x_d)$ and produces a scalar output $a_i(\mx)$. 
 \end{mybox}
 A neural network consists of many such neurons stacked into layers, with the output of one layer serving as the input for the next \todo{Inut figurre 35}. The first layer in the neural net is called the \emph{input layer}, the middle layers are often called \emph{hidden layers}, and the final layer is called the \emph{output layer}.\\
-The exact function $a_i$ varies depending on the type of non-linearity used in the NN. However, in essentially all cases $a_i$ can be decomposed into a linear operation that weights the relative importance of the various inputs, and a non-linear transformation $\sigma_i(z)$ which is usually the same for all neurons\footnote{I.e. a threshhold function which squishes the sum of all $a_i$ into a number between $0$ and $1$, cf. \ref{subsubsec:thresholdfct}.} The linear transformation in almost all NNs takes the form of a dot product with a set of neuron-specific weights $\mw^{(i)} = (w^{(i)}_1,w^{(i)}_2,\dots,w^{(i)}_d)$ followed by re-centring with a neuron-specific bias $b^{(i)}$:
+The exact function $a_i$ varies depending on the type of non-linearity used in the NN. However, in essentially all cases $a_i$ can be decomposed into a linear operation that weights the relative importance of the various inputs, and a non-linear transformation $\sigma_i(z)$ which is usually the same for all neurons\footnote{I.e. a threshhold function which squishes the sum of all $a_i$ into a number between $0$ and $1$, cf. \ref{subsubsec:thresholdfct}.}, compare \ref{fig:neuron}. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{gfx/Neuron}
+	\caption{\itshape A) Neurons consist of a linear transformation that weights the importance of various inputs, followed by a non-linear activation function. B) Network architecture.}
+	\label{fig:neuron}
+\end{figure}
+
+
+
+
+The linear transformation in almost all NNs takes the form of a dot product with a set of neuron-specific weights $\mw^{(i)} = (w^{(i)}_1,w^{(i)}_2,\dots,w^{(i)}_d)$ followed by re-centring with a neuron-specific bias $b^{(i)}$:
 \be 
-z^{(i)} = \mw^{(i)} \cdot \mx ü+ b^{(i)} = \mathbb{x}^T \cdot \mathbb{w}^{(i)},
+z^{(i)} = \mw^{(i)} \cdot \mx ü+ b^{(i)} = \textbf{x}^T \cdot \textbf{w}^{(i)},
 \ee 
-where $\mathbb{x}=(1,\mx)$ and $\mathbb{w}^{(i)} = (b^{(i)}, \mw^{(i)} )$.
+where $\textbf{x}=(1,\mx)$ and $\textbf{w}^{(i)} = (b^{(i)}, \mw^{(i)} )$.
 \begin{mybox}{Choosing the right non-linearity}
  In terms of $z^{(i)}$ and the non-linear function $\sigma_i(z)$, we can write the full input-output function as 
 \be 
+\label{eq:dnnInputOutputfct}
 a_i(\mx) = \sigma_i ( z^{(i)}).
 \ee 
 Historical choices of nonlinearities include step-functions (perceptrons), sigmoids (i.e. Fermi functions), and the hyperbolic tangent, cf. \ref{subsubsec:thresholdfct}. More recently, it has become more common to use rectified linear units (ReLUs), leaky rectified linear units (leaky ReLUs), and exponential linear units (ELUs). Different choice of non-linearities lead to different computational and training properties for neurons. The underlying reason for this is that we train neural nets using gd based methods, cf. \ref{sec:gd}, that require us to take derivatives of the neural input-output function with respect to the weights $\mw^{(i)}$ and the bias $b^{(i)}$.
 \end{mybox}
 Notice that the derivatives of the aforementioned non-linearities $\sigma(z)$ have very different properties. The derivative of the perceptron is zero everywhere except where the input is zero. This discontinuous behaviour makes it impossible to train perceptrons using gradient descent. For this reason, until recently the most popular choice of non-linearity was the $\tanh$ function or a sigmoid/Fermi function. However, this choice of non-linearity has a major drawback. When the input weights become large, as they often do in traingin, the activation functions saturates and the derivative of the output w.r.t. the weights tends to zero since $\partial \sigma /\partial z \rightarrow 0$ for $z\gg 1$. Such \emph{vanishing gradients} are a feature of any saturating function, making it harder to train deep networks. In contrast, for a non-saturating function such as ReLUs or ELUs, the gradients stay finite even for large inputs.
 
+\subsubsection{Layering neurons to build deep networks: network architecture}
+\label{subsubsec:dnnNetworkArchitecture}
+The basic idea of all NNs is to layer neurons in a hierarchical fashion, the general structure of which is known as the \emph{network architecture}, compare \ref{fig:neuron}. In the simplest feed-forward networks, each neuron in the \emph{input layer} of the neurons takes the inputs $\textbf{x}$ and produces an output $a_i(\textbf{x})$ that depends on its current weights, see \ref{eq:dnnInputOutputfct}. The outputs of the input layer are then treated as the inputs to the next \emph{hidden layer}. This is usually repeated several times until one reaches the top or \emph{output layer}.
+\begin{mybox}{Output layer and general architecture}
+	The output layer is almost always a simple classifier of the form discussed before: a logistic regression \ref{sec:logisticRegression} or soft-max function \ref{subsec:logregSoftMax} in the case of categorical data (i.e. discrete labels) or a linear regression \ref{sec:linearRegression} layer in the case of continuous outputs. Thus, the whole neural network can be though of as a complicated nonlinear transformation of the inputs $\tx$ into an output $\hat{y}$ that depends on the weights and biases of all the neurons in the input, hidden, and output layers.
+\end{mybox}
+The use of hidden layers greatly expands the representation power (\emph{expressivity}) of a NN when compared with a simple soft-max or linear regression network, this is exemplified by the following theorem.
+\begin{mybox}{Universal approximation theorem}
+	A NN with a single hidden layer can approximate any continuous multi-input/multi-output function with arbitrary accuracy.
+\end{mybox}
+What does this mean and where does this come from ?\\
+Note that by increasing the number of hidden neurons we can improve the approximation. Suppose we're given a function $f(x)$ which we'd like to compute to within some desired accuracy $ϵ>0$. The guarantee is that by using enough hidden neurons we can always find a neural network whose output $g(x)$ satisfies 
+ \bse 
+ \abs{g(x)-f(x)} < \epsilon,
+ \ese 
+  for all inputs $x$.
+The approximation of the function works in the following way like a Riemann sum. Basically every pair of neurons in the hidden layer can be combined, via a combination of both weights, into a step function (or a sigmoid function which becomes a step function for large inputs). To be more precise, you can make every activation function into a step function by a clever combination of weights and bias if the activation function satisfies the following properties:\\
+We do need to assume that $s(z)$ is well-defined as$z\rightarrow \infty$ and $z\rightarrow -\infty$. These two limits are the two values taken on by our step function. We also need to assume that these limits are different from one another. If they weren't, there'd be no step, simply a flat graph! But provided the activation function $s(z)$ satisfies these properties, neurons based on such an activation function are universal for computation (i.e. they are able to approximate any function).
+\\
+ Having $N$ pairs of hidden layer neuron pairs therefore gives you $N$ step function, which you can arrange beside each other, or overlapping. This is basically the approximation of the function. You Arrange step functions in such a way that they give you the function in a small section of the intervall. Therefore, basically neuron pairs in the hidden layer provide support functions as in analysis, which are step function approximating the true function for a small part of the interval. Therefore, by simply increasing the number of hidden layer neurons, you increase the number of step functions and decrease their width, resulting in a finer approximation of the function.\\
+This makes use of the weighted combination $\sum_j w_j a_j$ output from the hidden neurons, however the function is given by the output layer, i.e. by the output $\sigma(\sum_j w_j a_j +b)$ where $b$ is the bias on the output neuron. How do you make the transition ?\\
+The solution is to design a neural network whose hidden layer has a weighted output given by $\sigma^{-1}\circ f(x)$, such that the overall output will be a very good approximation of $\sigma\circ \sigma^{-1} \circ f(x) = f(x)$.
+\\
+If you have more inputs for one neuron, i.e. a many-input function $f(x_1,x_2,\dots)$, you get more weights, because every input $x_i$ has a weight $w_i$ associated with it which determines how much this input variable should contribute in this particular neuron, where every neuron also has one specific bias associated with it.\\
+For two input variables:\\
+ You can again create step function but this time in three dimensions (i.e. $x_1,x_2,g(x_1,x_2)$), which are called tower functions. These are constructed by introducing a second hidden layer. A pair of Neurons in the first hidden layer giving us a step-function in one direction can be combined with a pair of neurons giving us a step function in another direction (and so on) to create a tower function by a clever combination of heights of the two neuron pairs and bias of the neuron in the second hidden layer both of these pairs are connected to. Then, you can create any $3$ or $m$ dimensional function by stacking tower functions together. We can also make them as thin as we like, and whatever height we like. As a result, we can ensure that the weighted output from the second hidden layer approximates any desired function of two variables.
+In particular, by making the weighted output from the second hidden layer a good approximation to $\sigma^{-1}\circ f$, we ensure the output from our network will be a good approximation to any desired function, $f$.\\
+For $m$ input variables you need to have $m$ neuron pairs in the first hidden layer to feed into one respective neuron in the second hidden layer, where the former create all the step functions in the different dimensions by clever combination of parameters and the latter gives the output tower function in the given dimension.\\
+For vector-valued functions, you simply compute the components of the vector separately via the above method and then put them into a vector.
+\begin{mybox}{Conclusion}
+We saw that we can approximate any function with just one hidden layer. Given this, you might wonder why we would ever be interested in deep networks, i.e., networks with many hidden layers. Can't we simply replace those networks with shallow, single hidden layer networks?\\
+While in principle that's possible, there are good practical reasons to use deep networks. Deep networks have a hierarchical structure which makes them particularly well adapted to learn the hierarchies of knowledge that seem to be useful in solving real-world problems. Put more concretely, when attacking problems such as image recognition, it helps to use a system that understands not just individual pixels, but also increasingly more complex concepts: from edges to simple geometric shapes, all the way up through complex, multi-object scenes. Deep networks do a better job than shallow networks at learning such hierarchies of knowledge.
+\end{mybox}
+\subsubsection{Further on network architecture: How many layers is adequate for a problem ?}
+\label{subsubsec:deepBestPracticeArchitecture}
+Deep architectures are favourable for learning. Increasing the number of layers increases the number of parameters and hence the representational power of NNs. Indeed, recent numerical experiments suggest that as long as the number of parameters i larger than the number of data points, certain classes of NNs can fit arbitrarily labelled random noise samples. This suggests that large NNs of the kind used in practice can express highly complex function. Adding hidden layers is also though to allow neural nets to learn more complex features rom the data. Work on convolutional networks suggests that the first few layers of a neural network learn simple, ’low-level’ features thatare then combined into higher-level, more abstract features in the deeper layers.\\
+\\
+Choosing the exact network architecture for a NN remains an art that requires extensive numerical experimentation and intuition, and is often times problem-specific. Both the number of hidden layers and the number of neurons in each layer can affect the performance of a NN.
+\begin{mybox}{Rule of thumb}
+	A general rule of thumb that seems to be emerging is that the number of parameters in the NN should be large enough to prevent underfitting.
+\end{mybox}
+Empirically, the best architecture for a problem depends on the task, the amount and type of data that is available, and the computational resources at one's disposal. Certain architectures are easier to train, while others might be better at capturing complicated dependencies in the data and learning relevant input features. Finally, there architectures beyond simple deep, feed-forward NNs.
+For example, modern NNs for image segmentation often incorporate ’skip connections’ that skip layers of NN. This allows information to directly propagate to a hidden or output layer, bypassing intermediate layers and often improving performance.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\subsubsection{Training deep networks}
+\label{subsubsec:deepTraining}
 
 
 
