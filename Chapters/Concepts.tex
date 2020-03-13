@@ -453,7 +453,7 @@ In bagging, the contribution of all predictors is weighted equally in the bagged
 \label{subsubsec:ensemblesBagging}
 BAGGing, or Bootstrap AGGregation, is one of the most widely employed and simplest ensemble-inspired methods.
 Bagging is effective on ’unstable’ learning algorithms where small changes in the training set result in large changes in predictions.\\
-Imagine we have a very large dataset $\mL$ that we could partition into $M$ smaller data sets which we label $\{\mL_1,\dots,\mL_m\}$ If each partition is sufficiently alrge to learn a predictor, we can create an ensemble aggregate predictor composed of predictors trained on each subset of the data. For continuous predictors like regression, this is just the average of all the individual predictors 
+Imagine we have a very large dataset $\mL$ that we could partition into $M$ smaller data sets which we label $\{\mL_1,\dots,\mL_m\}$. If each partition is sufficiently large to learn a predictor, we can create an ensemble aggregate predictor composed of predictors trained on each subset of the data. For continuous predictors like regression, this is just the average of all the individual predictors 
 \be 
 \label{eq:ensemblesBaggingaggregatePredictorcontinuous}
 \hat{g}^A_{\mL}(\mx) = \frac{1}{M} \sum_{i=1}^M g_{\mL_i} (\mx).
@@ -490,7 +490,7 @@ When the procedure is unstable, the prediction error is dominated by the varianc
  	In boosting, an ensemble of weak classifiers $\{g_k(\mx)\}$ is combined into an aggregate, boosted classifier. However, unlike bagging \ref{subsubsec:ensemblesBagging}, each classifier is associated with a weight $\alpha_k$ that indicates how much it contributes to the aggregate classifier
  	\be 
  	\label{eq:ensemblesBoostingAggregateClassifier}
- 	g_A(\mx) = \sum_{k=1}^M \alpha_k g_k)(\mx),
+ 	g_A(\mx) = \sum_{k=1}^M \alpha_k g_k(\mx),
  	\ee 
  	where $\sum_k \alpha_k =1$. Boosting, like all ensemble methods, works best when we combine simple, high-variance classifiers into a more complex whole.
  \end{mybox}
