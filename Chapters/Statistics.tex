@@ -57,7 +57,7 @@ There is a fundamental difference between minimizing the in-sample error and min
 	\label{eq:errorR2}
 	R^2=1-\frac{\sum_{i=1}^n \abs{y^{true}_i - y^{pred}_i}^2}{\sum_{i=1}^n \abs{y^{true}_i- \frac{1}{n} \sum_{i=1}^n y^{pred}_i}^2}.
 	\ee 
-Optimal performance is $R^2=1$. but it can also be negative. A constant model that always predicts the expected value of $y, ⟨y^{true}⟩,$ disregarding the input features, would get a $R^2$ score of $0$.
+Optimal performance is $R^2=1$, but it can also be negative. A constant model that always predicts the expected value of $y, ⟨y^{true}⟩,$ disregarding the input features, would get a $R^2$ score of $0$.
 \end{mybox}
 
 
@@ -80,7 +80,7 @@ It turns out that for complicated models studied in ML, predicting and fitting a
 	Models that give the best fit to existing data do not necessarily make the best predictions even for simple tasks. At small sample sizes, noise can create fluctuations in the data that look like genuine patterns. Simple models (like a linear function) cannot represent complicated patterns in the data, so they are forced to ignore the fluctuations and to focus on the larger trends. 
 \begin{mybox}{Overfitting}
 	\label{subsubsec:overfitting}
-Complex models with many parameters can capture both the global trends and noise-generated patters at the same time. IN this case, the model can be tricked into thinking that the noise encodes real information. This problem is called \emph{overfitting} and leads to a steep drop-off in predictive performance.\\
+Complex models with many parameters can capture both the global trends and noise-generated patterns at the same time. In this case, the model can be tricked into thinking that the noise encodes real information. This problem is called \emph{overfitting} and leads to a steep drop-off in predictive performance.\\
 We can guard against overfitting in two ways:
 \begin{enumerate}
 	\item We can use less expensive models with fewer parameters, or
@@ -92,7 +92,7 @@ The relative degree of overfitting: This information is contained in the differe
 	\label{subsubsec:biasvariancetradeoff}
 	The \emph{bias-variance} tradeoff is used in our countermeasures against overfitting. What is it ?\\When the amount of training data is limited, one can often get better predictive power performance by using a less expressive model rather than the more complex model. The simpler model has more ’bias’ but is less dependent on the particular realization of the training dataset, i.e. less ’variance’. Therefore, even though the correct model is guaranteed to have better predictive performance for an infinite amount of training data (less bias), the training errors stemming from finite-size sampling (variance) can cause simpler models to outperform the more complex model when sampling is limited.
 \end{mybox}
-The bias-variance tradeoff is one of the key concepts in ML and therefore discussed quantitatively in more detail in \ref{subsubsec:biasvariancetradeoff} and qualitatively in \ref{subsubsec:biasvarianceMathematical}.\\
+The bias-variance tradeoff is one of the key concepts in ML and therefore discussed quantitatively in more detail in \ref{subsubsec:biasvariancetradeoff} and qualitatively in \ref{subsubsec:biasvarianceMathematicaloneClassifier}.\\
 These two concepts are now discussed in more detail, for that we introduce another quantity and then look explicitly at the components of our theory causing problems for different complexity regimes.
 \begin{mybox}{Bias}
 	The bias represents the best our model could do if we had an infinite amount of training data to beat down sampling noise. The bias is a property of the kind of functions, or model class, we are using to approximate $f(x)$. In general, the more complex the model class we use, the smaller the bias. However, we do not generally have an infinite amount of data. For this reason, to get best predictive power it is better to minimize the out-of-sample error, $E_{out}$, rather than the bias. 
@@ -104,11 +104,11 @@ The out-of-sample error will decrease with the number of data points. As the num
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{gfx/IMG_20200303_180633}
+	\includegraphics[width=0.7\linewidth]{gfx/InOutError.png}
 	\caption{}
 	\label{fig:errorbehaviour}
 \end{figure}
-Compare the behaviour of both errors with increasing number of data points, left graph of \ref{fig:errorbehaviour}, and the out-of-sample error with increasing model complexity, right graph of \ref{fig:errorbehaviour}. As for the left graph, we can look at the difference between the generalization ($\abs{E_{in}-E_{out}}$) and training error ($E_{in}$), the big curly bracket. It measures how well our in-sample error reflects the out-of-sample error, and measures how much worse we would do on a new data set compared to our training data. For this reason, the difference between these error is precisely the quantity that measures the difference between fitting and predicting. \emph{Models with a large difference between the in-sample and out-of-sample errors are said to \textbf{overfit} the data}. 
+Compare the behaviour of both errors with increasing number of data points, left graph of \ref{fig:errorbehaviour}, and the out-of-sample error with increasing model complexity, right graph of \ref{fig:errorbehaviour}. As for the left graph, we can look at the difference between the generalization ($E_{out}$) and training error ($E_{in}$), i.e. the big curly bracket representing $\abs{E_{in}-E_{out}}$. It measures how well our in-sample error reflects the out-of-sample error, and measures how much worse we would do on a new data set compared to our training data. For this reason, the difference between these errors is precisely the quantity that measures the difference between fitting and predicting. \emph{Models with a large difference between the in-sample and out-of-sample errors are said to \textbf{overfit} the data}. 
 \begin{mybox}{}
 	One of the lessons of statistical learning theory is that it is not enough to simply minimize the training error, because the out-of-sample error can still be large.
 \end{mybox}
@@ -116,7 +116,7 @@ Considering the right graph, model  complexity is, in many cases, related to the
 \begin{mybox}{}
 Thus, to minimize $E_{out}$ and maximize our predictive power, it may be more suitable to use a more biased model with small variance than a less-biased model with large variance. This is is, again, the \emph{bias-variance} tradeoff we introduced above.
 \end{mybox} 
-Another way to understand this tradeoff is the following. Due to sampling noise from having finite size data sets, the learned models will differ for each choice of training sets. In general, more complex models need a larger amount of training data. For this reason, the fluctuations in the learned models (variance) will be much larger for the more complex model than the simpler model. However, if we consider the asymptotic performance as we increase the size of the training set (the bias), it is clear that the complex model will eventually perform better than the simpler model. Thus, depending on the amount of training data, it may \textbf{be more favourable to use a less comples, high-bias model to make predictions}.
+Another way to understand this tradeoff is the following. Due to sampling noise from having finite size data sets, the learned models will differ for each choice of training sets. In general, more complex models need a larger amount of training data. For this reason, the fluctuations in the learned models (variance) will be much larger for the more complex model than the simpler model. However, if we consider the asymptotic performance as we increase the size of the training set (the bias), it is clear that the complex model will eventually perform better than the simpler model. Thus, depending on the amount of training data, it may \textbf{be more favourable to use a less complex, high-bias model to make predictions}.
 
 
 
@@ -147,7 +147,7 @@ Statistical modelling revolves around estimation or prediction.
 Note first and foremost that techniques in ML tend to be more focused on prediction rather than estimation, which means that we will mostly treat prediction problems in this compendium. This is for example because an artificially intelligent agent needs to be able to recognize objects in its surroundings and predict the behaviour of its environment in order to make informed choices.\\
 \subsubsection{Contrasting the two}
 Estimation and prediction problems can be cast into a common conceptual framework. In both cases, we choose some observable quantity $\mx$ of the system we are studying (e.g. an interference pattern) that is related to some parameters $\mt$ (e.g. the speed of light) of a model $p(\mx|\mt)$ that describes the probability of observing $\mx$ given $\mt$.\\
-Now we perform an experiment to obtain a dataset $\mX$ and use these data to fit the model. Typically,  ’fitting’ the model involves finding $\hat{\mt}$ that provides the best explanation for the data. IN the case when ’fitting’ refers to the method of least squares, the estimated parameters maximize the probability of observing the data (i.e., $\hat{\mt}=\arg \max_{\mt}\{p(\mX|\mt) \}$).\\
+Now we perform an experiment to obtain a dataset $\mX$ and use these data to fit the model. Typically,  ’fitting’ the model involves finding $\hat{\mt}$ that provides the best explanation for the data. In the case when ’fitting’ refers to the method of least squares, the estimated parameters maximize the probability of observing the data (i.e., $\hat{\mt}=\arg \max_{\mt}\{p(\mX|\mt) \}$).\\
 \begin{mybox}{Estimation vs Prediction}
 	\emph{Estimation problems} are concerned with the accuracy of $\hat{\mt}$, whereas \emph{prediction problems} are concerned with the ability of the model to predict new observations (i.e., the accuracy of $p(\mx|\hat{\mt})$. Although the goals of estimation and prediction are related, they often lead to different approaches.
 \end{mybox}
@@ -270,7 +270,7 @@ Bias^2(\mx) \equiv \left(f(\mx) - \mathbb{E}_{\mL,\mt}[\hat{g}^A_{\mL} (\mx,\{\m
 \ee 
 and the variance as
 \bse 
-Var(\mx) = \\mathbb{E}_{\mL,\mt}\left[ (\hat{g}^A_{\mL}(\mx,\{\mt\}) - \mathbb{E}_{\mL,\mt}[\hat{g}^A_{\mL}(\mx,\{\mt\})])^2 \right]. 
+Var(\mx) = \mathbb{E}_{\mL,\mt}\left[ (\hat{g}^A_{\mL}(\mx,\{\mt\}) - \mathbb{E}_{\mL,\mt}[\hat{g}^A_{\mL}(\mx,\{\mt\})])^2 \right]. 
 \ese 
 So far the calculation for ensembles is almost identical to that of a single estimator, compare \ref{subsubsec:biasvarianceMathematicaloneClassifier}.
 \begin{mybox}{Crux of Bias-Variance for Ensembles}
@@ -291,7 +291,7 @@ Bias^2(\mx) = (f(\mx) - \mu_{\mL,\mt})^2.
 \end{mybox}
 
 Therefore, the correlation between models that constitute the ensemble is the key property here. It is important for two reasons. First, holding the ensemble size fixed, averaging the predictions of correlated models reduces the variance less than averaging uncorrelated models. Second, in some cases, correlations between models within an ensemble can result in an \emph{increase} in bias, offsetting any potential reduction in variance gained from ensemble averaging.\\
-This will be discussed in the context of bagging \ref{subsec:ensemblesBagging}
+This will be discussed in the context of bagging  \ref{subsubsec:ensemblesBagging}.
 
 
 
@@ -352,7 +352,7 @@ Fitting a given set of samples $(y_i,\mx_i)$ means relating the independent vari
 y_i = g(\mx_i;\mw).
 \ese 
 We call $g(\mx^{(i)},\mw)$ the \emph{predictor}. Recall that the optimal choice of predictor depends on, among many other things, the functions used to fit the data and the underlying noise level.
-We then try to minimize the errors made in explaing the given set of measurements based on our model $g$ by tuning the parameters $\mw$. To do so, we need to first define the error function (formally called the  \emph{loss function}) that characterizes the deviation of our prediction form the actual response
+We then try to minimize the errors made in explaing the given set of measurements based on our model $g$ by tuning the parameters $\mw$. To do so, we need to first define the error function (formally called the  \emph{loss function}) that characterizes the deviation of our prediction from the actual response
 
 
 
@@ -424,7 +424,7 @@ Using an informative prior tends to decrease the variance of the posterior distr
 	\label{eq:bayesLaplacianprior}
 	p(\mt|\lambda) = \prod_j \frac{\lambda}{2} e^{-\lambda \abs{\theta_j}}.
 	\ee 
-	The hyperparameter can either be chose via a hierarchical prior employing MCMC or  by simply finding a good value of $\lambda$ using an optimization procedure (see linear regression).
+	The hyperparameter can either be chosen via a hierarchical prior employing MCMC or  by simply finding a good value of $\lambda$ using an optimization procedure (see linear regression).
 \end{mybox}
 Indeed, a Gaussian prior is the \emph{conjugate prior} that gives a Gaussian posterior. For a given likelihood, conjugacy guarantees the preservation of prior distribution at the posterior level.
 \begin{example}
@@ -484,7 +484,7 @@ Using the assumption that samples are i.i.d., we can write the \emph{log-likelih
 \label{eq:bayesLogLikelihood}
 l(\mt) \equiv \log p(\mD|\mt) = \sum_{i=1}^n \log p(y_i|\mx^{(i)},\mt).
 \ee 
-Note that the conditional dependence of the response variable $y_i$ on the independent variable $\mx^{(i)}$ in the likelihood function is made explicit since, in most applications, the observed value of data, $y_i$, is predicted based on $\mx^{(i)}$ using a model that is assumed to be a probability distribution that depends on unknown parameter $\mt$. This distribution, when endowed with $\mt$, can, as we hope, potentially explain our prediction on $y_i$. By definition, such distribution is the likelihood function \ref{eq:bayesLikelihoodFct}. We stress that this notation does \emph{not} imply $\mx^{(i)}$ is unknown . it is still part of the observed data!
+Note that the conditional dependence of the response variable $y_i$ on the independent variable $\mx^{(i)}$ in the likelihood function is made explicit since, in most applications, the observed value of data, $y_i$, is predicted based on $\mx^{(i)}$ using a model that is assumed to be a probability distribution that depends on unknown parameters $\mt$. This distribution, when endowed with $\mt$, can, as we hope, potentially explain our prediction on $y_i$. By definition, such distribution is the likelihood function \ref{eq:bayesLikelihoodFct}. We stress that this notation does \emph{not} imply $\mx^{(i)}$ is unknown, it is still part of the observed data!
 \begin{mybox}{Error function}
 The negative of the log-likelihood gives us the error function
 \be 
@@ -498,7 +498,7 @@ E(\mt)=-l(\mt).
 	\item The posterior mean, or  \emph{Bayes estimate}
 	\be 
 	\label{eq:bayesBayesEstimate}
-	\expval{\mt} = \int \md \mt \mt p(\mt |\mX),
+	\expval{\mt} = \int \md \mt \mt \;p(\mt |\mX),
 	\ee 
 	or
 	\item the posterior mode, also called the \emph{maximum-a-posteriori} (MAP) estimate
@@ -509,7 +509,10 @@ E(\mt)=-l(\mt).
 	This estimate gives the parameters at which the posterior probability distribution is peaked
 \end{enumerate}
 While the Bayes estimate minimizes the mean-squared error, MAP estimate is often used instead because it is easier to compute.
-
+\subsubsection{Out-of-Bag estimators}
+\label{subsubsec:bayesOOBestimators}
+For ensemble methods, especially random forest \ref{subsec:ensemblesRandomForest}, there exists another object for estimation, the \emph{out-of-bag (OOB) estimates}.
+This is discussed in more detail in \ref{subsec:ensemblesRandomForest}.
 \subsection{Bayesian view on regularization}
 As discussed in \ref{subsec:performanceeval}, \emph{we can't make predictions without making assumptions}. Thus, it is sensible to introduce priors that reflect the fact that we are likely to be undersampled (especially in high dimensions).\\
 We can supplement an error function with a regularizer that prevents overfitting. From a Bayesian point of view, the regularization can be thought of as a prior on parameters. Minimizing the combined in-sample error $+$ regularization terms is the same as the \emph{Maximum a posteriori probability} (MAP) estimate in Bayesian regression \ref{eq:bayesMAPestimate}. Note that in a true Bayesian approach, we should not use the mode of the posterior but the average over all possible choices of parameters weighted by their posterior probability. In practice, this is often not done (for computational and practical reasons).
@@ -535,7 +538,6 @@ This is used later on to cast linear regression into bayesian language, \ref{sub
 
 
 
-
 \section{Mathematical tools}
 \label{sec:math}
 \subsection{Sampling methods}
@@ -547,7 +549,7 @@ Suppose we are given a finite set of $n$ data points $\mD=\{X_1,\dots,X_n\}$ as 
 \bse 
 \mD^{*(1)},\dots, \mD^{*(B)}.
 \ese 
-The next step is to use these $B$ bootstrap sets to get the \textbf{bootstrap estimate} of the quantitfy of interest. For example, let $M^{*(k)}_n=$Median$(\mD^{*(k)})$ be the sample median of bootstrap data $\mD^{*(k)}$. Then we can construct the variance of the distribution of bootstrap medians as
+The next step is to use these $B$ bootstrap sets to get the \textbf{bootstrap estimate} of the quantity of interest. For example, let $M^{*(k)}_n=$Median$(\mD^{*(k)})$ be the sample median of bootstrap data $\mD^{*(k)}$. Then we can construct the variance of the distribution of bootstrap medians as
 \be 
 \label{eq:ensemblesBootrapingVariance}
 \hat{Var}_B(M_n)=\frac{1}{B-1} \sum_{k=1}^B \left[M^{*(k)}_n-\bar{M}^{*}_n\right]^2 = \sigma^2 \stackrel{n\rightarrow \infty}{\longrightarrow} \frac{1}{n}
