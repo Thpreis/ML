@@ -28,4 +28,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {2.4}{\ignorespaces \itshape A) Neurons consist of a linear transformation that weights the importance of various inputs, followed by a non-linear activation function. B) Network architecture.\relax }}{61}{figure.caption.8}
 \defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Left :\itshape Backpropagation for a DNN with one neuron per layer. \normalfont Right: \itshape $L$-th layer is introduced by multiple activations in the previous layer if we have more than one neuron.\relax }}{71}{figure.caption.9}
+\defcounter {refsection}{0}\relax 
 \ttl@tocsep 

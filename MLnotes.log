@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  16 MAR 2020 21:37
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  17 MAR 2020 08:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -5712,6 +5712,30 @@ Package microtype Info: Character `‒' is missing
 Package microtype Info: Character `―' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/m/it/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/m/n' will be
+(Font)              scaled to size 10.95015pt on input line 31.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/m/n' will be
+(Font)              scaled to size 8.10922pt on input line 31.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/m/n' will be
+(Font)              scaled to size 6.02809pt on input line 31.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/m/n' will be
+(Font)              scaled to size 10.94983pt on input line 31.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/m/n' will be
+(Font)              scaled to size 8.10896pt on input line 31.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/m/n' will be
+(Font)              scaled to size 6.0279pt on input line 31.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/bx/n' will be
+(Font)              scaled to size 10.95015pt on input line 31.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/bx/n' will be
+(Font)              scaled to size 8.10922pt on input line 31.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/bx/n' will be
+(Font)              scaled to size 6.02809pt on input line 31.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/bx/n' will be
+(Font)              scaled to size 10.94983pt on input line 31.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/bx/n' will be
+(Font)              scaled to size 8.10896pt on input line 31.
+LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/bx/n' will be
+(Font)              scaled to size 6.0279pt on input line 31.
 )
 \tf@lof=\write10
 \openout10 = `MLnotes.lof'.
@@ -5732,32 +5756,7 @@ Package tocbasic Info: character protrusion at lot deactivated on input line 39
 
 
 
-] (./MLnotes.tdo
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/m/n' will be
-(Font)              scaled to size 10.95015pt on input line 2.
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/m/n' will be
-(Font)              scaled to size 8.10922pt on input line 2.
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/m/n' will be
-(Font)              scaled to size 6.02809pt on input line 2.
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/m/n' will be
-(Font)              scaled to size 10.94983pt on input line 2.
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/m/n' will be
-(Font)              scaled to size 8.10896pt on input line 2.
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/m/n' will be
-(Font)              scaled to size 6.0279pt on input line 2.
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/bx/n' will be
-(Font)              scaled to size 10.95015pt on input line 2.
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/bx/n' will be
-(Font)              scaled to size 8.10922pt on input line 2.
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/bx/n' will be
-(Font)              scaled to size 6.02809pt on input line 2.
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/bx/n' will be
-(Font)              scaled to size 10.94983pt on input line 2.
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/bx/n' will be
-(Font)              scaled to size 8.10896pt on input line 2.
-LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/bx/n' will be
-(Font)              scaled to size 6.0279pt on input line 2.
-)
+] (./MLnotes.tdo)
 \tf@tdo=\write13
 \openout13 = `MLnotes.tdo'.
 
@@ -7510,46 +7509,59 @@ Overfull \hbox (34.06969pt too wide) has occurred while \output is active
  []
 
 [63] [64]
-Overfull \hbox (7.3839pt too wide) in paragraph at lines 708--709
-\TU/TeXGyrePagella(0)/m/n/10.95 Constructing a Deep Neural Network to solve ML 
-problems is a multiple-
- []
-
-
-Overfull \hbox (1.2746pt too wide) in paragraph at lines 716--717
-[]\TU/TeXGyrePagella(0)/m/n/10.95 Modify the hyperparameters to optimize perfor
-mance for the spe-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 721--726
-
- []
-
-
 Overfull \hbox (34.06969pt too wide) has occurred while \output is active
  []|[]|
  []
 
 [65]
-Underfull \hbox (badness 10000) in paragraph at lines 736--739
+Underfull \hbox (badness 10000) in paragraph at lines 740--745
 
  []
 
 [66]
+Underfull \hbox (badness 10000) in paragraph at lines 755--758
+
+ []
+
+
 Overfull \hbox (34.06969pt too wide) has occurred while \output is active
  []|[]|
  []
 
 [67] [68]
-Underfull \hbox (badness 10000) in paragraph at lines 794--802
+Overfull \hbox (34.06969pt too wide) has occurred while \output is active
+ []|[]|
+ []
 
+[69]
+File: gfx/Backpropagation.png Graphic file (type bmp)
+<gfx/Backpropagation.png>
+File: gfx/Backpropagation2.png Graphic file (type bmp)
+<gfx/Backpropagation2.png>
+
+Overfull \hbox (1.06021pt too wide) in paragraph at lines 817--831
+\TU/TeXGyrePagella(0)/m/n/10.95 putationally slow, such that you randomly subdi
+vide the data into mini-
  []
 
 
-Overfull \hbox (1.06021pt too wide) in paragraph at lines 794--802
-\TU/TeXGyrePagella(0)/m/n/10.95 putationally slow, such that you randomly subdi
-vide the data into mini-
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[70]
+Overfull \hbox (34.06969pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[71]
+Overfull \hbox (4.32689pt too wide) in paragraph at lines 839--842
+\TU/TeXGyrePagella(0)/m/n/10.95 the weight initialization is chosen randomly, i
+n order to break
+ []
+
+[72]
+Underfull \hbox (badness 1215) in paragraph at lines 858--859
+[]\TU/TeXGyrePagella(0)/m/n/10.95 The idea of Batch Normalization is to introdu
+ce new
  []
 
 
@@ -7557,9 +7569,20 @@ Overfull \hbox (34.06969pt too wide) has occurred while \output is active
  []|[]|
  []
 
-[69]
+[73]
+Overfull \hbox (1.12587pt too wide) in paragraph at lines 870--872
+\TU/TeXGyrePagella(0)/m/n/10.95 In practice, Batch Normalization considerably i
+mproves the learn-
+ []
+
+
+Overfull \hbox (0.88866pt too wide) in paragraph at lines 878--879
+[]\TU/TeXGyrePagella(0)/m/n/10.95 In Tensorflow one constructs data flowgraphs,
+ the nodes of which
+ []
+
 Chapter 3.
-[70]) [71
+[74]) [75
 
 
 ]
@@ -7798,6 +7821,8 @@ gfx/Bootstrapping.jpg
 Chapters/Concepts.tex
 gfx/LassoVsRidge.jpg
 gfx/Neuron.jpg
+gfx/Backpropagation.png
+gfx/Backpropagation2.png
  ***********
 
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 159.
@@ -7809,12 +7834,12 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59475 strings out of 493007
- 1225956 string characters out of 6136718
+ 59511 strings out of 493007
+ 1226836 string characters out of 6136718
  2034695 words of memory out of 5000000
- 62434 multiletter control sequences out of 15000+600000
+ 62468 multiletter control sequences out of 15000+600000
  546530 words of font info for 147 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
  83i,23n,138p,10510b,5117s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (77 pages).
+Output written on MLnotes.pdf (81 pages).
