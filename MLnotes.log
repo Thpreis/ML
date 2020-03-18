@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  17 MAR 2020 08:53
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  18 MAR 2020 18:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -5453,6 +5453,18 @@ Overfull \hbox (4.31511pt too wide) in paragraph at lines 195--195
 ural Networks 
  []
 
+
+Overfull \hbox (1.15413pt too wide) in paragraph at lines 211--211
+ [][] []\TU/TeXGyrePagella(0)/m/n/10.95 Regularizing neural networks and other 
+practical 
+ []
+
+
+Overfull \hbox (24.60902pt too wide) in paragraph at lines 227--227
+ [][] []\TU/TeXGyrePagella(0)/m/n/10.95 The structure of convolutional neural n
+etworks []  
+ []
+
 )
 \tf@toc=\write9
 \openout9 = `MLnotes.toc'.
@@ -5736,10 +5748,19 @@ LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/bx/n' will be
 (Font)              scaled to size 8.10896pt on input line 31.
 LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/bx/n' will be
 (Font)              scaled to size 6.0279pt on input line 31.
+
+Overfull \hbox (44.28893pt too wide) in paragraph at lines 35--35
+ \TU/TeXGyrePagella(0)/m/n/10.95 convolutional layer with ReLU nonlinearity:\TU
+/TeXGyrePagella(0)/m/it/10.95 Convolutional 
+ []
+
 )
 \tf@lof=\write10
 \openout10 = `MLnotes.lof'.
 
+ [5
+
+]
 Package tocbasic Info: character protrusion at lot deactivated on input line 39
 .
  (./MLnotes.lot)
@@ -5750,24 +5771,21 @@ Package tocbasic Info: character protrusion at lot deactivated on input line 39
 \tf@lol=\write12
 \openout12 = `MLnotes.lol'.
 
-) [5
-
-] [6
-
-
-
-] (./MLnotes.tdo)
+) [6] (./MLnotes.tdo)
 \tf@tdo=\write13
 \openout13 = `MLnotes.tdo'.
 
+ [1
 
-[1
+
+
 
 
 ]
 \openout2 = `Chapters/Introduction.aux'.
 
- (./Chapters/Introduction.tex
+
+(./Chapters/Introduction.tex
 Chapter 1.
 [2
 
@@ -7315,19 +7333,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 617--620
  []
 
 
-Overfull \hbox (9.82108pt too wide) in paragraph at lines 627--629
+Overfull \hbox (9.82108pt too wide) in paragraph at lines 651--653
 \TU/TeXGyrePagella(0)/m/n/10.95 vised learning techniques. Deep Neural Networks
  (DNNs) got rebranded
  []
 
 
-Overfull \hbox (0.81839pt too wide) in paragraph at lines 627--629
+Overfull \hbox (0.81839pt too wide) in paragraph at lines 651--653
 \TU/TeXGyrePagella(0)/m/n/10.95 as ’Deep Learning’ and have become the workhors
 e technique for many
  []
 
 [59]
-Overfull \hbox (7.83365pt too wide) in paragraph at lines 633--634
+Overfull \hbox (7.83365pt too wide) in paragraph at lines 657--658
 []\TU/TeXGyrePagella(0)/m/n/10.95 NNs for unsupervised learning such as Deep Bo
 ltzmann Machines. 
  []
@@ -7498,7 +7516,7 @@ Overfull \hbox (34.06969pt too wide) has occurred while \output is active
  []
 
 [61]
-Overfull \hbox (6.3655pt too wide) in paragraph at lines 671--672
+Overfull \hbox (6.3655pt too wide) in paragraph at lines 695--696
 \TU/TeXGyrePagella(0)/m/n/10.95 was the $[]$ function or a sigmoid/Fermi functi
 on. However, this choice
  []
@@ -7509,59 +7527,49 @@ Overfull \hbox (34.06969pt too wide) has occurred while \output is active
  []
 
 [63] [64]
+Underfull \hbox (badness 10000) in paragraph at lines 741--746
+
+ []
+
+
 Overfull \hbox (34.06969pt too wide) has occurred while \output is active
  []|[]|
  []
 
 [65]
-Underfull \hbox (badness 10000) in paragraph at lines 740--745
+Underfull \hbox (badness 10000) in paragraph at lines 756--759
 
  []
 
 [66]
-Underfull \hbox (badness 10000) in paragraph at lines 755--758
-
- []
-
-
 Overfull \hbox (34.06969pt too wide) has occurred while \output is active
  []|[]|
  []
 
 [67] [68]
-Overfull \hbox (34.06969pt too wide) has occurred while \output is active
- []|[]|
- []
-
-[69]
 File: gfx/Backpropagation.png Graphic file (type bmp)
 <gfx/Backpropagation.png>
 File: gfx/Backpropagation2.png Graphic file (type bmp)
 <gfx/Backpropagation2.png>
 
-Overfull \hbox (1.06021pt too wide) in paragraph at lines 817--831
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Overfull \hbox (1.06021pt too wide) in paragraph at lines 828--833
 \TU/TeXGyrePagella(0)/m/n/10.95 putationally slow, such that you randomly subdi
 vide the data into mini-
  []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[70]
 Overfull \hbox (34.06969pt too wide) has occurred while \output is active
  []|[]|
  []
 
-[71]
-Overfull \hbox (4.32689pt too wide) in paragraph at lines 839--842
-\TU/TeXGyrePagella(0)/m/n/10.95 the weight initialization is chosen randomly, i
-n order to break
- []
-
-[72]
-Underfull \hbox (badness 1215) in paragraph at lines 858--859
-[]\TU/TeXGyrePagella(0)/m/n/10.95 The idea of Batch Normalization is to introdu
-ce new
+[69] [70]
+Overfull \hbox (0.63226pt too wide) in paragraph at lines 847--848
+\TU/TeXGyrePagella(0)/m/n/10.95 ing rate or step-size by searching over five lo
+garithmic grid points.
  []
 
 
@@ -7569,20 +7577,35 @@ Overfull \hbox (34.06969pt too wide) has occurred while \output is active
  []|[]|
  []
 
-[73]
-Overfull \hbox (1.12587pt too wide) in paragraph at lines 870--872
-\TU/TeXGyrePagella(0)/m/n/10.95 In practice, Batch Normalization considerably i
-mproves the learn-
+[71] [72]
+Overfull \hbox (5.06656pt too wide) in paragraph at lines 875--877
+[]\TU/TeXGyrePagella(0)/m/n/10.95 Hence, the new parameters $[][]$ and $[][]$ c
+an be learned just like the weights
  []
 
 
-Overfull \hbox (0.88866pt too wide) in paragraph at lines 878--879
+Overfull \hbox (0.88866pt too wide) in paragraph at lines 882--883
 []\TU/TeXGyrePagella(0)/m/n/10.95 In Tensorflow one constructs data flowgraphs,
  the nodes of which
  []
 
+
+Overfull \hbox (34.06969pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[73] [74] [75]
+File: gfx/cnn.png Graphic file (type bmp)
+<gfx/cnn.png>
+ [76]
+File: gfx/cnnExample.png Graphic file (type bmp)
+<gfx/cnnExample.png>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 Chapter 3.
-[74]) [75
+[77] [78]) [79
 
 
 ]
@@ -7823,6 +7846,8 @@ gfx/LassoVsRidge.jpg
 gfx/Neuron.jpg
 gfx/Backpropagation.png
 gfx/Backpropagation2.png
+ gfx/cnn.png
+gfx/cnnExample.png
  ***********
 
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 159.
@@ -7834,12 +7859,12 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59511 strings out of 493007
- 1226836 string characters out of 6136718
+ 59533 strings out of 493007
+ 1227184 string characters out of 6136718
  2034695 words of memory out of 5000000
- 62468 multiletter control sequences out of 15000+600000
+ 62488 multiletter control sequences out of 15000+600000
  546530 words of font info for 147 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
- 83i,23n,138p,10510b,5117s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 85i,23n,140p,10510b,5117s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (81 pages).
+Output written on MLnotes.pdf (85 pages).

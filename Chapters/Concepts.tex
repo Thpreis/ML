@@ -9,7 +9,7 @@ As always in the context of ML, we want to minimize the cost function $E(\mathbf
 \begin{mybox}{Gradient descent}
 The simplest gradient descent (GD) algorithm is characterized by the following \emph{update rule} for the parameters $\mathbf{θ}$. Initialize the parameters to some value $\mathbf{θ}_0$ and iteratively update the parameters according to the equation
 \be
-\label{eq:gdsimple}
+\centering\label{eq:gdsimple}
 \mathbf{v}_t = \eta_t \nabla_{θ} E(\mathbf{θ}_t),\quad \mathbf{θ}_{t+1} = \mathbf{θ}_t-\mathbf{v}_t
 \ee 
 where we have introduced the \emph{learning rate} $\eta_t$ (one hyperparameter of the model), that controls how big a step we should take in the direction of the gradient at time step $t$.
@@ -34,7 +34,7 @@ These limitiations lead to generalized GD methods which form the backbone of muc
 		In SGD, we replace the actual gradient over the full data at each gradient descent step by an approximation to the gradient computed using a minibatch. This introduces stochasticity and decreases the chance that our fitting algorithm gets stuck in isolated local minima, as you cycle over all minibatches one at a time.\\
 The update rule is
 	\be
-	\label{eq:gdstochastic}
+	\centering\label{eq:gdstochastic}
 	\mathbf{v}_t=\eta_t \nabla_{θ} E^{MB}(\mathbf{θ}),\quad \mathbf{θ}_{t+1} = \mathbf{θ}_t-\mathbf{v}_t.
 	\ee 
 \end{mybox}
@@ -43,7 +43,7 @@ The update rule is
 \begin{mybox}{GDM}
 Introduce a ’momentum’ term into SGD which serves as a memory of the direction we are moving in parameter space. This helps the GD algorithm to gain speed in directions with persistent but small gradients even in the presence of stochasticity, while suppressing oscillations in high-curvature directions. The update rules is
 \be 
-\label{eq:gdmomentum}
+\centering\label{eq:gdmomentum}
 \mathbf{v}_t = \gamma \mathbf{v}_{t-1}+\eta_t \nabla_{θ} E^{MB}(\mathbf{θ}_t), \quad \mathbf{θ}_{t+1} = \mathbf{θ}_t-\mathbf{v}_t,
 \ee
 where we have introduced a momentum parameter $\gamma \in [0,1]$. 
@@ -51,7 +51,7 @@ where we have introduced a momentum parameter $\gamma \in [0,1]$.
 \begin{mybox}{NAG}
 	A final widely used variant of gradient descent with momentum is called the Nesterov accelerated gradient (NAG). In NAG, rather than calculating the gradient at the current position, one calculates the gradient at the position momentum will carry us to at time  $t+1$ , namely, $ θ_t−γ v_{t−1}$ . Thus, the update becomes
 	\be 
-	\label{eq:gdNAG}
+	\centering\label{eq:gdNAG}
 	\mathbf{v}_t = \gamma \mathbf{v}_t + \eta_t \nabla_{θ} E(\mathbf{θ}_t-\gamma \mathbf{v}_{t-1}),\quad \mathbf{θ}_{t+1} = \mt_{t}-\mathbf{v}_t.
 	\ee 
 \end{mybox}
@@ -60,7 +60,7 @@ We would like to adaptively change the step size to match the landscape. This ca
 \begin{mybox}{Root-mean-square propagation - RMSprop}
 	In addition to keeping a running average of the first moment of the gradient, we also keep track of the second moment denoted by $\mathbf{s}_t=\mathbb{E}[\mathbf{g}^2_t]$. The update rule is 
 	\be
-	\label{eq:gdRMSprop}
+	\centering\label{eq:gdRMSprop}
 	\mathbf{g}_t=\nabla_{θ} E(\mathbf{θ}),\; \mathbf{s}_t=\beta \mathbf{s}_{t-1} + (1-\beta) \mathbf{g}^2_t,\; \mathbf{θ}_{t+1}=\mathbf{θ}_t - \eta_t \frac{\mathbf{g}_t}{\sqrt{\mathbf{s}_t+\epsilon}},
 		\ee 
 		where $\beta$ controls the averaging time of the second moment and is typically taken to be about $\beta=0.9$, $\eta_t$ is typically chosen to be $10^{-3}$, and $\epsilon\propto 10^{-8}$ is a small regularization constant to prevent divergencies. It is clear from this formula that the learning rate is reduced in directions where the gradient is consistently large.
@@ -68,7 +68,7 @@ We would like to adaptively change the step size to match the landscape. This ca
 \begin{mybox}{ADAM}
 	In ADAM, we keep a running average of both the first and second moment of the gradient and use this information to adaptively change the learning rate for different parameters. In addition to keeping a running average of the second moments of the gradient (i.e $\mathbf{m}_t= \mathbb{E}[\mathbf{g}_t], \mathbf{s}_t=\mathbb{E}[\mathbf{g}^2_t]$), ADAM performs an additional bias correction to account for the fact that we are estimating the first two moments of the gradient using a running average (denoted by the hat in the update rule). The update rule is given by (where multiplication and division are once again understood to be element-wise operations)
 	\begin{align}
-		\label{eq:gdADAM}
+		\centering\label{eq:gdADAM}
 		\mathbf{g}_t &= \nabla_{θ} E(\mathbf{θ}), \quad \mathbf{m}_t =\beta_1 \mathbf{m}_{t-1} + (1-\beta_1) \mathbf{g}_t, \\
 		\mathbf{s}_t &=\beta_2 \mathbf{s}_{t-1} + (1-\beta_2) \mathbf{g}^2_t,\quad \hat{\mathbf{m}}_t = \frac{\mathbf{m}}{1-(\beta_1)^t},\nonumber \\
 		\hat{\mathbf{s}}_t &= \frac{\mathbf{s}_t}{1-(\beta_2)^t},\quad \mathbf{θ_{t+1}} = \mathbf{θ}_t - \eta_t \frac{\hat{\mathbf{m}}}{\sqrt{\hat{\mathbf{s}}_t} +\epsilon}\nonumber,
@@ -103,13 +103,13 @@ We'll consider ordinary least squares regression problem in which the "error fun
 \begin{mybox}{OLS}
 \emph{Ordinary least squares linear regression} (OLS) is defined as the minimization of the $L_2$ norm of the difference between the response $y_i$ and the predictor $g(\mx^{(i)};\mw)=\mw^T \mx^{(i)}$:
 \be 
-\label{eq:lregOLS}
+\centering\label{eq:lregOLS}
 \min_{\mw \in \mR^p} \norm{\mX \mw -\my}^2_2 = \min_{\mw \in \mR^p}\sum_{i=1}^n (\mw^T \mx^{(i)} - y_i)^2.
 \ee
 Where \ref{eq:lregOLS} is the minimization of the loss function of OLS.\\
 We are looking to find the parameters $\mw$ which minimize the $L_2$ error. Geometrically speaking, the predictor function $g$ defines a hyperplane in $\mR^p$. Minimizing the least squares error is therefore equivalent to minimizing the sum of all projections (i.e. residuals) for all points $\mx^{(i)}$ to this hyperplane. If $\rank (\mX)=p$ , namely, the feature predictors  $\mX_{:,1},\dots,\mX_{:,p}$  are linearly independent, then there exists unique solution to this problem, which we denote as $\hat{\mw}_{LS}$:
 \be 
-\label{eq:lregOLSsolution}
+\centering\label{eq:lregOLSsolution}
 \hat{\mw}_{LS} = \arg \min_{\mw \in \mR^p} \norm{\mX \mw - \my}^2_2 = (\mX^T \mX )^{-1} \mX^T \my,
 \ee 
 where we have assumed that $\mX^T\mX$ is inertible, which is often the case when $n\gg p$ (i.e. method works if number of data points exceeds number of features). The best fit of our data $\mX$ is
@@ -622,9 +622,33 @@ As a note about the sketch above, in practice additional regularization such as 
 	One nice feature of ensemble methods such as XGBoost is that they automatically allow us to calculate feature scores (\emph{Fscores}) that rank the importance of various features for classification. The higher the Fscore, the more important the feature for classification.
 \end{mybox}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{An Introduction to Feed-Forward Deep Neural Networks (DNNS)}
 \label{sec:dnn}
- Neural networks are one of the most powerful and widely-used supervised learning techniques. Deep Neural Networks (DNNs) got rebranded as ’Deep Learning’ and have become the workhorse technique for many image and speech recognition based ML tasks. The large-scale industrial deplyoment of DNNs has given rise to a number of high-level libraries and packages (Caffe, Keras, Pytorch, Tensorflow, etx.).\\
+ Neural networks are one of the most powerful and widely-used supervised learning techniques. Deep Neural Networks (DNNs) got rebranded as ’Deep Learning’ and have become the workhorse technique for many image and speech recognition based ML tasks. The large-scale industrial deplyoment of DNNs has given rise to a number of high-level libraries and packages (Caffe, Keras, Pytorch, Tensorflow, etc.).\\
  Conceptually, it is helpful to divide NNs into four categories 
  \begin{enumerate}
  	\item General purpose NNs for supervised learning,
@@ -642,7 +666,7 @@ Neural networks (also called neural nets) are neural-inspired nonlinear models f
 \begin{mybox}{Neurons}
 The basic unit of a neural net is a stylized \emph{neuron} $i$ that takes a vector of $d$ input features $\mx=(x_1,x_2,\dots,x_d)$ and produces a scalar output $a_i(\mx)$. 
 \end{mybox}
-A neural network consists of many such neurons stacked into layers, with the output of one layer serving as the input for the next \todo{Inut figurre 35}. The first layer in the neural net is called the \emph{input layer}, the middle layers are often called \emph{hidden layers}, and the final layer is called the \emph{output layer}.\\
+A neural network consists of many such neurons stacked into layers, with the output of one layer serving as the input for the next. The first layer in the neural net is called the \emph{input layer}, the middle layers are often called \emph{hidden layers}, and the final layer is called the \emph{output layer}.\\
 The exact function $a_i$ varies depending on the type of non-linearity used in the NN. However, in essentially all cases $a_i$ can be decomposed into a linear operation that weights the relative importance of the various inputs, and a non-linear transformation $\sigma_i(z)$ which is usually the same for all neurons\footnote{I.e. a threshhold function which squishes the sum of all $a_i$ into a number between $0$ and $1$, cf. \ref{subsubsec:thresholdfct}.}, compare \ref{fig:neuron}. 
 
 \begin{figure}[h!]
@@ -720,16 +744,16 @@ Choosing the exact network architecture for a NN remains an art that requires ex
 \begin{mybox}{Rule of thumb}
 	A general rule of thumb that seems to be emerging is that the number of parameters in the NN should be large enough to prevent underfitting.
 \end{mybox}
-Empirically, the best architecture for a problem depends on the task, the amount and type of data that is available, and the computational resources at one's disposal. Certain architectures are easier to train, while others might be better at capturing complicated dependencies in the data and learning relevant input features. Finally, there architectures beyond simple deep, feed-forward NNs.
+Empirically, the best architecture for a problem depends on the task, the amount and type of data that is available, and the computational resources at one's disposal. Certain architectures are easier to train, while others might be better at capturing complicated dependencies in the data and learning relevant input features. Finally, there are architectures beyond simple deep, feed-forward NNs.
 For example, modern NNs for image segmentation often incorporate ’skip connections’ that skip layers of NN. This allows information to directly propagate to a hidden or output layer, bypassing intermediate layers and often improving performance.
 
-\subsubsection{Training deep networks}
-\label{subsubsec:dnnTraining}
+\subsection{Training deep networks}
+\label{subsec:dnnTraining}
 \begin{mybox}{Training procedure}
 	The training procedure is the same as we used for training simpler supervised learning algorithms such as logistic and linear regression, compare \ref{subsec:recipeML}:\\
 	Construct a cost/loss function and then use gradient descent to minimize the cost function and find the optimal weights and biases. 
 \end{mybox}
-NNs differ from these simpler supervised procedures in that generally they contain multiple hidden layers that make taking the gradient computationally more difficult, this will be discussed in more detail via the \emph{backpropagation} algorithm for computing gradients in \ref{subsubsec:dnnBackpropagation}.\\
+NNs differ from these simpler supervised procedures in that generally they contain multiple hidden layers that make taking the gradient computationally more difficult, this will be discussed in more detail via the \emph{backpropagation} algorithm for computing gradients in \ref{subsec:dnnBackpropagation}.\\
 \\
 Like all supervised learning procedures, the first thing one must do to train a NN is to specify a loss function. Given a data point $(\tx_i,y_i)$, $\tx_i \in \mR^{d+1}$, the NN makes a prediction $\hat{y}_i(\tw)$, where $\tw$ are the parameters of the NN. Recall that in most cases, the top output layer of our NN is either a continuous predictor or a classifier that makes discrete (categorical) predictions. Depending on whether one wants to make continuous or categorical predictions, one must utilize a different kind of loss function.
 \begin{enumerate} 
@@ -750,10 +774,10 @@ Like all supervised learning procedures, the first thing one must do to train a 
 The full cost function often includes terms that implement regularization (e.g. $L_1$ or $L_2$ regularizers).
 \item For categorical data, the most commonly used loss function is the cross-entropy (\ref{eq:logregCrossEntropy} and \ref{eq:logregSoftMaxcostFct}), since the output layer is often taken to be a logistic classifier for binary data with two types of labels, or a soft-max classifier if there are more than two types of labels. As usual, these loss functions are often supplemented by aditional terms that implement regularization.
 \end{enumerate}
-Having defined an architecture and a cost function, we must now train the model. Similar to other supervised learning methods, we make use of gradient-descend based methods \ref{sec:gd} to optimize the cost function. Recall that the basic idea of GD is to update the parameters $\tw$ to move in the direction of the gradient of the cost function $\nabla_{\tw} E(\tw)$.\footnote{Most modern NN packages, such as Keras, allow te user to specify which of the optimizers discussed in \ref{sec:gd} they would like to use in order to train the NN. Depending on the architecture, data, and computation resources, different optimizers may work better on the problem, though vanilla SGD \ref{subsubsec:gdSGD} is a good first choice.}
+Having defined an architecture and a cost function, we must now train the model. Similar to other supervised learning methods, we make use of gradient-descend based methods \ref{sec:gd} to optimize the cost function. Recall that the basic idea of GD is to update the parameters $\tw$ to move in the direction of the gradient of the cost function $\nabla_{\tw} E(\tw)$.\footnote{Most modern NN packages, such as Keras, allow the user to specify which of the optimizers discussed in \ref{sec:gd} they would like to use in order to train the NN. Depending on the architecture, data, and computation resources, different optimizers may work better on the problem, though vanilla SGD \ref{subsubsec:gdSGD} is a good first choice.}
 
-\subsubsection{The Backpropagation algorithm}
-\label{subsubsec:dnnBackpropagation}
+\subsection{The Backpropagation algorithm}
+\label{subsec:dnnBackpropagation}
 The training procedure of a NN requires us to be able to calculate the derivative of the cost function w.r.t. all the parameters of the NN (the weights and biases of all the neurons in the input, hidden, and visible layers). The backpropagation algorithm is a clever procedure that exploits the layered structure of NNs to more efficiently compute gradients.\\
 We will assume that there are $L$ layers in our network with $l=1,\dots,L$ indexing the layer. Denote by $w^l_{jk}$ the weight for the connection from the $k$-th neuron in layer $l-1$ to the $j$-th neuron in layer $l$ We denote the bias of this neuron by $b^l_j$. By construction, in a feed-forward NN the activation $a^l_j$ of the $j$-th neuron in the $l$-th layer can be related to the activities of the neurons in the layer $l-1$ by the equation
 \be 
@@ -765,16 +789,16 @@ Define the error $\Delta^L_j$ of the $j$-th neuron in the $L$-th layer as the ch
 \label{eq:dnnBackprop1}
 \Delta^L_j=\frac{\partial E}{\partial z^L_j},
 \ee 
-where $E$ is the cost function which depends directly on the activities of the output layer $a^L_j$ and indirectly on all the activities of neurons in lower layers iteratively via \ref{eq:dnnBackpropActivation}. Equation \ref{eq:dnnBackprop1} therefore asks the question of how much the cost function changes when we change the weighted sum. Equally, the following three equations ask the question of how the cost function changes w.r.t. the bias, weight and activation.
+where $E$ is the cost function which depends directly on the activities of the output layer $a^L_j$ and indirectly on all the activities of neurons in lower layers iteratively via \ref{eq:dnnBackpropActivation}. Equation \ref{eq:dnnBackprop1} therefore asks the question of how much the cost function changes when we change the weighted sum. Equally, the following three equations ask the question of how the cost function changes w.r.t. a change in the bias, weight and activation respectively.
 Equation \ref{eq:dnnBackprop1} together with the following three equations
 \begin{align}
 	\Delta^l_j&= \frac{\partial^E}{\partial z} = \frac{\partial E}{\partial b^l_j}, \label{eq:dnnBackprop2} \\
 	\Delta^l_j &= \sum_k \frac{\partial E}{\partial z^{l+1}_k} \frac{\partial z^{l+1}_k}{z^l_j} =\left(\sum_k \Delta^{l+1}_k w^{l+1}_{kj} \right) \sigma^\prime(z^l_j), \label{eq:dnnBackprop3} \\
 	\frac{\partial E}{\partial w^l_{jk}} &= \frac{\partial E}{\partial z^l_j} \frac{\partial z^l_j}{\partial w^l_{jk}} = \Delta^l_j a^{l-1}_k.\label{eq:dnnBackprop4}
 \end{align}
-define the four backpropagation equations relating the gradients of the activations of various neuron $a^l_j$, the weighted inputs $z^l_j=\sum_k w^l_{jk} a^{l-1}_k +b^l_j$, and the errors $\Delta^l_j$. These equations can be combined into a simple, computationally efficient algorithm to calculate th gradient w.r.t. all parameters. As all of them are asking the question of how the error/cost function is affected by a change in one of the parameters, they are  a means of quantifying how to most easily minimize the cost function, compare figure \ref{fig:backpropagation}. This is what the backpropagation algorithm is doing. It combines the average amount of change of the error function w.r.t.one of the parameters into the gradient vector
+define the four backpropagation equations relating the gradients of the activations of various neuron $a^l_j$, the weighted inputs $z^l_j=\sum_k w^l_{jk} a^{l-1}_k +b^l_j$, and the errors $\Delta^l_j$. These equations can be combined into a simple, computationally efficient algorithm to calculate th gradient w.r.t. all parameters. As all of them are asking the question of how the error/cost function is affected by a change in one of the parameters, they are  a means of quantifying how to most easily minimize the cost function, compare figure \ref{fig:backpropagation}. This is what the backpropagation algorithm is doing. It combines the average amount of change of the error function w.r.t. one of the parameters into the gradient vector
 \bse 
-\vec{\nabla} C = (w_1,w_2,\dots,w_{1000}, b_1,\dots, b_{400}).
+\vec{\nabla} \mC = (w_1,w_2,\dots,w_{1000}, b_1,\dots, b_{400}).
 \ese 
 The optimized gradient of the cost function is determined via the backpropagation algorithm by choosing the direction of change in this huge parameter space.
 \begin{mybox}{The Backpropagation algorithm}
@@ -799,18 +823,20 @@ The algorithm consists of a forward pass from the bottom layer to the top layer 
 	\caption{Left :\itshape Backpropagation for a DNN with one neuron per layer. \normalfont Right: \itshape $L$-th layer is introduced by multiple activations in the previous layer if we have more than one neuron.}
 	\label{fig:backpropagation}
 \end{figure}
-What can go wrong with backpropagation ?\\
-A problem that occurs in deep networks, which transmit information through many layers, is that gradients can vanish or explode. This is know as the \emph{problem of vanishing or exploding gradients}. Especially pronounced in NNs that try to capture long-range dependencies, such as RNN for sequential data. 
-Consider the eigenvalues (or singular values) of the weight matrices $w^l_{jk}$. In order for the gradients to be finite for deep networks, we need these eigenvalues to stay near unity even after many gradient descent steps.\footnote{ In modern feedfrward and ReLU NNs, this is achieved by initializing the weights for the gradient descent in clever ways and using non-linearities that do not saturate, such as ReLUs ( recall that for saturating functions, $\sigma^\prime \rightarrow 0$, which will cause the gradient to vanish).}
-Proper initialization and regularization schems such as \emph{gradient clipping} (cutting-off gradients with very large values), and \emph{batch normalization} also lep mitigate this problem.\\
+\subsubsection{What can go wrong with backpropagation ?}
+\label{subsubsec:dnnBackpropagationProblems}
+A problem that occurs in deep networks, which transmit information through many layers, is that gradients can vanish or explode. This is known as the \emph{problem of vanishing or exploding gradients}. Especially pronounced in NNs that try to capture long-range dependencies, such as RNN for sequential data. 
+Consider the eigenvalues (or singular values) of the weight matrices $w^l_{jk}$. In order for the gradients to be finite for deep networks, we need these eigenvalues to stay near unity even after many gradient descent steps.\footnote{ In modern feed-forward and ReLU NNs, this is achieved by initializing the weights for the gradient descent in clever ways and using non-linearities that do not saturate, such as ReLUs ( recall that for saturating functions, $\sigma^\prime \rightarrow 0$, which will cause the gradient to vanish).}
+Proper initialization and regularization schems such as \emph{gradient clipping} (cutting-off gradients with very large values), and \emph{batch normalization} also help mitigate this problem.\\
 Summarizing Backpropagation:\\
 Backpropagation is the algorithm for determining how a single training example would nudge all weights and biases of the NN - not in terms of whether they should go up or down but in terms of what relative proportions to those changes cause the \emph{most rapid decrease of the cost function}. A true GD step would involve doing this for all your tens of thousands of training examples and averaging the desired changes that you get (i.e. average change to weight $w_{143}$). This however is computationally slow, such that you randomly subdivide the data into mini-batches and compute each step w.r.t. a mini-batch. Repeatedly going through all the mini-batches making these adjustments to the weights, you will converge towards a local minimum.
-\subsubsection{Regularizing neural networks and other practical considerations}
-\label{subsubsec:dnnRegularizingPractical}
+\subsection{Regularizing neural networks and other practical considerations}
+\label{subsec:dnnRegularizingPractical}
 DNNs, like all supervised learning algorithms, must navigate the bias-variance tradeoff \ref{subsubsec:biasvariancetradeoff}.
 Regularization techniques play an important role in ensuring that DNNs generalize well to new data. In addition to special regularization techniques (Batch Normalization, Dropout), large DNNs seem especially well-suited to implicit regularization that already takes place in SGD \ref{subsubsec:gdSGD}. The implicit stochasticity and local nature of SGD often prevent overfitting of spurious correlations in the training data, especially when combined with techniques such as Early Stopping.
-\begin{enumerate}
-	\item \emph{Implicit regularization using SGD: initialization, hyper-parameter tuning, and Early Stopping}.\\
+\subsubsection{Implicit regularization using SGD: Initialization, hyper-parameter tuning, and Early Stopping}
+\label{subsubsec:dnnRegularizingPracticalSGDEarlyStopping}
+\emph{Implicit regularization using SGD: initialization, hyper-parameter tuning, and Early Stopping}.\\
 	The most commonly employed and effective optimizer for training NN is SGD. SGD acts as an implicit regularizer by introducing stochasticity (from the use of mini-batches) that prevents overfitting. 
 	\begin{enumerate} 
 	\item In order to achieve good performance, it is important that the weight initialization is chosen randomly, in order to break any leftover symmetries. One common choice is drawing the weights from a Gaussian centred around zero with some variance that scales inversely with number of inputs to the neuron. 
@@ -823,13 +849,15 @@ It is important to experiment with different variances, the NN is extremely sens
 \end{enumerate}
  Another important form of regularization that is often employed in practice is \emph{Early Stopping}.
 \begin{mybox}{Early Stopping}
-	The idea of Early Stopping is to divide the training data into two portions, the dataset we train on, and a smaller \emph{validation set} that serves as a proxy for out-of-sample performance of the test set (cross-validation). As we train the model, we plot both the training error and the validation error (i.e. $E_{in}, E_{out}$). We expect the training error to continuously decrease during training ($E_{in, t} \leq E_{in,t-1}$). However, the validation error will eventually increase due to overfitting. The basic idea of Early Stopping is to halt the training procedure when the validation error starts to rise. This Early Stopping procedure ensures that we stop the training and avoid fitting sample specific features in the data.
+	The idea of Early Stopping is to divide the training data into two portions, the dataset we train on, and a smaller \emph{validation set} that serves as a proxy for out-of-sample performance of the test set (i.e. cross-validation \ref{subsec:recipeML}, note however that you also split test test into test and play set, where you perform hyperparameter grid search on the play set). As we train the model, we plot both the training error and the validation error (i.e. $E_{in}, E_{out}$). We expect the training error to continuously decrease during training ($E_{in, t} \leq E_{in,t-1}$). However, the validation error will eventually increase due to overfitting. The basic idea of Early Stopping is to halt the training procedure when the validation error starts to rise. This Early Stopping procedure ensures that we stop the training and avoid fitting sample specific features in the data.
 \end{mybox}
-\item \label{subsubsec:dnnRegularizerPracticalDropout} \emph{Here we discuss Dropout}.
+\subsubsection{Dropout}
+\label{subsubsec:dnnRegularizerPracticalDropout}
 \begin{mybox}{Dropout}
-The basic idea of Dropout is to prevent overfitting by reducing spurious correlations between neurons within the network by introducing a randomization procedure similar to that underlying ensemble models such as Bagging \ref{subsubsec:ensemblesBagging}. Dropout prevents problems of correlation and computational costs by randomly dropping out neurons (along with their connections) from the NN during each step of the training. Typically, for each mini-batch in the GD step, a neuron is dropped from the NN with a probability $p$. The GD step is then performed only on the weights of the ’thinned’ network of individual predictors. Since during training, on average weights are only present a fraction $p$ of the time, predictions are made by reweighing the weights by $p$: $\tw_{test} = p\tw_{train}$. The learned weights can be viewed as some ’average’ weight over all possible thinned NNs, this is similar to Bagging and reduces the variance.
+The basic idea of Dropout is to prevent overfitting by reducing spurious correlations between neurons within the network by introducing a randomization procedure similar to that underlying ensemble models such as Bagging \ref{subsubsec:ensemblesBagging}. Dropout prevents problems of correlation and computational cost by randomly dropping out neurons (along with their connections) from the NN during each step of the training. Typically, for each mini-batch in the GD step, a neuron is dropped from the NN with a probability $p$. The GD step is then performed only on the weights of the ’thinned’ network of individual predictors. Since during training, on average weights are only present a fraction $p$ of the time, predictions are made by reweighing the weights by $p$: $\tw_{test} = p\tw_{train}$. The learned weights can be viewed as some ’average’ weight over all possible thinned NNs, this is similar to Bagging and reduces the variance.
 \end{mybox}
-\item \label{subsubsec:dnnRegularizerPracticalBatchNorm}\emph{Batch Normalization}:\\
+\subsubsection{Batch Normalization}
+ \label{subsubsec:dnnRegularizerPracticalBatchNorm}
 The basic inspiration is that training NNs works best when the inputs are centred around zero w.r.t. the bias. The reason for this is that it prevents neurons from saturating and gradients from vanishing in deep nets.
 \begin{mybox}{Batch Normalization}
 	The idea of Batch Normalization is to introduce new ’BatchNorm’ layers that standardize the inputs by the mean and variance of the mini-batch. Consider a layer $l$ with $d$ neurons whose inputs are $(z^l_1,\dots,z^l_d)$. We standardize each dimension so that
@@ -837,23 +865,22 @@ The basic inspiration is that training NNs works best when the inputs are centre
 	\label{eq:dnnRegularizerPracticalBatch1}
 	z^l_k \rightarrow \hat{z}^l_k = \frac{z^l_k -\mathbb{E}[z^l_k]}{\sqrt{Var[z^l_k]}},
 	\ee
-	where the mean and variance are taken over all samples in the mini-batch. One furthermore introduces two new parameters $\gamma^l_k, \beta^l-k$ for each neuron that can additionaly shift and sclae the normalized input
+	where the mean and variance are taken over all samples in the mini-batch. One furthermore introduces two new parameters $\gamma^l_k, \beta^l_k$ for each neuron that can additionally shift and scale the normalized input
 	\be 
 	\label{eq:dnnRegularizerPracticalBatch2}
 	\hat{z}^l_k \rightarrow \gamma^l_k \hat{z}^l_k + \beta^l_k.
 	\ee 
-	These two equations \ref{eq:dnnRegularizerPracticalBatch1},\ref{eq:dnnRegularizerPracticalBatch2} are like adding new extra layers $\hat{z}$ in the deep net architecture.
+	These two equations \ref{eq:dnnRegularizerPracticalBatch1}, \ref{eq:dnnRegularizerPracticalBatch2} are like adding new extra layers $\hat{z}$ in the deep net architecture.
 \end{mybox}
 Hence, the new parameters $\gamma^l_k$ and $\beta^l_k$ can be learned just like the weights and biases using backpropagation (since this is just an extra layer for the chain rule). We initiliaze the NN so that at the beginning of training the inputs are being standardized. Backpropagation then adjusts $\gamma,\beta$ during training.\\
 In practice, Batch Normalization considerably improves the learning speed by preventing gradients from vanishing. The randomness introduced by the mini-batches seems to shape Batch Normalization as a power regularization tool by introducing additional randomness into the training procedure.
-\end{enumerate}
 
-\subsubsection{Deep neural networks in practice}
-\label{subsubsec:dnnPractice}
+\subsection{Deep neural networks in practice}
+\label{subsec:dnnPractice}
 Different packages:
 \begin{enumerate} 
-	\item In Tensorflow one constructs data flowgraphs, the nodes of which represent mathematical operations, while the edges encode mutlidimensional tensors (data arrays). A DNN can then be though of a a graph with a particular architecture and connectivity.
-	\item PyTorch offers libraries for automatic differentiation of tensors at GPU speed. As we discussed above, manipulating NNs boils down to fast array multiplication and onctraction operations and, therefore, the \textbf{torch.nn} library often does the job.
+	\item In Tensorflow one constructs data flowgraphs, the nodes of which represent mathematical operations, while the edges encode mutlidimensional tensors (data arrays). A DNN can then be thought of as a graph with a particular architecture and connectivity.
+	\item PyTorch offers libraries for automatic differentiation of tensors at GPU speed. As we discussed above, manipulating NNs boils down to fast array multiplication and contraction operations and, therefore, the \textbf{torch.nn} library often does the job.
 	\item Keras is a high-level package which does simple jobs in a few lines of code, but does not give you much control for more complicated processes.
 \end{enumerate}
 
@@ -863,8 +890,8 @@ Different packages:
 
 
 
-\subsubsection{Recipe DNNs}
-\label{subsubsec:dnnRecipe}
+\subsection{Recipe DNNs}
+\label{subsec:dnnRecipe}
 Constructing a Deep Neural Network to solve supervised ML problems is a multiple-stage process. Quite generally, one can identify the key steps as follows:
 \begin{enumerate} 
 	\item Collect and pre-process the data.
@@ -882,7 +909,7 @@ A few comments:
 		The more classification categories there are in the task, the closer the sizes of the training and test datasets should be ($\rightarrow 50/50$) in order to prevent overfitting.
 	\end{mybox}
 	Once the size of the training set is fixed, it is common to reserve $20 \%$ of it for validation , which is used to fine-tune the hyperparameters of the model.
-	\item Also related to preprocessing is the standardization of the dataset. As discussed in backpropagation \ref{subsubsec:dnnBackpropagation}, the problem of vanishing and exploding gradients come up when values of the data differ by orders of magnitude. Two approaches are possible:
+	\item Also related to preprocessing is the standardization of the dataset. As discussed in backpropagation \ref{subsec:dnnBackpropagation}, the problem of vanishing and exploding gradients come up when values of the data differ by orders of magnitude. Two approaches are possible:
 	\begin{enumerate}
 		\item All data should be mean-centred, i.e. from every data point we subtract the mean of the entire dataset.
 		\item Rescale the data - for which there are two ways:
@@ -891,11 +918,23 @@ A few comments:
 			\item Otherwise, it is typically rescaled by the maximum absolute value so the rescaled data lies within the interval $[-1,1]$ (i.e. .reshape$(-1,1)$). Rescaling ensures that the weights of the DNN are of a similar order of magnitude, compare Batch Normalization \ref{subsubsec:dnnRegularizerPracticalBatchNorm}. 
 		\end{enumerate}
 	\end{enumerate}
-	\item How tho choose the right hyperparameters to start training the model ?\\
+	\item How to choose the right hyperparameters to start training the model ?\\
 	The optimal learning rate is often an order of magnitude lower than the smallest learning rate that blows up the loss. It is usually a good idea to play with a small enough fraction of the training data to get a rough feeling about the correct hyperparameter regimes, the usefulness of the DNN architecture, and to debug the code. The size of this small ’play set’ should be such that training on it can be done fast and in real time to allow to quickly adjust the hyperparameters. A typical strategy of exploring the hyperparameter landscape is to use grid searches.
 \end{enumerate}
 Whereas it is always possible to view Steps $1-5$ as generic and independent of the particular problem we are trying to solve, it is only when these steps are put together in Step $6$ that the real benefit of DL is revelaed.\\
-The optimal choice of network architecture \ref{subsubsec:dnnNetworkArchitecture},\ref{subsubsec:dnnBestPracticeArchitecture}, cost function \ref{subsubsec:dnnTraining}, and optimizer is determined by the properties of the training and test datasets, which are usually revealed when we try to improve the model \ref{subsubsec:dnnRegularizingPractical}.
+The optimal choice of network architecture \ref{subsubsec:dnnNetworkArchitecture},\ref{subsubsec:dnnBestPracticeArchitecture}, cost function \ref{subsec:dnnTraining}, and optimizer is determined by the properties of the training and test datasets, which are usually revealed when we try to improve the model \ref{subsec:dnnRegularizingPractical}.
+
+
+
+\section{Convolutional Neural Networks (CNNS)}
+\label{sec:cnn}
+\subsection{Symmetries}
+\label{subsec:cnnSymmetries}
+One of the core lessons of physics is that we should \textbf{explot symmetries and invariances when analyzing physical systems.} Likey physical systems, many datasets and supervised learning tasks also possess additional symmetries and structure. 
+\begin{example}
+For instance, consider a supervised learning task where we want to label images from some dataset as being pictures of cats or not. Our statistical procedure must first learn features associated with cats. Because a cat is a physical object, we know that these features are likely to be local (groups of neighbouring pixels in the $2D$ image corresponding to whiskers, tails, etc.). We also know that the cat can be anywhere in the image. Thus, it does not really matter where in the picture these features occur (though relative positions of features likely do matter). \emph{This is a manifestation of translational invariance that is built into our supervised learning task.}
+\end{example}
+The all-to-all coupled NNs in \ref{sec:dnn} fail to exploit this additional structure. CNNs take advantage of this additional structure (locality and translational invariance). 
 
 
 
@@ -904,10 +943,38 @@ The optimal choice of network architecture \ref{subsubsec:dnnNetworkArchitecture
 
 
 
+\subsection{The structure of convolutional neural networks}
+\label{subsec:cnnStructure}
+A CNN is a translationally invariant NN that respects locality of the input data\footnote{Excellent course in \href{https://cs231n.github.io/}{Andrej Karpathy and Fei-Fei Li}.}.
+\subsubsection{Architecture}
+There are two kinds of basic layers that make up a CNN:
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{gfx/cnn}
+	\caption{Architecture of a CNN: \itshape The neurons in a CNN are arranged in three dimension: height $(H)$, width $(W)$, and depth $(D)$. For the input layer, the depth corresponds to the  number of channels (in this case $3$ for RGB images). Neurons in the convolutional layers calculate the convolution of the image with a local spatial filter (e.g. $3\times 3$ pixel grid, times $3$ channels for first layer) at a given location in the spatial $(W,H)$-plane. The depth $D$ of the convolutional layer corresponds to the number of filters used in the convolutional layer. Neurons at the same depth correspond to the same filter. Neurons in the convolutional layer mix inputs at different depths but preserve the spatial location. Pooling layers perform a spatial coarse graining (pooling step) at each depth to give a smaller height and width while preserving the depth. The convolutional and pooling layers are followed by a fully connected layer and classifier (not shown).}
+	\label{fig:cnn}
+\end{figure}
 
+\begin{enumerate}
+\item A convolution layer that computes the convolution of the input with a bank of filters\footnote{As a mathematical operation, see this practical guide to :\href{http://setosa.io/ev/image-kernels}{Image kernels}.},
+\item and pooling layers that coarse-grain the input while maintaining locality and spatial structure, compare fig. \ref{fig:cnn}.
+\end{enumerate}
 
+For two-dimensional data, a layer $l$ is characterized by three numbers: height $H_l$, width $W_l$, and depth $D_l$\footnote{The depth $D_l$ is often called ’number of channels’, to distinguish it from the depth of the NN itself, i.e. the total number of layers (which can be convolutional, pooling or fully-connected), c.f. \ref{fig:cnn}.}
+ The height and width correspond to the sizes of the two-dimensional spatial $(W_l, H_l)$-plane (in neurons), and the depth $D_l$ (marked by the different colours in \ref{fig:cnn})-to the number of filters in that layer. All neurons corresponding to a particular filter have the same parameters (i.e. shared weights and bias).\\
+ In general, we will be concerned with local spatial filters (often called a \emph{receptive field} in analogy with neuroscience) that take as inputs a small spatial patch of the previous layer at all depths. For instance, a square filter os fize $F$ is a three-dimensional array of size $F\times F\times D_{l-1}$. The convolution consists of running this filter over all locations in the spatial plane.
+ \begin{example}
+ 	To demonstrate how this works in practice, let us consider the simple example consisting of a one-dimensional input of depth $1$, shown in fig \ref{fig:cnnExample}. In this case, a filter of size $F\times 1\times 1$ can be specified by a vector of weights $w$ of length $F$. 
+ \end{example}
+The stride, $S$, encodes by how many neurons we translate the filter by when performing the convolution. In addition, it is common to pad the input with $P$ zeroes (c.f. \ref{fig:cnnExample}).
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\linewidth]{gfx/cnnExample}
+	\caption{Two examples to illustrate a one-dimensional convolutional layer with ReLU nonlinearity:\itshape Convolutional layer for a spatial filter of size $F$ for a one-dimensional input of width $W$ with stride $S$ and padding $P$ followed by a ReLU non-linearity.}
+	\label{fig:cnnExample}
+\end{figure}
 
 
 
