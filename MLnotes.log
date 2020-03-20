@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  20 MAR 2020 15:10
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  20 MAR 2020 17:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -7763,17 +7763,47 @@ Overfull \hbox (1.40517pt too wide) in paragraph at lines 110--114
  points close together while
  []
 
-[92]) [93]
+[92]
+Overfull \hbox (6.7679pt too wide) in paragraph at lines 141--142
+\TU/TeXGyrePagella(0)/m/n/10.95 separated clusters), the geometry of the data (
+flat vs. non-flat), the cluster
+ []
+
+[93]
+Underfull \hbox (badness 1163) in paragraph at lines 168--169
+[]\TU/TeXGyrePagella(0)/m/it/10.95 Maximization\TU/TeXGyrePagella(0)/m/n/10.95 
+: Given a set of cluster means $[][][][]$, find
+ []
+
+[94]
+File: gfx/HierarchicalCLustering.png Graphic file (type bmp)
+<gfx/HierarchicalCLustering.png>
+
+Overfull \hbox (3.30406pt too wide) in paragraph at lines 184--191
+\TU/TeXGyrePagella(0)/m/n/10.95 Agglomerative clustering is a bottom up approac
+h that starts from small
+ []
+
+
+Overfull \hbox (15.18481pt too wide) in paragraph at lines 184--191
+\TU/TeXGyrePagella(0)/m/n/10.95 initial clusters which are then progressively m
+erged to form larger clusters.
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) [95] [96]
 \openout2 = `Chapters/Problems.aux'.
 
  (./Chapters/Problems.tex
 Chapter 3.
-[94
+) [97
 
 
 
 
-]) [95]
+]
 \tf@thm=\write14
 \openout14 = `MLnotes.thm'.
 
@@ -8017,6 +8047,7 @@ gfx/cnnExample.png
 gfx/cnnPooling.png
 gfx/WorkflowDNN.png
 Chapters/Unsupervised.tex
+gfx/HierarchicalCLustering.png
 Chapters/Problems.tex
  ***********
 
@@ -8029,12 +8060,12 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59659 strings out of 493007
- 1229675 string characters out of 6136718
+ 59683 strings out of 493007
+ 1230300 string characters out of 6136718
  2034695 words of memory out of 5000000
- 62598 multiletter control sequences out of 15000+600000
+ 62621 multiletter control sequences out of 15000+600000
  546530 words of font info for 147 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
  83i,23n,136p,10510b,5117s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (101 pages).
+Output written on MLnotes.pdf (103 pages).

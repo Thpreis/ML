@@ -132,10 +132,62 @@ $\mO(N^2)$.
 
 \section{Clustering}
 \label{sec:cluster}
-This section is also concerned with unsupervised learning methods.
+This section is also concerned with unsupervised learning methods.\\
+Unsupervised learning is concerned with discovering structure in unlabelled data (for instance learning local structures for data visualization \ref{sec:dimRed}). The lack of labels make unsupervised learning much more difficult and subtle than its supervised counterpart. What is somewhat surprising is that even without labels it is still possible to uncover and exploit the hidden structure in the data. Perhaps, the simplest example of unsupervised learning is clustering.
+\begin{mybox}{Clustering}
+ The aim of clustering is to group unlabelled data into clusters according to some similarity or distance measure. Informally, a cluster is though of as a set of points sharing some pattern or structure.\\
+ Clustering finds many applications throughout data mining, data compression and signal processing. Clustering can be used to identify coarse features or high level structures in an unlabelled dataset.
+\end{mybox}
+The field of clustering is vast and there exists a flurry of clustering methods suited for different purposes. Some common considerations one has to take into account when choosing a particular method is the distribution of the clusters (overlapping/noisy clusters vs. well-separated clusters), the geometry of the data (flat vs. non-flat), the cluster size distribution (multiple sizes vs. uniform sizes), the dimensionality of the data (low vs. high dimensional) and the computational efficiency of the desired method (small vs. large dataset).
 
 
+\subsection{Practical clustering methods}
+\label{subsec:clusterPractical}
+Throughout this section we focus on the Euclidean distance as a similarity measure.
 
+\subsubsection{$K$-means}
+\label{subsubsec:clusterPracticalKmeans}
+
+Consider a set of $N$ \emph{unlabelled} observations $\{\mx_n\}^N_{n=1}$ where $\mx_n\in \mR^p$ and where $p$ is the number of features. Also consider a set of $K$ cluster centres called the cluster \emph{means}: $\{\mathbf{μ}_k\}^K_{k=1}$, with $\mathbf{μ}_k\in \mR^p$, which we'll compute ’empirically’ in the clustering procedure. The cluster means can be though of as the representatives of each cluster, to which data points are assigned. 
+\begin{mybox}{$K$-means set-up}
+	$K$-means clustering can be formulated as follows: given a fixed integer $K$, find the cluster means $\{\mathbf{μ}\}$ and the data point assignments in order to minimize the following objective function
+	\be
+	\label{eq:clusterPracticalKmeansCostfct}
+	\mC(\{x,\mathbf{μ}\}) = \sum_{k=1}^K \sum_{n=1}^N r_{nk} ( \mx_n - \mathbf{μ}_k)^2,
+	\ee
+	where $r_{nk} \in \{0,1\}$ is a binary variable called the \emph{assignment}. The assignment $r_{nk}$ is $1$ if $x_n$ is assigned to cluster $k$ and $0$ otherwise. Notice that $\sum_k r_{nk}=1 \forall n$ and $\sum_n r_{nk}\equiv N_k$, where $N_k$ is the number of points assigned to cluster $k$. The minimization of this objective function can be understood as trying to find the best cluster means such that the variance within each cluster is minimized.
+\end{mybox}
+In physical terms, $\mC$ is equivalent to the sum of the moments of inertia of every cluster. The cluster means $\mathbf{μ}_k$ correspond to the centres of mass of their respective cluster.
+\begin{mybox}{$K$-means algorithm}
+	The $K$-means algorithm alternates between two steps:
+	\begin{enumerate}
+		\item \emph{Expectation}: Given a set of assignments $\{r_{nk}\}$, minimize $\mC$ w.r.t. $\mathbf{μ}_k$. Taking a simple derivative and setting it to zero yields the following update rule:
+		\be 
+		\mathbf{μ}_k = \frac{1}{N_k} \sum_n r_{nk} \mx_n.
+		\ee 
+		\item \emph{Maximization}: Given a set of cluster means $\{\mathbf{μ}_k\}$, find the assignments $\{r_{nk} \}$ which minimizes $\mC$. Clearly, this is achieved by assigning each data point to their nearest cluster-mean:
+		\be
+		r_{nk} = \left\{ \begin{array}{ll}
+		1 & \text{if } k=\arg \min_{k^\prime} (\mx_n-\mathbf{μ}_{k^\prime})^2 \\
+		0& \text{otherwise}.
+		\end{array}\right\}
+		\ee 
+	\end{enumerate}
+Practically, the algorithm should terminate when the change in the objective function from one iteration to another becomes smaller than a pre-specified threshold.
+\end{mybox}
+A nice property of the $K$-means algorithm is that it is guaranteed to converge.\footnote{To see this, one can verify explicitly (by taking second-order derivatives) that the expectation and assignment step respectively always decrease $\mC$. Thus, since $\mC$ is bounded from below, the two-step iteration of $K$-means \emph{always} converges to a local maximum of $\mC$. Since $\mC$ is generally a non-convex function, in practice one usually needs to run the algorithm with different initial random cluster centre initializations and post-select the best local minimum.} The complexity is $\mO(KN)$ per iteration and is thus scalable to very large datasets.\\
+A common drawback of $K$-means is the following:\\
+If the true clusters have very different variances (spreads), $K$-means can lead to spurious results since the underlying assumption is that the latent model has uniform variances.
+
+\subsubsection{Hierarchical clustering: Agglomerative methods}
+\label{subsubsec:ClusterPracticalHierarchical}
+Agglomerative clustering is a bottom up approach that starts from small initial clusters which are then progressively merged to form larger clusters.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\linewidth]{gfx/HierarchicalCLustering}
+	\caption{}
+	\label{fig:hierarchicalclustering}
+\end{figure}
 
 
 
