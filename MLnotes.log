@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  20 MAR 2020 17:40
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  20 MAR 2020 18:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -7779,31 +7779,95 @@ Underfull \hbox (badness 1163) in paragraph at lines 168--169
 File: gfx/HierarchicalCLustering.png Graphic file (type bmp)
 <gfx/HierarchicalCLustering.png>
 
-Overfull \hbox (3.30406pt too wide) in paragraph at lines 184--191
+! Undefined control sequence.
+<argument> ...figure}}}{\ignorespaces \itshapeThe 
+                                                  merging process generates ...
+l.188 ... visualized in the form of a dendrogram.}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \itshapeThe 
+                       merging process generates a hierarchy of clusters tha...
+l.188 ... visualized in the form of a dendrogram.}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \itshapeThe 
+                       merging process generates a hierarchy of clusters tha...
+l.188 ... visualized in the form of a dendrogram.}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (3.30406pt too wide) in paragraph at lines 184--192
 \TU/TeXGyrePagella(0)/m/n/10.95 Agglomerative clustering is a bottom up approac
 h that starts from small
  []
 
 
-Overfull \hbox (15.18481pt too wide) in paragraph at lines 184--191
+Overfull \hbox (15.18481pt too wide) in paragraph at lines 184--192
 \TU/TeXGyrePagella(0)/m/n/10.95 initial clusters which are then progressively m
 erged to form larger clusters.
  []
 
 
+Overfull \hbox (3.91364pt too wide) in paragraph at lines 184--192
+\TU/TeXGyrePagella(0)/m/n/10.95 This hierarchy [][]2.10[][] can be useful to an
+alyze the relation between clusters
+ []
+
+
+Overfull \hbox (10.31209pt too wide) in paragraph at lines 184--192
+\TU/TeXGyrePagella(0)/m/n/10.95 ods are usually specified by defining a distanc
+e measure between clusters.
+ []
+
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [95] [96]
+[95]
+Overfull \hbox (5.66286pt too wide) in paragraph at lines 206--207
+[]\TU/TeXGyrePagella(0)/m/n/10.95 The most popular distances used in agglomerat
+ive methods, often called
+ []
+
+
+Overfull \hbox (18.93971pt too wide) in paragraph at lines 218--219
+[]\TU/TeXGyrePagella(0)/m/n/10.95 Average linkage: average distance between poi
+nts of different clusters
+ []
+
+[96]
+Overfull \hbox (7.08818pt too wide) in paragraph at lines 223--224
+[]\TU/TeXGyrePagella(0)/m/n/10.95 Ward’s linkage: This distance measure is anal
+ogous to the $[]$-means
+ []
+
+) [97]
 \openout2 = `Chapters/Problems.aux'.
 
  (./Chapters/Problems.tex
 Chapter 3.
-) [97
+[98
 
 
 
 
-]
+]) [99]
 \tf@thm=\write14
 \openout14 = `MLnotes.thm'.
 
@@ -7812,7 +7876,12 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 160.
  (./MLnotes.aux (./FrontBackmatter/Titlepage.aux)
 (./FrontBackmatter/Contents.aux) (./Chapters/Introduction.aux)
 (./Chapters/Statistics.aux) (./Chapters/Supervised.aux)
-(./Chapters/Unsupervised.aux) (./Chapters/Problems.aux))
+(./Chapters/Unsupervised.aux) (./Chapters/Problems.aux)
+
+Package mparhack Warning: Marginpars may have changed.
+(mparhack)                Rerun to get them right.
+
+)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 160.
 
 
@@ -8055,17 +8124,20 @@ Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 160.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 \openout1 = `MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59683 strings out of 493007
- 1230300 string characters out of 6136718
+ 59697 strings out of 493007
+ 1230766 string characters out of 6136718
  2034695 words of memory out of 5000000
- 62621 multiletter control sequences out of 15000+600000
+ 62635 multiletter control sequences out of 15000+600000
  546530 words of font info for 147 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
  83i,23n,136p,10510b,5117s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (103 pages).
+Output written on MLnotes.pdf (105 pages).

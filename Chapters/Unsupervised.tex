@@ -185,10 +185,49 @@ Agglomerative clustering is a bottom up approach that starts from small initial 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.4\linewidth]{gfx/HierarchicalCLustering}
-	\caption{}
+	\caption{\itshapeThe merging process generates a hierarchy of clusters that can be visualized in the form of a dendrogram.}
 	\label{fig:hierarchicalclustering}
 \end{figure}
+This hierarchy \ref{fig:hierarchicalclustering} can be useful to analyze the relation between clusters and the subcomponents of individual clusters. Agglomerative methods are usually specified by defining a distance measure between clusters. Different choices of distance result in different clustering algorithms. At each step, the two clusters that are the closest w.r.t. the distance measure are merged until a single cluster is left.
 
+\begin{mybox}{Agglomerative clustering algorithm}
+	\begin{enumerate}
+		\item Initialize each point to its own cluster.
+		\item Given a set of $K$ clusters $X_1,X_2,\dots,X_K$, merge clusters until one cluster is left ($K=1$):
+		\begin{enumerate}
+			\item Find the closest pair of clusters $(X_i,X_j)$:
+			\bse 
+			(i,j)=\arg \min_{i^\prime,j^\prime} d(X_{i^\prime},X_{j^\prime} )
+			\ese 
+			\item Merge the pair. Update. $K\leftarrow K-1$.
+		\end{enumerate}
+	\end{enumerate}
+\end{mybox}
+The most popular distances used in agglomerative methods, often called \emph{linkage methods}
+\begin{enumerate}
+	\item Single-linkage: the distance between clusters $i$ and $j$ is defined as the minimum distance between two elements of the different clusters
+\be
+\label{eq:ClusterPracticalHierarchicalSinglelinkage}
+d(X_i,X_j) = \min_{\mx_i \in X_i,\mx_j \in X_j} \norm{\mx_i-\mx_j}_2. 
+\ee 
+\item Complete linkage: the distance between clusters $i$ and $j$ is defined as the maximum distance between two elements of the different clusters
+\be 
+\label{eq:ClusterPracticalHierarchicalCompleteLinkage}
+d(X_i,X_j) = \max_{\mx_i \in X_i,\mx_j\in X_j} \norm{\mx_i-\mx_j}_2.
+\ee 
+\item Average linkage: average distance between points of different clusters
+\be 
+\label{eq:ClusterPracticalHierarchicalAverageLinkage}
+d(X_i,X_j) = \frac{1}{\abs{X_i}\cdot \abs{X_j}} \sum_{\mx_i \in X_i,\mx_j\in X_j} \norm{\mx_i-\mx_j}_2.
+\ee 
+\item Ward's linkage: This distance measure is analogous to the $K$-means method as it seeks to minimize the total inertia. The distance measure is the ’error squared’ before and after merging which simplifies to
+\be 
+\label{eq:ClusterPracticalHierarchicalWardsLinkage}
+d(X_i,X_j) = \frac{\abs{X_i} \abs{X_j}}{\abs{X_i \cup X_j}} (\mathbf{μ}_i-\mathbf{μ}_j)^2, 
+\ee 
+where $\mathbf{μ}_j$ is the centre of cluster $j$.
+\end{enumerate}
+A common drawback of hierarchical methods is that they do not scale well: At every step, a distance matrix between all clusters must be updated/computed. This leads to a complexity of $\mO(N^2)$, i.e. the method is suitable for small to medium-size datasets.
 
 
 
