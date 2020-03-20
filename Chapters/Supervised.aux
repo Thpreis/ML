@@ -178,38 +178,61 @@
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.10.2}{The structure of convolutional neural networks}}{76}{subsection.2.10.2}}
 \newlabel{subsec:cnnStructure}{{2.10.2}{76}{The structure of convolutional neural networks}{subsection.2.10.2}{}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.10.2.1}{Architecture}}{76}{subsubsection.2.10.2.1}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Architecture of a CNN: \itshape  The neurons in a CNN are arranged in three dimension: height $(H)$, width $(W)$, and depth $(D)$. For the input layer, the depth corresponds to the number of channels (in this case $3$ for RGB images). Neurons in the convolutional layers calculate the convolution of the image with a local spatial filter (e.g. $3\times 3$ pixel grid, times $3$ channels for first layer) at a given location in the spatial $(W,H)$-plane. The depth $D$ of the convolutional layer corresponds to the number of filters used in the convolutional layer. Neurons at the same depth correspond to the same filter. Neurons in the convolutional layer mix inputs at different depths but preserve the spatial location. Pooling layers perform a spatial coarse graining (pooling step) at each depth to give a smaller height and width while preserving the depth. The convolutional and pooling layers are followed by a fully connected layer and classifier (not shown).\relax }}{76}{figure.caption.9}}
-\newlabel{fig:cnn}{{2.6}{76}{Architecture of a CNN: \itshape The neurons in a CNN are arranged in three dimension: height $(H)$, width $(W)$, and depth $(D)$. For the input layer, the depth corresponds to the number of channels (in this case $3$ for RGB images). Neurons in the convolutional layers calculate the convolution of the image with a local spatial filter (e.g. $3\times 3$ pixel grid, times $3$ channels for first layer) at a given location in the spatial $(W,H)$-plane. The depth $D$ of the convolutional layer corresponds to the number of filters used in the convolutional layer. Neurons at the same depth correspond to the same filter. Neurons in the convolutional layer mix inputs at different depths but preserve the spatial location. Pooling layers perform a spatial coarse graining (pooling step) at each depth to give a smaller height and width while preserving the depth. The convolutional and pooling layers are followed by a fully connected layer and classifier (not shown).\relax }{figure.caption.9}{}}
 \mph@setcol{ii:76}{\mph@nr}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Architecture of a CNN: \itshape  The neurons in a CNN are arranged in three dimension: height $(H)$, width $(W)$, and depth $(D)$. For the input layer, the depth corresponds to the number of channels (in this case $3$ for RGB images). Neurons in the convolutional layers calculate the convolution of the image with a local spatial filter (e.g. $3\times 3$ pixel grid, times $3$ channels for first layer) at a given location in the spatial $(W,H)$-plane. The depth $D$ of the convolutional layer corresponds to the number of filters used in the convolutional layer. Neurons at the same depth correspond to the same filter. Neurons in the convolutional layer mix inputs at different depths but preserve the spatial location. Pooling layers perform a spatial coarse graining (pooling step) at each depth to give a smaller height and width while preserving the depth. The convolutional and pooling layers are followed by a fully connected layer and classifier (not shown).\relax }}{77}{figure.caption.9}}
+\newlabel{fig:cnn}{{2.6}{77}{Architecture of a CNN: \itshape The neurons in a CNN are arranged in three dimension: height $(H)$, width $(W)$, and depth $(D)$. For the input layer, the depth corresponds to the number of channels (in this case $3$ for RGB images). Neurons in the convolutional layers calculate the convolution of the image with a local spatial filter (e.g. $3\times 3$ pixel grid, times $3$ channels for first layer) at a given location in the spatial $(W,H)$-plane. The depth $D$ of the convolutional layer corresponds to the number of filters used in the convolutional layer. Neurons at the same depth correspond to the same filter. Neurons in the convolutional layer mix inputs at different depths but preserve the spatial location. Pooling layers perform a spatial coarse graining (pooling step) at each depth to give a smaller height and width while preserving the depth. The convolutional and pooling layers are followed by a fully connected layer and classifier (not shown).\relax }{figure.caption.9}{}}
 \mph@setcol{ii:77}{\mph@nr}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Two examples to illustrate a one-dimensional convolutional layer with ReLU nonlinearity:\itshape  Convolutional layer for a spatial filter of size $F$ for a one-dimensional input of width $W$ with stride $S$ and padding $P$ followed by a ReLU non-linearity.\relax }}{78}{figure.caption.10}}
-\newlabel{fig:cnnExample}{{2.7}{78}{Two examples to illustrate a one-dimensional convolutional layer with ReLU nonlinearity:\itshape Convolutional layer for a spatial filter of size $F$ for a one-dimensional input of width $W$ with stride $S$ and padding $P$ followed by a ReLU non-linearity.\relax }{figure.caption.10}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.10.2.2}{On convolutional layers}}{78}{subsubsection.2.10.2.2}}
+\newlabel{subsubsec:cnnConvolutionalLayer}{{2.10.2.2}{78}{On convolutional layers}{subsubsection.2.10.2.2}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.10.2.3}{On pooling layers}}{78}{subsubsection.2.10.2.3}}
+\newlabel{subsubsec:cnnPooling}{{2.10.2.3}{78}{On pooling layers}{subsubsection.2.10.2.3}{}}
 \mph@setcol{ii:78}{\mph@nr}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\ttl@tocsep }
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\ttl@tocsep }
-\def\mph@nr{8}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {3}{Ideas for problems to work on}}{79}{chapter.3}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.1}{Physics problems}}{79}{section.3.1}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}{Cosmology}}{79}{subsection.3.1.1}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}{QFT}}{79}{subsection.3.1.2}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Two examples to illustrate a one-dimensional convolutional layer with ReLU nonlinearity:\itshape  Convolutional layer for a spatial filter of size $F$ for a one-dimensional input of width $W$ with stride $S$ and padding $P$ followed by a ReLU non-linearity.\relax }}{79}{figure.caption.10}}
+\newlabel{fig:cnnExample}{{2.7}{79}{Two examples to illustrate a one-dimensional convolutional layer with ReLU nonlinearity:\itshape Convolutional layer for a spatial filter of size $F$ for a one-dimensional input of width $W$ with stride $S$ and padding $P$ followed by a ReLU non-linearity.\relax }{figure.caption.10}{}}
 \mph@setcol{ii:79}{\mph@nr}
-\@setckpt{Chapters/Concepts}{
-\setcounter{page}{80}
-\setcounter{equation}{0}
-\setcounter{enumi}{1}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Illustration of Max Pooling: \itshape  Illustration of max pooling over a $2\times 2$ region. Notice that pooling is done at each depth (vertical axis) separately. The number of outputs is halved along each dimension due to this coarse-graining.\relax }}{80}{figure.caption.11}}
+\newlabel{fig:cnnPooling}{{2.8}{80}{Illustration of Max Pooling: \itshape Illustration of max pooling over a $2\times 2$ region. Notice that pooling is done at each depth (vertical axis) separately. The number of outputs is halved along each dimension due to this coarse-graining.\relax }{figure.caption.11}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.10.2.4}{Classifying layer}}{80}{subsubsection.2.10.2.4}}
+\mph@setcol{ii:80}{\mph@nr}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.10.3}{Pre-trained CNNs and transfer learning}}{81}{subsection.2.10.3}}
+\newlabel{subsec:cnnTransferLearning}{{2.10.3}{81}{Pre-trained CNNs and transfer learning}{subsection.2.10.3}{}}
+\mph@setcol{ii:81}{\mph@nr}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.11}{High-Level Concepts in Deep Neural Networks}}{82}{section.2.11}}
+\newlabel{sec:dnn2}{{2.11}{82}{High-Level Concepts in Deep Neural Networks}{section.2.11}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.11.1}{Organizing deep learning workflows using the bias-variance tradeoff}}{82}{subsection.2.11.1}}
+\newlabel{subsec:dnn2Workflow}{{2.11.1}{82}{Organizing deep learning workflows using the bias-variance tradeoff}{subsection.2.11.1}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces \relax }}{82}{figure.caption.12}}
+\newlabel{fig:dnnworkflow}{{2.9}{82}{\relax }{figure.caption.12}{}}
+\mph@setcol{ii:82}{\mph@nr}
+\mph@setcol{ii:83}{\mph@nr}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.11.2}{Why NN are so successful: three high-level perspectives on neural networks}}{84}{subsection.2.11.2}}
+\newlabel{subsec:dnn2Successful}{{2.11.2}{84}{Why NN are so successful: three high-level perspectives on neural networks}{subsection.2.11.2}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.11.2.1}{Neural networks as representation learning}}{84}{subsubsection.2.11.2.1}}
+\newlabel{subsubsec:dnn2SuccessfulRepresentation}{{2.11.2.1}{84}{Neural networks as representation learning}{subsubsection.2.11.2.1}{}}
+\mph@setcol{ii:84}{\mph@nr}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.11.2.2}{Neural networks can exploit large amounts of data}}{85}{subsubsection.2.11.2.2}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.11.2.3}{Neural networks scale up well computationally}}{85}{subsubsection.2.11.2.3}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.11.3}{Limitations of supervised learning with deep networks}}{85}{subsection.2.11.3}}
+\newlabel{sec:dnn2Limitations}{{2.11.3}{85}{Limitations of supervised learning with deep networks}{subsection.2.11.3}{}}
+\mph@setcol{ii:85}{\mph@nr}
+\mph@setcol{ii:86}{\mph@nr}
+\@setckpt{Chapters/Supervised}{
+\setcounter{page}{87}
+\setcounter{equation}{80}
+\setcounter{enumi}{4}
 \setcounter{enumii}{2}
 \setcounter{enumiii}{2}
 \setcounter{enumiv}{0}
-\setcounter{footnote}{0}
+\setcounter{footnote}{19}
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
-\setcounter{chapter}{3}
-\setcounter{section}{1}
-\setcounter{subsection}{2}
+\setcounter{chapter}{2}
+\setcounter{section}{11}
+\setcounter{subsection}{3}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{0}
+\setcounter{figure}{9}
 \setcounter{table}{0}
 \setcounter{tabx@nest}{0}
 \setcounter{listtotal}{0}
@@ -334,9 +357,9 @@
 \setcounter{lstnumber}{1}
 \setcounter{listings}{0}
 \setcounter{loldepth}{1}
-\setcounter{Item}{100}
+\setcounter{Item}{109}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{65}
+\setcounter{bookmark@seq@number}{66}
 \setcounter{tcbbreakpart}{1}
 \setcounter{tcblayer}{0}
 \setcounter{tcbrastercolumn}{0}

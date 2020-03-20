@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  18 MAR 2020 18:52
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  20 MAR 2020 15:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -3479,7 +3479,8 @@ File: german.lbx 2017/12/19 v3.10 biblatex localization (PK/JW/AB)
 ))
 (./MLnotes.aux (./FrontBackmatter/Titlepage.aux)
 (./FrontBackmatter/Contents.aux) (./Chapters/Introduction.aux)
-(./Chapters/Statistics.aux) (./Chapters/Concepts.aux))
+(./Chapters/Statistics.aux) (./Chapters/Supervised.aux)
+(./Chapters/Unsupervised.aux) (./Chapters/Problems.aux))
 \openout1 = `MLnotes.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 134.
@@ -5465,6 +5466,18 @@ Overfull \hbox (24.60902pt too wide) in paragraph at lines 227--227
 etworks []  
  []
 
+
+Overfull \hbox (3.67995pt too wide) in paragraph at lines 251--251
+ [][] []\TU/TeXGyrePagella(0)/m/n/10.95 Limitations of supervised learning with
+ deep net- 
+ []
+
+
+Overfull \hbox (31.51482pt too wide) in paragraph at lines 255--255
+ [][] []\TU/TeXGyrePagella(0)/m/n/10.95 Some of the challenges of high-dimensio
+nal data []  
+ []
+
 )
 \tf@toc=\write9
 \openout9 = `MLnotes.toc'.
@@ -5752,6 +5765,12 @@ LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/bx/n' will be
 Overfull \hbox (44.28893pt too wide) in paragraph at lines 35--35
  \TU/TeXGyrePagella(0)/m/n/10.95 convolutional layer with ReLU nonlinearity:\TU
 /TeXGyrePagella(0)/m/it/10.95 Convolutional 
+ []
+
+
+Overfull \hbox (4.17088pt too wide) in paragraph at lines 37--37
+ \TU/TeXGyrePagella(0)/m/it/10.95 done at each depth (vertical axis) separately
+. The num- 
  []
 
 )
@@ -7214,9 +7233,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 580--585
  []
 
 ) [35]
-\openout2 = `Chapters/Concepts.aux'.
+\openout2 = `Chapters/Supervised.aux'.
 
- (./Chapters/Concepts.tex [36
+ (./Chapters/Supervised.tex [36
 
 
 ] [37] [38]
@@ -7597,27 +7616,174 @@ Overfull \hbox (34.06969pt too wide) has occurred while \output is active
 [73] [74] [75]
 File: gfx/cnn.png Graphic file (type bmp)
 <gfx/cnn.png>
- [76]
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[76] [77]
 File: gfx/cnnExample.png Graphic file (type bmp)
 <gfx/cnnExample.png>
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-Chapter 3.
-[77] [78]) [79
+
+Overfull \hbox (7.23875pt too wide) in paragraph at lines 989--991
+\TU/TeXGyrePagella(0)/m/n/10.95 The convolutional layers are interspersed with 
+pooling layers that coarse-
+ []
+
+[78]
+Underfull \hbox (badness 10000) in paragraph at lines 996--1002
+
+ []
+
+File: gfx/cnnPooling.png Graphic file (type bmp)
+<gfx/cnnPooling.png>
+[79] [80]
+Overfull \hbox (3.27396pt too wide) in paragraph at lines 1028--1031
+\TU/TeXGyrePagella(0)/m/n/10.95 The huge CNN models trained by industry are cal
+led: AlexNet, GoogLe-
+ []
+
+[81]
+File: gfx/WorkflowDNN.png Graphic file (type bmp)
+<gfx/WorkflowDNN.png>
+ [82] [83]
+Overfull \hbox (6.51236pt too wide) in paragraph at lines 1092--1096
+\TU/TeXGyrePagella(0)/m/n/10.95 of the other supervised learning algorithms dis
+cussed (regression-based
+ []
+
+[84]
+Overfull \hbox (2.0056pt too wide) in paragraph at lines 1100--1103
+\TU/TeXGyrePagella(0)/m/n/10.95 unique in that they contain million of paramete
+rs, yet can still be trained
+ []
+
+
+Overfull \hbox (2.53017pt too wide) in paragraph at lines 1100--1103
+\TU/TeXGyrePagella(0)/m/n/10.95 on existing hardwares. The complexity of DNNs (
+i.t.o. parameters) com-
+ []
+
+
+Overfull \hbox (2.78209pt too wide) in paragraph at lines 1100--1103
+\TU/TeXGyrePagella(0)/m/n/10.95 bined with their simple architecture (layer-wis
+e connections) hit a sweet
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1100--1103
+
+ []
+
+[85]) [86]
+\openout2 = `Chapters/Unsupervised.aux'.
+
+ (./Chapters/Unsupervised.tex
+Overfull \hbox (3.14342pt too wide) in paragraph at lines 7--8
+[]\TU/TeXGyrePagella(0)/m/n/10.95 Part of the complication of dim. red. lies in
+ the fact that low-dimensional
+ []
+
+[87
 
 
 ]
+Overfull \hbox (3.50655pt too wide) in paragraph at lines 28--29
+\TU/TeXGyrePagella(0)/m/n/10.95 visualization scheme. Powerful methods such as 
+t-distributed stochastic
+ []
+
+Missing character: There is no 𝛴 in font TeX Gyre Pagella Bold/OT:script=latn;l
+anguage=DFLT;+onum;mapping=tex-text;!
+[88]
+Missing character: There is no 𝛴 in font TeX Gyre Pagella Bold/OT:script=latn;l
+anguage=DFLT;+onum;mapping=tex-text;!
+Missing character: There is no 𝛴 in font TeX Gyre Pagella Bold/OT:script=latn;l
+anguage=DFLT;+onum;mapping=tex-text;!
+Missing character: There is no 𝛴 in font TeX Gyre Pagella Bold/OT:script=latn;l
+anguage=DFLT;+onum;mapping=tex-text;!
+Missing character: There is no 𝛬 in font TeX Gyre Pagella Bold/OT:script=latn;l
+anguage=DFLT;+onum;mapping=tex-text;!
+Missing character: There is no 𝛬 in font TeX Gyre Pagella Bold/OT:script=latn;l
+anguage=DFLT;+onum;mapping=tex-text;!
+Missing character: There is no 𝛴 in font TeX Gyre Pagella Bold/OT:script=latn;l
+anguage=DFLT;+onum;mapping=tex-text;!
+ [89]
+Underfull \hbox (badness 10000) in paragraph at lines 77--78
+[]\TU/TeXGyrePagella(0)/m/n/10.95 Recently, $[]$-stochastic neighbour embedding
+ ($[]$-SNE) has
+ []
+
+
+Underfull \hbox (badness 2478) in paragraph at lines 77--78
+\TU/TeXGyrePagella(0)/m/n/10.95 dimensional data. $[]$-SNE is a non-parametric 
+method that
+ []
+
+
+Underfull \hbox (badness 6910) in paragraph at lines 77--78
+\TU/TeXGyrePagella(0)/m/n/10.95 constructs non-linear embeddings. Each high-dim
+ensional
+ []
+
+
+Underfull \hbox (badness 5203) in paragraph at lines 77--78
+\TU/TeXGyrePagella(0)/m/n/10.95 training point is mapped to low-dimensional emb
+edding
+ []
+
+
+Overfull \hbox (2.97191pt too wide) in paragraph at lines 74--78
+\TU/TeXGyrePagella(0)/m/n/10.95 ated by complicated surfaces or datasets with a
+ large number of clusters,
+ []
+
+[90]
+Underfull \hbox (badness 10000) in paragraph at lines 87--104
+
+ []
+
+
+Overfull \hbox (7.19237pt too wide) in paragraph at lines 87--104
+\TU/TeXGyrePagella(0)/m/n/10.95 Using Gaussian likelihoods in $[][]$ implies th
+at only points that are nearby
+ []
+
+[91]
+Underfull \hbox (badness 10000) in paragraph at lines 110--114
+
+ []
+
+
+Overfull \hbox (1.40517pt too wide) in paragraph at lines 110--114
+\TU/TeXGyrePagella(0)/m/n/10.95 sequence of the fact that $[]$-SNE keeps nearby
+ points close together while
+ []
+
+[92]) [93]
+\openout2 = `Chapters/Problems.aux'.
+
+ (./Chapters/Problems.tex
+Chapter 3.
+[94
+
+
+
+
+]) [95]
 \tf@thm=\write14
 \openout14 = `MLnotes.thm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 159.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 159.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 160.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 160.
  (./MLnotes.aux (./FrontBackmatter/Titlepage.aux)
 (./FrontBackmatter/Contents.aux) (./Chapters/Introduction.aux)
-(./Chapters/Statistics.aux) (./Chapters/Concepts.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 159.
+(./Chapters/Statistics.aux) (./Chapters/Supervised.aux)
+(./Chapters/Unsupervised.aux) (./Chapters/Problems.aux))
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 160.
 
 
  *File List*
@@ -7841,16 +8007,20 @@ Chapters/Introduction.tex
 Chapters/Statistics.tex
 gfx/InOutError.png
 gfx/Bootstrapping.jpg
-Chapters/Concepts.tex
+Chapters/Supervised.tex
 gfx/LassoVsRidge.jpg
 gfx/Neuron.jpg
 gfx/Backpropagation.png
 gfx/Backpropagation2.png
  gfx/cnn.png
 gfx/cnnExample.png
+gfx/cnnPooling.png
+gfx/WorkflowDNN.png
+Chapters/Unsupervised.tex
+Chapters/Problems.tex
  ***********
 
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 159.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 160.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -7859,12 +8029,12 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59533 strings out of 493007
- 1227184 string characters out of 6136718
+ 59659 strings out of 493007
+ 1229675 string characters out of 6136718
  2034695 words of memory out of 5000000
- 62488 multiletter control sequences out of 15000+600000
+ 62598 multiletter control sequences out of 15000+600000
  546530 words of font info for 147 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
- 85i,23n,140p,10510b,5117s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 83i,23n,136p,10510b,5117s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (85 pages).
+Output written on MLnotes.pdf (101 pages).

@@ -935,6 +935,8 @@ One of the core lessons of physics is that we should \textbf{explot symmetries a
 For instance, consider a supervised learning task where we want to label images from some dataset as being pictures of cats or not. Our statistical procedure must first learn features associated with cats. Because a cat is a physical object, we know that these features are likely to be local (groups of neighbouring pixels in the $2D$ image corresponding to whiskers, tails, etc.). We also know that the cat can be anywhere in the image. Thus, it does not really matter where in the picture these features occur (though relative positions of features likely do matter). \emph{This is a manifestation of translational invariance that is built into our supervised learning task.}
 \end{example}
 The all-to-all coupled NNs in \ref{sec:dnn} fail to exploit this additional structure. CNNs take advantage of this additional structure (locality and translational invariance). 
+\\
+Note that in the absence of spatial locality, applying CNNs to a problem is useless.
 
 
 
@@ -960,10 +962,16 @@ There are two kinds of basic layers that make up a CNN:
 \item A convolution layer that computes the convolution of the input with a bank of filters\footnote{As a mathematical operation, see this practical guide to :\href{http://setosa.io/ev/image-kernels}{Image kernels}.},
 \item and pooling layers that coarse-grain the input while maintaining locality and spatial structure, compare fig. \ref{fig:cnn}.
 \end{enumerate}
+\begin{mybox}{Pedagogical summary of CNN}
+	
+	The weights of a cnn are the kernel convolution operations. Each depth in the convolutional layer corresponds to one specific filter/kernel convolution applied to three $3$ input (RGB) channels. One weight/filter could correspond to a convolution that highlights all the horizontal edges, another one highlights all the vertical edges, we dont know and we dont care. The input, i.e. a face, however is a combination of features, a combination of edges, shapes etc. All of the different depths per layer will look different, will highlight different features, will be a different representation of the face, which the machine deems as important. We therefore do not pick which convolutions to apply, i.e. which features are to be highlighted, the machine does, as in a DNN. One layer in the final layer could for example be highlighted if there is a ear at a certain position, they will eventually describe one pixel. We have completely removed the spatial dimension from the $3D$ input image. At the end you have a classifier, which decides whether the resulting convolution of convolutions is a picture of Alice's face or not. Therefore, the weights (i.e. the kernel convolutions) are adjusted via (backpropagation) supervised learning as we know whether the picture corresponds to Alice or not, i.e. only the weights and dimension of the input is different but the training and prediction procedure is the same.
+\end{mybox}
 
+\subsubsection{On convolutional layers}
+\label{subsubsec:cnnConvolutionalLayer}
 For two-dimensional data, a layer $l$ is characterized by three numbers: height $H_l$, width $W_l$, and depth $D_l$\footnote{The depth $D_l$ is often called ’number of channels’, to distinguish it from the depth of the NN itself, i.e. the total number of layers (which can be convolutional, pooling or fully-connected), c.f. \ref{fig:cnn}.}
  The height and width correspond to the sizes of the two-dimensional spatial $(W_l, H_l)$-plane (in neurons), and the depth $D_l$ (marked by the different colours in \ref{fig:cnn})-to the number of filters in that layer. All neurons corresponding to a particular filter have the same parameters (i.e. shared weights and bias).\\
- In general, we will be concerned with local spatial filters (often called a \emph{receptive field} in analogy with neuroscience) that take as inputs a small spatial patch of the previous layer at all depths. For instance, a square filter os fize $F$ is a three-dimensional array of size $F\times F\times D_{l-1}$. The convolution consists of running this filter over all locations in the spatial plane.
+ In general, we will be concerned with local spatial filters (often called a \emph{receptive field} in analogy with neuroscience) that take as inputs a small spatial patch of the previous layer at all depths. For instance, a square filter of size $F$ is a three-dimensional array of size $F\times F\times D_{l-1}$. The convolution consists of running this filter over all locations in the spatial plane.
  \begin{example}
  	To demonstrate how this works in practice, let us consider the simple example consisting of a one-dimensional input of depth $1$, shown in fig \ref{fig:cnnExample}. In this case, a filter of size $F\times 1\times 1$ can be specified by a vector of weights $w$ of length $F$. 
  \end{example}
@@ -975,6 +983,37 @@ The stride, $S$, encodes by how many neurons we translate the filter by when per
 	\caption{Two examples to illustrate a one-dimensional convolutional layer with ReLU nonlinearity:\itshape Convolutional layer for a spatial filter of size $F$ for a one-dimensional input of width $W$ with stride $S$ and padding $P$ followed by a ReLU non-linearity.}
 	\label{fig:cnnExample}
 \end{figure}
+For an input of width $W$, the number of neurons (outputs) in the layer is given by $(W-F+2P)/S+1$. After computing the filter, the output is passed through a non-linearity (e.g. a ReLU). In practice, one often inserts a BatchNorm layer before the non-linearity, cf. \ref{subsubsec:dnnRegularizerPracticalBatchNorm}.
+\subsubsection{On pooling layers}
+\label{subsubsec:cnnPooling}
+The convolutional layers are interspersed with pooling layers that coarse-grain spatial information by performing a subsampling at each depth. \\
+A limitation of the feature map output of convolutional layers is that they record the precise position of features in the input. This means that small movements in the position of the feature in the input image will result in a different feature map. This can happen with re-cropping, rotation, shifting, and other minor changes to the input image. A common approach to addressing this problem from signal processing is called down sampling. This is where a lower resolution version of an input signal is created that still contains the large or important structural elements, without the fine detail that may not be as useful to the task.
+
+Down sampling can be achieved with convolutional layers by changing the stride of the convolution across the image. A more robust and common approach is to use a pooling layer.
+The pooling layer operates upon each feature map separately to create a new set of the same number of pooled feature maps.
+Pooling involves selecting a pooling operation, much like a filter to be applied to feature maps. The size of the pooling operation or filter is smaller than the size of the feature map; specifically, it is almost always $2×2$ pixels applied with a stride of $2$ pixels.
+
+This means that the pooling layer will always reduce the size of each feature map by a factor of $2$, e.g. each dimension is halved, reducing the number of pixels or values in each feature map to one quarter the size. For example, a pooling layer applied to a feature map of $6×6$ ($36$ pixels) will result in an output pooled feature map of$ 3×3$ ($9$ pixels). 
+\\
+\\
+One common pooling operation is the \emph{max pool}, another one is average pooling. In a max pool, the spatial dimensions are coarse-grained by replacing a small region (say $2\times 2$ neurons) by a single neuron whose output is the maximum value of the output in the region. This generally reduces the dimension of outputs, compare \ref{fig:cnnPooling}.
+\begin{example}
+	For example, if the region we pool over is $2\times 2$, then both the height and the width of the output layer will be halved. 
+\end{example}
+Generally, pooling operations do not reduce the depth of the convolutional layers because pooling is performed separately at each depth.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{gfx/cnnPooling}
+	\caption{Illustration of Max Pooling: \itshape Illustration of max pooling over a $2\times 2$ region. Notice that pooling is done at each depth (vertical axis) separately. The number of outputs is halved along each dimension due to this coarse-graining.}
+	\label{fig:cnnPooling}
+\end{figure}
+\subsubsection{Classifying layer}
+In a CNN, the convolution and max-pool layers are generally followed by an all-to-all connected layer and a high-level classifier such as soft max. This allows us to train CNNs as usual using backpropagation  \ref{subsec:dnnBackpropagation}. From a backprop perspective, CNNs are almost identical to fully connected NN architectures except with tied parameters.\\
+Apart from introducing additional structure, such as translational invariance and locality, this convolutional structure also has important practical and computational benefits. All neurons at a given layer represent the same filter, and hence can all be described by a single set of weights and biases. This reduces the number of free parameters by a factor of $H\times W$ at each layer.
+\begin{example}
+	For a layer with $D=10^2$ and $H=W=10^2$, this gives us a reduction in parameters of nearly $10^6$.
+\end{example}
+This allows for the training of much larger models than would otherwise be possible with fully connected layers. 
 
 
 
@@ -984,33 +1023,145 @@ The stride, $S$, encodes by how many neurons we translate the filter by when per
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\chapter{Ideas for problems to work on}
-\section{Physics problems}
-\subsection{Cosmology}
+\subsection{Pre-trained CNNs and transfer learning}
+\label{subsec:cnnTransferLearning}
+The huge CNN models trained by industry are called: AlexNet, GoogLeNet, ResNet, InceptionNet, VGGNet, etc. The trained models have been released and are now available in standard packages such as Torch Vision library in Pytorch or the Caffe framework. These models can be used directly as a basis for fine-tuning in different supervised image recognition tasks through a process called \emph{tranfer learning}.
+\begin{mybox}{Transfer learning}
+	The basic idea behind transfer learning is that the filters (receptive fields) learned by the convolution layers of these networks should be informative for most image recognition based tasks, not just the ones they were originally trained for. In other words, we expect that , since images reflect the natural world, the filters learned by these CNNs should transfer over to new tasks with only slight modifications and fine-tuning.
+\end{mybox}
+There are three distinct ways one can take a pretrained CNN and repurpose it for a new task.
 \begin{enumerate}
-	\item Maybe write a classification logistic regressor, or deep CNN to classify where dark matter halos have their boundary. It is very difficult to define a boundary of such a spread out object with confidence, maybe find criteria via classification ML technique ?
+	\item \emph{Use CNN as fixed feature detector at top layer}:\\
+	If the new dataset we want to train on is small and similar to the original dataset, we can simply use the CNN as a fixed feature detector and retrain our classifier. In other words, we remove the classifier (soft-max) layer at the top of the CNN and replace it with a new classifier (linear support vector machine (SVM) or soft-max) relevant to our supervised learning problem. In this procedure, the CNN serves as a fixed map from images to relevant features (the outputs of the top fully-connected layer right before the original classifier). This procedure prevents overfitting on small, similar datasets and is often a useful starting point for transfer learning.
+	\item \emph{Use CNN as fixed feature detector at intermediate layer}:\\
+	If the dataset is small and quite different from the dataset used to train the original image, the features at the top level might not be suitable for our dataset. In this case, one may want to instead use features in the middle of the CNN to train our new classifier. These features are though to be less fine-tuned and more universal (e.g. edge detectors) This is motivated by the idea that CNNs learn increasingly complex features the deeper one goes in the network (see discussion on representational learning in \ref{subsubsec:dnn2SuccessfulRepresentation}).
+	
+	\item \emph{Fine-tune the CNN}:\\
+	If the dataset is large, in addition to replacing and retraining the classifier in the top layer, we can also fine-tune the weights of the original CNN using backpropagation. One may choose to freeze some of the weights in the CNN during the procedure or retrain all of them simultaneously.
+	
 \end{enumerate}
-\subsection{QFT}
+All of these procedures can be carried our easily by using packages such as Caffe or the Torch Vision library in PyTorch.\footnote{Read the \href{https://pytorch.org/tutorials/}{Pytorch tutorials} carefully if interested in transfer learning.}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{High-Level Concepts in Deep Neural Networks}
+\label{sec:dnn2}
+Here we discuss some high-level questions about the practice and performance of neural networks. 
+
+
+\subsection{Organizing deep learning workflows using the bias-variance tradeoff}
+\label{subsec:dnn2Workflow}
+Here we present a DL workflow inspired by the bias-variance tradeoff \ref{subsubsec:biasvariancetradeoff}. This workflow is especially relevant to industrial applications where one is often trying to employ NNs to solve a particular problem.\footnote{Draws heavily from \href{https://www.youtube.com/watch?v=F1ka6a13S91}{Andrew Ng's tutorial}.}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{gfx/WorkflowDNN}
+	\caption{}
+	\label{fig:dnnworkflow}
+\end{figure}
+The first thing we would like to do is divide the data into three parts. A training set, a validation or dev (development) set, and a test set. The test set is the data on which we want to make predictions. The dev set is a subset of the training data we use to check how well we are doing out-of-sample, after training the model on the training dataset. We use the validation error as a proxy for the test error in order to make tweaks to our model. It is crucial that we do not use any of the test data to train the algorithm. Follow the following \textbf{workflow}, compare \ref{fig:dnnworkflow}.
+\begin{enumerate}
+\item \emph{Estimate optimal error rate (Bayes rate).}\\
+The first thing one should establish is the difficulty of the task and the best performance one can expect to achieve. No algorithm can do better than the ’signal’ in the dataset. 
+\begin{example}
+	It is much easier to classify objects in high-resolution images than in very blurry, low-resolution images.
+\end{example}
+Thus, one need to establish \textbf{a proxy or baseline for the optimal performance that can be expected from any algorithm}. In the context of Bayesian statistics, this is often called the \emph{Bayes rate}. Since we do not know this \emph{a priori}, we must get an estimate of this. For many tasks such as speech or object recognition, we can approximate this by the performance of humans on the task. For a more specialized task, we would like to ask how well experts, trained at the task, perform. This expert performance then serves as a proxy for our Bayes rate.
+
+\item \emph{Minimize underfitting (bias) on training data set.}\\
+After we have established the Bayes rate, we want to make sure that we are using a sufficiently complex model to avoid underfitting on the training dataset. In practice, this means comparing the training error rate to the Bayes rate. Since the training error does not care about generalization (variance), our model should approach the Bayes rate on the training set. If it does not, the bias of the DNN model is too large and one should try training the model longer and/or using a larger model. Finally, if none of these techniques work, it is likely that the model architecture is not well suited to the dataset, and one should modify the neural architecture in some way to better reflect the underlying structure of the data (symmetries, \emph{locality}, etc.).
+\item \emph{Make sure you are not overfitting}:\\
+Next, we run our algorithm on the validation or dev set. If the error is similar to the training error rate and Bayes rate, we are done. If it is not, then we are overfitting the training data. Possible solutions include, regularization and, importantly, collecting more data. Finally, if none of these work, one likely has to change the DNN architecture.
+\end{enumerate}
+If the validation and test sets are drawn from the same distributions, then good performance on the validation set should lead to similarly good performance on the test set. (Of course performance will typically be slightly worse on the test set because the hyperparameters were fit to the validation set.) However, sometimes the training data and test data differ in subtle ways because, for example, they are collected using slightly different methods, or because it is cheaper to collect data in one way versus another. In this case, there can be a mismatch between the training and test data. This can lead to the NN overfitting these small differences between the test and training sets, and a poor performance on the test set despite having a good performance on the validation set.
+\\
+One possibility to alleviate this is to make two validation or dev sets, one constructed from the training data and one constructed from the test data. The difference between the performance of the algorithm on these two validation sets quantifies the train-test mismatch. This can serve as another important diagnostic when using DNNs for supervised learning.
+
+\subsection{Why NN are so successful: three high-level perspectives on neural networks}
+\label{subsec:dnn2Successful}
+\subsubsection{Neural networks as representation learning}
+\label{subsubsec:dnn2SuccessfulRepresentation}
+The ability of DL to learn good representations with very little hand-tuning (i.e. blackbox learning of relevant features) is very potent. Many of the other supervised learning algorithms discussed (regression-based models \ref{sec:linearRegression},\ref{sec:logisticRegression}; ensemble methods \ref{subsec:ensemblesRandomForest},\ref{subsec:ensemblesRandomForest}) perform comparably or even better than NNs but when using hand-crafted features with small-to-intermediate sized datasets.\\
+The hierarchical structure of DL models is thought to be crucial to their ability to represent complex, abstract features.
+\begin{example}
+	Consider the use of CNNs for image classification tasks. The analysis of CNNs suggests that the lower-levels of the NNs learn elementary features, such as edge detectors, which are then combined into higher levels of networks into more abstract, higher-level features.
+\end{example}
+One of the interesting consequences of this line of thinking is the idea that one can train a CNN on one large dataset and the features it learns should also be useful for other supervised tasks. This results in the ability to learn important and salient features directly from the data and then transfer this knowledge to a new task\footnote{This ability to learn important, higher-level, coarse-grained features is reminiscent of ideas like RG in physics where the RG flows separate out relevant and irrelevant directions.}.
+
+\subsubsection{Neural networks can exploit large amounts of data}
+The advent of Big Data favours supervised learning methods that can fully exploit this. One important reason for the success of DNNs is that they are able to exploit the additional signal in large datasets for difficult supervised learning tasks. Fundamentally, modern DNNs are unique in that they contain million of parameters, yet can still be trained on existing hardwares. The complexity of DNNs (i.t.o. parameters) combined with their simple architecture (layer-wise connections) hit a sweet spot between expressivity (ability to represent very complicated functions) and trainability (ability to learn millions of parameters.).\\
+\\
+When the amount of data is small, DNNs offer no substantial benefit over conventional supervised learning algorithms (like support vector machines SVM or ensemble methods). However, large DNNs with large datasets outperform other methods by a vast amount, not having to specify parameters helps as well. It is likely that as long as a DNN is large enough, it should generalize well and not overfit.
+
+\subsubsection{Neural networks scale up well computationally}
+The architecture of NNs naturally lends itself to parallelization and the exploitation of fast but specialized processors (GPU or TPU). The layered architecture of NNs also makes it easy to use modern techniques such as automatic differentiation that make it easy to quickly deploy them. Algorithms such as SGD and the use of mini-batches make it easy to parallelize code and train much larger DNNs.
+
+\subsection{Limitations of supervised learning with deep networks}
+\label{sec:dnn2Limitations}
+Often, the same or better performance on a task can be achieved by using a few hand-engineered features (or even a collection of random features). Limitations may be and are not limited to:
+\begin{enumerate}
+	\item \emph{Need labelled data.}
+	\item \emph{Supervised NNs are extremely data intensive.}\\
+	The utility of DNNs is extremely limited if data is hard to acquire or datasets are small (hundreds to a few thousand samples), especially for supervised learning where you need labels for the data.
+	\item \emph{Homogeneous data.}\\
+	Almost all DNNs deal with homogenoeus data of one type, very hard to design architectures that mix and match data types. Ensemble methods can do this in contrast.
+	\item\emph{Many physics problems are not about prediction.}\\
+	In physics, we are often not interested in solving prediction tasks such as classification. Instead, we want to learn something about the underlying distribution that generates the data. In this case, it is often difficult to cast these ideas in a supervised learning setting. While the problems are related it is possible to make good predictions with a ’wrong’ model. The model might or might not be useful for understanding the physics.	
+\end{enumerate}
+The use of unsupervised methods in part circumnavigates these problems.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
