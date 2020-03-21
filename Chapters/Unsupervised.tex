@@ -1,3 +1,4 @@
+\chapter{Unsupervised Learning}
 \section{Dimensional Reduction and Data Visualization}
 \label{sec:dimRed}
 In this section, we will begin our foray into unsupervised learning by way of data visualization. Data visualization methods are important for modelling as they can be used to identify correlated or redundant features along with irrelevant features (noise) from raw or processed data. For data involving a relatively small number of features, studying pair-wise correlations (i.e. pairwise scatter plots of all features) may suffice in performing a complete analysis. This rapidly becomes impractical for datasets involving a large number of measured features (such as images). \begin{mybox}{Dimensional Reduction}
@@ -39,14 +40,14 @@ Such PCA-based projections often capture a lot of the large scale structure of m
 Consider $N$ data points, $\{\mx_1,\dots,\mx_N\}$ that live in a $p$-dimensional feature space $\mx_i \in \mR^p$. Denote the $N\times p$ design matrix as $\mX = [\mx_1,\dots,\mx_N]^T$ whose rows are the data points and columns correspond to different features, compare \ref{subsec:recipeML}. The $p\times p$ (symmetric) covariance matrix is therefore 
 \be 
 \label{eq:dimRedPCAcovMatrix}
-\mathbf{\Sigma}(\mX) = \frac{1}{N-1} \mX^T \mX.
+\mS(\mX) = \frac{1}{N-1} \mX^T \mX.
 \ee 
-notice that the $j$-th diagonal entry of $\mathbf{\Sigma}(\mX)$ corresponds to the variance of the $j$-th feature and $\mathbf{\Sigma}(\mX)_{ij}$ measures the covariance (i.e. connect correlation in the language of physics) between feature $i$ and feature $j$.\\
+notice that the $j$-th diagonal entry of $\mS(\mX)$ corresponds to the variance of the $j$-th feature and $\mS(\mX)_{ij}$ measures the covariance (i.e. connect correlation in the language of physics) between feature $i$ and feature $j$.\\
 Via singular value decomposition (SVD), one finds
 \be 
-\mathbf{\Sigma}(\mX) = \mathbf{V} \left(\frac{\mathbf{S}^2}{N-1}\right) \mathbf{V}^T \equiv \mathbf{V}\mathbf{\Lambda} \mathbf{V}^T,
+\mS(\mX) = \mathbf{V} \left(\frac{\mathbf{S}^2}{N-1}\right) \mathbf{V}^T \equiv \mathbf{V}\mathbf{\Lambda} \mathbf{V}^T,
 \ee 
-where $\mathbf{V}$ contains (as its columns) the right singular vectors of $\mX$, and $\mathbf{\Lambda}$ is a diagonal matrix with eigenvalues $\lambda_i =s^2_i/(N-1)$ ($s_i$ are the singular values) in the decreasing order along the diagonal (i.e. eigendecomposition). It is clear that the right singular vectors of $\mX$ (i.e. the columns of $\mathbf{V}$) are principal directions of $\mathbf{\Sigma}(\mX)$, and the singular values of $\mx$ are related to the eigenvalues of the covariance matrix $\Sigma(\mX)$ via $\lambda_i$. To reduce the dimensionality of data from $p$ to $\tilde{p}<p$, we first construct the $p\times \tilde{p}$ projection matrix $\mathbf{V}_{\tilde{p}}$ by selecting the singular components with the $\tilde{p}$ largest singular values. The projection of the data from $p$ to $\tilde{p}$ is simply $\tilde{\mathbf{Y}}=\mX \mathbf{V}_{\tilde{p}}$. \\
+where $\mathbf{V}$ contains (as its columns) the right singular vectors of $\mX$, and $\mathbf{\Lambda}$ is a diagonal matrix with eigenvalues $\lambda_i =s^2_i/(N-1)$ ($s_i$ are the singular values) in the decreasing order along the diagonal (i.e. eigendecomposition). It is clear that the right singular vectors of $\mX$ (i.e. the columns of $\mathbf{V}$) are principal directions of $\mS(\mX)$, and the singular values of $\mx$ are related to the eigenvalues of the covariance matrix $\Sigma(\mX)$ via $\lambda_i$. To reduce the dimensionality of data from $p$ to $\tilde{p}<p$, we first construct the $p\times \tilde{p}$ projection matrix $\mathbf{V}_{\tilde{p}}$ by selecting the singular components with the $\tilde{p}$ largest singular values. The projection of the data from $p$ to $\tilde{p}$ is simply $\tilde{\mathbf{Y}}=\mX \mathbf{V}_{\tilde{p}}$. \\
 The singular vector with the largest singular value (i.e. the largest variance) is referred to as the first principal component; the singular vector with the second largest singular value as the second principal component, and so on. An important quantity is the ration $\lambda_i/\sum_{i=1}^p \lambda_i$ which is referred as the \emph{percentage of the explained variance contained in a principal component}.\\
 It is common in data visualization to present the data projected on the first few principal components. This is valid as long as a large part of the variance is explained in those components. Low values of explained variance may imply that the intrinsic dimensionality of the data is high or simply that it cannot be captured by a linear representation.
 
@@ -180,12 +181,12 @@ A common drawback of $K$-means is the following:\\
 If the true clusters have very different variances (spreads), $K$-means can lead to spurious results since the underlying assumption is that the latent model has uniform variances.
 
 \subsubsection{Hierarchical clustering: Agglomerative methods}
-\label{subsubsec:ClusterPracticalHierarchical}
+\label{subsubsec:clusterPracticalHierarchical}
 Agglomerative clustering is a bottom up approach that starts from small initial clusters which are then progressively merged to form larger clusters.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.4\linewidth]{gfx/HierarchicalCLustering}
-	\caption{\itshapeThe merging process generates a hierarchy of clusters that can be visualized in the form of a dendrogram.}
+	\caption{\itshape The merging process generates a hierarchy of clusters that can be visualized in the form of a dendrogram.}
 	\label{fig:hierarchicalclustering}
 \end{figure}
 This hierarchy \ref{fig:hierarchicalclustering} can be useful to analyze the relation between clusters and the subcomponents of individual clusters. Agglomerative methods are usually specified by defining a distance measure between clusters. Different choices of distance result in different clustering algorithms. At each step, the two clusters that are the closest w.r.t. the distance measure are merged until a single cluster is left.
@@ -229,6 +230,147 @@ where $\mathbf{μ}_j$ is the centre of cluster $j$.
 \end{enumerate}
 A common drawback of hierarchical methods is that they do not scale well: At every step, a distance matrix between all clusters must be updated/computed. This leads to a complexity of $\mO(N^2)$, i.e. the method is suitable for small to medium-size datasets.
 
+\subsubsection{Density-based (DB) clustering}
+\label{subsubsec:clusterPracticalDBSCAN}
+Density clustering makes the intuitive assumption that clusters are defined by regions of space with higher density of data points. Data points that constitute noise or that are outliers are expected to form regions of low density. The method is also suitable for large-scale applications.\\
+The core assumption of DB clustering is that a \emph{relative} local density estimation of the data is possible. In other words, it is possible to order points according to their densities. Density estimates are usually accurate for low-dimensional data but become unreliable for high-dimensional data due to large sampling noise.\\
+\\
+	Consider a set of $N$ data points $X\equiv \{\mx_n\}^N_{n=1}$. Define the $\epsilon$-neighbourhood of point $\mx_n$ 
+\be 
+N_{\epsilon} (\mx_n) = \{\mx \in X| \md(\mx,\mx_n) < \epsilon \}.
+\ee 
+$N_{\epsilon}(\mx_n)$ are the data points that are at a distance smaller than $\epsilon$ from $\mx_n$, $\md(\cdot,\cdot)$ is the Euclidean metric. $N_{\epsilon}(\mx_n)$ can be seen as a crude estimate of local density. $\mx_n$ is considered to be a \emph{core-point} if at least \textbf{minPts} are in its $\epsilon$-neighbourhood. \textbf{minPts} is a free parameter of the algorithm that sets the scale of the size of the smallest cluster one should expect. Finally, a point $\mx_i$ is said to be \emph{density-reachable} if it is in the $\epsilon$-neighbourhood of a \emph{core-point}.
+\begin{mybox}{DBSCAN algorithm}
+\begin{enumerate}
+	\item[$\rightarrow$] Until all points in $X$ have been visited; \textbf{do}
+	\begin{enumerate}
+		\item Pick a point $\mx_i$ that has not been visited
+		\item Mark $\mx_i$ as a visited point
+		\item If $\mx_i$ is a core point; \textbf{then}
+		\begin{enumerate}
+			\item Find the set $C$ of all points that are \emph{density reachable} from $\mx_i$.
+			\item $C$ now forms a cluster. Mark all points within that cluster as being visited.
+		\end{enumerate}
+	\end{enumerate}
+	\item[$\rightarrow$] Return the cluster assignments $C_1,\dots,C_k$, with $k$ the number of clusters. Points that have not been assigned to a cluster are considered noise or outliers.
+\end{enumerate}
+\end{mybox}
+DBSCAN is very efficient with a $\mO(N\log N)$.
+
+\subsection{Clustering and Latent Variables via the Gaussian Mixture Models}
+\label{subsec:clusterConcepts}
+Here we collect important 
+\subsubsection{Important concepts in unsupervised learning}
+\label{subsubsec:clusterConceptsCollection}
+
+\begin{mybox}{Important concepts in unsupervised learning}
+	\label{subsubsec:clusterConceptsCollectionImportant}
+\begin{enumerate}
+\item It is often useful to think of the visible correlations between features in the data as resulting from hidden or latent variables.
+\item We will often posit a generative model that encodes the structure we think exists in the data and then find the parameters that maximize the likelihood of the observed data.
+\item Often we will not be able to directly estimate the MLE, and will have to instead look for a computationally efficient way to find a local minimum of the likelihood.
+\end{enumerate}
+\end{mybox}
+A central concept in many unsupervised learning techniques is the idea of a latent or hidden variable. Even though latent variables are not directly observable, they still influence the visible structure of the data. 
+\begin{example}
+In the context of clustering we can think of the cluster identity of each datapoint (i.e. which cluster does a datapoint belong to) as a latent variable.
+\end{example}
+The latent variables in out data (cluster identity) are a way of representing and abstracting the correlations between datapoints.\\
+
+\begin{mybox}{Clustering}
+We can think of clustering as an algorithm to learn the most probable value of a latent variable (cluster identity) associated with each datapoint.
+\end{mybox}
+ Calculating this latent variables requires additional assumptions about the structure of our dataset. Like all unsupervised learning algorithms, in clustering we must make an assumption about the underlying probability distribution from which the data was generated. Our model for how the data is generated is called the \emph{generative model}. In clustering, we assume that data points are assigned a cluster, with each cluster characterized by some \emph{cluster-specific} probability distribution  (e.g. Gaussian with some mean and variance that charaterizes the cluster). We then specify a procedure for finding the value of the latent variable. This is often done by choosing the values of the latent variable that minimize some cost function.\\
+ \\
+ One common choice for a class of cost functions for many unsupervised learning problems is MLE \ref{subsubsec:bayesEstMLE}. In MLE, we choose the values of the latent variables that maximize the likelihood of the observed data under our generative model (i.e. maximize the probability of getting the observed dataset under our generative model).
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ \begin{mybox}{Cluster validation}
+ 	\label{subsubsec:clusterConceptsValidation}
+ 	\emph{Cluster validation} describes the procedure of verifying whether the obtained labels are ’valid’, which is usually done by visual inspection. That is, the data is represented in a low-dimensional space and the cluster labels obtained are visually inspected to make sure that different labels organize into distinct ’blobs’. This is particularly difficult for high-dimensional data, cf. \ref{subsec:clusterHighD}.
+ \end{mybox}
+ 
+ 
+ 
+ 
+\subsubsection{Concepts visualized via the Gaussian Mixture Model (GMM)}
+\label{subsubsec:clusterConceptsGMM}
+Gaussian Mixture Models are a generative model often used in the context of clustering. In GMM, points are drawn from one of $K$ Gaussians, each with its own mean $\mathbf{μ}_k$ and covariance matrix $\Sigma_k$,
+\be 
+\label{eq:clusterGMMGaussian}
+\mathcal{N}(\mx |\mathbf{μ},\mS) \sim \exp \left[-\half (\mx -\mathbf{μ}) \mS^{-1} (\mx-\mathbf{μ})^T\right].
+\ee 
+Let us denote the probability that a point is drawn from mixture $k$ by $\pi_k$. Then the probability of generating a point $\mx$ in a GMM is given by
+\bse 
+p(\mx | \{\mm_k,\mS_k,\pi_k \})= \sum_{k=1}^K \mathcal{N}(\mx |\mm_k,\mS_k) \pi_k.
+\ese 
+Given a dataset $\mX=\{\mx_1,\dots,\mx_N\}$, we can write the likelihood of the dataset as
+\bse 
+p(\mX | \{\mm_k,\mS_k,\pi_k\}) = \prod_{i=1}^N p(\mx_i| \{\mm_k,\mS_k,\pi_k \} ).
+\ese 
+For future reference, let us denote the set of parameters (of $K$ Gaussians in the model) $\{\mm_k,\mS_k,\pi_k\}$ by $\mt$.\\
+\\
+We will now go through this model exemplifying the important concepts lined out in \ref{subsubsec:clusterConceptsCollectionImportant} in the exact same steps to give an example of these.
+\begin{enumerate} 
+	\item 
+To see how we can use GMM and MLE to perform clustering, we introduce discrete binary $K$-dimensional latent variables $\mathbf{z}$ for each data point $\mx$ whose $k$-th component is $1$ if point $\mx$ was generated from the $k$-th Gaussian and zero otherwise (i.e. one-hot variables).
+For instance, if we were considering a Gaussian mixture with $K=3$, we would have three possible values for $\mathbf{z}\equiv (z_1,z_2,z_3): (1,0,0),(0,1,0)$ and $(0,0,1)$. We cannot directly observe the variable $\mathbf{z}$. It is a latent variable that encodes the cluster identity of point $\mx$. Let us also denote all the $N$ latent variables corresponding to a dataset $\mX$ by $\mathbf{Z}$.
+\item 
+Viewing the GMM as a generative model, we can write the probability $p(\mx |\mathbf{z})$ of observing a data point $\mx$ given $\mathbf{z}$ as 
+\bse 
+p(\mx | \mathbf{z}; \{ \mm_k,\mS_k\} ) = \prod_{k=1}^K \mathcal{N}(\mx |\mm_k,\mS_k)^{z_k}
+\ese 
+as well as the probability of observing a given value of latent variable
+\bse 
+p(\mathbf{z}| \{\pi_k\}) = \prod_{k=1}^K \pi^{z_k}_k.
+\ese 
+Using Bayes' rule \ref{eq:bayesrule}, we can write the joint probability of a clustering assignment $\mathbf{z}$ and a data point $\mx$ given the GMM parameter as
+\bse 
+p(\mx ,\mathbf{z};\mt) = p(\mx| \mathbf{z}; \{\mm_k,\mS_k\} ) p(\mathbf{z}|\{\pi_k\}).
+\ese 
+Using Bayes' again we find the conditional probability of the data point $\mx$ being in the $k$-th cluster, $\gamma(z_k)$, given model parameters $ \theta$ as 
+\be 
+\label{eq:clusterConceptsGMMresponsibility}
+\gamma(z_k)\equiv p(z_k=1 | \mx;\theta)= \frac{\pi_k \mathcal{N}(\mx|\mu_k,\Sigma_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mx |\mu_j,\Sigma_j)}.
+\ee 
+The $\gamma(z_k)$ are often referred to sa the \emph{responsibility} that mixture $k$ takes for explaining $\mx$. Just like in our discussion of soft-max classifiers, this can be made into a ’hard-assignment’ by assigning each point to the cluster with the largest probability: $\arg \max_k \gamma(z_k)$ over the responsibilities.\\
+\\
+The complication is of course that we do not know the parameters $\mt$ of the underlying GMM but instead must also learn them from the dataset $\mX$. Ideally we would do this by choosing the parameters that maximize the likelihood of the data
+\bse 
+\hat{\mt} = \arg \max_{\mt} \log p(\mX|\mt).
+\ese 
+Once we know the MLEs $\hat{\mt}$, we could use \ref{eq:clusterConceptsGMMresponsibility} to calculate the optimal hard cluster assignment $\arg \max_k \hat{\gamma}(z_k)$ where $\hat{\gamma}(z_k) =p(z_k=1|\mx;\hat{\mt})$.
+
+\item It is almost impossible to find the global maximum of the likelihood function. Instead, we must settle for a local maximum. One approach to finding a local maximum of the likelihood is to use a method like SGD \ref{subsubsec:gdSGD} on the negative log-likelihood (i.e. the cost function \ref{eq:bayesErrorFct}), or expectation minimization \ref{subsubsec:clusterConceptsEM}.
+\end{enumerate}
+
+\subsubsection{Expectation Maximization (EM)}
+\label{subsubsec:clusterConceptsEM}
+An alternative, powerful approach for finding local minima in latent variable models using an iterative procedure is called EM. Given an initial guess for the parameters $\theta^{(0)}$, the EM algorithm iteratively generates new estimates for the parameters $\theta^{(1)},\theta^{(2)},\dots$ Importantly, the likelihood guaranteed to be non-decreasing under these iterations and hence EM converges to a local maximum of the likelihood.\\
+The central observation underlying EM is that it is often much easier to calculate the conditional likelihoods of the latent variables $\tilde{p}^{(t)}(\mathbf{Z}) = p(\mathbf{Z}|\mX;\theta^{(t)})$ given some choice of parameters, and the maximum of the expected log likelihood given an assignment of the latent variables $\theta^{(t+1)} = \arg \max_{\theta} \mathbb{E}_{p(\mathbf{Z}|\mX;\theta^{(t)} )} [\log p(\mX, \mathbf{Z};\theta)]$. This can be rewritten via differentiation into the update rules
+\begin{align*}
+\mm^{(t+1)}_k &= \frac{\sum_i^N \gamma^{(t)}_{ik} x_i}{\sum_i \gamma^{(t)}_{ik}}\\
+\mS^{(t+1)}_k &= \frac{\sum_i^N \gamma^{(t)}_{ik} (\mx_i-\mm_k) (\mx_i-\mm_k)^T}{\sum_i \gamma^{(t)}_{ik}}\\
+\pi^{(t+1)}_k &= \frac{1}{N} \sum_k \gamma^{(t)}_{ik}.
+\end{align*}
+These are just the usual estimates for the mean and variance, with each data point weighed according to our current best guess for the probability that it belongs to cluster $k$. We can then use our new estimate $\theta^{(t+1)}$ to calculate responsibility $\gamma^{(t+1)}_{ik}$ and repeat the process. This is essentially the $K$-means algorithm \ref{subsubsec:clusterPracticalKmeans}.
+
+\subsection{Clustering in high dimensions}
+\label{subsec:clusterHighD}
+One major problem that is aggravated in high-dimensions is the generic accumulation of noise due to random measurement error for each feature. This in turn leads to increased errors for pairwise similarity and distance measures and thus tends to ’blur’ distances between data points.\\
+\\
+In order to perform clustering on high-dimensional data, it is often useful to denoise the data before proceeding using a standard clustering method such as $K$-means \ref{subsubsec:clusterPracticalKmeans}. 
+For example, PCA \ref{subsec:dimRedPCA} can be used to denoise the data by projecting the original $N$ dimensions onto $n < N$ (i.e. $20n\approx N$) with the largest principal components. The resulting features can then be used to construct a Euclidean distance matrix, which in turn can be used by $t$-SNE \ref{subsec:dimRedTSNE} to compute the embedding that is presented. Using $t$-SNE directly on original data leads to a ’blurring’ of the clusters.\\
+However, simple feature selection or feature denoising (using PCA for instance) can sometimes be insufficient for learning clusters due to the presence of large variations in the signal and noise of the features that are relevant for identifying the underlying clusters.
+
+\subsubsection{Cluster validation in high dimensions}
+For high-dimensional data, cluster validation \ref{subsubsec:clusterConceptsValidation} is done by performing dimensional reduction \ref{sec:dimRed}. However, this can lead to the appearance of spurious clusters since dimensional reduction inevitably loses information about the original data, i.e. use methods with care.\\
+Perhaps one of the most intuitive ways of defining a god clustering is by measuring how well the clusters generalizes. Clustering methods based on leveraging powerful classifiers to measure the generalization errors of the \href{https://pypi.org/project/hal-x/}{cluster} could be promising.
 
 
 
@@ -238,6 +380,9 @@ A common drawback of hierarchical methods is that they do not scale well: At eve
 
 
 
+\section{Variational Methods and Mean-Field Theory (MFT)}
+\label{sec:varMFT}
+A common thread in many unsupervised learning tasks is accurately representing the underlying probability distribution from which a dataset is drawn.
 
 
 

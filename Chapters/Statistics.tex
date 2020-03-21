@@ -1,5 +1,5 @@
-\chapter{Supervised and Unsupervised learning}
-We limit our focus to supervised and unsupervised learning if not specified otherwise, reinforcement learning will be treated later on.
+\chapter{Supervised learning}
+We limit our focus to supervised and later on unsupervised learning if not specified otherwise, reinforcement learning will be treated later on.
 \todo{Solve problem with bold greek letters}
 \section{More formal introduction into the idea of Machine Learning}
 \subsection{Problem set-up and recipe}
@@ -466,6 +466,7 @@ In other words, our model is defined by a conditional probability that depends n
 The denominator is difficult in practice such that one normally uses Markov Chain Monte Carlo (MCMC) to draw random samples from $p(\mt|\mX)$.
 \subsection{Estimation}
 \subsubsection{Maximum Likelihood estimation}
+\label{subsubsec:bayesEstMLE}
 In statistics, many problems rely on estimation of some parameters of interest.
 \begin{example}
 	For example, suppose we are given the height data of $20$ junior students from a regional high school, but what we are interested in is the average height of all high school juniors in the whole country. It is conceivable that the data we are given are not representative of the student population as a whole.
