@@ -5,8 +5,15 @@
 \subsection{Cosmology}
 \begin{enumerate}
 	\item Maybe write a classification logistic regressor, or deep CNN to classify where dark matter halos have their boundary. It is very difficult to define a boundary of such a spread out object with confidence, maybe find criteria via classification ML technique ?
+\item Maybe use density contrast concept from cosmology for density based clustering \ref{subsubsec:clusterPracticalDBSCAN}. Basically a mean field approach ?
 \end{enumerate}
 \subsection{QFT}
+\begin{enumerate}
+	\item Connected correlation functions describe n-point correlations between points (like covariance matrix). Can maybe find a motivation of describing connected correlations from qft, how do you infer connected correaltions from dataset ? Then you can find the set of one, two and higher n-point corr. functions for one class in your data, i.e. the ones which are correlated (inter cluster correlation possible ?Should be, compare \ref{fig:hierarchicalclustering}). Need to Wick rotate to Euclidean space for analogy. Can one use Feynman diagrams ?\\
+	This should be interesting since you normally would consider relative ratios of probabilities for highly-complex unsupervised learning tasks as described in \ref{sec:varMFT}. The same is done in QFT, where you have cumulants which are normalized such that the partition function cancels out, i.e. we do not need to know the whole configuration.
+	\item How can one infer distance and curvature from a picture. If i do a panorama picture, the points in the middle are further away (which is encoded in their curvature) and the ones on the side are rather far (at least the ones in the middle are squished), how can you generally tell curvature ? Can you construct a pixel triangle and infer local curvature from it or do you first need to find a metric in the local manifold describing the dataset locally ?
+	\item Rather than understanding clusters as different densities  \ref{subsubsec:clusterPracticalDBSCAN} one could think of clusters like disconnectd (or maybe even connected if correlated ?) patches of a manifold. How can you fin the parametrization of this manifold, how its intrinsic metric and how the embedded metric ? Look at \href{https://arxiv.org/pdf/1802.03426.pdf}{manifold link}.
+\end{enumerate}
 \section{Ai safety}
 \subsection{Questions}
 \begin{enumerate}

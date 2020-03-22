@@ -45,6 +45,7 @@ The final ingredient is the \emph{cost function} $\mC(\my,f(\mX;\mt))$ that allo
 Note that once we select the best model on the basis of its performance on $E_{out}$, the real-world performance of the winning model should be expected to be slightly worse because the test data was now used in the fitting procedure.\\
 Splitting the data into mutually exclusive training and test sets provides an unbiased estimate for the predictive performance of the model - this is known as \emph{cross-validation}.
 \begin{mybox}{Pitfalls for performance evaluation}
+	\label{subsubsec:performanceevalCurseDimensionality}
 	It may be at first surprising that the model that has the lowest out-of-sample error $E_{out}$ usually \emph{does not} have the lowest in-sample Error $E_{in}$. Therefore, if our goal is to obtain a model that is useful for prediction, we may not want to choose the model that provides the best explanation for the current observations. At first glance, the observation that the model providing the best explanation for the current dataset probably will not provide the best explanation for future datasets is very counter-intuitive. \\
 Moreover, the discrepancy between $E_{in}$ and $E_{ou}$ becomes more and more important, as the complexity of our data, and the models we use to make predictions, grows. As the number of parameters in the model increases, we are forced to work in high-dimensional spaces. The ’curse of dimensionality’ ensures that many phenomena that are absent or rare in low-dimensional spaces become generic.
 \end{mybox}
@@ -533,6 +534,38 @@ Then, we can recast the MAP estimator into
 	&= \arg \max_{\mt} \left[- \frac{1}{2 \sigma^2} \norm{\mX \mw -\my }^2_2 - \frac{1}{2\tau^2} \norm{\mw}^2_2\right].
 \end{align}
 This is used later on to cast linear regression into bayesian language, \ref{subsec:lregBayesian}.
+
+
+
+
+\section{Information theory}
+\label{sec:info}
+
+
+
+
+
+
+
+
+\subsection{Relative Entropy or Kullback-Leibler divergence}
+\label{subsec:infoRelEntropy}
+The KL divergence between two distributions $p(\mx)$ and $q(\mx)$ measures the dissimilarity between the two distributions and is given by
+\be 
+\label{eq:infoKLdivergence}
+D_{KL}(q||p) = \text{Tr}_{\mx}q(\mx) \log \frac{q(\mx)}{p(\mx)},
+\ee 
+which is the expectation w.r.t. $q$ of the logarithmic difference between the two distributions $p$ and $q$ The trace denotes a sum over all possible configurations $\mx$. Two important properties of the KL-divergence are 
+\begin{enumerate}
+	\item Positivity: $D_{KL}(p||q)\geq 0$ with equality if and only if $p=q$, and
+	\item the KL-divergence is not symmetric in its arguments $D_{KL}(p||q) \neq D_{KL} (q||p)$.
+\end{enumerate}
+
+
+
+
+
+
 
 
 

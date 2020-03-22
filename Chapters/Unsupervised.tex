@@ -10,21 +10,21 @@ Part of the complication of dim. red. lies in the fact that low-dimensional repr
 \subsection{Some of the challenges of high-dimensional data}
 \label{subsec:dimRedChallengesData}
 \subsubsection{High-dimensional data lives near the edge of sample space}
-Like one sees in statistical physics, for high-dimensional data, nearly only the surface of the $D$-dimensional sphere/cube/... describing it describes data points.
+Like one sees in statistical physics, for high-dimensional data, approximately all of the datapoints are contained only in the surface of the $D$-dimensional sphere/cube/... describing it.
 
 \subsubsection{Real-world data vs. uniform distribution}
 Fortunately, real-world data is not random or uniformly distributed.\\
-In facet, real data usually lives in a much lower dimensional space than the original space in which the features are being measured. This is sometimes referred to as the \emph{blessing of non-uniformity} (in opposition to the curse of dimensionality). 
+In facet, real data usually lives in a much lower dimensional space than the original space in which the features are being measured. This is sometimes referred to as the \emph{blessing of non-uniformity} (in opposition to the curse of dimensionality \ref{subsubsec:performanceevalCurseDimensionality}). 
 \begin{example}
-	For weakly interacting particles in stat. phys., one can describe them via thermodynamic variables and not via their microscopic degrees of freedom in phase space, this is the same idea.
+	For weakly interacting particles in stat. phys., one can describe them via thermodynamic variables containing the macroscopic dynamics without having to specify the high-dimensional $N\propto 10^{23}$ amount of d.o.f. of the respective phase space dynamics of every particle in the ensemble.
 \end{example}
 
 \subsubsection{Intrinsic dimensionality and the crowding problem}
 \begin{mybox}{Intrinsic dimensionality of the data}
-	Qualitatively, this refers to the minimum number of dimensions (parameters) required to capture the signal in the data (to parametrize the data). 
+	Qualitatively, this refers to the minimum number of dimensions (parameters) required to capture the signal in the data (to parametrize the data).  For example, if a data set is described by a sphere, then you need three parameters ($r,\vartheta,\varphi$), i.e. an intrinsic dimensionality of $3$, to parametrize the sphere $S^2 \subset \mR^3$.
 \end{mybox}
 \begin{mybox}{Crowding problem}
-	Attempting to represent data in a space of dimensionality lower than its intrinsic dimensionality can lead to a \emph{crowding problem}. In short, because we are attempting to satisfy too many constraints (e.g. preserve all relative distances of the original space), this results in a trivial solution for the latent space where all mapped data points collapse to the centre of the map.
+	Attempting to represent data in a space of dimensionality lower than its intrinsic dimensionality can lead to a \emph{crowding problem}. In short, because we are attempting to satisfy too many constraints (e.g. preserve all relative distances of the original space), this results in a trivial solution for the latent space where all mapped data points collapse to the centre of the map. In our example, if you collapse the sphere into two-dimensions, i.e. the circle with variable radius, you would only be able to describe one of the hemispheres, i.e. $\vartheta\in [0,\pi)\mapsto \vartheta=const.$. Thus, you would lose a lot of information via the embedding in $\mR^2$.
 \end{mybox}
 To alleviate this, one needs to weaken the constraints imposed on the visualization scheme. Powerful methods such as t-distributed stochastic embedding (t-SNE) and uniform manifold approximation and projection (UMAP) have been devised to circumvent this issue in various ways.
 
@@ -45,10 +45,10 @@ Consider $N$ data points, $\{\mx_1,\dots,\mx_N\}$ that live in a $p$-dimensional
 notice that the $j$-th diagonal entry of $\mS(\mX)$ corresponds to the variance of the $j$-th feature and $\mS(\mX)_{ij}$ measures the covariance (i.e. connect correlation in the language of physics) between feature $i$ and feature $j$.\\
 Via singular value decomposition (SVD), one finds
 \be 
-\mS(\mX) = \mathbf{V} \left(\frac{\mathbf{S}^2}{N-1}\right) \mathbf{V}^T \equiv \mathbf{V}\mathbf{\Lambda} \mathbf{V}^T,
+\mS(\mX) = \mathbf{V} \left(\frac{\mathbf{S}^2}{N-1}\right) \mathbf{V}^T \equiv \mathbf{V}\mathbf{Λ} \mathbf{V}^T,
 \ee 
-where $\mathbf{V}$ contains (as its columns) the right singular vectors of $\mX$, and $\mathbf{\Lambda}$ is a diagonal matrix with eigenvalues $\lambda_i =s^2_i/(N-1)$ ($s_i$ are the singular values) in the decreasing order along the diagonal (i.e. eigendecomposition). It is clear that the right singular vectors of $\mX$ (i.e. the columns of $\mathbf{V}$) are principal directions of $\mS(\mX)$, and the singular values of $\mx$ are related to the eigenvalues of the covariance matrix $\Sigma(\mX)$ via $\lambda_i$. To reduce the dimensionality of data from $p$ to $\tilde{p}<p$, we first construct the $p\times \tilde{p}$ projection matrix $\mathbf{V}_{\tilde{p}}$ by selecting the singular components with the $\tilde{p}$ largest singular values. The projection of the data from $p$ to $\tilde{p}$ is simply $\tilde{\mathbf{Y}}=\mX \mathbf{V}_{\tilde{p}}$. \\
-The singular vector with the largest singular value (i.e. the largest variance) is referred to as the first principal component; the singular vector with the second largest singular value as the second principal component, and so on. An important quantity is the ration $\lambda_i/\sum_{i=1}^p \lambda_i$ which is referred as the \emph{percentage of the explained variance contained in a principal component}.\\
+where $\mathbf{V}$ contains (as its columns) the right singular vectors of $\mX$, and $\mathbf{Λ}$ is a diagonal matrix with eigenvalues $\lambda_i =s^2_i/(N-1)$ ($s_i$ are the singular values) in the decreasing order along the diagonal (i.e. eigendecomposition). It is clear that the right singular vectors of $\mX$ (i.e. the columns of $\mathbf{V}$) are principal directions of $\mS(\mX)$, and the singular values of $\mX$ are related to the eigenvalues of the covariance matrix $\Sigma(\mX)$ via $\lambda_i$. To reduce the dimensionality of data from $p$ to $\tilde{p}<p$, we first construct the $p\times \tilde{p}$ projection matrix $\mathbf{V}_{\tilde{p}}$ by selecting the singular components with the $\tilde{p}$ largest singular values. The projection of the data from $p$ to $\tilde{p}$ is simply $\tilde{\mathbf{Y}}=\mX \mathbf{V}_{\tilde{p}}$. \\
+The singular vector with the largest singular value (i.e. the largest variance) is referred to as the first principal component; the singular vector with the second largest singular value as the second principal component, and so on. An important quantity is the ratio $\lambda_i/\sum_{i=1}^p \lambda_i$ which is referred as the \emph{percentage of the explained variance contained in a principal component}.\\
 It is common in data visualization to present the data projected on the first few principal components. This is valid as long as a large part of the variance is explained in those components. Low values of explained variance may imply that the intrinsic dimensionality of the data is high or simply that it cannot be captured by a linear representation.
 
 \subsection{Multidimensional scaling}
@@ -73,14 +73,14 @@ Both MDS and PCA can be implemented using standard Python packages such as Sciki
 \subsection{t-SNE}
 \label{subsec:dimRedTSNE}
 It is often desirable to preserve local structures in high-dimensional datasets. However, when dealing with datasets having clusters delimitated by complicated surfaces or datasets with a large number of clusters, preserving local structures becomes difficult using linear techniques such as PCA\footnote{Non-linear techniques such as non-classical MDS, self-organizing map, Isomap and Locally Linear Embedding preserve local structures but fail to capture structures at the larger scale such as the clusters in which the data is organized.}.
-\marginpar{Non-parametric hear means that it does not explicitly parametrize feature extraction required to compute the embedding coordinates. Thus it cannot be applied to find the coordinate of new data points.}
+\marginpar{Non-parametric here means that it does not explicitly parametrize feature extraction required to compute the embedding coordinates. Thus it cannot be applied to find the coordinate of new data points.}
 \begin{mybox}{t-SNE}
 	Recently, $t$-stochastic neighbour embedding ($t$-SNE) has emerged as one of the go-to methods for visualizing high-dimensional data. $t$-SNE is a non-parametric method that constructs non-linear embeddings. Each high-dimensional training point is mapped to low-dimensional embedding coordinates, which are optimized in a way to preserve the local structure in the data.
 \end{mybox}
 \subsubsection{The theory}
 The idea of stochastic neighbour embedding is to associate a probability distribution to the neighbourhood of each data (note $x\in \mR^p$, $p$ is the number of features):
 \be 
-p_{i|j} = \frac{\exp(-\norm{x_i-x_j}^2/2 \sigma^2_i)}{\sum_{k\neq i} \exp(-\norm{x_i-x_k}^2/2 sigma^2_i)},
+p_{i|j} = \frac{\exp(-\norm{x_i-x_j}^2/2 \sigma^2_i)}{\sum_{k\neq i} \exp(-\norm{x_i-x_k}^2/2 \sigma^2_i)},
 \ee 
 where $p_{i|j }$ can be interpreted as the likelihood that $x_j$ is $x_i$'s neighbour (thus we take $p_{i|i}=0$). $\sigma_i$ are free bandwidth parameters that are usually determined by fixing the local entropy $H(p_i)$ of each data point:
 \be 
@@ -88,7 +88,7 @@ H(p_i) \equiv -\sum_j p_{j|i}\log_2 p_{j|i}.
 \ee 
 The local entropy is then set to equal a constant across \emph{all data points} $\Sigma = 2^{H(p_i)}$, where $\Sigma$ is called the \emph{perplexity}. The perplexity constraint determines $\sigma_i \forall i$ and implies that points in regions of high-density will have smaller $\sigma_i$.\\
 \\
-Using Gaussian likelihoods in $p_{i|j}$ implies that only points that are nearby $x_i$ contribute to its probability distribution. This ensures that the similarity, for nearby points is well represented but neglects the contributions of points far away. To alleviate this, we define a symmetrized distribution $p_{ij} \equiv (p_{i|j}+p_{j|i})/(2N)$. This \emph{guarantees} that $\sum_j p_{ij} >1/(2N)$ for all data points $x_i$, resulting in each data point $x_i$ making a significant contribution to the cost function to be defined below.
+Using Gaussian likelihoods in $p_{i|j}$ implies that only points that are nearby $x_i$ contribute to its probability distribution. This ensures that the similarity for nearby points is well represented but neglects the contributions of points far away. To alleviate this, we define a symmetrized distribution $p_{ij} \equiv (p_{i|j}+p_{j|i})/(2N)$. This \emph{guarantees} that $\sum_j p_{ij} >1/(2N)$ for all data points $x_i$, resulting in each data point $x_i$ making a significant contribution to the cost function to be defined below.
 \begin{mybox}{tSNE}
 	$t$-SNE constructs a \emph{similar} probability distribution $q_{ij}$ in a low dimensional latent space (with coordinates $Y=\{y_i\}, y_i \in \mR^{p^\prime}$, where $p^\prime <p$ is the dimension of the latent space):
 	\be 
@@ -136,7 +136,7 @@ $\mO(N^2)$.
 This section is also concerned with unsupervised learning methods.\\
 Unsupervised learning is concerned with discovering structure in unlabelled data (for instance learning local structures for data visualization \ref{sec:dimRed}). The lack of labels make unsupervised learning much more difficult and subtle than its supervised counterpart. What is somewhat surprising is that even without labels it is still possible to uncover and exploit the hidden structure in the data. Perhaps, the simplest example of unsupervised learning is clustering.
 \begin{mybox}{Clustering}
- The aim of clustering is to group unlabelled data into clusters according to some similarity or distance measure. Informally, a cluster is though of as a set of points sharing some pattern or structure.\\
+ The aim of clustering is to group unlabelled data into clusters according to some similarity or distance measure. Informally, a cluster is thought of as a set of points sharing some pattern or structure.\\
  Clustering finds many applications throughout data mining, data compression and signal processing. Clustering can be used to identify coarse features or high level structures in an unlabelled dataset.
 \end{mybox}
 The field of clustering is vast and there exists a flurry of clustering methods suited for different purposes. Some common considerations one has to take into account when choosing a particular method is the distribution of the clusters (overlapping/noisy clusters vs. well-separated clusters), the geometry of the data (flat vs. non-flat), the cluster size distribution (multiple sizes vs. uniform sizes), the dimensionality of the data (low vs. high dimensional) and the computational efficiency of the desired method (small vs. large dataset).
@@ -166,7 +166,7 @@ In physical terms, $\mC$ is equivalent to the sum of the moments of inertia of e
 		\be 
 		\mathbf{μ}_k = \frac{1}{N_k} \sum_n r_{nk} \mx_n.
 		\ee 
-		\item \emph{Maximization}: Given a set of cluster means $\{\mathbf{μ}_k\}$, find the assignments $\{r_{nk} \}$ which minimizes $\mC$. Clearly, this is achieved by assigning each data point to their nearest cluster-mean:
+		\item \emph{Maximization}: Given a set of cluster means $\{\mathbf{μ}_k\}$, find the assignments $\{r_{nk} \}$ which minimize $\mC$. Clearly, this is achieved by assigning each data point to their nearest cluster-mean:
 		\be
 		r_{nk} = \left\{ \begin{array}{ll}
 		1 & \text{if } k=\arg \min_{k^\prime} (\mx_n-\mathbf{μ}_{k^\prime})^2 \\
@@ -259,7 +259,7 @@ DBSCAN is very efficient with a $\mO(N\log N)$.
 
 \subsection{Clustering and Latent Variables via the Gaussian Mixture Models}
 \label{subsec:clusterConcepts}
-Here we collect important 
+Here we collect important concepts of unsupervised learning and showcase them via GMM.
 \subsubsection{Important concepts in unsupervised learning}
 \label{subsubsec:clusterConceptsCollection}
 
@@ -338,7 +338,7 @@ Using Bayes' again we find the conditional probability of the data point $\mx$ b
 \label{eq:clusterConceptsGMMresponsibility}
 \gamma(z_k)\equiv p(z_k=1 | \mx;\theta)= \frac{\pi_k \mathcal{N}(\mx|\mu_k,\Sigma_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mx |\mu_j,\Sigma_j)}.
 \ee 
-The $\gamma(z_k)$ are often referred to sa the \emph{responsibility} that mixture $k$ takes for explaining $\mx$. Just like in our discussion of soft-max classifiers, this can be made into a ’hard-assignment’ by assigning each point to the cluster with the largest probability: $\arg \max_k \gamma(z_k)$ over the responsibilities.\\
+The $\gamma(z_k)$ are often referred to as the \emph{responsibility} that mixture $k$ takes for explaining $\mx$. Just like in our discussion of soft-max classifiers, this can be made into a ’hard-assignment’ by assigning each point to the cluster with the largest probability: $\arg \max_k \gamma(z_k)$ over the responsibilities.\\
 \\
 The complication is of course that we do not know the parameters $\mt$ of the underlying GMM but instead must also learn them from the dataset $\mX$. Ideally we would do this by choosing the parameters that maximize the likelihood of the data
 \bse 
@@ -346,19 +346,9 @@ The complication is of course that we do not know the parameters $\mt$ of the un
 \ese 
 Once we know the MLEs $\hat{\mt}$, we could use \ref{eq:clusterConceptsGMMresponsibility} to calculate the optimal hard cluster assignment $\arg \max_k \hat{\gamma}(z_k)$ where $\hat{\gamma}(z_k) =p(z_k=1|\mx;\hat{\mt})$.
 
-\item It is almost impossible to find the global maximum of the likelihood function. Instead, we must settle for a local maximum. One approach to finding a local maximum of the likelihood is to use a method like SGD \ref{subsubsec:gdSGD} on the negative log-likelihood (i.e. the cost function \ref{eq:bayesErrorFct}), or expectation minimization \ref{subsubsec:clusterConceptsEM}.
+\item It is almost impossible to find the global maximum of the likelihood function. Instead, we must settle for a local maximum. One approach to finding a local maximum of the likelihood is to use a method like SGD \ref{subsubsec:gdSGD} on the negative log-likelihood (i.e. the cost function \ref{eq:bayesErrorFct}), or expectation minimization \ref{subsec:varMFTEM}.
 \end{enumerate}
 
-\subsubsection{Expectation Maximization (EM)}
-\label{subsubsec:clusterConceptsEM}
-An alternative, powerful approach for finding local minima in latent variable models using an iterative procedure is called EM. Given an initial guess for the parameters $\theta^{(0)}$, the EM algorithm iteratively generates new estimates for the parameters $\theta^{(1)},\theta^{(2)},\dots$ Importantly, the likelihood guaranteed to be non-decreasing under these iterations and hence EM converges to a local maximum of the likelihood.\\
-The central observation underlying EM is that it is often much easier to calculate the conditional likelihoods of the latent variables $\tilde{p}^{(t)}(\mathbf{Z}) = p(\mathbf{Z}|\mX;\theta^{(t)})$ given some choice of parameters, and the maximum of the expected log likelihood given an assignment of the latent variables $\theta^{(t+1)} = \arg \max_{\theta} \mathbb{E}_{p(\mathbf{Z}|\mX;\theta^{(t)} )} [\log p(\mX, \mathbf{Z};\theta)]$. This can be rewritten via differentiation into the update rules
-\begin{align*}
-\mm^{(t+1)}_k &= \frac{\sum_i^N \gamma^{(t)}_{ik} x_i}{\sum_i \gamma^{(t)}_{ik}}\\
-\mS^{(t+1)}_k &= \frac{\sum_i^N \gamma^{(t)}_{ik} (\mx_i-\mm_k) (\mx_i-\mm_k)^T}{\sum_i \gamma^{(t)}_{ik}}\\
-\pi^{(t+1)}_k &= \frac{1}{N} \sum_k \gamma^{(t)}_{ik}.
-\end{align*}
-These are just the usual estimates for the mean and variance, with each data point weighed according to our current best guess for the probability that it belongs to cluster $k$. We can then use our new estimate $\theta^{(t+1)}$ to calculate responsibility $\gamma^{(t+1)}_{ik}$ and repeat the process. This is essentially the $K$-means algorithm \ref{subsubsec:clusterPracticalKmeans}.
 
 \subsection{Clustering in high dimensions}
 \label{subsec:clusterHighD}
@@ -370,7 +360,7 @@ However, simple feature selection or feature denoising (using PCA for instance) 
 
 \subsubsection{Cluster validation in high dimensions}
 For high-dimensional data, cluster validation \ref{subsubsec:clusterConceptsValidation} is done by performing dimensional reduction \ref{sec:dimRed}. However, this can lead to the appearance of spurious clusters since dimensional reduction inevitably loses information about the original data, i.e. use methods with care.\\
-Perhaps one of the most intuitive ways of defining a god clustering is by measuring how well the clusters generalizes. Clustering methods based on leveraging powerful classifiers to measure the generalization errors of the \href{https://pypi.org/project/hal-x/}{cluster} could be promising.
+Perhaps one of the most intuitive ways of defining a good clustering is by measuring how well the clusters generalizes. Clustering methods based on leveraging powerful classifiers to measure the generalization errors of the \href{https://pypi.org/project/hal-x/}{cluster} could be promising.
 
 
 
@@ -382,7 +372,59 @@ Perhaps one of the most intuitive ways of defining a god clustering is by measur
 
 \section{Variational Methods and Mean-Field Theory (MFT)}
 \label{sec:varMFT}
-A common thread in many unsupervised learning tasks is accurately representing the underlying probability distribution from which a dataset is drawn.
+\subsection{Variational methods introduction}
+A common thread in many unsupervised learning tasks is accurately representing the underlying probability distribution from which a dataset is drawn. When dealing with complicated probability distributions, it is often much easier to learn the \emph{relative weights} of different states or data points (ratio of probabilities), than \emph{absolute} probabilities. 
+\begin{example}
+	This is the case for statistical physics, where the whole partition function drops out in ratios of cumulants. 
+\end{example}
+One approach to solve for partition functons is to use Monte-Carlo based methods to draw samples from the underlying distribution (this can be done knowing only the relative probabilities) and then use these samples to numerically estimate the partition function. This is the philosophy behind powerful methods such as Markov CHain Monte Carlo (MCMC).\\
+\\
+An alternative approach are via variational methods, an example of which is Mean-Field Theory in statistical physics. We use this in the following to explore the concepts of Variational Methods and visualize them on the Ising model.
+
+
+
+\subsection{Variational mean-field theory via Ising model}
+
+\subsubsection{Important concepts of MFT}
+\label{subsubsec:varMFTconcepts}
+\begin{mybox}{Idea variational method}
+The alternative approach is to approximate the probability distribution $p(\mx)$ and partition function using a \emph{variational distribution} $q(\mx;\theta_q)$ whose partition function we can calculate exactly. The variational parameters $\theta_q$ are chosen to make the variational distribution as close to the true distribution as possible, this is where the name ’variational distribution’ comes from, because we vary the parameters $\theta_q$.\\
+MFT can be naturally understood as a procedure for approximating the true distribution of the system by a factorized distribution.
+\end{mybox}
+Variational MFT is a systematic way for constructing such an approximate distribution $q(\mx;\theta_q)$.\\
+Even though MFT is not exact, it can often yield qualitatively and even quantitatively precise predictions (especially in high dimensions). The discrepancy between the true physics and MFT predictions stems from he fact that the variational distribution $q$ we chose cannot capture correlations. These correlations become less and less important in higher dimensions and the MFT ansatz becomes more accurate.\\
+We emphasize that the failure of any particular variational ansatz does not compromise the usefulness of the approach. In some cases, one can consider changing the variational ansatz to improve the predictive properties of the corresponding variational MFT.
+\subsubsection{On the example of the Ising model}
+Here we discuss the ideas given in \ref{subsubsec:varMFTconcepts} on the example of the Ising model.\\
+The probability of finding the Ising system in a given spin configuration at temperature $\beta^{-1}$ is given by
+\bse 
+p(\mathbf{s} |\beta,\mathbf{J}) = \frac{1}{Z_p(\mathbf{J})} e^{-\beta E(\mathbf{s},\mathbf{J}) }.
+\ese 
+Even though the true probability distribution $p(\mathbf{s}|\beta,\mathbf{J})$ may be a very complicated object, we can still make progress by approximating $p(\mathbf{s}|\beta,\mathbf{J})$ by a \emph{variational distribution}
+$q(\mathbf{s},\mt)$ which captures the essential features of interest, with $\mt$ some parameters that define our variational ansatz.\\
+The main idea is to choose parameters that minimize the difference between the variational free-energy $F_q(\mathbf{J},\mt)$ and the true free-energy $F_p(\mathbf{J}|\beta)$. This is
+\bse 
+F_q(\mathbf{J},\mt) = F_p(\mathbf{J},\beta) + D_{KL}(q||p),
+\ese 
+with the KL-divergence \ref{eq:infoKLdivergence}. Its properties show us that the variational free-energy is always larger than the true free energy $F_q (\mathbf{J},\mt) \geq F_p(\mathbf{J})$,with equality if and only if $q=p$ (the latter inequality is known as Gibbs inequality). They also show us that finding the best variational free-energy is equivalent to minimizing the KL divergence.
+\\
+\\
+One starts the MFT by making an ansatz for the variational distribution $q(\mathbf{s},\mt)$ which is here chosen such that all spins are independent, i.e. ignoring spin correlations. This gives us the free energy via the partition function (which became analytically solvable), the former of which we then try to minimize w.r.t. the variational parameters $\mt$. One obtains the mean-field equations for the Ising model
+\begin{align}
+	m_i &= \expval{s_i}_q = \sum_{s_i=\pm 1} s_i \frac{e^{\theta_i s_i}}{2 \cosh \theta_i} = \tanh(\theta_i),\label{eq:varMFTIsing1}\\
+	\theta_i &= \beta \sum_j J_{ij} m_j(\theta_j) + h_i \label{eq:varMFTIsing2}.
+\end{align}
+To find a solution to these equations, one method is to iterate through and update each $\theta_i$, once at a time, in an asynchronous fashion. The iterative procedure to find the solutions to \ref{eq:varMFTIsing2} is given by the following.\\
+We start by initializing our variational parameters to some $\mt^{(0)}$ and repeat the following two steps until convergence:
+\begin{enumerate}
+	\item \emph{Expectation}:\\
+	Given a set of assignments at iteration $t$, $\mt^{(t)}$, calculate the corresponding magnetizations $\mathbf{m}^{(t)}$ using \ref{eq:varMFTIsing1}.
+	\item \emph{Maximization}:\\
+	Given a set of magnetizations $m_t$, find new assignments $\theta^{(t+1)}$ which minimize the variational free energy $F_q$. From \ref{eq:varMFTIsing2}, this is just
+	\bse 
+	\theta^{(t+1)}_i = \beta \sum_j J_{ij} m^{(t)}_j +h_i.
+	\ese 
+\end{enumerate}
 
 
 
@@ -391,5 +433,24 @@ A common thread in many unsupervised learning tasks is accurately representing t
 
 
 
+
+
+
+
+
+ 
+\subsection{Expectation Maximization (EM)}
+\label{subsec:varMFTEM}
+EM is a general method that can be derived for any latent (hidden) variable model using a variational procedure.
+\begin{mybox}{EM in a nutshell}
+An alternative, powerful approach for finding local minima in latent variable models using an iterative procedure is called EM. Given an initial guess for the parameters $\theta^{(0)}$, the EM algorithm iteratively generates new estimates for the parameters $\theta^{(1)},\theta^{(2)},\dots$ Importantly, the likelihood guaranteed to be non-decreasing under these iterations and hence EM converges to a local maximum of the likelihood.\\
+The central observation underlying EM is that it is often much easier to calculate the conditional likelihoods of the latent variables $\tilde{p}^{(t)}(\mathbf{Z}) = p(\mathbf{Z}|\mX;\theta^{(t)})$ given some choice of parameters, and the maximum of the expected log likelihood given an assignment of the latent variables $\theta^{(t+1)} = \arg \max_{\theta} \mathbb{E}_{p(\mathbf{Z}|\mX;\theta^{(t)} )} [\log p(\mX, \mathbf{Z};\theta)]$. This can be rewritten via differentiation into the update rules
+\begin{align*}
+	\mm^{(t+1)}_k &= \frac{\sum_i^N \gamma^{(t)}_{ik} x_i}{\sum_i \gamma^{(t)}_{ik}}\\
+	\mS^{(t+1)}_k &= \frac{\sum_i^N \gamma^{(t)}_{ik} (\mx_i-\mm_k) (\mx_i-\mm_k)^T}{\sum_i \gamma^{(t)}_{ik}}\\
+	\pi^{(t+1)}_k &= \frac{1}{N} \sum_k \gamma^{(t)}_{ik}.
+\end{align*}
+These are just the usual estimates for the mean and variance, with each data point weighed according to our current best guess for the probability that it belongs to cluster $k$. We can then use our new estimate $\theta^{(t+1)}$ to calculate responsibility $\gamma^{(t+1)}_{ik}$ and repeat the process. This is essentially the $K$-means algorithm \ref{subsubsec:clusterPracticalKmeans}.
+\end{mybox}
 
 
