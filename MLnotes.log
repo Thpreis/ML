@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  22 MAR 2020 16:00
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  22 MAR 2020 21:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -5797,13 +5797,12 @@ Overfull \hbox (20.71817pt too wide) in paragraph at lines 43--43
 ogram. []  
  []
 
-)
+[6
+
+])
 \tf@lof=\write10
 \openout10 = `MLnotes.lof'.
 
- [6
-
-]
 Package tocbasic Info: character protrusion at lot deactivated on input line 39
 .
  (./MLnotes.lot)
@@ -7913,63 +7912,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 355--360
  []
 
 [103]
-Overfull \hbox (1.65788pt too wide) in paragraph at lines 376--379
+Overfull \hbox (1.65788pt too wide) in paragraph at lines 377--380
 \TU/TeXGyrePagella(0)/m/n/10.95 representing the underlying probability distrib
 ution from which a data-
  []
 
 
-Overfull \hbox (1.43704pt too wide) in paragraph at lines 380--383
+Overfull \hbox (1.43704pt too wide) in paragraph at lines 381--384
 \TU/TeXGyrePagella(0)/m/n/10.95 samples to numerically estimate the partition f
 unction. This is the philo-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 380--383
+Underfull \hbox (badness 10000) in paragraph at lines 381--384
 
  []
 
 [104]
-Overfull \hbox (6.92941pt too wide) in paragraph at lines 402--406
+Overfull \hbox (6.92941pt too wide) in paragraph at lines 404--408
 \TU/TeXGyrePagella(0)/m/n/10.95 complicated object, we can still make progress 
 by approximating $[][][][][][] [][]$
  []
 
 
-Overfull \hbox (12.88628pt too wide) in paragraph at lines 408--413
+Overfull \hbox (12.88628pt too wide) in paragraph at lines 410--415
 \TU/TeXGyrePagella(0)/m/n/10.95 free-energy is always larger than the true free
  energy $[][][][][] [][] [] [][][][][]$,with
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 408--413
+Underfull \hbox (badness 10000) in paragraph at lines 410--415
 
  []
 
-[105]
-Underfull \hbox (badness 2326) in paragraph at lines 446--448
-\TU/TeXGyrePagella(0)/m/n/10.95 The central observation underlying EM is that i
-t is often
+[105] [106]
+Underfull \hbox (badness 10000) in paragraph at lines 473--489
+
  []
 
-
-Underfull \hbox (badness 1406) in paragraph at lines 446--448
-\TU/TeXGyrePagella(0)/m/n/10.95 much easier to calculate the conditional likeli
-hoods of the
- []
+[107]
+File: gfx/AnalogyEMstatphys.png Graphic file (type bmp)
+<gfx/AnalogyEMstatphys.png>
 
 
-Underfull \hbox (badness 2556) in paragraph at lines 446--448
-\TU/TeXGyrePagella(0)/m/n/10.95 latent variables $[][][][] [] [][][][][][] [][]
-[]$ given some choice
- []
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[106]) [107]
+) [108] [109]
 \openout2 = `Chapters/Problems.aux'.
 
  (./Chapters/Problems.tex
 Chapter 4.
-[108
+[110
 
 
 
@@ -7980,7 +7973,7 @@ Overfull \hbox (25.70038pt too wide) in paragraph at lines 12--14
 int correlations between
  []
 
-[109]) [110]
+[111]) [112]
 \tf@thm=\write14
 \openout14 = `MLnotes.thm'.
 
@@ -8225,6 +8218,7 @@ gfx/cnnPooling.png
 gfx/WorkflowDNN.png
 Chapters/Unsupervised.tex
 gfx/HierarchicalCLustering.png
+gfx/AnalogyEMstatphys.png
 Chapters/Problems.tex
  ***********
 
@@ -8237,12 +8231,12 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59767 strings out of 493007
- 1232244 string characters out of 6136718
+ 59792 strings out of 493007
+ 1232764 string characters out of 6136718
  2032707 words of memory out of 5000000
- 62705 multiletter control sequences out of 15000+600000
+ 62729 multiletter control sequences out of 15000+600000
  546530 words of font info for 147 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
  87i,23n,138p,10510b,5676s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (118 pages).
+Output written on MLnotes.pdf (120 pages).

@@ -316,18 +316,22 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3.3}{Expectation Maximization (EM)}}{106}{subsection.3.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{109}{chapter.4}
+\contentsline {subsubsection}{\numberline {3.3.3.1}{EM in a nutshell - mathematical}}{107}{subsubsection.3.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}{Physics problems}}{109}{section.4.1}
+\contentsline {subsubsection}{\numberline {3.3.3.2}{EM via statistical physics}}{107}{subsubsection.3.3.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}{Cosmology}}{109}{subsection.4.1.1}
+\contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{111}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}{QFT}}{109}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.1}{Physics problems}}{111}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}{Ai safety}}{110}{section.4.2}
+\contentsline {subsection}{\numberline {4.1.1}{Cosmology}}{111}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}{Questions}}{110}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.1.2}{QFT}}{111}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}{Knobel-problems}}{110}{section.4.3}
+\contentsline {section}{\numberline {4.2}{Ai safety}}{112}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}{Ideas}}{110}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.2.1}{Questions}}{112}{subsection.4.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}{Knobel-problems}}{112}{section.4.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3.1}{Ideas}}{112}{subsection.4.3.1}

@@ -373,6 +373,7 @@ Perhaps one of the most intuitive ways of defining a good clustering is by measu
 \section{Variational Methods and Mean-Field Theory (MFT)}
 \label{sec:varMFT}
 \subsection{Variational methods introduction}
+\label{subsec:varMFTconcept}
 A common thread in many unsupervised learning tasks is accurately representing the underlying probability distribution from which a dataset is drawn. When dealing with complicated probability distributions, it is often much easier to learn the \emph{relative weights} of different states or data points (ratio of probabilities), than \emph{absolute} probabilities. 
 \begin{example}
 	This is the case for statistical physics, where the whole partition function drops out in ratios of cumulants. 
@@ -395,6 +396,7 @@ Variational MFT is a systematic way for constructing such an approximate distrib
 Even though MFT is not exact, it can often yield qualitatively and even quantitatively precise predictions (especially in high dimensions). The discrepancy between the true physics and MFT predictions stems from he fact that the variational distribution $q$ we chose cannot capture correlations. These correlations become less and less important in higher dimensions and the MFT ansatz becomes more accurate.\\
 We emphasize that the failure of any particular variational ansatz does not compromise the usefulness of the approach. In some cases, one can consider changing the variational ansatz to improve the predictive properties of the corresponding variational MFT.
 \subsubsection{On the example of the Ising model}
+\label{subsubsec:varMFTising}
 Here we discuss the ideas given in \ref{subsubsec:varMFTconcepts} on the example of the Ising model.\\
 The probability of finding the Ising system in a given spin configuration at temperature $\beta^{-1}$ is given by
 \bse 
@@ -441,16 +443,74 @@ We start by initializing our variational parameters to some $\mt^{(0)}$ and repe
  
 \subsection{Expectation Maximization (EM)}
 \label{subsec:varMFTEM}
-EM is a general method that can be derived for any latent (hidden) variable model using a variational procedure.
+EM is a general method that can be derived for any latent (hidden) variable model using a variational procedure. We will focus on latent variable models where some of the variables are hidden and cannot be directly observed. This often makes MLE \ref{subsubsec:bayesEstMLE}. EM gets around this difficulty by using an iterative two-step procedure closely related to variational free-energy based approximation schemes in stat. phys.
+\subsubsection{EM in a nutshell - mathematical}
+\label{subsubsec:varMFTEMmath}
+To set the stage, let $\mx$ be the set of visible variables we can directly observe and $\mathbf{z}$ be the set of latent or hidden variables that we cannot directly observe. Denote the underlying probability distribution from which $\mx$ and $\mathbf{z}$ are drawn by $p(\mathbf{z},mx |\mt)$, with $\mt$ representing all relevant parameters. Given a dataset $\mx$, we wish to find the MLE of the parameters $\mt$ that maximizes the probability of the observed data.\\
+As in variational MFT \ref{subsec:varMFTconcept}, we view $\mt$ as variational parameters chosen to maximize the log-likelihood $L(\mt)=\expval{\log p(\mx|\mt)}_{P_{\mx}}$, where the expectation is taken with respect to the marginal distributions of $\mx$.
 \begin{mybox}{EM in a nutshell}
-An alternative, powerful approach for finding local minima in latent variable models using an iterative procedure is called EM. Given an initial guess for the parameters $\theta^{(0)}$, the EM algorithm iteratively generates new estimates for the parameters $\theta^{(1)},\theta^{(2)},\dots$ Importantly, the likelihood guaranteed to be non-decreasing under these iterations and hence EM converges to a local maximum of the likelihood.\\
-The central observation underlying EM is that it is often much easier to calculate the conditional likelihoods of the latent variables $\tilde{p}^{(t)}(\mathbf{Z}) = p(\mathbf{Z}|\mX;\theta^{(t)})$ given some choice of parameters, and the maximum of the expected log likelihood given an assignment of the latent variables $\theta^{(t+1)} = \arg \max_{\theta} \mathbb{E}_{p(\mathbf{Z}|\mX;\theta^{(t)} )} [\log p(\mX, \mathbf{Z};\theta)]$. This can be rewritten via differentiation into the update rules
-\begin{align*}
-	\mm^{(t+1)}_k &= \frac{\sum_i^N \gamma^{(t)}_{ik} x_i}{\sum_i \gamma^{(t)}_{ik}}\\
-	\mS^{(t+1)}_k &= \frac{\sum_i^N \gamma^{(t)}_{ik} (\mx_i-\mm_k) (\mx_i-\mm_k)^T}{\sum_i \gamma^{(t)}_{ik}}\\
-	\pi^{(t+1)}_k &= \frac{1}{N} \sum_k \gamma^{(t)}_{ik}.
-\end{align*}
-These are just the usual estimates for the mean and variance, with each data point weighed according to our current best guess for the probability that it belongs to cluster $k$. We can then use our new estimate $\theta^{(t+1)}$ to calculate responsibility $\gamma^{(t+1)}_{ik}$ and repeat the process. This is essentially the $K$-means algorithm \ref{subsubsec:clusterPracticalKmeans}.
+EM is a powerful approach for finding local minima in latent variable models using an iterative procedure. Given an initial guess for the parameters $\theta^{(0)}$, the EM algorithm iteratively generates new estimates for the parameters $\theta^{(1)},\theta^{(2)},\dots$ Importantly, the likelihood guaranteed to be non-decreasing under these iterations and hence EM converges to a local maximum of the likelihood. This is formulated in the following:
+\begin{enumerate}
+\item \emph{Expectation step (E step)}:\\
+Given the known values of observed variable $\mx$ and the current estimate of parameter $\mt_{t-1}$, find the probability distribution of the latent variable $\mathbf{z}$:
+\be 
+\label{eq:varMFTEM1}
+q_{t-1}(\mathbf{z}) = p(\mathbf{z}|\mt^{(t-1)}, \mx).
+\ee 
+\item \emph{Maximization step (M step)}:\\
+Re-estimate the parameter $\mt^{(t)}$ to be those with with maximum likelihood, assuming $q_{t-1}(\mathbf{z})$ found in the previous step is the true distribution of hidden variable $\mathbf{z}$:
+\be 
+\label{eq:varMFTEM2}
+\mt_t = \arg \max_{\mt} \expval{\log p(\mathbf{z},\mx |\mt)}_{q_{t-1}}.
+\ee 
+\end{enumerate}
+It was shown that each EM iteration increases the true log-likelihood $L(\mt)$, or at worst leaves it unchanged. In most models, this iteration procedure converges to a \emph{local maximum} of $L(\mt)$.
 \end{mybox}
+
+
+\subsubsection{EM via statistical physics}
+\label{subsubsec:varMFTEMphys}
+Recall that our goal is to maximize the log-likelihood $L(\mt)$. With data $\mathbf{z}$ missing, we surely cannot just maximize $L(\mt)$ directly since parameter $\mt$ might couple both $\mathbf{z}$ and $\mx$. EM circumvents this by optimizing another objective function, $F_q(\mt)$, constructed based on estimates of the hidden variable distribution $q(\mathbf{z}|\mx)$. Indeed, the function optimized is none other than the \emph{variational free energy}, encountered in \ref{subsubsec:varMFTising}.\\
+Then, the maximization step (M-step) in the algorithm in  \ref{eq:varMFTEM2} is equivalent to minimizing the variational free-energy $F_q(\mt)$. Surprisingly, the expectation step (E-step) can also be viewed as the optimization of this variational free-energy. Concretely, one can show that the distribution of hidden variables $\mathbf{z}$ given the observed variable $\mx$ and the current estimate of parameter $\mt$, \ref{eq:varMFTEM1}, is the \emph{unique} probability $q(\mathbf{z})$ that minimizes $F_q(\mt)$.\\
+\begin{mybox}{EM algorithm in physics language}
+	We can re-write EM as follows:
+	\begin{enumerate}
+		\item \emph{Expectation Step:}\\
+		Construct the approximating probability distribution of unobserved $\mathbf{z}$ given the values of observed variable $\mx$ and parameter estimate $\mt^{(t-1)}$:
+		\be 
+		q_{t-1}(\mathbf{z}) = \arg \min_q F_q (\mt^{(t-1)}).
+		\ee 
+		\item \emph{Maximization step:}\\
+		Fix $q$, update the variational parameters
+		\be 
+		\mt^{(t)} = \arg \max_{\mt} -F_{q_{t-1}} (\mt).
+		\ee 
+	\end{enumerate}
+\end{mybox}
+\begin{mybox}{Summary Em physics language}
+	EM implements ML estimation \ref{subsubsec:bayesEstMLE} even with missing or hidden variables through optimizing a lower bound of the true log-likelihood. In stat. phys., this is reminiscent of optimizing a variational free-energy which is a lower bound of true free-energy due to Gibbs inequality. The E-step can be seen as representing the unobserved variable $\mathbf{z}$ by a probability distribution $q(\mathbf{z})$. This probability is used to construct an alternative objective function $-F_q(\mt)$, which is then maximized w.r.t. $\mt$ in the M-step. By construction, maximizing the negative variational free-energy is equivalent to doing ML estimation on the joint data (i.e. bot observed and unobserved). The name ’M-step’ is intuitive since the parameters $ \mt$ are found by maximizing $-F_q(\mt)$. The name ’E-step’ comes from the fact that one usually doesn' t need to construct the probability of missing data explicitly, but rather need only compute the ’expected’sufficient statistics over these data.
+\end{mybox}
+In many cases, implementation of EM is guaranteed to increase the likelihood monotonically, which could be a perk during debugging.\\
+For a comparison between EM and statistical physics see \ref{fig:analogyemstatphys}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{gfx/AnalogyEMstatphys}
+	\caption{}
+	\label{fig:analogyemstatphys}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
