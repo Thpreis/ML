@@ -5,7 +5,7 @@ In this section, we will begin our foray into unsupervised learning by way of da
 	Thus, in practice, we often have to perform \emph{dimensional reduction}, namely, project or embed the data onto a lower dimensional space, which we refer to as the \emph{latent} space.\\
 	A recurrent objective of dim. red. techniques is to preserve the relative pairwise distances (or defined similarities) between data points from the original space to the latent space.
 \end{mybox}
-Part of the complication of dim. red. lies in the fact that low-dimensional representations of high-dimensional data necessarily incurs information last.
+Part of the complication of dim. red. lies in the fact that low-dimensional representations of high-dimensional data necessarily incurs information loss.
 
 \subsection{Some of the challenges of high-dimensional data}
 \label{subsec:dimRedChallengesData}
@@ -24,7 +24,7 @@ In facet, real data usually lives in a much lower dimensional space than the ori
 	Qualitatively, this refers to the minimum number of dimensions (parameters) required to capture the signal in the data (to parametrize the data).  For example, if a data set is described by a sphere, then you need three parameters ($r,\vartheta,\varphi$), i.e. an intrinsic dimensionality of $3$, to parametrize the sphere $S^2 \subset \mR^3$.
 \end{mybox}
 \begin{mybox}{Crowding problem}
-	Attempting to represent data in a space of dimensionality lower than its intrinsic dimensionality can lead to a \emph{crowding problem}. In short, because we are attempting to satisfy too many constraints (e.g. preserve all relative distances of the original space), this results in a trivial solution for the latent space where all mapped data points collapse to the centre of the map. In our example, if you collapse the sphere into two-dimensions, i.e. the circle with variable radius, you would only be able to describe one of the hemispheres, i.e. $\vartheta\in [0,\pi)\mapsto \vartheta=const.$. Thus, you would lose a lot of information via the embedding in $\mR^2$.
+	Attempting to represent data in a space of dimensionality lower than its intrinsic dimensionality can lead to a \emph{crowding problem}. In short, because we are attempting to satisfy too many constraints (e.g. preserve all relative distances of the original space), this results in a trivial solution for the latent space where all mapped data points collapse to the centre of the map. In our example, if you collapse the sphere into two-dimensions, i.e. the circle with variable radius, the two hemispheres would be projected non-bijectively onto the circle, i.e. $\vartheta\in [0,\pi)\mapsto \vartheta=const$. Thus, you would lose a lot of information via the embedding in $\mR^2$.
 \end{mybox}
 To alleviate this, one needs to weaken the constraints imposed on the visualization scheme. Powerful methods such as t-distributed stochastic embedding (t-SNE) and uniform manifold approximation and projection (UMAP) have been devised to circumvent this issue in various ways.
 
@@ -54,7 +54,7 @@ It is common in data visualization to present the data projected on the first fe
 \subsection{Multidimensional scaling}
 \label{subsec:dimRedMDS}
 \begin{mybox}{MDS}
-	Multidimensional scaling (MDS) is a non-linear dimensional reduction technique which preserves the pairwise distance or dissimilarity $d_{ij}$ between data points. There are two types of MDS. metric and non-metric.
+	Multidimensional scaling (MDS) is a non-linear dimensional reduction technique which preserves the pairwise distance or dissimilarity $d_{ij}$ between data points. There are two types of MDS, metric and non-metric.
 \end{mybox}
 \subsubsection{Metric MDS}
 In metric MDS, the distance is computed under a pre-defined metric and the latent coordinates $\tilde{\mathbf{Y}}$ are obtained by minimizing the difference between the distance measured in the original space ($d_{ij}(\mx)$) and that in the latent space ($d_{ij}(\mathbf{Y})$):
@@ -149,7 +149,7 @@ Throughout this section we focus on the Euclidean distance as a similarity measu
 \subsubsection{$K$-means}
 \label{subsubsec:clusterPracticalKmeans}
 
-Consider a set of $N$ \emph{unlabelled} observations $\{\mx_n\}^N_{n=1}$ where $\mx_n\in \mR^p$ and where $p$ is the number of features. Also consider a set of $K$ cluster centres called the cluster \emph{means}: $\{\mathbf{μ}_k\}^K_{k=1}$, with $\mathbf{μ}_k\in \mR^p$, which we'll compute ’empirically’ in the clustering procedure. The cluster means can be though of as the representatives of each cluster, to which data points are assigned. 
+Consider a set of $N$ \emph{unlabelled} observations $\{\mx_n\}^N_{n=1}$ where $\mx_n\in \mR^p$ and where $p$ is the number of features. Also consider a set of $K$ cluster centres called the cluster \emph{means}: $\{\mathbf{μ}_k\}^K_{k=1}$, with $\mathbf{μ}_k\in \mR^p$, which we'll compute ’empirically’ in the clustering procedure. The cluster means can be thought of as the representatives of each cluster, to which data points are assigned. 
 \begin{mybox}{$K$-means set-up}
 	$K$-means clustering can be formulated as follows: given a fixed integer $K$, find the cluster means $\{\mathbf{μ}\}$ and the data point assignments in order to minimize the following objective function
 	\be
@@ -178,7 +178,9 @@ Practically, the algorithm should terminate when the change in the objective fun
 \end{mybox}
 A nice property of the $K$-means algorithm is that it is guaranteed to converge.\footnote{To see this, one can verify explicitly (by taking second-order derivatives) that the expectation and assignment step respectively always decrease $\mC$. Thus, since $\mC$ is bounded from below, the two-step iteration of $K$-means \emph{always} converges to a local maximum of $\mC$. Since $\mC$ is generally a non-convex function, in practice one usually needs to run the algorithm with different initial random cluster centre initializations and post-select the best local minimum.} The complexity is $\mO(KN)$ per iteration and is thus scalable to very large datasets.\\
 A common drawback of $K$-means is the following:\\
-If the true clusters have very different variances (spreads), $K$-means can lead to spurious results since the underlying assumption is that the latent model has uniform variances.
+If the true clusters have very different variances (spreads), $K$-means can lead to spurious results since the underlying assumption is that the latent model has uniform variances.\\
+\\
+We can measure the performance of $K$-means by thinking about the distortion- the square distance of each point from the centroid defining the cluster. This is the objective function that K-means tries to optimize.
 
 \subsubsection{Hierarchical clustering: Agglomerative methods}
 \label{subsubsec:clusterPracticalHierarchical}
@@ -275,12 +277,12 @@ A central concept in many unsupervised learning techniques is the idea of a late
 \begin{example}
 In the context of clustering we can think of the cluster identity of each datapoint (i.e. which cluster does a datapoint belong to) as a latent variable.
 \end{example}
-The latent variables in out data (cluster identity) are a way of representing and abstracting the correlations between datapoints.\\
+The latent variables in our data (cluster identity) are a way of representing and abstracting the correlations between datapoints.\\
 
 \begin{mybox}{Clustering}
 We can think of clustering as an algorithm to learn the most probable value of a latent variable (cluster identity) associated with each datapoint.
 \end{mybox}
- Calculating this latent variables requires additional assumptions about the structure of our dataset. Like all unsupervised learning algorithms, in clustering we must make an assumption about the underlying probability distribution from which the data was generated. Our model for how the data is generated is called the \emph{generative model}. In clustering, we assume that data points are assigned a cluster, with each cluster characterized by some \emph{cluster-specific} probability distribution  (e.g. Gaussian with some mean and variance that charaterizes the cluster). We then specify a procedure for finding the value of the latent variable. This is often done by choosing the values of the latent variable that minimize some cost function.\\
+ Calculating these latent variables requires additional assumptions about the structure of our dataset. Like all unsupervised learning algorithms, in clustering we must make an assumption about the underlying probability distribution from which the data was generated. Our model for how the data is generated is called the \emph{generative model}. In clustering, we assume that data points are assigned a cluster, with each cluster characterized by some \emph{cluster-specific} probability distribution  (e.g. Gaussian with some mean and variance that charaterizes the cluster). We then specify a procedure for finding the value of the latent variable. This is often done by choosing the values of the latent variable that minimize some cost function.\\
  \\
  One common choice for a class of cost functions for many unsupervised learning problems is MLE \ref{subsubsec:bayesEstMLE}. In MLE, we choose the values of the latent variables that maximize the likelihood of the observed data under our generative model (i.e. maximize the probability of getting the observed dataset under our generative model).
  
@@ -363,6 +365,9 @@ For high-dimensional data, cluster validation \ref{subsubsec:clusterConceptsVali
 Perhaps one of the most intuitive ways of defining a good clustering is by measuring how well the clusters generalizes. Clustering methods based on leveraging powerful classifiers to measure the generalization errors of the \href{https://pypi.org/project/hal-x/}{cluster} could be promising.
 
 
+\subsection{Practical considerations of clustering methods - when do we use which method ?}
+When tuning a clustering method it is important to understand what the implicit assumption of the clustering method are. For instance, methods based on density (local information), will typically fare well at clustering topological datasets since points are connected from neighbour to neighbour. At the same time, methods based on long-distance information ($𝐾$-means for instance), will typically perform poorly in such instances. Density-based methods will, however, have more difficulty at dealing with datasets with large fluctuations in the density distribution of the dataset (3rd row). Another drawback of density based methods is that they do not generalize well to high-dimensional space due to large sampling noise in the density estimates.
+
 
 
 
@@ -378,7 +383,7 @@ A common thread in many unsupervised learning tasks is accurately representing t
 \begin{example}
 	This is the case for statistical physics, where the whole partition function drops out in ratios of cumulants. 
 \end{example}
-One approach to solve for partition functons is to use Monte-Carlo based methods to draw samples from the underlying distribution (this can be done knowing only the relative probabilities) and then use these samples to numerically estimate the partition function. This is the philosophy behind powerful methods such as Markov CHain Monte Carlo (MCMC).\\
+One approach to solve for partition functons is to use Monte-Carlo based methods to draw samples from the underlying distribution (this can be done knowing only the relative probabilities) and then use these samples to numerically estimate the partition function. This is the philosophy behind powerful methods such as Markov Chain Monte Carlo (MCMC).\\
 \\
 An alternative approach are via variational methods, an example of which is Mean-Field Theory in statistical physics. We use this in the following to explore the concepts of Variational Methods and visualize them on the Ising model.
 
@@ -443,13 +448,14 @@ We start by initializing our variational parameters to some $\mt^{(0)}$ and repe
  
 \subsection{Expectation Maximization (EM)}
 \label{subsec:varMFTEM}
-EM is a general method that can be derived for any latent (hidden) variable model using a variational procedure. We will focus on latent variable models where some of the variables are hidden and cannot be directly observed. This often makes MLE \ref{subsubsec:bayesEstMLE}. EM gets around this difficulty by using an iterative two-step procedure closely related to variational free-energy based approximation schemes in stat. phys.
+Expectation-Maximization (EM) is a practical way to perform maximum likelihood estimation (MLE) even when some of the data is hidden (i.e in the presence of latent or hidden variables)\\
+EM is a general method that can be derived for any latent (hidden) variable model using a variational procedure. We will focus on latent variable models where some of the variables are hidden and cannot be directly observed. This often makes MLE \ref{subsubsec:bayesEstMLE} difficult to implement. EM gets around this difficulty by using an iterative two-step procedure closely related to variational free-energy based approximation schemes in stat. phys.
 \subsubsection{EM in a nutshell - mathematical}
 \label{subsubsec:varMFTEMmath}
-To set the stage, let $\mx$ be the set of visible variables we can directly observe and $\mathbf{z}$ be the set of latent or hidden variables that we cannot directly observe. Denote the underlying probability distribution from which $\mx$ and $\mathbf{z}$ are drawn by $p(\mathbf{z},mx |\mt)$, with $\mt$ representing all relevant parameters. Given a dataset $\mx$, we wish to find the MLE of the parameters $\mt$ that maximizes the probability of the observed data.\\
+To set the stage, let $\mx$ be the set of visible variables we can directly observe and $\mathbf{z}$ be the set of latent or hidden variables that we cannot directly observe. Denote the underlying probability distribution from which $\mx$ and $\mathbf{z}$ are drawn by $p(\mathbf{z},\mx |\mt)$, with $\mt$ representing all relevant parameters. Given a dataset $\mx$, we wish to find the MLE of the parameters $\mt$ that maximizes the probability of the observed data.\\
 As in variational MFT \ref{subsec:varMFTconcept}, we view $\mt$ as variational parameters chosen to maximize the log-likelihood $L(\mt)=\expval{\log p(\mx|\mt)}_{P_{\mx}}$, where the expectation is taken with respect to the marginal distributions of $\mx$.
 \begin{mybox}{EM in a nutshell}
-EM is a powerful approach for finding local minima in latent variable models using an iterative procedure. Given an initial guess for the parameters $\theta^{(0)}$, the EM algorithm iteratively generates new estimates for the parameters $\theta^{(1)},\theta^{(2)},\dots$ Importantly, the likelihood guaranteed to be non-decreasing under these iterations and hence EM converges to a local maximum of the likelihood. This is formulated in the following:
+EM is a powerful approach for finding local minima in latent variable models using an iterative procedure. Given an initial guess for the parameters $\theta^{(0)}$, the EM algorithm iteratively generates new estimates for the parameters $\theta^{(1)},\theta^{(2)},\dots$ Importantly, the likelihood is guaranteed to be non-decreasing under these iterations and hence EM converges to a local maximum of the likelihood. This is formulated in the following:
 \begin{enumerate}
 \item \emph{Expectation step (E step)}:\\
 Given the known values of observed variable $\mx$ and the current estimate of parameter $\mt_{t-1}$, find the probability distribution of the latent variable $\mathbf{z}$:
@@ -467,7 +473,9 @@ Re-estimate the parameter $\mt^{(t)}$ to be those with with maximum likelihood, 
 It was shown that each EM iteration increases the true log-likelihood $L(\mt)$, or at worst leaves it unchanged. In most models, this iteration procedure converges to a \emph{local maximum} of $L(\mt)$.
 \end{mybox}
 
-
+\begin{mybox}{EM in application}
+	The E-M algorithm often approximates the MLE even in the presence of latent (hidden variables). Like with most optimization methods for non-concave functions, E-M only guarantees convergence to a local maximum of the objective function. For this reason, its performance can be boosted by running the EM procedure starting with multiple initial parameters.
+\end{mybox}
 \subsubsection{EM via statistical physics}
 \label{subsubsec:varMFTEMphys}
 Recall that our goal is to maximize the log-likelihood $L(\mt)$. With data $\mathbf{z}$ missing, we surely cannot just maximize $L(\mt)$ directly since parameter $\mt$ might couple both $\mathbf{z}$ and $\mx$. EM circumvents this by optimizing another objective function, $F_q(\mt)$, constructed based on estimates of the hidden variable distribution $q(\mathbf{z}|\mx)$. Indeed, the function optimized is none other than the \emph{variational free energy}, encountered in \ref{subsubsec:varMFTising}.\\
@@ -488,7 +496,7 @@ Then, the maximization step (M-step) in the algorithm in  \ref{eq:varMFTEM2} is 
 	\end{enumerate}
 \end{mybox}
 \begin{mybox}{Summary Em physics language}
-	EM implements ML estimation \ref{subsubsec:bayesEstMLE} even with missing or hidden variables through optimizing a lower bound of the true log-likelihood. In stat. phys., this is reminiscent of optimizing a variational free-energy which is a lower bound of true free-energy due to Gibbs inequality. The E-step can be seen as representing the unobserved variable $\mathbf{z}$ by a probability distribution $q(\mathbf{z})$. This probability is used to construct an alternative objective function $-F_q(\mt)$, which is then maximized w.r.t. $\mt$ in the M-step. By construction, maximizing the negative variational free-energy is equivalent to doing ML estimation on the joint data (i.e. bot observed and unobserved). The name ’M-step’ is intuitive since the parameters $ \mt$ are found by maximizing $-F_q(\mt)$. The name ’E-step’ comes from the fact that one usually doesn' t need to construct the probability of missing data explicitly, but rather need only compute the ’expected’sufficient statistics over these data.
+	EM implements ML estimation \ref{subsubsec:bayesEstMLE} even with missing or hidden variables through optimizing a lower bound of the true log-likelihood. In stat. phys., this is reminiscent of optimizing a variational free-energy which is a lower bound of true free-energy due to Gibbs inequality. The E-step can be seen as representing the unobserved variable $\mathbf{z}$ by a probability distribution $q(\mathbf{z})$. This probability is used to construct an alternative objective function $-F_q(\mt)$, which is then maximized w.r.t. $\mt$ in the M-step. By construction, maximizing the negative variational free-energy is equivalent to doing ML estimation on the joint data (i.e. bot observed and unobserved). The name ’M-step’ is intuitive since the parameters $ \mt$ are found by maximizing $-F_q(\mt)$. The name ’E-step’ comes from the fact that one usually doesn' t need to construct the probability of missing data explicitly, but rather need only compute the ’expected’ sufficient statistics over these data.
 \end{mybox}
 In many cases, implementation of EM is guaranteed to increase the likelihood monotonically, which could be a perk during debugging.\\
 For a comparison between EM and statistical physics see \ref{fig:analogyemstatphys}.

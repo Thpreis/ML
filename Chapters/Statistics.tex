@@ -543,8 +543,55 @@ This is used later on to cast linear regression into bayesian language, \ref{sub
 
 
 
-
-
+\subsection{Entropy as a measure of information}
+\label{subsec:infoEntropy}
+\subsubsection{Probabilities introduction}
+To a set of measurement outcomes, or more general realizations of a random variable, one can associate symbols $\{x_1,\dots,x_N\}$ and probabilities $p(x_1),\dots,p(x_N)$ which are normalized $1=\sum_x p(x)$.\\
+For two events $X$ and $Y$ with possible outcomes $\{x_m\}$ and $\{y_n\}$ one has a complete description in term of \emph{joint probabilities}
+\be 
+p(x_m,y_n),\quad 1=\sum_{x,y}p(x,y).
+\ee 
+If the two events are \emph{statistically independent} one has
+\be 
+p(x,y)=p(x)p(y),
+\ee 
+but that is of course not always the case. More general, the reduced (\emph{marginal}) probabilities for one event are
+\be 
+p(x)=\sum_y p(x,y),\quad p(y)=\sum_x p(x,y).
+\ee 
+Assume now that one has already learned the outcome $x_0$, then the new probability distribution for $y$ is
+\be 
+p(y_n |x_0) = \frac{p(x_0,y_n)}{\sum_k p(x_0,y_k)} = \frac{p(x_0,y_n)}{p(x_0)}
+\ee 
+which is the \emph{conditional probability}\footnote{Read: probability for $y_n$ under the condition that $x_0$ has been obtained.} One can write
+\be 
+p(x_m,y_n) = p(y_n |x_m) p(x_m)=p(x_m|y_n) p(y_n),
+\ee 
+which directly implies Baye's theorem \ref{eq:bayesrule}
+\be 
+p(x_m|y_n) = \frac{p(y_n|x_m) p(x_m)}{p(y_n)}.
+\ee 
+\subsubsection{Shannon's information entropy}
+How much information can one learn from an outcome or event realization $x$ ? Or, in other words, how large is the information content $i(x)$ associated with the outcome $x$? Intuitively, the less likely the outcome, the higher the information content. Moreover, for independent events it is natural to take the information content additive,
+\be 
+i(p(x,y)) = i(p(x) p(y)) = i(p(x)) +i(p(y)).
+\ee 
+This directly leads to the logarithm, and the definition of the \emph{information content}
+\be 
+i(x)=i(p(x)) = -\ln p(x).
+\ee 
+In principle, one might add a (positive) prefactor here or, equivalently, take another base for the logarithm. Oftentimes $\log_2$ is used, but we work here with the natural logarithm in this section. For example, throwing an ideal coin corresponds to $p(x_1)=p(x_2)=\half$ and by learning the event outcome one learns an amount of information 
+\be 
+i=- \ln\half = \ln 2,
+\ee 
+corresponding to one bit of information. Note that a very unlikely event outcome with $p\rightarrow 0$ has formally infinite information content, $i\rightarrow \infty$. On the other side, a certain event outcome with unit probability, $p=1$, has no information content, $i=0$.
+\begin{mybox}{Shannon's information entropy}
+	Shannon's \emph{information entropy} associated to a discrete random variable or event $X$ is the expected amount of information content,
+	\be
+	\label{eq:infoShannon}
+	H(X)=\expval{i(x)} = - \sum_x p(x) \ln p(x).
+	\ee 
+\end{mybox}
 
 
 
