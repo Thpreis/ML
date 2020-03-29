@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  29 MAR 2020 17:59
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  29 MAR 2020 19:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8064,28 +8064,39 @@ Underfull \hbox (badness 10000) in paragraph at lines 607--610
 
  []
 
-)
+
+Overfull \hbox (1.80391pt too wide) in paragraph at lines 631--636
+\TU/TeXGyrePagella(0)/m/n/10.95 The MaxEnt procedure gives us a way if parametr
+izing an energy-based
+ []
+
+
 Overfull \hbox (258.70947pt too wide) has occurred while \output is active
  []|[]|
  []
 
 [119]
+Underfull \hbox (badness 10000) in paragraph at lines 640--643
+
+ []
+
+) [120]
 \openout2 = `Chapters/Problems.aux'.
 
  (./Chapters/Problems.tex
 Chapter 4.
-[120
 
-
-
-
-]
 Overfull \hbox (25.70038pt too wide) in paragraph at lines 12--14
 []\TU/TeXGyrePagella(0)/m/n/10.95 Connected correlation functions describe n-po
 int correlations between
  []
 
-[121]) [122]
+[121
+
+
+
+
+]) [122]
 \tf@thm=\write14
 \openout14 = `MLnotes.thm'.
 
@@ -8343,10 +8354,10 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59858 strings out of 493007
- 1234096 string characters out of 6136718
+ 59864 strings out of 493007
+ 1234218 string characters out of 6136718
  2035707 words of memory out of 5000000
- 62795 multiletter control sequences out of 15000+600000
+ 62801 multiletter control sequences out of 15000+600000
  546530 words of font info for 147 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
  87i,23n,138p,10510b,5676s stack positions out of 5000i,500n,10000p,200000b,80000s

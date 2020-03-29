@@ -356,6 +356,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.4.3.3}{Generalized Ising models from MaxEnt}}{119}{subsubsection.3.4.3.3}
 \defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.4}{Cost functions for training energy-based models}}{120}{subsection.3.4.4}
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{121}{chapter.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.1}{Physics problems}}{121}{section.4.1}

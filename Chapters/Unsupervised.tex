@@ -621,3 +621,60 @@ where $\mu=-J^{-1} \mathbf{a}$ and $\Sigma = - J^{-1}$. This, of course, is the 
 \item Second, consider the case that the random variable $\mx$ is a binary with $x_i \in \{-1,+1\}$. The partition function can no longer be computed in a closed form. This model is known as the Ising model in physics and as Markov Random Field in ML. Calculating partition function for the Ising model is intractable. For this reason, the best we can do is estimate it using numerical techniques such MCMC methods \todo{reference} or approximate methods like variational MFT methods \ref{sec:varMFT}. 
 \end{enumerate}
 Finally we note that ML and physics notation for binary variables differ ($x_i \in  \{0,1\}$ rather than $x_i \in \{\pm 1\}$), which can lead to confusion translating between literature or programming packages in ML and physics problems.
+
+
+
+
+
+\subsection{Cost functions for training energy-based models}
+\label{subsec:energyCostfctHowTo}
+The MaxEnt procedure gives us a way if parametrizing an energy-based generative model.\\
+	For any energy-based generative model, the energy function $E(\mx,\{\theta_i\} )$ depends on some parameters $\theta_i$ - couplings in the language of stat. phys.- that must be inferred directly from the data. For example, for the MaxEnt models the $\{\theta_i\}$ are just Lagrange multipliers $\{\lambda_i\}$. 
+\begin{mybox}{Training procedure.}
+The goal of the training procedure is to use the available training data to fit these parameters.\\
+	Like in many other ML techniques, we will fit these couplings by minimizing a cost function using SGD \ref{subsubsec:gdSGD}. Such a procedure naturally separates into two parts: choosing an appropriate cost function, an calculating the gradient of the cost function with respect to the model parameters.
+\end{mybox}
+\begin{mybox}{Defining a cost function}
+	 Formulating a cost function for generative models is a little bit trickier than for supervised, discriminative models. The objective of discriminative models is straightforward - predict the label from the features. However, what we mean by a "good" generative model is much harder to define using a cost function. We would like the model to generate examples similar to those we find in the training dataset. However, we would also like the model to generalize - we do not want the model to reproduce "spurious details" that are particular to the training dataset. Unlike for discriminative models, there is no straightforward idea like cross-validation on the data labels that neatly addresses this issue. For this reason, formulating cost functions for generative models is subtle and represent an important and interesting open are of research.
+\end{mybox}
+Calculating the gradients of energy-based models also turns out to be different than for discriminative models, such as DNNs. Rather than relying on automatic differentiation techniques and backpropagation, calculating the gradient requires drawing on intuitions from MCMC-baed methods.\\
+\\
+What follows is an in-depth discussion of \emph{Boltzmann learning} for energy-based generative models, focussing on MaxEnt models. We put the emphasis on training procedures that generalize to more complicated generative models with latent variables such as RBMs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
