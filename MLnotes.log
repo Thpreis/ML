@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  29 MAR 2020 11:24
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  29 MAR 2020 17:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -5664,6 +5664,18 @@ Overfull \hbox (17.86383pt too wide) in paragraph at lines 329--329
  model []  
  []
 
+
+Overfull \hbox (6.10266pt too wide) in paragraph at lines 341--341
+ [][] []\TU/TeXGyrePagella(0)/m/n/10.95 Energy Based Models: Maximum Entropy (M
+axEnt) Prin- 
+ []
+
+
+Overfull \hbox (3.08319pt too wide) in paragraph at lines 341--341
+ \TU/TeXGyrePagella(0)/m/n/10.95 ciple, Generative Models, and Boltmann Learnin
+g []  
+ []
+
 )
 \tf@toc=\write9
 \openout9 = `MLnotes.toc'.
@@ -6067,7 +6079,7 @@ Overfull \hbox (11.31393pt too wide) in paragraph at lines 155--156
  (./Chapters/Statistics.tex
 Chapter 2.
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 3.
+ine 4.
 Package microtype Info: Character `ﬆ' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/bx/n/8.1091'.
 (microtype)             Ignoring protrusion settings for this character.
@@ -6309,9 +6321,9 @@ Package microtype Info: Character `―' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/m/it/9'.
 (microtype)             Ignoring protrusion settings for this character.
 LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/m/n' will be
-(Font)              scaled to size 9.00014pt on input line 10.
+(Font)              scaled to size 9.00014pt on input line 11.
 LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/m/n' will be
-(Font)              scaled to size 8.99986pt on input line 10.
+(Font)              scaled to size 8.99986pt on input line 11.
 Package microtype Info: Character `ﬆ' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/bx/n/9'.
 (microtype)             Ignoring protrusion settings for this character.
@@ -6565,9 +6577,9 @@ Package microtype Info: Character `―' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/bx/n/5'.
 (microtype)             Ignoring protrusion settings for this character.
 LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(2)/bx/n' will be
-(Font)              scaled to size 9.00014pt on input line 10.
+(Font)              scaled to size 9.00014pt on input line 11.
 LaTeX Font Info:    Font shape `TU/TeXGyrePagellaMath(3)/bx/n' will be
-(Font)              scaled to size 8.99986pt on input line 10.
+(Font)              scaled to size 8.99986pt on input line 11.
 Package microtype Info: Character `ﬆ' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/bx/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
@@ -6911,7 +6923,7 @@ Package microtype Info: Character `―' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/m/n/6.028'.
 (microtype)             Ignoring protrusion settings for this character.
 
-Overfull \hbox (1.9791pt too wide) in paragraph at lines 45--51
+Overfull \hbox (1.9791pt too wide) in paragraph at lines 46--52
 \TU/TeXGyrePagella(0)/m/n/10.95 Splitting the data into mutually exclusive trai
 ning and test sets provides
  []
@@ -7085,7 +7097,7 @@ Package microtype Info: Character `―' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/m/n/5'.
 (microtype)             Ignoring protrusion settings for this character.
 [16]
-Overfull \hbox (4.36342pt too wide) in paragraph at lines 52--54
+Overfull \hbox (4.36342pt too wide) in paragraph at lines 53--55
 \TU/TeXGyrePagella(0)/m/n/10.95 likes to repeat: \TU/TeXGyrePagella(0)/m/it/10.
 95 We can’t make predictions without making assumptions\TU/TeXGyrePagella(0)/m/
 n/10.95 . Thus,
@@ -7097,7 +7109,7 @@ Overfull \hbox (23.04971pt too wide) has occurred while \output is active
  []
 
 [17] [18]
-Underfull \hbox (badness 10000) in paragraph at lines 100--103
+Underfull \hbox (badness 10000) in paragraph at lines 101--104
 
  []
 
@@ -7182,51 +7194,51 @@ Package microtype Info: Character `―' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/bx/it/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
  [20]
-Overfull \hbox (11.47458pt too wide) in paragraph at lines 120--121
+Overfull \hbox (11.47458pt too wide) in paragraph at lines 121--122
 []\TU/TeXGyrePagella(0)/m/n/10.95 Another way to understand this tradeoff is th
 e following. Due to sampling
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 148--149
+Underfull \hbox (badness 10000) in paragraph at lines 149--150
 
  []
 
 
-Underfull \hbox (badness 2809) in paragraph at lines 153--154
+Underfull \hbox (badness 2809) in paragraph at lines 154--155
 []\TU/TeXGyrePagella(0)/m/it/10.95 Estimation problems \TU/TeXGyrePagella(0)/m/
 n/10.95 are concerned with the accuracy of $[]$,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 150--154
+Underfull \hbox (badness 10000) in paragraph at lines 151--155
 
  []
 
 [21] [22]
-Overfull \hbox (9.44026pt too wide) detected at line 226
+Overfull \hbox (9.44026pt too wide) detected at line 227
 []
  []
 
 [23] [24] [25]
-Underfull \hbox (badness 10000) in paragraph at lines 307--308
+Underfull \hbox (badness 10000) in paragraph at lines 308--309
 
  []
 
 [26] [27]
-Overfull \hbox (1.6506pt too wide) in paragraph at lines 392--393
+Overfull \hbox (1.6506pt too wide) in paragraph at lines 393--394
 \TU/TeXGyrePagella(0)/m/n/10.95 Bayesian inference provides a set of principles
  and procedures for learn-
  []
 
 [28] [29] [30]
-Overfull \hbox (12.41174pt too wide) in paragraph at lines 484--485
+Overfull \hbox (12.41174pt too wide) in paragraph at lines 485--486
 []\TU/TeXGyrePagella(0)/m/n/10.95 Using the assumption that samples are i.i.d.,
  we can write the \TU/TeXGyrePagella(0)/m/it/10.95 log-likelihood
  []
 
 [31]
-Overfull \hbox (8.34648pt too wide) in paragraph at lines 519--521
+Overfull \hbox (8.34648pt too wide) in paragraph at lines 520--522
 \TU/TeXGyrePagella(0)/m/n/10.95 thought of as a prior on parameters. Minimizing
  the combined in-sample
  []
@@ -7317,25 +7329,25 @@ Package microtype Info: Character `―' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/m/n/6'.
 (microtype)             Ignoring protrusion settings for this character.
 
-Overfull \hbox (4.58792pt too wide) in paragraph at lines 582--584
+Overfull \hbox (4.58792pt too wide) in paragraph at lines 583--585
 \TU/TeXGyrePagella(0)/m/n/10.95 work here with the natural logarithm in this se
 ction. For example, throw-
  []
 
-
-Overfull \hbox (5.79697pt too wide) in paragraph at lines 597--599
+[34]
+Overfull \hbox (5.79697pt too wide) in paragraph at lines 600--602
 \TU/TeXGyrePagella(0)/m/n/10.95 Information entropy for discrete random variabl
 es is positive semi-
  []
 
-[34] [35] [36] [37]
-Overfull \hbox (41.38927pt too wide) detected at line 721
+[35] [36] [37]
+Overfull \hbox (41.38927pt too wide) detected at line 724
  $[][][][][][][] [] [] [][][][][][][][][][] [] [][][][] [] [] [][][][][][][][] 
 [][][][] [] [] [][][][][][]$  
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 733--737
+Underfull \hbox (badness 10000) in paragraph at lines 736--740
 
  []
 
@@ -7347,18 +7359,18 @@ File: gfx/Bootstrapping.jpg Graphic file (type bmp)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [39]
-Overfull \hbox (0.73074pt too wide) in paragraph at lines 791--796
+Overfull \hbox (0.73074pt too wide) in paragraph at lines 794--799
 \TU/TeXGyrePagella(0)/bx/n/10.95 fitting\TU/TeXGyrePagella(0)/m/n/10.95 , limit
 ing the out-of-sample performance. For this reason, in prac-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 791--796
+Underfull \hbox (badness 10000) in paragraph at lines 794--799
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 791--796
+Underfull \hbox (badness 10000) in paragraph at lines 794--799
 
  []
 
@@ -7992,23 +8004,88 @@ File: gfx/AnalogyEMstatphys.png Graphic file (type bmp)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [113] [114]
+
+Overfull \hbox (9.14778pt too wide) in paragraph at lines 519--519
+|[]\TU/TeXGyrePagella(2)/m/sc/10.95 energy based models: maximum entropy (maxen
+t) prin-
+ []
+
+[113]
+Overfull \hbox (1.11859pt too wide) in paragraph at lines 525--526
+\TU/TeXGyrePagella(0)/m/n/10.95 complish, such as drawing new examples from an 
+unknown prob-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 533--536
+
+ []
+
+[114]
+Overfull \hbox (2.67072pt too wide) in paragraph at lines 537--538
+\TU/TeXGyrePagella(0)/m/n/10.95 discussing discriminative models. The ability t
+o generate new examples
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 545--551
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 545--551
+
+ []
+
+
+Overfull \hbox (258.70947pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[115] [116]
+Overfull \hbox (258.70947pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[117]
+Overfull \hbox (3.65807pt too wide) in paragraph at lines 597--599
+\TU/TeXGyrePagella(0)/m/n/10.95 This subtle change has important implications f
+or training MaxEnt mod-
+ []
+
+
+Overfull \hbox (0.3762pt too wide) in paragraph at lines 604--605
+\TU/TeXGyrePagella(0)/m/n/10.95 For these reasons, choosing the $[][][][]$ is o
+ften farm from straightforward.[] 
+ []
+
+[118]
+Underfull \hbox (badness 10000) in paragraph at lines 607--610
+
+ []
+
+)
+Overfull \hbox (258.70947pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[119]
 \openout2 = `Chapters/Problems.aux'.
 
  (./Chapters/Problems.tex
 Chapter 4.
+[120
 
+
+
+
+]
 Overfull \hbox (25.70038pt too wide) in paragraph at lines 12--14
 []\TU/TeXGyrePagella(0)/m/n/10.95 Connected correlation functions describe n-po
 int correlations between
  []
 
-[115
-
-
-
-
-]) [116]
+[121]) [122]
 \tf@thm=\write14
 \openout14 = `MLnotes.thm'.
 
@@ -8266,12 +8343,12 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59826 strings out of 493007
- 1233526 string characters out of 6136718
+ 59858 strings out of 493007
+ 1234096 string characters out of 6136718
  2035707 words of memory out of 5000000
- 62763 multiletter control sequences out of 15000+600000
+ 62795 multiletter control sequences out of 15000+600000
  546530 words of font info for 147 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
  87i,23n,138p,10510b,5676s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (124 pages).
+Output written on MLnotes.pdf (130 pages).

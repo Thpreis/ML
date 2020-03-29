@@ -516,9 +516,108 @@ For a comparison between EM and statistical physics see \ref{fig:analogyemstatph
 
 
 
+\section{Energy Based Models: Maximum Entropy (MaxEnt) Principle, Generative Models, and Boltmann Learning}
+\label{sec:energy}
+\subsection{Introduction - Why do we need another class of models}
+Supervised learning models discussed in \ref{ch:supervised} are \emph{discriminative} - they are designed to perceive differences between groups or categories of data. Discriminative models form the core techniques of most supervised learning methods, but they have several limitations.
+\begin{enumerate}
+	\item They require labelled data.
+	\item There are tasks that discriminative approaches simply cannot accomplish, such as drawing new examples from an unknown probability distribution. 
+\end{enumerate}
+
+	A model that can earn to represent and sample from a probability distribution is called \emph{generative}. \emph{Energy-based} generative models are able to deal with tasks discriminative models even fail to attempt in the first place. This section is concerned with introducing these models.
+
+\subsection{An overview of energy-based generative models}
+\label{subsec:energyOverview}
+\subsubsection{The idea}
+This overview will highlight the similarities and differences with the supervised learning methods encountered in earlier sections.\\
+\begin{mybox}{Generative model idea}
+	Generative models are a ML technique that allows to learn how to generate new examples similar to those found in a training dataset. The core idea of most generative models is to learn a parametric model for the probability distribution from which the data was drawn. One we have learned a model, we can generate new examples by sampling from the learned generative model. As in stat. phys., this sampling is often done using MCMC methods.
+\end{mybox}
+The added complexity of learning models directly from samples introduces many of the same fundamental tensions we encountered when discussing discriminative models. The ability to generate new examples requires models to be able to "generalize" beyond the examples they have been trained on, that is to generate new samples that are not samples of the training set. The models must be expressive enough to capture the complex correlations present in the underlying data distribution, but the amount of data we have is finite which can give rise to overfitting.
+\subsubsection{Generative models in practice}
+In practice, most generative models that are used in ML are flexible enough that, with a sufficient number of parameters, they can approximate any probability distribution. For this reason,there are three axes on which we can differentiate classes of generative models:
+\begin{enumerate}
+	\item First axis is how easy the model is to train - both in terms of computational time and the complexity of writing code for the algorithm.
+	\item The second axis is how well the model generalizes from the training set to the test set.
+	\item The third axis is which characteristics of the data distribution the model is capable of and focuses on capturing.
+\end{enumerate}
+All generative models must balance these competing requirements and generative models differ in the tradeoffs they choose.\\
+\\
+One of the fundamental reasons that energy-based models have been less widely-employed than their discriminative counterparts is that the training procedure for these models differs significantly from those for supervised NNs (\ref{sec:dnn},\ref{sec:cnn},\ref{sec:dnn2}). Though both employ GD \ref{sec:gd} based procedure for minimizing a cost function (one common choice for generative models is the negative log-likelihood function \ref{eq:bayesErrorFct}), energy-based models do not use backpropagation\ref{subsec:dnnBackpropagation} and automatic differentiation for computing gradients. Rather, one must turn to ideas inspired by MCMC based methods in physics and statistics that sometimes go under the name "\emph{Boltzmann learning}". As a result, training energy-based models requires additional tools that are not immediately available in packages such as PyTorch and TensorFlow.\\
+The open-source package \emph{Paysage} that is built on top of PyTorch bridges this gap by providing the toolset for training energy-based models. Paysage makes it easy to quickly code and deploy energy-based models such as Restricted Boltzmann Machines (RBMs) and Stacked RBMs - a "deep" unsupervised model.\\
+\\
+	Finally, we note that generative models at their most basic level are complex parametrizations of the probability distribution the data is drawn from. For this reason, generative models can do much more than just generate new examples. They can be used to perform a multitude of other tasks that require sampling from a complex probability distribution including "de-noising", filling in missing data, and even discrimination. The versatility of generative models is one of the major appeals of these unsupervised learning methods.
 
 
+\subsection{Maximum entropy models: the simplest energy-based generative models}
+\label{subsec:energyMaxEnt}
+MaxEnt models have no latent (or hidden) variables, making them ideal for introducing the key concepts and tools that underlie energy-based generative models.
+\subsubsection{Derivation of the theory}
+It is possible to rederive the Boltzmann distribution (and the idea of generalized ensembles) entirely from information theoretic arguments. The Boltzmann distribution can be viewed as resulting from a statistical inference procedure for learning probability distributions describing physical systems where one only has partial information about the system (usually the average energy).\\
+The key quantity in MaxEnt models is the information theoretic, or Shannon, entropy \ref{eq:infoShannon}. The Boltzmann distribution follows from the Principle of Maximum Entropy.
+\begin{mybox}{Principle of Maximum Entropy}
+A physical system should be described by the probability distribution with the largest entropy subject to certain constrains (often provided by measuring the average value of conserved, extensive quantities such as energy, particle number,..). The principle uniquely specifies a procedure for parametrizing the functional form of the probability distribution. Once we have specified and learned this form we can, of course, generate new examples by sampling this distribution.
+\end{mybox}
+How does this work ?\\
+Suppose that we have chosen a set of functions $\{f_i(\mx)\}$ whose average value we want to fix to some observed values $\expval{f_i}_{obs}$. The Principle of Maximum Entropy states that we should choose the distribution $p(\mx)$ with the largest uncertainty (i.e. the largest Shannon entropy $S_p$ \ref{eq:infoShannon}), subject to the constraints that the model averages match the observed averages
+\be 
+\expval{f_i}_{model} = \int \md \mx f_i(\mx) p(\mx) = \expval{f_i}_{obs}.
+\ee 
+We can formulate the Principle of Maximum Entropy as an optimization problem using the method of Lagrange multipliers by minimizing 
+\begin{align*}
+	\mL[p] &= -S_p + \sum_i \lambda_i \left(\expval{f_i}_{obs} - \int \md \mx f_i (\mx) p(\mx) \right)\\
+	&+ \gamma \left(1- \int \md \mx p(\mx)\right)\\
+	0&=\frac{\delta \mL}{\delta p} = (\log p(\mx) +1) - \sum_i \lambda_i f_i(\mx) -\gamma,
+\end{align*}
+where the first set of constraints enforce the requirement for the averages and the last constraint enforces the normalization that the trace over the probability distribution equals one. The differentiation leads to the general form of the maximum entropy distribution
+\be 
+p(\mx) = \frac{1}{Z} e^{\sum_i \lambda_i f_i(\mx)}
+\ee 
+where $Z(\lambda_i)= \int \md \mx e^{\sum_i \lambda_i f_i(\mx)}$ is the partition function. The maximum entropy distribution is clearly just the usual Boltzmann distribution with energy $E(\mx) = - \sum_i \lambda_i f_i(\mx)$. The values of the Lagrange multipliers are chosen to match the observed averages for the set of functions $\{f_i(\mx)\}$ whose average value is being fixed:
+\bse 
+\expval{f_i}_{model}=\int \md \mx p(\mx) f_i(\mx) = \frac{\partial \log Z}{\partial \lambda_i} = \expval{f_i}_{obs}.
+\ese 
+In other words, the parameters of the distribution can be chosen such that 
+\bse 
+\partial_{\lambda_i} \log Z= \expval{f_i}_{data}.
+\ese 
+\begin{mybox}{Comparison to stat. phys.}
+	Our $\mx$ denotes the microscopic state of the system, i.e. the MaxEnt distribution is a probability distribution over microscopic states. However, in thermodynamics we only have access to average quantities. If we know only the average energy $\expval{E(\mx)}_{obs}$, the MaxEnt procedure tells us to maximize the entropy subjet to the average energy constraints, this yields
+	\be 
+	p(\mx) = \frac{1}{Z} e^{-\beta E(\mx)},
+	\ee 
+	where we identified $\lambda_1 = - \beta= -1/k_BT$. Now suppose we also constrain the particle number $\expval{N(x)}_{obs}$. Then we obtain the following MaxEnt distribution
+	\be 
+	p(\mx) = \frac{1}{Z} e^{-\beta (E(\mx) - \mu N(\mx))},
+	\ee 
+	where we identified $\lambda_1=-\beta, \lambda_2=\mu/\beta$. Since this is just the Boltzmann distribution, we can also relate the partition function in our MaxEnt model to the thermodynamic free-energy via $F=-\beta^{-1} \log Z$. The choice of which quantities to constrain is equivalent to working in different thermodynamic ensembles.
+\end{mybox}
+\subsubsection{From statistical mechanics to ML}
+The MaxEnt idea also provides a general procedure for learning a generative model from data. They key difference between MaxEnt models in physics and ML is that in ML we have no direct access to observed values $\expval{f_i}_{obs}$. Instead, these averages must be directly estimated from data (samples). To denote this difference, we will call empirical averages calculated from data as $\expval{f_i}_{data}$. We can think of MaxEnt as a statistical inference procedure simply by replacing $\expval{f_i}_{obs}$ by $\expval{f_i}_{data}$ as above.\\
+This subtle change has important implications for training MaxEnt models. 
+\begin{enumerate}
+\item First, since we do not know these averages exactly, but must estimate them from the data, our training procedures must be careful not to overfit to the observations (our samples might no be reflective of the true values of these statistics). 
+\item Second, the averages of certain functions $f_i$ are easier to estimate from limited data than others. This is often an important consideration when formulating which MaxEnt model to fit to the data.
+\item Finally, we note that unlike in physics where conservation laws often suggest the functions $f_i$ whose averages we hold fix, ML offers no comparable guide for how to choose the $f_i$ we care about.
+\end{enumerate}
+For these reasons, choosing the $\{f_i\}$ is often farm from straightforward.\footnote{Note that MaxEnt is closely related to Bayesian inference from a ML perspective.}
 
-
-
-
+\subsubsection{Generalized Ising models from MaxEnt}
+The form of a MaxEnt model is completely specified once we choose the averages $\{f_i\}$ we wish to constrain. One common choice often used in MaxEnt modeling is to constrain the first two moments of a distribution. When our random variables $\mx$ are continuous, the corresponding MaxEnt distribution is a multi-dimensional Gaussian. If the $\mx$ are binary (discrete), then the corresponding MaxEnt distribution is a generalized Ising (Potts) model with all-to-all couplings.\\
+\\
+Partition functions for maximum entorpy models are often intractable to compute. Therefore, it is helpful to consider two special cases where $\mx$ has different support (different kinds of data). 
+\begin{enumerate}
+	\item First, consider the case that the random variable $\mx \in \mR^n$ are real numbers. The partition function can be calculated analytically
+	\bse 
+	Z = \int \md x e^{\mathbf{a}^T \mathbf{x}+\half \mathbf{x}^TJ\mx}=\sqrt{(2\pi)^n \det J^{-1}} e^{- \half \mathbf{a}^T J^{-1} \mathbf{a}}.
+	\ese
+	The resulting probability density function is,
+	\begin{align}
+		p(\mx) &= Z^{-1} e^{-E(\mx)} =\frac{1}{\sqrt{(2 \pi)^n \det J^{-1}} } e^{\half \mathbf{a}^T J^{-1} \mathbf{a}+ \mathbf{a}^T \mx+ \half \mx^T J \mx }\nonumber \\
+		&=\frac{1}{\sqrt{(2 \pi)^n \det \Sigma} } e^{-\half (\mx -\mu)^T \Sigma^{-1} (\mx-\mu)},
+	\end{align} 
+where $\mu=-J^{-1} \mathbf{a}$ and $\Sigma = - J^{-1}$. This, of course, is the normalized, multi-dimensional Gaussian distribution.
+\item Second, consider the case that the random variable $\mx$ is a binary with $x_i \in \{-1,+1\}$. The partition function can no longer be computed in a closed form. This model is known as the Ising model in physics and as Markov Random Field in ML. Calculating partition function for the Ising model is intractable. For this reason, the best we can do is estimate it using numerical techniques such MCMC methods \todo{reference} or approximate methods like variational MFT methods \ref{sec:varMFT}. 
+\end{enumerate}
+Finally we note that ML and physics notation for binary variables differ ($x_i \in  \{0,1\}$ rather than $x_i \in \{\pm 1\}$), which can lead to confusion translating between literature or programming packages in ML and physics problems.

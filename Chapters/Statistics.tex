@@ -1,4 +1,5 @@
 \chapter{Supervised learning}
+\label{ch:supervised}
 We limit our focus to supervised and later on unsupervised learning if not specified otherwise, reinforcement learning will be treated later on.
 \todo{Solve problem with bold greek letters}
 \section{More formal introduction into the idea of Machine Learning}
@@ -589,8 +590,10 @@ corresponding to one bit of information. Note that a very unlikely event outcome
 	Shannon's \emph{information entropy} associated to a discrete random variable or event $X$ is the expected amount of information content,
 	\be
 	\label{eq:infoShannon}
-	H(X)=\expval{i(x)} = - \sum_x p(x) \ln p(x).
+	H(X)=\expval{i(x)} = - \tr_{\mx} p(\mx) \ln p(\mx) = S_p,
 	\ee 
+	where the trace is a sum/integral over all possible values a variable can take.
+	The Shannon entropy quantifies the statistical uncertainty one has about the value of a random variable $\mx$ drawn from a probability distribution $p(\mx)$.
 \end{mybox}
 Properties of information entropy are
 \begin{enumerate}

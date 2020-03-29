@@ -338,18 +338,36 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.3.3.2}{EM via statistical physics}}{112}{subsubsection.3.3.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{115}{chapter.4}
+\contentsline {section}{\numberline {3.4}{Energy Based Models: Maximum Entropy (MaxEnt) Principle, Generative Models, and Boltmann Learning}}{114}{section.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}{Physics problems}}{115}{section.4.1}
+\contentsline {subsection}{\numberline {3.4.1}{Introduction - Why do we need another class of models}}{114}{subsection.3.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}{Cosmology}}{115}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {3.4.2}{An overview of energy-based generative models}}{114}{subsection.3.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}{QFT}}{115}{subsection.4.1.2}
+\contentsline {subsubsection}{\numberline {3.4.2.1}{The idea}}{114}{subsubsection.3.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}{Ai safety}}{116}{section.4.2}
+\contentsline {subsubsection}{\numberline {3.4.2.2}{Generative models in practice}}{115}{subsubsection.3.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}{Questions}}{116}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {3.4.3}{Maximum entropy models: the simplest energy-based generative models}}{116}{subsection.3.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}{Knobel-problems}}{116}{section.4.3}
+\contentsline {subsubsection}{\numberline {3.4.3.1}{Derivation of the theory}}{116}{subsubsection.3.4.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}{Ideas}}{116}{subsection.4.3.1}
+\contentsline {subsubsection}{\numberline {3.4.3.2}{From statistical mechanics to ML}}{118}{subsubsection.3.4.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.4.3.3}{Generalized Ising models from MaxEnt}}{119}{subsubsection.3.4.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{121}{chapter.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}{Physics problems}}{121}{section.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.1}{Cosmology}}{121}{subsection.4.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.2}{QFT}}{121}{subsection.4.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}{Ai safety}}{122}{section.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.1}{Questions}}{122}{subsection.4.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}{Knobel-problems}}{122}{section.4.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3.1}{Ideas}}{122}{subsection.4.3.1}
