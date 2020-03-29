@@ -1,0 +1,47 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {british}{}
+\defcounter {refsection}{0}\relax 
+\deactivateaddvspace 
+\babel@toc {british}{}
+\defcounter {refsection}{0}\relax 
+\ttl@tocsep 
+\defcounter {refsection}{0}\relax 
+\ttl@tocsep 
+\defcounter {refsection}{0}\relax 
+\ttl@tocsep 
+\defcounter {refsection}{0}\relax 
+\ttl@tocsep 
+\defcounter {refsection}{0}\relax 
+\ttl@tocsep 
+\defcounter {refsection}{0}\relax 
+\ttl@tocsep 
+\defcounter {refsection}{0}\relax 
+\ttl@tocsep 
+\defcounter {refsection}{0}\relax 
+\ttl@tocsep 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.1}{\ignorespaces \relax }}{20}{figure.caption.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces \relax }}{40}{figure.caption.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces \relax }}{50}{figure.caption.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.4}{\ignorespaces \itshape A) Neurons consist of a linear transformation that weights the importance of various inputs, followed by a non-linear activation function. B) Network architecture.\relax }}{67}{figure.caption.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Left :\itshape Backpropagation for a DNN with one neuron per layer. \normalfont Right: \itshape $L$-th layer is introduced by multiple activations in the previous layer if we have more than one neuron.\relax }}{76}{figure.caption.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Architecture of a CNN: \itshape The neurons in a CNN are arranged in three dimension: height $(H)$, width $(W)$, and depth $(D)$. For the input layer, the depth corresponds to the number of channels (in this case $3$ for RGB images). Neurons in the convolutional layers calculate the convolution of the image with a local spatial filter (e.g. $3\times 3$ pixel grid, times $3$ channels for first layer) at a given location in the spatial $(W,H)$-plane. The depth $D$ of the convolutional layer corresponds to the number of filters used in the convolutional layer. Neurons at the same depth correspond to the same filter. Neurons in the convolutional layer mix inputs at different depths but preserve the spatial location. Pooling layers perform a spatial coarse graining (pooling step) at each depth to give a smaller height and width while preserving the depth. The convolutional and pooling layers are followed by a fully connected layer and classifier (not shown).\relax }}{83}{figure.caption.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Two examples to illustrate a one-dimensional convolutional layer with ReLU nonlinearity:\itshape Convolutional layer for a spatial filter of size $F$ for a one-dimensional input of width $W$ with stride $S$ and padding $P$ followed by a ReLU non-linearity.\relax }}{85}{figure.caption.10}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Illustration of Max Pooling: \itshape Illustration of max pooling over a $2\times 2$ region. Notice that pooling is done at each depth (vertical axis) separately. The number of outputs is halved along each dimension due to this coarse-graining.\relax }}{86}{figure.caption.11}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.9}{\ignorespaces \relax }}{88}{figure.caption.12}
+\defcounter {refsection}{0}\relax 
+\ttl@tocsep 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces \itshape The merging process generates a hierarchy of clusters that can be visualized in the form of a dendrogram.\relax }}{102}{figure.caption.13}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.2}{\ignorespaces \relax }}{114}{figure.caption.14}
+\defcounter {refsection}{0}\relax 
+\ttl@tocsep 

@@ -323,7 +323,7 @@ We will now go through this model exemplifying the important concepts lined out 
 To see how we can use GMM and MLE to perform clustering, we introduce discrete binary $K$-dimensional latent variables $\mathbf{z}$ for each data point $\mx$ whose $k$-th component is $1$ if point $\mx$ was generated from the $k$-th Gaussian and zero otherwise (i.e. one-hot variables).
 For instance, if we were considering a Gaussian mixture with $K=3$, we would have three possible values for $\mathbf{z}\equiv (z_1,z_2,z_3): (1,0,0),(0,1,0)$ and $(0,0,1)$. We cannot directly observe the variable $\mathbf{z}$. It is a latent variable that encodes the cluster identity of point $\mx$. Let us also denote all the $N$ latent variables corresponding to a dataset $\mX$ by $\mathbf{Z}$.
 \item 
-Viewing the GMM as a generative model, we can write the probability $p(\mx |\mathbf{z})$ of observing a data point $\mx$ given $\mathbf{z}$ as 
+Viewing the GMM as a generative model, we can write the probability $p(\mx |\mathbf{z})$ of observing a data point $\mx$ given $\mathbf{z}$ as\footnote{Note that the notation with $;$ is something we have seen in \ref{eq:infoMutualInfo}, it describes a conditional dependence and makes a distinction between data and parameters.}
 \bse 
 p(\mx | \mathbf{z}; \{ \mm_k,\mS_k\} ) = \prod_{k=1}^K \mathcal{N}(\mx |\mm_k,\mS_k)^{z_k}
 \ese 

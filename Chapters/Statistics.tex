@@ -592,22 +592,152 @@ corresponding to one bit of information. Note that a very unlikely event outcome
 	H(X)=\expval{i(x)} = - \sum_x p(x) \ln p(x).
 	\ee 
 \end{mybox}
+Properties of information entropy are
+\begin{enumerate}
+	\item Non-negativity.\\
+	Information entropy for discrete random variables is positive semi-definite, $H(X)\geq 0$.
+	\item $H=2 \ln 2$ for a uniform distribution and $H=0$ for a delta distribution ($p=1$ for one $x$ and for all others).
+	\item Concavity.\\
+	Define a random variable $X$ with probability distribution $p(x)$ out of distributions $p_A(x)$ and $p_B(x)$ for the variables $X_A$ and $X_B$ such that
+	\bse 
+	p(x) = qp_A(x) + (1-q) p_B(x).
+	\ese 
+	One has then
+	\be 
+	H(X) \geq q H(X_A) + (1-q) H(X_B).
+	\ee 
+	\item Permutation invariance.\\
+	If one relabels the event outcomes by some permutation of indices $x_m \rightarrow x_{\pi(m)}$, the information entropy is unchanged.
+	\item Minimum value.\\
+	One has $H(X)=0$ if and only if $X$ is deterministic such that $p(x)=1$ for one outcome $x$.
+	\item Maximum value.\\
+	For a set of event outcomes of size or cardinality $\abs{X}$ one has
+	\be 
+	H(X) \leq \ln \abs{X}.
+	\ee 
+	Proof:\\
+	Maximize the probability distribution $p(x)$ with the condition that it remains normalized. This corresponds to finding the extremum of 
+	\be 
+	\label{eq:infoLagrangeMultiplier}
+	\mL =H(X) + \lambda \left(\sum_x p(x) -1\right).
+	\ee 
+	One has 
+	\bse 
+	\frac{\partial \mL}{\partial p(x)} = -\ln p(x) -1 +\lambda =0 \; \Rightarrow \; p(x) = e^{\lambda-1 }.
+	\ese 
+	This depends only on $\lambda$ but must be normalized. Normalization leads to $p(x)= 1/\abs{X}$ and $H(x) = \ln(X)$    $\blacksquare$.
+	
+\end{enumerate}
+
+\subsection{Conditional entropy}
+\label{subsec:infoCondEntropy}
+If two variables are correlated they are not statistically independent. One may say that $Y$ contains side information about $X$. Define the \emph{conditional information content} via the conditional probability
+\be 
+i(x|y) = - \ln p(x|y).
+\ee 
+The conditional entropy is defined as the following expectation value of the conditional information content,
+\be 
+\label{eq:infoCondEntropy}
+H(X|Y) = - \sum_{x,y} p(x,y) \ln p(x|y).
+\ee 
+This can be seen as the expected information content of surprise when learning an outcome $x$ after already knowing the outcome $y$. One can show that \emph{Conditioning does not increase entropy}
+\be
+\label{eq:infoCondEntropyInequality}
+H(X) \geq H(X|Y).
+\ee 
+\subsection{Joint entropy}
+\label{subsec:infoJointEntropy}
+The \emph{joint entropy} is simply the entropy associated with the joint probability distribution
+\be 
+H(X,Y) = - \sum_{x,y} p(x,y) \ln p(x,y),
+\ee 
+with the property
+\bse 
+H(X,Y) = H(X) + H(Y|X) = H(Y) + H(X|Y).
+\ese 
+
+\subsection{Mutual information}
+\label{subsec:infoMutualInfo}
+The \emph{mutual information} of two random variables $X$ and $Y$ is the entropy of one variable less the conditional entropy,
+\be 
+\label{eq:infoMutualInfo}
+I(X;Y) = H(X) -H(X|Y) = H(Y)-H(Y|X)=I(Y;X)
+\ee 
+It corresponds to the expected gain in information (or loss of uncertainty) about the variable $X$ when learning an event outcome $y$ of the random variable $Y$. One can express the mutual information also as
+\be
+I(X;Y)= \sum_{x,y} p(x,y) \ln\left(\frac{p(x,y)}{p(x) p(y)}\right).
+\ee 
+Note that the statement \emph{conditioning does not increase entropy} is equivalent to
+\be 
+\label{eq:infoMutualInfoInequality}
+I(X;Y)\geq 0.
+\ee 
+One has $I(X;Y)=0$ if and only if $X$ and $Y$ are independent random variables such that $p(x,y) = p(x)p(y)$.
 
 
-
-\subsection{Relative Entropy or Kullback-Leibler divergence}
-\label{subsec:infoRelEntropy}
+\subsubsection{Relative Entropy or Kullback-Leibler divergence}
+\label{subsubsec:infoRelEntropy}
+\begin{mybox}{KL divergence}
 The KL divergence between two distributions $p(\mx)$ and $q(\mx)$ measures the dissimilarity between the two distributions and is given by
 \be 
 \label{eq:infoKLdivergence}
-D_{KL}(q||p) = \text{Tr}_{\mx}q(\mx) \log \frac{q(\mx)}{p(\mx)},
+D_{KL}(p||q) = \text{Tr}_{\mx}p(\mx) \log \frac{p(\mx)}{q(\mx)} = \sum_x p(\mx) \left[\ln p(\mx) - \ln q(\mx)\right],
 \ee 
-which is the expectation w.r.t. $q$ of the logarithmic difference between the two distributions $p$ and $q$ The trace denotes a sum over all possible configurations $\mx$. Two important properties of the KL-divergence are 
+which is the expectation w.r.t. $p$ of the logarithmic difference between the two distributions $p$ and $q$. The trace denotes a sum over all possible configurations $\mx$. The latter definition works if the support of function $p(x)$ (the set of values $x$ where $p(x) >0$) is within the support of $q(x)$.\\
+The relative entropy tells in some sense how far the distribution function $p(x)$ is from the distribution function $q(x)$. However, it is not defined symmetrically (nor does it satisfy a triangle inequality) and is therefore not a distance measure or metric in the mathematical sense.
+\end{mybox}
+Typically, relative entropy is used to compare two probability distributions where $p(x)$ is often the true distribution and $q(x)$ some kind of approximation to it. It then has the meaning of a gain in information when one replaces the (approximate) model distribution $q(x)$ by the true (or more accurate) distribution $p(x)$. It can also denote a loss of information, or added uncertainty, if one works with $q(x)$ instead of $p(x)$.
+
+
+
+
+
+
+
+
+
+
+
+
+Two important properties of the KL-divergence are 
 \begin{enumerate}
 	\item Positivity: $D_{KL}(p||q)\geq 0$ with equality if and only if $p=q$, and
 	\item the KL-divergence is not symmetric in its arguments $D_{KL}(p||q) \neq D_{KL} (q||p)$.
 \end{enumerate}
+Note also that the mutual information can be written as a relative entropy
+\be 
+I(X;Y) = D(p(x,y) || p(x) p(y)),
+\ee
+so it can be seen as the information gained when one learns that the true distribution is $p(x,y)$ and not the factorized distribution $p(x)p(y)$. Note also that positivity of relative entropy directly implies positivity of mutual information which in turn implies the statement \emph{conditioning does not increase entropy}.
+\subsubsection{Continuum limit}
+\label{subsubsec:infoContinuumRelEntropy}
+Relative entropy has the advantage that it generalizes favourably to continuous probability distributions. Consider the continuum limit
+\bse 
+p(x_m) \rightarrow \mathcal{P}(x) \md x, \quad q(x_m) \rightarrow \mathcal{Q}(x) \md x,
+\ese  
+with \emph{probability densities} $\mathcal{P}(x), \mathcal{Q}(x)$. The relative entropy becomes
+\be 
+D(p||q) = \int \md x \mathcal{P}(x) [\ln(\mathcal{P}(x) \md x) - \ln (\mathcal{Q}(x) \md x) ] = \int \md x \mathcal{P}(x) [\ln\mathcal{P}(x) -\ln \mathcal{Q}(x)].
+\ee 
+In contrast, Shannon's entropy \ref{eq:infoShannon} has the formal continuum limit
+\be 
+H(X) \rightarrow \int \md x \mathcal{P}(x) \ln (\mathcal{P}(x) \md x),
+\ee 
+which is not very well defined.
 
+\subsection{Fisher information metric}
+\label{subsec:infoFisherInfoMetric}
+The relative entropy is positive semi-definite and one has $D(p||q)=0$ if and only if $p(x) =q(x)$. However, it is not a distance measure in the mathematical sense because it is not symmetric. In the limit where $p$ and $q$ are very close, it satisfies the properties of a metric, however. To make this more precise, consider a set of probability distributions $p(\theta)(x)$ where $\theta$ is a (multi-dimensional) parameter. Close to some point $\theta_0$ one may expand
+\bse 
+D(p(\theta) || p(\theta_0)) = \half (\theta^j -\theta^j_0) (\theta^k-\theta^k_0) g_{jk} (\theta_0) + \dots 
+\ese 
+The constant and linear terms vanish because $D(p||q)$ is positive semi-definite and vanishes at $p=q$. The object $g_{jk}(\theta_0)$ is known as the \emph{Fisher information metric}. It is by construction symmetry and serves as a Euclidean, positive semi-definite metric on the space of parameters $\theta$ of probability distributions $p(\theta)$.\\
+\\
+One may also see this as a two-form constructed via the pull-back of the map $\theta \rightarrow p(\theta)$ from a metric directly defined on the space of probability functions. The latter is obtained from the expansion
+\bse 
+D(q+\delta q || q) = \sum_x \frac{1}{2 q(x)} \delta q(x)^2 + \dots 
+\ese 
+We have set here $p(x)=q(x)+\delta q(x)$ and used that both $p$ and $q$ are normalized such that $\sum_x \delta q(x) =0$.
 
 
 
