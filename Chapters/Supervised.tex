@@ -131,6 +131,7 @@ We find that the average \emph{generalization error} for this method to be
 One way to ameliorate this is to use regularization. We will mainly focus on two forms of regularization which are introduced in the following:\\
 the first one employs an $L_2$ penalty and is called \emph{Ridge regression}, while the second uses an $L_1$ penalty and is called $LASSO$.
 \subsection{Regularized Least-square regressions-frequentist}
+\label{subsec:lregRegularization}
 Due to poor generalization, regularization is necessary, in particular  in the \emph{high-dimensional limit} ($p\gg n$). Regularization typically leads to better generalization. 
 \begin{mybox}{Idea behind regularization}
 	Due to the equivalence between the constrained and penalized form of regularized regression, we can regard the regularized regression problem as an un-regularized problem but on a \emph{constrained set of parameters}. Since the size of the allowed parameter space (e.g. $\mw \in \mR^p$ when un-regularized vs. $\mw \in C \subset \mR^p$ when regularized) is roughly a proxy for model complexity, solving the regularized problem is in effect \textbf{solving the un-regularized problem with a smaller model complexity class}. This implies that we are \textbf{less likely to overfit}.

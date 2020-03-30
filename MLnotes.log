@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  29 MAR 2020 19:05
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  30 MAR 2020 12:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -7393,13 +7393,13 @@ D may work equally
  []
 
 [45] [46]
-Overfull \hbox (36.85297pt too wide) in paragraph at lines 138--141
+Overfull \hbox (36.85297pt too wide) in paragraph at lines 139--142
 \TU/TeXGyrePagella(0)/m/n/10.95 dataset for yourself. However you actually poss
 ess an even higher-dimensional
  []
 
 [47]
-Underfull \hbox (badness 1152) in paragraph at lines 162--164
+Underfull \hbox (badness 1152) in paragraph at lines 163--165
 \TU/TeXGyrePagella(0)/m/n/10.95 Thus, by adding a regularization term, $[][][]$
 , to our least
  []
@@ -7412,19 +7412,19 @@ File: gfx/LassoVsRidge.jpg Graphic file (type bmp)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [49] [50]
-Overfull \hbox (20.45541pt too wide) in paragraph at lines 247--248
+Overfull \hbox (20.45541pt too wide) in paragraph at lines 248--249
 \TU/TeXGyrePagella(0)/m/n/10.95 Linear regression can be applied to model non-l
 inear relationships between
  []
 
 [51]
-Overfull \hbox (2.88889pt too wide) in paragraph at lines 277--280
+Overfull \hbox (2.88889pt too wide) in paragraph at lines 278--281
 \TU/TeXGyrePagella(0)/m/n/10.95 The classifiers do this by using threshold func
 tions, which are discussed
  []
 
 [52] [53]
-Overfull \hbox (2.9053pt too wide) in paragraph at lines 351--353
+Overfull \hbox (2.9053pt too wide) in paragraph at lines 352--354
 \TU/TeXGyrePagella(0)/m/n/10.95 not treat all available data at the same time. 
 Instead, it learns the weights
  []
@@ -7433,80 +7433,80 @@ Instead, it learns the weights
 Missing character: There is no ∇ in font TeX Gyre Pagella Bold/OT:script=latn;l
 anguage=DFLT;+onum;mapping=tex-text;!
 
-Overfull \hbox (29.57143pt too wide) in paragraph at lines 389--392
+Overfull \hbox (29.57143pt too wide) in paragraph at lines 390--393
 \TU/TeXGyrePagella(0)/m/n/10.95 only one bit is $[]$ and all others $[]$, i.e. 
 representing states: $[] [] [][][] [][] [] [] [][][] [] []
  []
 
 [55]
-Overfull \hbox (1.0447pt too wide) in paragraph at lines 393--396
+Overfull \hbox (1.0447pt too wide) in paragraph at lines 394--397
 \TU/TeXGyrePagella(0)/m/n/10.95 We use both ordered and disordered states to tr
 ain the logistic regressor
  []
 
 [56]
-Overfull \hbox (3.49928pt too wide) in paragraph at lines 429--430
+Overfull \hbox (3.49928pt too wide) in paragraph at lines 430--431
 \TU/TeXGyrePagella(0)/m/n/10.95 Ensemble methods combine predictions from multi
 ple, often weak, stat-
  []
 
 [57]
-Underfull \hbox (badness 10000) in paragraph at lines 436--442
+Underfull \hbox (badness 10000) in paragraph at lines 437--443
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 436--442
+Underfull \hbox (badness 10000) in paragraph at lines 437--443
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 436--442
+Underfull \hbox (badness 10000) in paragraph at lines 437--443
 
  []
 
 [58]
-Underfull \hbox (badness 10000) in paragraph at lines 465--469
+Underfull \hbox (badness 10000) in paragraph at lines 466--470
 
  []
 
 [59]
-Overfull \hbox (36.27682pt too wide) in paragraph at lines 470--483
+Overfull \hbox (36.27682pt too wide) in paragraph at lines 471--484
 \TU/TeXGyrePagella(0)/m/n/10.95 sampling with replacement to create new ’bootst
 rapped’ datasets $[][][][] [] [] [][][]$
  []
 
 [60] [61]
-Overfull \hbox (7.28346pt too wide) in paragraph at lines 548--549
+Overfull \hbox (7.28346pt too wide) in paragraph at lines 549--550
 \TU/TeXGyrePagella(0)/m/n/10.95 Strictly speaking, this procedure dos not const
 itute a random forest
  []
 
 [62]
-Overfull \hbox (5.42831pt too wide) in paragraph at lines 550--551
+Overfull \hbox (5.42831pt too wide) in paragraph at lines 551--552
 \TU/TeXGyrePagella(0)/m/n/10.95 semble because it dramatically reduces correlat
 ions between mem-
  []
 
 [63] [64]
-Underfull \hbox (badness 10000) in paragraph at lines 617--620
+Underfull \hbox (badness 10000) in paragraph at lines 618--621
 
  []
 
 
-Overfull \hbox (9.82108pt too wide) in paragraph at lines 651--653
+Overfull \hbox (9.82108pt too wide) in paragraph at lines 652--654
 \TU/TeXGyrePagella(0)/m/n/10.95 vised learning techniques. Deep Neural Networks
  (DNNs) got rebranded
  []
 
 
-Overfull \hbox (0.81839pt too wide) in paragraph at lines 651--653
+Overfull \hbox (0.81839pt too wide) in paragraph at lines 652--654
 \TU/TeXGyrePagella(0)/m/n/10.95 as ’Deep Learning’ and have become the workhors
 e technique for many
  []
 
 [65]
-Overfull \hbox (7.83365pt too wide) in paragraph at lines 657--658
+Overfull \hbox (7.83365pt too wide) in paragraph at lines 658--659
 []\TU/TeXGyrePagella(0)/m/n/10.95 NNs for unsupervised learning such as Deep Bo
 ltzmann Machines. 
  []
@@ -7593,7 +7593,7 @@ Overfull \hbox (38.57968pt too wide) has occurred while \output is active
  []
 
 [67]
-Overfull \hbox (6.3655pt too wide) in paragraph at lines 695--696
+Overfull \hbox (6.3655pt too wide) in paragraph at lines 696--697
 \TU/TeXGyrePagella(0)/m/n/10.95 was the $[]$ function or a sigmoid/Fermi functi
 on. However, this choice
  []
@@ -7604,7 +7604,7 @@ Overfull \hbox (38.57968pt too wide) has occurred while \output is active
  []
 
 [69] [70]
-Underfull \hbox (badness 10000) in paragraph at lines 741--746
+Underfull \hbox (badness 10000) in paragraph at lines 742--747
 
  []
 
@@ -7614,7 +7614,7 @@ Overfull \hbox (38.57968pt too wide) has occurred while \output is active
  []
 
 [71]
-Underfull \hbox (badness 10000) in paragraph at lines 756--759
+Underfull \hbox (badness 10000) in paragraph at lines 757--760
 
  []
 
@@ -7633,7 +7633,7 @@ File: gfx/Backpropagation2.png Graphic file (type bmp)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (1.06021pt too wide) in paragraph at lines 828--833
+Overfull \hbox (1.06021pt too wide) in paragraph at lines 829--834
 \TU/TeXGyrePagella(0)/m/n/10.95 putationally slow, such that you randomly subdi
 vide the data into mini-
  []
@@ -7644,7 +7644,7 @@ Overfull \hbox (38.57968pt too wide) has occurred while \output is active
  []
 
 [75] [76]
-Overfull \hbox (0.63226pt too wide) in paragraph at lines 847--848
+Overfull \hbox (0.63226pt too wide) in paragraph at lines 848--849
 \TU/TeXGyrePagella(0)/m/n/10.95 ing rate or step-size by searching over five lo
 garithmic grid points.
  []
@@ -7655,13 +7655,13 @@ Overfull \hbox (38.57968pt too wide) has occurred while \output is active
  []
 
 [77] [78]
-Overfull \hbox (5.06656pt too wide) in paragraph at lines 875--877
+Overfull \hbox (5.06656pt too wide) in paragraph at lines 876--878
 []\TU/TeXGyrePagella(0)/m/n/10.95 Hence, the new parameters $[][]$ and $[][]$ c
 an be learned just like the weights
  []
 
 
-Overfull \hbox (0.88866pt too wide) in paragraph at lines 882--883
+Overfull \hbox (0.88866pt too wide) in paragraph at lines 883--884
 []\TU/TeXGyrePagella(0)/m/n/10.95 In Tensorflow one constructs data flowgraphs,
  the nodes of which
  []
@@ -7686,20 +7686,20 @@ File: gfx/cnnExample.png Graphic file (type bmp)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (7.23875pt too wide) in paragraph at lines 989--991
+Overfull \hbox (7.23875pt too wide) in paragraph at lines 990--992
 \TU/TeXGyrePagella(0)/m/n/10.95 The convolutional layers are interspersed with 
 pooling layers that coarse-
  []
 
 [84]
-Underfull \hbox (badness 10000) in paragraph at lines 996--1002
+Underfull \hbox (badness 10000) in paragraph at lines 997--1003
 
  []
 
 File: gfx/cnnPooling.png Graphic file (type bmp)
 <gfx/cnnPooling.png>
 [85] [86]
-Overfull \hbox (3.27396pt too wide) in paragraph at lines 1028--1031
+Overfull \hbox (3.27396pt too wide) in paragraph at lines 1029--1032
 \TU/TeXGyrePagella(0)/m/n/10.95 The huge CNN models trained by industry are cal
 led: AlexNet, GoogLe-
  []
@@ -7708,31 +7708,31 @@ led: AlexNet, GoogLe-
 File: gfx/WorkflowDNN.png Graphic file (type bmp)
 <gfx/WorkflowDNN.png>
  [88] [89]
-Overfull \hbox (6.51236pt too wide) in paragraph at lines 1092--1096
+Overfull \hbox (6.51236pt too wide) in paragraph at lines 1093--1097
 \TU/TeXGyrePagella(0)/m/n/10.95 of the other supervised learning algorithms dis
 cussed (regression-based
  []
 
 [90]
-Overfull \hbox (2.0056pt too wide) in paragraph at lines 1100--1103
+Overfull \hbox (2.0056pt too wide) in paragraph at lines 1101--1104
 \TU/TeXGyrePagella(0)/m/n/10.95 unique in that they contain million of paramete
 rs, yet can still be trained
  []
 
 
-Overfull \hbox (2.53017pt too wide) in paragraph at lines 1100--1103
+Overfull \hbox (2.53017pt too wide) in paragraph at lines 1101--1104
 \TU/TeXGyrePagella(0)/m/n/10.95 on existing hardwares. The complexity of DNNs (
 i.t.o. parameters) com-
  []
 
 
-Overfull \hbox (2.78209pt too wide) in paragraph at lines 1100--1103
+Overfull \hbox (2.78209pt too wide) in paragraph at lines 1101--1104
 \TU/TeXGyrePagella(0)/m/n/10.95 bined with their simple architecture (layer-wis
 e connections) hit a sweet
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1100--1103
+Underfull \hbox (badness 10000) in paragraph at lines 1101--1104
 
  []
 
@@ -8065,7 +8065,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 607--610
  []
 
 
-Overfull \hbox (1.80391pt too wide) in paragraph at lines 631--636
+Overfull \hbox (1.80391pt too wide) in paragraph at lines 632--637
 \TU/TeXGyrePagella(0)/m/n/10.95 The MaxEnt procedure gives us a way if parametr
 izing an energy-based
  []
@@ -8076,11 +8076,62 @@ Overfull \hbox (258.70947pt too wide) has occurred while \output is active
  []
 
 [119]
-Underfull \hbox (badness 10000) in paragraph at lines 640--643
+Underfull \hbox (badness 10000) in paragraph at lines 641--644
 
  []
 
-) [120]
+[120]
+Overfull \hbox (0.61104pt too wide) in paragraph at lines 672--681
+\TU/TeXGyrePagella(0)/m/n/10.95 where $[][][][][][][][]$ is an additional regul
+arization term that prevents over-
+ []
+
+
+Overfull \hbox (258.70947pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[121]
+Overfull \hbox (12.80592pt too wide) in paragraph at lines 693--695
+\TU/TeXGyrePagella(0)/m/n/10.95 which implies, as $[]$ is the cumulant generati
+ng function for the Boltzmann
+ []
+
+[122]
+Underfull \hbox (badness 10000) in paragraph at lines 715--719
+
+ []
+
+
+Overfull \hbox (20.33998pt too wide) in paragraph at lines 715--719
+\TU/TeXGyrePagella(0)/m/n/10.95 we can also easily calculate the gradient of an
+y expectation value $[][]$
+ []
+
+
+Overfull \hbox (258.70947pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[123]
+Underfull \hbox (badness 1910) in paragraph at lines 732--733
+[]\TU/TeXGyrePagella(0)/m/n/10.95 Our goal is to fit the parameters of a model 
+$[][][][][][][][] []
+ []
+
+
+Underfull \hbox (badness 4752) in paragraph at lines 736--737
+[]\TU/TeXGyrePagella(0)/m/n/10.95 Compute the gradient of log-likelihood using 
+these
+ []
+
+
+Overfull \hbox (11.85243pt too wide) in paragraph at lines 753--753
+|[]\TU/TeXGyrePagella(2)/m/sc/10.95 deep generative models: hidden variables an
+d restric-
+ []
+
+) [124]
 \openout2 = `Chapters/Problems.aux'.
 
  (./Chapters/Problems.tex
@@ -8091,12 +8142,12 @@ Overfull \hbox (25.70038pt too wide) in paragraph at lines 12--14
 int correlations between
  []
 
-[121
+[125
 
 
 
 
-]) [122]
+]) [126]
 \tf@thm=\write14
 \openout14 = `MLnotes.thm'.
 
@@ -8354,12 +8405,12 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59864 strings out of 493007
- 1234218 string characters out of 6136718
+ 59905 strings out of 493007
+ 1235149 string characters out of 6136718
  2035707 words of memory out of 5000000
- 62801 multiletter control sequences out of 15000+600000
+ 62842 multiletter control sequences out of 15000+600000
  546530 words of font info for 147 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
  87i,23n,138p,10510b,5676s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (130 pages).
+Output written on MLnotes.pdf (134 pages).

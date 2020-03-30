@@ -614,6 +614,7 @@ Partition functions for maximum entorpy models are often intractable to compute.
 	\ese
 	The resulting probability density function is,
 	\begin{align}
+		\label{eq:energyCostfctMaxEntmodel}
 		p(\mx) &= Z^{-1} e^{-E(\mx)} =\frac{1}{\sqrt{(2 \pi)^n \det J^{-1}} } e^{\half \mathbf{a}^T J^{-1} \mathbf{a}+ \mathbf{a}^T \mx+ \half \mx^T J \mx }\nonumber \\
 		&=\frac{1}{\sqrt{(2 \pi)^n \det \Sigma} } e^{-\half (\mx -\mu)^T \Sigma^{-1} (\mx-\mu)},
 	\end{align} 
@@ -646,6 +647,111 @@ What follows is an in-depth discussion of \emph{Boltzmann learning} for energy-b
 
 
 
+\subsubsection{Maximum likelihood}
+By far the most common approach used for training a generative model is to maximize the log-likelihood of the training data set. Recall, that the log-likelihood characterizes the log-probability of generating the observed data using our generative model. By choosing the negative log-likelihood as the cost function, the learning procedure tries to find parameters that maximize the probability of the data.\\
+In what follows, we employ a general notation that is applicable to all energy-based models, not just the MaxEnt models \ref{subsec:energyMaxEnt}. The reason for this is that much of this discussion does not rely on the specific form of the energy function but only on the fact that our generative model takes a Boltzmann form. We denote the generative model by the probability distribution $p_{\theta}(\mx)$ and its corresponding partition function by $\log Z(\{\theta_i\})$. In MLE, the parameters of the model are fit by maximizing the log-likelihood
+\be 
+\label{eq:energyCostfctLogLikely}
+\mL(\{\theta_i\}) = \expval{\log(p_{\theta}(\mx))}_{data}=-\expval{E(\mx;\{\theta_i\})}_{data} - \log Z(\{\theta_i\}),
+\ee 
+where we made use of 
+\begin{enumerate}
+	\item Our generative distribution is of the Boltzmann form, and
+	\item the partition function does not depend on the data
+	\bse 
+	\expval{Z}_{data}=Z.
+	\ese 
+\end{enumerate}
+
+
+\subsubsection{Regularization}
+\label{subsubsec:energyCostfctRegularization}
+Just as for discriminative models like linear and logistic regression, it is common to supplement the log-likelihood with additional regularization terms (cf. \ref{subsec:lregRegularization}). Instead of minimizing the negative log-likelihood, one minimizes a cost function of the form
+\be 
+-\mL(\{\theta_i\}) +E_{reg}(\{\theta_i\}),
+\ee 
+where $E_{reg}(\{\theta_i\})$ is an additional regularization term that prevents overfitting. From a Bayesian perspective, this new term can be viewed as encoding a (negative) log-prior on model parameters and performing a maximum-a-posteriori (MAP) estimate instead of a MLE.
+\begin{mybox}{Regularization energy based models}
+	A common choice for the regularization function are the sums of the $L_1$ or $L_2$ norms of the parameters
+	\be 
+	\label{eq:energyCostfctRegularizationFct}
+	E_{reg}(\{\theta_i\}) = \Lambda \sum_i \abs{\theta_i}^\alpha ,\quad \alpha=1,2
+	\ee 
+	with $\Lambda$ controlling the regularization strength. A large $\Lambda$ will force many parameters to be close to or exactly zero, $\Lambda=0$ is MLE. Just as in regression, an $L_1$ penalty enforces sparsity, with many of the $\theta_i$ set to zero, and $L_2$ regularization shrinks the size of the parameters towards zero.
+\end{mybox}
+One challenge of generative models is that is is often difficult to choose the regularization strength $\Lambda$. Recall that, for linear \ref{sec:linearRegression} and logistic regression \ref{sec:logisticRegression}, $\Lambda$ is chosen to maximize the out-of-sample performance on a validation dataset (i.e. cross-validation). However, for generative models our data are usually unlabelled. Therefore, choosing a regularization strength is more subtle and there exists no universal procedure for choosing $\Lambda$. One common strategy is to divide the data into a training set and a validation set and monitor a summary statistic such as the log-likelihood, energy distance, or variational free-energy \ref{subsubsec:varMFTEMphys} of the generative model on the training and validation sets. If the gap between the training and validation datasets starts growing, one is probably overfitting the model even if the log-likelihood of the training dataset is still increasing. This also give a procedure for "early stopping".\\
+In practice, when using such regularizers it is important to try many different values of $\Lambda$ and then try to use a proxy statistic for overfitting to evaluate the optimal choice of $\Lambda$.
+
+
+
+\subsection{Computing gradients}
+\label{subsec:energyGradients}
+We still need to specify a procedure for minimizing the cost function. SGD \ref{subsubsec:gdSGD} is normally employed, but how do you actually compute the gradients ?\\
+Define operators conjugate to the parameters $\theta_i$
+\bse 
+\mO_i(\mx) = \frac{\partial E(\mx;\theta_i)}{\partial \theta_i},
+\ese 
+which implies, as $Z$ is the cumulant generating function for the Boltzmann distribution, that
+\bse 
+\expval{\mO_i(\mx)}_{model}= \tr_{\mx} p_{\theta}(\mx) \mO_i(\mx) = -\frac{\partial \log Z(\{\theta_i\})}{\partial \theta_i}.
+\ese 
+\begin{mybox}{MLE}
+Then, \ref{eq:energyCostfctLogLikely} becomes
+\begin{align}
+	\label{eq:energyGradientsMLE}
+	-\frac{\partial \mL(\{\theta_i\})}{\partial \theta_i} &= \langle \frac{\partial E(\mx;\theta_i)}{\partial \theta_i}\rangle_{data} +\frac{\partial \log Z(\{\theta_i\})}{\partial \theta_i} \nonumber \\
+	&=\expval{\mO_i(\mx)}_{data} - \expval{\mO_i(\mx)}_{model}.
+\end{align}
+The gradient of the log-likelihood w.r.t. a model parameter \ref{eq:energyGradientsMLE} is a difference of moments - one calculated directly from the data and one calculated from our model using the current model parameters. The data-dependent term is known as the \emph{positive phase} of the gradient and the model-dependent term is known as the \emph{negative phase} of the gradient. This derivation also gives an intuitive explanation for likelihood-based training procedures. The gradient acts on the model to lower the energy of configurations that are near observed data points while raising the energy of configurations that are far from observed data points. Finally, we note that all information about the data only enters the training procedure through the expectations $\expval{\mO_i(\mx)}_{data}$ and our generative model is blind to information beyond what is contained in these expressions. 
+\end{mybox}
+\subsubsection{How does one actually compute the gradient then ?}
+To use SGD, we must still calculate the expectation values in \ref{eq:energyGradientsMLE}. The positive phase of the gradient can be easily calculated using samples from the training dataset. The negative phase, however, is generally much more difficult to compute because analytically calculating the partition function is intractable for most interesting models.
+\begin{definition}
+	There are exceptional cases in which we can calculate the expectation values analytically. When this happens, the generative model is said to have a \emph{Tractable Likelihood}. One example of a generative model with a Tractable Likelihood is the Gaussian MaxEnt model for real valued data \ref{eq:energyCostfctMaxEntmodel}.
+\end{definition}
+Returning to the generic case where most energy-based model have \emph{intractable likelihoods}, we must estimate expectation values numerically. One way to do this is draw samples $\mathcal{S}_{model} =\{\mx^\prime_i\}$ from the model $p_{\theta}(\mx)$ and evaluate arbitrary expectation values using these samples:
+\be 
+\expval{f(\mx)}_{model} = \int \md \mx p_\theta(\mx) f(\mx) \approx \sum_{\mx^\prime_i\in\mathcal{S}_{model}} f(\mx^\prime_i).
+\ee 
+The samples from the model $\mx^\prime_i\in\mathcal{S}_{model}$ are often referred to as \emph{fantasy particles} in the ML literature and can be generated using simple MCMC algorithms such as Metropolis-Hasting.\\
+\\
+Finally, we note that once we have the fantasy particles from the model, we can also easily calculate the gradient of any expectation value $\expval{f(\mx)}_{model}$ using what is commonly called the "log-derivative trick" in ML
+\begin{align*}
+	\frac{\partial}{\partial \theta_i} \expval{f(\mx)}_{model} &= \int \md \mx \frac{\partial p_\theta(\mx)}{\partial \theta_i} f(\mx) \\
+	&= \langle \frac{\partial \log p_\theta(\mx)}{\partial \theta_i} f(\mx)\rangle _{model} \\
+&= \expval{\mO_i(\mx) f(\mx)}_{model} \approx \sum_{\mx^\prime_j\in\mathcal{S}_{model}} \mO_i(\mx_j) f(\mx^\prime_j).
+\end{align*}
+
+
+
+
+\subsection{Summary of the training procedure}
+\label{subsec:energyTrainingProcedure}
+We now summarize the discussion above and present a general procedure for training an energy-based model using SGD on the cost function.
+\begin{mybox}{Training Procedure - Recipe}
+	Our goal is to fit the parameters of a model $p_{\lambda}(\{\theta_i\}) = Z^{-1} e^{-E(\mx,\{\theta_i\})}$. Training the model involves the following steps:
+		\begin{enumerate}
+			\item Read a minibatch of data, $\{\mx\}$.
+			\item Generate fantasy particles $\{\mx^\prime\} \sim p_\lambda$ using an MCMC algorithm (e.g., Metropolis-Hastings).
+			\item Compute the gradient of log-likelihood using these samples and \ref{eq:energyGradientsMLE}, where the averages are taken over the minibatch of data nad the fantasy particles from the model, respectively.
+			\item Use the gradient as input to one of the gradient based optimizers from \ref{sec:gd}.
+		\end{enumerate}
+\end{mybox}
+\subsubsection{Practical tips}
+In practice, it is helpful to supplement this pasigc proecure with some tricks that help training. As with discriminative NNs, it is important to initialize the parameters properly and print summary statistics during the training procedure on the traing and validation sets to prevent overfitting. This is more discussed in \todo{Cheap tricks, to compile and reference !}.
+
+
+
+
+
+
+
+
+
+
+
+\section{Deep Generative Models: Hidden Variables and Restricted Boltzmann Machines (RBMs)}
+\label{sec:deepGenerative}
 
 
 
@@ -666,15 +772,4 @@ What follows is an in-depth discussion of \emph{Boltzmann learning} for energy-b
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+ 
