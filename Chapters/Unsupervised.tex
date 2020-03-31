@@ -752,24 +752,157 @@ In practice, it is helpful to supplement this pasigc proecure with some tricks t
 
 \section{Deep Generative Models: Hidden Variables and Restricted Boltzmann Machines (RBMs)}
 \label{sec:deepGenerative}
+Here, we extend the discussion in \ref{sec:energy} to energy-based models that include latent or hidden variables.\\
+Including latent variables in generative models greatly enhances their expressive power allowing the model to represent sophisticated correlations between visible veatures without sacrificing trainability.
+
+\subsection{Why hidden (latent) variables ?}
+\label{subsec:deepGenerativeWhy}
+\subsubsection{Idea}
+Latent or hidden variables are a powerful yet elegant way to encode sophisticated correlations between observable features.
+
+\begin{mybox}{Quintessence - physics perspective}
+	The underlying reason for this is that marginalizing over a subset of variables -"integrating out" degrees of freedom in the language of physics - induces complex correlations is a familiar component of many physical theories. For example when considering free electrons living on a lattice, integrating out phonons gives rise to higher-order electron-electron interactions (e.g. superconducting or magnetic correlations). More generally, in the Wilsonian renormalization group paradigm, all effective field theories can be though of as arising form integrating out high-energy degrees of freedom.
+\end{mybox}
+Generative models with latent variables run this logic in reverse.
+\begin{mybox}{Quintessence - generative models perspective}
+	Encode complex interactions between visible variables by introducing additional, hidden variables that interact with visible degrees of freedom in a simple manner, yet still reproduce the complex correlations between visible degrees in the data once marginalized over (integrated out). This allows us to encode interactions between the visible variables using simpler interactions at the cost of introducing new latent variables/degrees of freedom.
+\end{mybox}
+This trick is also widely exploited in physics (e.g. in the Hubbard-Stratonovich transformation or the introduction of ghost fields in gauge theory).
+
+\subsubsection{For example - the Ising model}
+\label{subsubsec:deepGenerativeHopfield}
+To make these ideas more concrete, let us revisit the pairwise Ising model, which is described by a Boltzmann distribution $p(\mathbf{v}) = e^{E(\mathbf{v})}/Z$ with energy 
+\bse 
+E(\mathbf{v}) = - \sum_i a_i v_i - \half \sum_{ij} v_i J_{ij} v_j,
+\ese 
+where $J_{ij}$ is a symmetric coupling matrix that encodes the pairwise constraints and $a_i$ enforce the single-variable constraint.\\
+Our goal is to replace the complicated interactions between the visible variables $v_i$ encoded by $J_{ij}$, by interactions with a new set of latent variables $h_\mu$. In order to do this, it is helpful to rewrite the coupling matrix in a slightly different form. Using SVD, we can always express the coupling matrix in the form $J_{ij} = \sum_{\mu=1}^N W_{i \mu} W_{j\mu}$, where $\{W_{i\mu}\}$ are appropriately normalized singular vectors.
+\begin{mybox}{Hopfield model}
+	 In terms of $W_{i\mu}$, the energy takes the form
+\be 
+\label{eq:deepGenerativeHopfield}
+E_{Hop}(\mathbf{v}) = -\sum_i a_i v_i - \half \sum_{ij \mu} v_i W_{i \mu} W_{ j\mu} v_j.
+\ee 
+We note that in the special case when both $v_i \in \{-1,+1\}$ and $W_{i\mu} \in \{-1,+1\}$ are binary variables, a model with this form of the energy functions is known as the \emph{Hopfield model}.
+Note that here we will refer to all energy functions of the form\ref{eq:deepGenerativeHopfield} as (generalized) Hopfield models, even for the case when the $W_{i\mu}$ are continuous variables.
+\end{mybox}
+We now "decouple" the visible variables $v_i$ by introducing a set of normally, distributed continuous latent variables $h_\mu$ such that we can rewrite the Boltzmann distribution for the generalized Hopfield model as
+\begin{align*}
+	p(\mathbf{v}) &= \frac{e^{\sum_i a_i v_i+\half \sum_{ij\mu} v_i W_{i\mu} W_{j\mu} v_j} }{Z}\\
+		&= \frac{e^{\sum_i a_i v_i} \prod_\mu \int \md h_\mu e^{-\half \sum_\mu h^2_\mu-\sum_i v_i W_{i\mu} h_\mu} }{Z} \\
+		&\equiv \frac{\int \md \mathbf{h}e^{-E(\mathbf{h,v}) }}{Z},
+\end{align*}
+where $E(\mathbf{v,h})$ is a joint energy functional of both the latent and visible variables of the form
+\be 
+E(\mathbf{v,h}) = - \sum_i a_i v_i + \half \sum_\mu h^2_\mu - \sum_{i\mu} v_i W_{i\mu} h_\mu. 
+\ee 
+We can also use the energy function $E(\mathbf{v,h})$ to define a new energy-based model $p(\mathbf{v,h})$ on both the latent and visible variables
+\be 
+p(\mathbf{v,h}) = \frac{e^{-E(\mathbf{v,h}) }}{Z^\prime}.
+\ee 
+Marginalizing over latent variables of course gives us back the generalized Hopfield model
+\be 
+p(\mathbf{v}) =\int \md \mathbf{h}p(\mathbf{v,h}) = \frac{e^{-E_{Hop}(\mathbf{v})}}{Z}.
+\ee 
+Notice that $E(\mathbf{v,h})$ contains no direct interactions between visile degrees of freedom (or between hidden degrees of freedom). Instead, the complex correlations between the $v_i$ are encoded in the interaction between the visible $v_i$ and latent variables $h_\mu$. It turns out that the model presented here is a special case of a more general class of powerful energy-based models called Restricted Boltzmann Machines (RBMs).
+
+
+\subsection{Restricted Boltzmann Machines (RBMs)}
+\label{sec:deepGenerativeRBM}
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\linewidth]{gfx/RBM}
+	\caption{\itshape A RBM consists of visible units $v_i$ and hidden units $h_\mu$ that interact with each other through interactions of the form $W_{i\mu}v_ih_\mu$. Importantly, there are no interactions between visible units themselves or hidden units themselves.}
+	\label{fig:RBM}
+\end{figure}
+
+\begin{mybox}{RBM}
+	A RBM is an energy-based model with both visible and hidden units where the visible and hidden units interact with each other but do not interact among themselves, compare figure \ref{fig:RBM}. The energy function of an RBM takes the general functional form
+	\be 
+	\label{eq:deepGenerativeRBMenergy}
+	E(\mathbf{v,h}) = - \sum_i a_i (v_i) -\sum_\mu b_\mu (h_\mu) - \sum_{i\mu} W_{i\mu} v_i h_\mu,
+	\ee 
+	where $a_i(\cdot)$ and $b_\mu(\cdot)$ are functions that we are free to choose. The most common choice is:
+		\bse 
+a_i(v_i) = \Bigg\{
+\begin{array}{ll}
+	a_i v_i& \text{if $v_i\in \{0,1\}$ is binary}\\
+	\frac{v^2_i}{2 \sigma^2_i}, & \text{if $v_i\in \mR$ is continuous}.
+\end{array}
+\ese 
+		and,
+		\bse 
+		b_\mu(h_\mu) =\Bigg\{ \begin{array}{ll}
+			b_\mu h_\mu & \text{if $h_\mu \in \{0,1\}$ is binary}\\
+			\frac{h^2_\mu}{2 \sigma^2_\mu}, & \text{if $h_\mu\in \mR$ is continuous}.
+	\end{array}
+	\ese 
+	For this choice of $a_i,b_\mu$, layers consisting of discrete binary units are often called \emph{Bernoulli layers}, and layers consisting of continuous variables are often called Gaussian layers.
+\end{mybox}
+The different possible combinations are the following.\\
+ \begin{tabular}{|l|ll|}
+	       Name &Visible Layer $a_i(v_i)$ & Hidden Layer $b_\mu(h_\mu)$ \\
+	\toprule
+"RBM" & Bernoulli & Bernoulli\\
+Multi-dimensional Gaussian & Gaussian &Gaussian \\
+Generalized Hopfield model& Bernoulli &Gaussian \\
+Gaussian Bernoulli RBM & Gaussian &Bernoulli\\
+	\bottomrule
+\end{tabular}
+\vspace{0.1cm}
+Specifying a generative model with this bipartite interaction structure has two major advantages:
+\begin{enumerate}
+\item It enables capturing both pairwise \emph{and higher-order} correlations between the visible units and 
+\item it makes it easier to sample from the model using an MCMC method known as block Gibbs sampling, which in turn makes the model easier to train.
+\end{enumerate}
+
+\subsubsection{Content of an RBM}
+We want to understand the kind of correlations that can be captured using an RMB.\\
+One can derive that the marginal energy includes all order of interactions between the visible units, with the $n$-th order cumulants of the distribution of hidden units $q_\mu(h_\mu) = e^{b_\mu(h_\mu)}/Z$ weighting the $n$-th order interactions between the visible units.\\
+This exemplifies the incredible representational power of RBMs with a Bernoulli hidden layer. Each hidden unit can encode interactions of arbitrarily high order. By combining many different hidden units, we can encode very complex interactions at all orders. Moreover, we can learn which order of correlations/interactions are important directly from the data instead of having to specify them ahead of time as we did in the MaxEnt models \ref{subsec:energyMaxEnt}. This highlights the power of generative models with even the simplest interactions between visible and latent variables to encode, learn, and represent complex correlations present in the data.
+
+
+
+\subsection{Training RBMs}
+\label{subsec:deepGenerativeTraining}
+RBMs are a special class of energy-based generative models, which can be trained using the MLE procedure described in detail in \ref{subsec:energyGradients},\ref{subsec:energyTrainingProcedure}. The gradient (SGD) can be calculated using \ref{eq:energyGradientsMLE}. As before calculating the negative phase of the gradient (i.e. the expectation value w.r.t. to the model) requires that we draw samples from the model. The bipartite form of the interactions in RBMs were specifically chosen with this in mind.
+
+\subsubsection{Gibbs sampling and contrastive divergence (CD)}
+\label{sububsec:deepGenerativeTrainingGibbsCD}
+The bipartite interaction structure of an RBM makes it possible to calculate expectation values using a MCMC method known as Gibbs sampling. The key reason for this is that since there are no auto-interactions in the layers, the visible and hidden units of an RBM are conditionally independent:
+\begin{align}
+	\label{eq:deepGenerativeTrainingGibbsCDdistributions}
+	p(\mathbf{v} |\mathbf{h}) &= \prod_i p(v_i|\mh),\; p(\mh|\mv) = \prod_\mu p(h_\mu|\mv) \nonumber \\
+	p(v_i|\mh) &=\sigma(a_i +\sum_\mu W_{i\mu} h_\mu) \\
+	p(h_\mu =1 |\mv) &= \sigma(b_\mu + \sum_i W_{i\mu} v_i)\nonumber,
+\end{align}
+and where $\sigma(z)=1/(1+e^{-z})$ is the sigmoid function.\\
+\begin{mybox}{Procedure}
+	Using these expressions it is easy to compute expectation values w.r.t. the data. The input to GD is a minibatch of observed data. For each sample in the minibatch, we simply clamp the visible units to the observed values and apply \ref{eq:deepGenerativeTrainingGibbsCDdistributions} using the probability for the hidden variables. We then average over all samples in the minibatch to calculate expectation values w.r.t. the data. To calculate expectation values w.r.t. the model, we use (block) Gibbs sampling. The idea behind (block) Gibbs sampling is to iteratively sample from the conditional distribution $\mh_{t+1} \sim p(\mh |\mv_t)$ and $\mv_{t+1} \sim p(\mv|\mh_{t+1})$. Since the units are conditionally independent, each step of this iteration can be performed by simply drawing random numbers. The samples are guaranteed to converge to the equilibrium distribution of the model in the limit that $t\rightarrow$. At the end of the Gibbs sampling procedure, one ends up with a minibatch of samples (fantasy particles).
+\end{mybox}
+To create a guaranteed independent sample, one resorts to using an approximate Gibbs sampling technique called \emph{Contrastive Divergence}(CD). In CD-$n$, we just perform $n$ interations of (block) Gibbs sampling, with $n$ often taken to be as small as $1$, it has proven to work reasonably well. Furthermore, to introduce stochasticity into the drawn dataset one uses a variant called Persistent CD (PCD). In PCD, rather than restarting the Gibbs sampler from the data at each GD step, we start the Gibbs sampling at the fantasy particles in the last GD step. Since parameters change slowly compared to the Gibbs sampling, samples that are high probability at one step of the SGD are also likely to be high probability at the next step. This ensures that PCD does not introduce large errors in the estimation of the gradients. The advantage of using fantasy particles to initialize the Gibbs sampler is to allow PCD to explore parts of the feature space that are much further from the training dataset than one could reach with ordinary CD, thus creating a randomized and independent minibatch via stochasticity.
+
+\subsubsection{Practical Considerations}
+\label{subsubsec:deepGenerativeTrainingPractical}
+Important tricks in the application are the following.
+\begin{enumerate}
+	\item \emph{Initialization}.\\
+	The model must be initialized. Hinton suggests taking the weights $W_{i\mu}$ from a Gaussian with mean zero and standard deviation $\sigma=0.01$. An alternative initialization scheme proposed by Glorot and Bengio instead chooses the standard deviation to scale with the size of the layers: $\sigma = 2/\sqrt{N_v+N_h}$ where $N_v$ and $N_h$ are number of visible and hidden units respectively. The bias of the hidden units is initialized to zero while the bias of the visible units is typically taken to be inversely proportional to the mean activation, $a_i=\expval{v_i}^{-1}_{data}$.
+	\item \emph{Regularization}.\\
+	One can of course use an $L_1$ or $L_2$ penalty, typically only on the weight parameters, not the biases. Alternatively, Droput has been shown to decrease overfitting when training with CD and PCD, which results in more interpretable learned features.
+	\item  \emph{Learning rates}.\\
+	Typically, it is helpful to reduce the learning rate in later stages of training.
+	\item \emph{Updates for CD and PCD}.\\
+	There are several computational tricks one can use for speeding up the alternating updates in CD and PCD, linked in Hinton $2012$.
+\end{enumerate}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\subsection{Deep Boltzmann Machine}
+\label{subsec:deepGenerativeDBM}
 
 
  

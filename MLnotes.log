@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  30 MAR 2020 12:33
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  31 MAR 2020 15:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -3483,26 +3483,26 @@ File: german.lbx 2017/12/19 v3.10 biblatex localization (PK/JW/AB)
 (./Chapters/Unsupervised.aux) (./Chapters/Problems.aux))
 \openout1 = `MLnotes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
 Package biblatex Info: XeTeX detected.
 (biblatex)             Assuming input encoding 'utf8'.
 Package biblatex Info: Data encoding 'ascii' specified.
@@ -3515,29 +3515,29 @@ Package biblatex Info: Data encoding 'ascii' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'MLnotes.bbl' found.
  (./MLnotes.bbl)
-Package biblatex Info: Reference section=0 on input line 136.
-Package biblatex Info: Reference segment=0 on input line 136.
+Package biblatex Info: Reference section=0 on input line 137.
+Package biblatex Info: Reference segment=0 on input line 137.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count482
-Package scrhack Info: undefining \float@addtolists on input line 136.
+Package scrhack Info: undefining \float@addtolists on input line 137.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
 (Font)                  TU/TeXGyrePagellaMath(1)/m/n --> TU/TeXGyrePagella(0)/m
-/n on input line 136.
+/n on input line 137.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> TU/TeXGyrePagella(0)/m/it on input lin
-e 136.
+e 137.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  TU/TeXGyrePagellaMath(1)/bx/n --> TU/TeXGyrePagella(0)/
-bx/n on input line 136.
+bx/n on input line 137.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 136.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 137.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 136.
-LaTeX Info: Redefining \microtypecontext on input line 136.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 137.
+LaTeX Info: Redefining \microtypecontext on input line 137.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: No adjustment of tracking.
@@ -4092,7 +4092,7 @@ Package microtype Info: Character `―' is missing
 (microtype)             in font `\TU/TeXGyrePagella(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 \AtBeginShipoutBox=\box82
-Package hyperref Info: Link coloring ON on input line 136.
+Package hyperref Info: Link coloring ON on input line 137.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -4102,9 +4102,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count483
 )
-LaTeX Info: Redefining \ref on input line 136.
-LaTeX Info: Redefining \pageref on input line 136.
-LaTeX Info: Redefining \nameref on input line 136.
+LaTeX Info: Redefining \ref on input line 137.
+LaTeX Info: Redefining \pageref on input line 137.
+LaTeX Info: Redefining \nameref on input line 137.
 
 (./MLnotes.out) (./MLnotes.out)
 \@outlinefile=\write8
@@ -4114,7 +4114,7 @@ LaTeX Info: Redefining \nameref on input line 136.
 
 Package tikz-feynman Warning: LuaTeX is required if you wish to have vertices a
 utomatically placed. You can disable this warning by setting /tikzfeynman/warn 
-luatex=false on input line 136.
+luatex=false on input line 137.
 
 \openout2 = `FrontBackmatter/Titlepage.aux'.
 
@@ -8131,33 +8131,84 @@ Overfull \hbox (11.85243pt too wide) in paragraph at lines 753--753
 d restric-
  []
 
-) [124]
+[124]
+Overfull \hbox (31.962pt too wide) in paragraph at lines 770--771
+[]\TU/TeXGyrePagella(0)/m/n/10.95 This trick is also widely exploited in physic
+s (e.g. in the Hubbard-Stratonovich
+ []
+
+
+Overfull \hbox (157.92955pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[125] [126]
+File: gfx/RBM.png Graphic file (type bmp)
+<gfx/RBM.png>
+
+Overfull \hbox (157.92955pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[127]
+Overfull \hbox (32.52287pt too wide) in paragraph at lines 844--856
+[]
+ []
+
+[128]
+Overfull \hbox (10.66158pt too wide) in paragraph at lines 874--875
+\TU/TeXGyrePagella(0)/m/n/10.95 late expectation values using a MCMC method kno
+wn as Gibbs sampling.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 880--884
+
+ []
+
+
+Overfull \hbox (157.92955pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[129]
+Overfull \hbox (3.23648pt too wide) in paragraph at lines 891--893
+\TU/TeXGyrePagella(0)/m/n/10.95 The model must be initialized. Hinton suggests 
+taking the weights
+ []
+
+[130])
+Overfull \hbox (157.92955pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[131]
 \openout2 = `Chapters/Problems.aux'.
 
  (./Chapters/Problems.tex
 Chapter 4.
+[132
 
+
+
+
+]
 Overfull \hbox (25.70038pt too wide) in paragraph at lines 12--14
 []\TU/TeXGyrePagella(0)/m/n/10.95 Connected correlation functions describe n-po
 int correlations between
  []
 
-[125
-
-
-
-
-]) [126]
+[133]) [134]
 \tf@thm=\write14
 \openout14 = `MLnotes.thm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 162.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 162.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 163.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 163.
  (./MLnotes.aux (./FrontBackmatter/Titlepage.aux)
 (./FrontBackmatter/Contents.aux) (./Chapters/Introduction.aux)
 (./Chapters/Statistics.aux) (./Chapters/Supervised.aux)
 (./Chapters/Unsupervised.aux) (./Chapters/Problems.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 162.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 163.
 
 
  *File List*
@@ -8393,10 +8444,11 @@ gfx/WorkflowDNN.png
 Chapters/Unsupervised.tex
 gfx/HierarchicalCLustering.png
 gfx/AnalogyEMstatphys.png
+ gfx/RBM.png
 Chapters/Problems.tex
  ***********
 
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 162.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 163.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -8405,12 +8457,12 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59905 strings out of 493007
- 1235149 string characters out of 6136718
- 2035707 words of memory out of 5000000
- 62842 multiletter control sequences out of 15000+600000
- 546530 words of font info for 147 fonts, out of 8000000 for 9000
+ 60070 strings out of 493007
+ 1240837 string characters out of 6136718
+ 2035713 words of memory out of 5000000
+ 62986 multiletter control sequences out of 15000+600000
+ 551866 words of font info for 183 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
  87i,23n,138p,10510b,5676s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (134 pages).
+Output written on MLnotes.pdf (142 pages).

@@ -370,20 +370,38 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.4.6.1}{Practical tips}}{124}{subsubsection.3.4.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}{Deep Generative Models: Hidden Variables and Restricted Boltzmann Machines (RBMs)}}{124}{section.3.5}
+\contentsline {section}{\numberline {3.5}{Deep Generative Models: Hidden Variables and Restricted Boltzmann Machines (RBMs)}}{125}{section.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{125}{chapter.4}
+\contentsline {subsection}{\numberline {3.5.1}{Why hidden (latent) variables ?}}{125}{subsection.3.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}{Physics problems}}{125}{section.4.1}
+\contentsline {subsubsection}{\numberline {3.5.1.1}{Idea}}{125}{subsubsection.3.5.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}{Cosmology}}{125}{subsection.4.1.1}
+\contentsline {subsubsection}{\numberline {3.5.1.2}{For example - the Ising model}}{126}{subsubsection.3.5.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}{QFT}}{125}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {3.5.2}{Restricted Boltzmann Machines (RBMs)}}{127}{subsection.3.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}{Ai safety}}{126}{section.4.2}
+\contentsline {subsubsection}{\numberline {3.5.2.1}{Content of an RBM}}{128}{subsubsection.3.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}{Questions}}{126}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {3.5.3}{Training RBMs}}{129}{subsection.3.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}{Knobel-problems}}{126}{section.4.3}
+\contentsline {subsubsection}{\numberline {3.5.3.1}{Gibbs sampling and contrastive divergence (CD)}}{129}{subsubsection.3.5.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}{Ideas}}{126}{subsection.4.3.1}
+\contentsline {subsubsection}{\numberline {3.5.3.2}{Practical Considerations}}{130}{subsubsection.3.5.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.5.4}{Deep Boltzmann Machine}}{131}{subsection.3.5.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{133}{chapter.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}{Physics problems}}{133}{section.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.1}{Cosmology}}{133}{subsection.4.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.2}{QFT}}{133}{subsection.4.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}{Ai safety}}{134}{section.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.1}{Questions}}{134}{subsection.4.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}{Knobel-problems}}{134}{section.4.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3.1}{Ideas}}{134}{subsection.4.3.1}
