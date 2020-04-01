@@ -390,18 +390,22 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.5.4}{Deep Boltzmann Machine}}{131}{subsection.3.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{133}{chapter.4}
+\contentsline {subsubsection}{\numberline {3.5.4.1}{The idea}}{131}{subsubsection.3.5.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}{Physics problems}}{133}{section.4.1}
+\contentsline {subsubsection}{\numberline {3.5.4.2}{Training a DBM}}{132}{subsubsection.3.5.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}{Cosmology}}{133}{subsection.4.1.1}
+\contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{135}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}{QFT}}{133}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.1}{Physics problems}}{135}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}{Ai safety}}{134}{section.4.2}
+\contentsline {subsection}{\numberline {4.1.1}{Cosmology}}{135}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}{Questions}}{134}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.1.2}{QFT}}{135}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}{Knobel-problems}}{134}{section.4.3}
+\contentsline {section}{\numberline {4.2}{Ai safety}}{136}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}{Ideas}}{134}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.2.1}{Questions}}{136}{subsection.4.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}{Knobel-problems}}{136}{section.4.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3.1}{Ideas}}{136}{subsection.4.3.1}

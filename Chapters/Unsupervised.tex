@@ -738,7 +738,7 @@ We now summarize the discussion above and present a general procedure for traini
 		\end{enumerate}
 \end{mybox}
 \subsubsection{Practical tips}
-In practice, it is helpful to supplement this pasigc proecure with some tricks that help training. As with discriminative NNs, it is important to initialize the parameters properly and print summary statistics during the training procedure on the traing and validation sets to prevent overfitting. This is more discussed in \todo{Cheap tricks, to compile and reference !}.
+In practice, it is helpful to supplement this pasigc proecure with some tricks that help training. As with discriminative NNs, it is important to initialize the parameters properly and print summary statistics during the training procedure on the traing and validation sets to prevent overfitting. This is more discussed in \ref{subsubsec:deepGenerativeTrainingPractical}\todo{Cheap tricks, to compile and reference !}.
 
 
 
@@ -903,6 +903,78 @@ Important tricks in the application are the following.
 
 \subsection{Deep Boltzmann Machine}
 \label{subsec:deepGenerativeDBM}
+\subsubsection{The idea}
+Unlike RBMs, DBMs possess multiple hidden layers and were the first models rebranded as "deep learning".
+Basically, you stack RBMs, the idea is the following.\\
+First of all we note the quintessential properties of RBMs again and their shortcomings.\\
+An RBM is composed of two layers of neurons that are connected via an undirected graph \ref{fig:RBM}. As a result, it is possible to perform sampling $\mathbf{v}\sim p(\mathbf{v|h})$ and inference $\mh \sim p(\mh|\mv)$ with the same model. As with the Hopfield model \ref{eq:deepGenerativeHopfield}, we can view each of the hidden units as representative of a pattern, or feature, that could be present in the data.\footnote{In general, one should instead think of activity patterns of hidden units representing features in the data.} The inference step involves assigning a probability to each of these features that expresses the degree to which each featue is present in a given data sample. In an RBM, hidden units do not influence each other during the inference step, i.e. hidden unit are conditionally independent given the visible units. How can we create connections between the hidden units ? This is essentially what a DBM boils down to.
+\begin{mybox}{DBM idea}
+	For a DBM, you stack multiple RBMs together to generate intra-layer interactions. How do we do this ?\\
+	With the Hopfield model, we saw that pairwise lienar connections between neurons can be mediated through another layer. Therefore, a simple way to allow for effective connections between the hidden units is to add another layer of hidden units. Rather than just having two layers, one visible and one hidden, we can add additional layers of latent variables to account for the correlations between hidden units. Ideally, as one adds more and more layers, one might hope that the correlations between hidden variables become smaller and smaller deeper into the network. This basic logic is reminiscent of renormalization procedures that seek to decorrelate layers at each step.
+\end{mybox}
+The price of adding additional layers is that the models become harder to train.
+\subsubsection{Training a DBM}
+\label{subsubsec:deepGenerativeDBMTraining}
+Training DBMs is more subtle than RBMs due to the difficulty of propagating information from visible to hidden units. Some of these problems can be alleviated via a layer-wise procedure.\\
+Rather than attempting to train the whole DBM at once, we can think of the DB; as a stack of RBMs, compare figure \ref{fig:dbm}.
+\begin{mybox}{Training procedure}
+	One first trains the bottom two layers of the DBM - treating it as if it is a stand-alone RBM. Once this bottom RBM is trained, we can generate "samples" from the hidden layer and use these samples as an input to the next RBM (consisting of the first and second hidden layer - purple hexagons and green squares in Fig. \ref{fig:dbm}). This procedure can then be repeated to pretrain all layers of the DBM.
+\end{mybox}
+This pretraining initializes the weights so that SGD can be used effectively when the network is trained in a supervised fashion. In particular, the pretraining helps the gradients to stay well-behaved rather than vanish or blow up (cf. \ref{subsubsec:dnnBackpropagationProblems}).\\
+It is worth noting that once pretrained, we can use the usual Boltzmann learning rules in \ref{eq:energyGradientsMLE} to fine-tune the weights and improve the performance of the DBM. As we demonstrate in the following, the Paysage packaged can be used to both construct and train DBMs using such a pretraining procedure.
+
+
+
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{gfx/DBM}
+	\caption{\itshape Deep Boltzmann Machine contain multiple hidden
+		layers. To train deep networks, first we perform layerwise
+		training where each two layers are treated as a RBM. This
+		can be followed by fine-tuning using gradient descent and per-
+		sistent contrastive divergence (PCD).}
+	\label{fig:dbm}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  

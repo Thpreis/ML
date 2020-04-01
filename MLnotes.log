@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  31 MAR 2020 15:48
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  1 APR 2020 10:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8177,17 +8177,33 @@ Overfull \hbox (3.23648pt too wide) in paragraph at lines 891--893
 taking the weights
  []
 
-[130])
+[130]
 Overfull \hbox (157.92955pt too wide) has occurred while \output is active
  []|[]|
  []
 
 [131]
+Overfull \hbox (12.58237pt too wide) in paragraph at lines 918--922
+\TU/TeXGyrePagella(0)/m/n/10.95 Training DBMs is more subtle than RBMs due to t
+he difficulty of propagat-
+ []
+
+File: gfx/DBM.png Graphic file (type bmp)
+<gfx/DBM.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) [132]
+Overfull \hbox (157.92955pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[133]
 \openout2 = `Chapters/Problems.aux'.
 
  (./Chapters/Problems.tex
 Chapter 4.
-[132
+[134
 
 
 
@@ -8198,7 +8214,7 @@ Overfull \hbox (25.70038pt too wide) in paragraph at lines 12--14
 int correlations between
  []
 
-[133]) [134]
+[135]) [136]
 \tf@thm=\write14
 \openout14 = `MLnotes.thm'.
 
@@ -8445,6 +8461,7 @@ Chapters/Unsupervised.tex
 gfx/HierarchicalCLustering.png
 gfx/AnalogyEMstatphys.png
  gfx/RBM.png
+ gfx/DBM.png
 Chapters/Problems.tex
  ***********
 
@@ -8457,12 +8474,12 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 60070 strings out of 493007
- 1240837 string characters out of 6136718
+ 60085 strings out of 493007
+ 1241091 string characters out of 6136718
  2035713 words of memory out of 5000000
- 62986 multiletter control sequences out of 15000+600000
+ 63000 multiletter control sequences out of 15000+600000
  551866 words of font info for 183 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
  87i,23n,138p,10510b,5676s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (142 pages).
+Output written on MLnotes.pdf (144 pages).

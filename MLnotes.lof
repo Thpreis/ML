@@ -46,4 +46,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {3.3}{\ignorespaces \itshape A RBM consists of visible units $v_i$ and hidden units $h_\mitmu $ that interact with each other through interactions of the form $W_{i\mitmu }v_ih_\mitmu $. Importantly, there are no interactions between visible units themselves or hidden units themselves.\relax }}{127}{figure.caption.17}
 \defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.4}{\ignorespaces \itshape Deep Boltzmann Machine contain multiple hidden layers. To train deep networks, first we perform layerwise training where each two layers are treated as a RBM. This can be followed by fine-tuning using gradient descent and per- sistent contrastive divergence (PCD).\relax }}{133}{figure.caption.18}
+\defcounter {refsection}{0}\relax 
 \ttl@tocsep 
