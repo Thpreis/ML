@@ -394,18 +394,34 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.5.4.2}{Training a DBM}}{132}{subsubsection.3.5.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{135}{chapter.4}
+\contentsline {section}{\numberline {3.6}{Variational AutoEncoders (VAES) and introduction to Generative Adversarial Networks (GANS)}}{133}{section.3.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}{Physics problems}}{135}{section.4.1}
+\contentsline {subsection}{\numberline {3.6.1}{The limitations of maximizing Likelihood}}{133}{subsection.3.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}{Cosmology}}{135}{subsection.4.1.1}
+\contentsline {subsubsection}{\numberline {3.6.1.1}{On the KL divergence underlying maximizing likelihood}}{133}{subsubsection.3.6.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}{QFT}}{135}{subsection.4.1.2}
+\contentsline {subsubsection}{\numberline {3.6.1.2}{On the differences and similarities of maximizing likelihood and GAN-methods}}{134}{subsubsection.3.6.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}{Ai safety}}{136}{section.4.2}
+\contentsline {subsubsection}{\numberline {3.6.1.3}{This is where adversarial learning comes into play and where it has the advantage}}{135}{subsubsection.3.6.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}{Questions}}{136}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {3.6.2}{Generative models and adversarial learning}}{135}{subsection.3.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}{Knobel-problems}}{136}{section.4.3}
+\contentsline {subsection}{\numberline {3.6.3}{Variational Autoencoders}}{136}{subsection.3.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}{Ideas}}{136}{subsection.4.3.1}
+\contentsline {section}{\numberline {3.7}{Generative Adversarial Networks in detail}}{136}{section.3.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{137}{chapter.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}{Physics problems}}{137}{section.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.1}{Cosmology}}{137}{subsection.4.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.2}{QFT}}{137}{subsection.4.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}{Ai safety}}{138}{section.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.1}{Questions}}{138}{subsection.4.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}{Knobel-problems}}{138}{section.4.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3.1}{Ideas}}{138}{subsection.4.3.1}

@@ -48,4 +48,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {3.4}{\ignorespaces \itshape Deep Boltzmann Machine contain multiple hidden layers. To train deep networks, first we perform layerwise training where each two layers are treated as a RBM. This can be followed by fine-tuning using gradient descent and per- sistent contrastive divergence (PCD).\relax }}{133}{figure.caption.18}
 \defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.5}{\ignorespaces A GAN consists of two differentiable functions (usually represented as DNNs): A generator function $G(\mathbf {z};\mittheta _G)$ that takes as an input a $\mathbf {z}$ sampled from some prior on the latent space and outputs a point $\mathbf {x}$. The generator function (NN) has parameters $\mittheta _G$. The discriminator function $D(\mathbf {x};\mittheta _D)$ discriminates between $\mathbf {x}$ from the data and samples from the model: $\mathbf {x}= G(\mathbf {z};\mittheta _G)$ The two networks are trained by "playing a game" where the discriminator is trained to distinguish between synthetic and real examples while the generator is trained to try to fool the discriminator. Importantly, the cost function for the discriminator depends on the generator parameters and vice versa.\relax }}{136}{figure.caption.20}
+\defcounter {refsection}{0}\relax 
 \ttl@tocsep 

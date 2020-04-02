@@ -181,24 +181,45 @@
 \mph@setcol{ii:132}{\mph@nr}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces \itshape  Deep Boltzmann Machine contain multiple hidden layers. To train deep networks, first we perform layerwise training where each two layers are treated as a RBM. This can be followed by fine-tuning using gradient descent and per- sistent contrastive divergence (PCD).\relax }}{133}{figure.caption.18}}
 \newlabel{fig:dbm}{{3.4}{133}{\itshape Deep Boltzmann Machine contain multiple hidden layers. To train deep networks, first we perform layerwise training where each two layers are treated as a RBM. This can be followed by fine-tuning using gradient descent and per- sistent contrastive divergence (PCD).\relax }{figure.caption.18}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.6}{Variational AutoEncoders (VAES) and introduction to Generative Adversarial Networks (GANS)}}{133}{section.3.6}}
+\newlabel{sec:vaeGan}{{3.6}{133}{Variational AutoEncoders (VAES) and introduction to Generative Adversarial Networks (GANS)}{section.3.6}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.1}{The limitations of maximizing Likelihood}}{133}{subsection.3.6.1}}
+\newlabel{subsec:vaeGanMotivation}{{3.6.1}{133}{The limitations of maximizing Likelihood}{subsection.3.6.1}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.1.1}{On the KL divergence underlying maximizing likelihood}}{133}{subsubsection.3.6.1.1}}
 \mph@setcol{ii:133}{\mph@nr}
+\newlabel{eq:vaeGanJSdivergence}{{3.43}{134}{On the KL divergence underlying maximizing likelihood}{equation.3.6.43}{}}
+\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{reference to GAN later}{134}{section*.19}}
+\def\mph@nr{12}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.1.2}{On the differences and similarities of maximizing likelihood and GAN-methods}}{134}{subsubsection.3.6.1.2}}
+\mph@setcol{ii:134}{\mph@nr}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.1.3}{This is where adversarial learning comes into play and where it has the advantage}}{135}{subsubsection.3.6.1.3}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.2}{Generative models and adversarial learning}}{135}{subsection.3.6.2}}
+\newlabel{subsec:vaeGanAdversarial}{{3.6.2}{135}{Generative models and adversarial learning}{subsection.3.6.2}{}}
+\mph@setcol{ii:135}{\mph@nr}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces  A GAN consists of two differentiable functions (usually represented as DNNs): A generator function $G(\mathbf {z};\mittheta _G)$ that takes as an input a $\mathbf {z}$ sampled from some prior on the latent space and outputs a point $\mathbf {x}$. The generator function (NN) has parameters $\mittheta _G$. The discriminator function $D(\mathbf {x};\mittheta _D)$ discriminates between $\mathbf {x}$ from the data and samples from the model: $\mathbf {x}= G(\mathbf {z};\mittheta _G)$ The two networks are trained by "playing a game" where the discriminator is trained to distinguish between synthetic and real examples while the generator is trained to try to fool the discriminator. Importantly, the cost function for the discriminator depends on the generator parameters and vice versa.\relax }}{136}{figure.caption.20}}
+\newlabel{fig:gan}{{3.5}{136}{A GAN consists of two differentiable functions (usually represented as DNNs): A generator function $G(\mathbf {z};\theta _G)$ that takes as an input a $\mathbf {z}$ sampled from some prior on the latent space and outputs a point $\mx $. The generator function (NN) has parameters $\theta _G$. The discriminator function $D(\mx ;\theta _D)$ discriminates between $\mx $ from the data and samples from the model: $\mx = G(\mathbf {z};\theta _G)$ The two networks are trained by "playing a game" where the discriminator is trained to distinguish between synthetic and real examples while the generator is trained to try to fool the discriminator. Importantly, the cost function for the discriminator depends on the generator parameters and vice versa.\relax }{figure.caption.20}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.3}{Variational Autoencoders}}{136}{subsection.3.6.3}}
+\newlabel{subsec:vaeGanVAEs}{{3.6.3}{136}{Variational Autoencoders}{subsection.3.6.3}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.7}{Generative Adversarial Networks in detail}}{136}{section.3.7}}
+\newlabel{sec:gan}{{3.7}{136}{Generative Adversarial Networks in detail}{section.3.7}{}}
+\mph@setcol{ii:136}{\mph@nr}
 \@setckpt{Chapters/Unsupervised}{
-\setcounter{page}{134}
-\setcounter{equation}{40}
+\setcounter{page}{137}
+\setcounter{equation}{43}
 \setcounter{enumi}{4}
 \setcounter{enumii}{3}
 \setcounter{enumiii}{2}
 \setcounter{enumiv}{0}
-\setcounter{footnote}{5}
+\setcounter{footnote}{7}
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
 \setcounter{chapter}{3}
-\setcounter{section}{5}
-\setcounter{subsection}{4}
-\setcounter{subsubsection}{2}
+\setcounter{section}{7}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{4}
+\setcounter{figure}{5}
 \setcounter{table}{0}
 \setcounter{tabx@nest}{0}
 \setcounter{listtotal}{0}
@@ -325,7 +346,7 @@
 \setcounter{loldepth}{1}
 \setcounter{Item}{171}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{99}
+\setcounter{bookmark@seq@number}{104}
 \setcounter{tcbbreakpart}{1}
 \setcounter{tcblayer}{0}
 \setcounter{tcbrastercolumn}{0}
@@ -333,7 +354,7 @@
 \setcounter{tcbraster}{0}
 \setcounter{tcblisting}{0}
 \setcounter{statements}{0}
-\setcounter{@todonotes@numberoftodonotes}{5}
+\setcounter{@todonotes@numberoftodonotes}{6}
 \setcounter{lstlisting}{0}
 \setcounter{section@level}{0}
 }

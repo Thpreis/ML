@@ -948,9 +948,112 @@ It is worth noting that once pretrained, we can use the usual Boltzmann learning
 
 
 
+\section{Variational AutoEncoders (VAES) and introduction to Generative Adversarial Networks (GANS)}
+\label{sec:vaeGan}
+Unlike energy-based models, both these generative modelling frameworks are based on differentiable neural networks and consequently can be trained using backpropagation-based methods\footnote{ VAEs, in particular, can be easily implemented and trained using high-level packages such as Keras making them an easy to deploy generative frameworks.}. These models also differ from the energy based models in that they do not directly seek to maximize likelihood. GANs, for example, employ a novel cost function based on adversarial learning (a concept explained below). 
+
+\subsection{The limitations of maximizing Likelihood}
+\label{subsec:vaeGanMotivation}
+We start by motivating adversarial learning by discussing the limitations of maximum likelihood based approaches.
+\subsubsection{On the KL divergence underlying maximizing likelihood}
+The KL divergence \ref{eq:infoKLdivergence} plays a central role in many generative models. Developing an intuition about KL-divergences is one of the keys to understanding why adversarial learning has proved to be such a powerful method for generative modelling.\\
+The KL-divergence measures the similarity between two probability distributions $p(\mx)$ and $q(\mx)$, but it is, strictly speaking, not a metric\footnote{As it is not symmetric and does not satisfy the triangle inequality.}. Given two distributions, there are two distinct KL-divergences we can construct
+\begin{align}
+	D_{KL}(p||q) &= \int \md \mx p(\mx) \log \frac{p(\mx)}{q(\mx)} \\
+	D_{KL}(q||p) &= \int \md \mx q(\mx) \log \frac{q(\mx)}{p(\mx)}.
+\end{align}
+A related quantity called the \emph{Jensen-Shannon divergence},
+\be 
+\label{eq:vaeGanJSdivergence}
+D_{JS}(p,q)=\half \left[D_{KL} \left(p||\frac{p+q}{2}\right) + D_{KL} \left(q||\frac{p+q}{2}\right)\right]
+\ee 
+does satisfy all of the properties of a squared metric (i.e. the square root of the JS-divergence is a metric).\\
+\\
+In generative models in ML, the two distributions we are usually concerned with are the model distribution $p_\theta(\mx)$ and the data distribution $p_{data}(\mx)$. We of course would like these models to be as similar as possible. However, as we discuss below, there are many subtleties about how we measure similarities that can have large consequences for the behaviour of training procedures. Maximizing the log-likelihood of the data under the model is the same as minimizing the KL divergence between the data distribution and the model distribution $D_{KL}(p_{data}|p_\theta)$. To see this, we can rewrite the KL-divergence as
+\begin{align*}
+	D_{KL}(p_{data} ||p_\theta) &= \int \md \mx p_{data} (\mx) \log p_{data}(\mx) \\
+	&- \int \md \mx p_{data}(\mx) \log p_\theta(\mx) \\
+	&\stackrel{\ref{eq:infoShannon}}{=} - S[p_{data}] -\expval{\log p_\theta(\mx)}_{data}  \\
+	\Leftrightarrow\quad \expval{\log p_\theta(\mx)}_{data} &=-S[p_{data}] - D_{KL}(p_{data}||p_\theta).
+\end{align*}
+The equivalence follows from the the positivity of KL-divergence and the fact that the entropy of the data distribution is constant. In contrast, the original formulation of GANs minimizes an upper bound on the JS divergence between the model distribution $p_\theta(\mx)$ and the data distribution $p_{data}(\mx)$ \todo{reference to GAN later}.
+\subsubsection{On the differences and similarities of maximizing likelihood and GAN-methods}
+This difference in objectives underlies the difference in behaviour between GANs and likelihood based generative models. To see this, we can compare the behaviour of the two KL-divergences $D_{KL}(p_{data}||p_\theta)$ and $D_{KL}(p_\theta ||p_{data})$. Though both of these KL-divergences measure similarities between the two distributions, they are sensitive to very different things.
+\\
+$D_{KL}(p_\theta ||p{data})$ is insensitive to setting $p_\theta \approx 0$ even when $p_{data}\neq 0$ whereas $D_{KL}(p_{data}||p_\theta)$ punishes this harshly. In contrast, $D_{KL}(p_{data}||p_\theta)$ is insensitive to placing weight in the model distribution in regions where $p_{data}\approx 0$ whereas $D_{KL}(p_\theta||p_{data})$ punished this harshly. In other words, $D_{KL}(p_{data}||p_\theta)$ prefers models that have a high probability in regions with lots of training data points whereas $D_{KL}(p_\theta || p_{data})$ punishes models for putting high probability where there is no data.\\
+This suggests that the way likelihood-based methods are most likely to fail is by improperly "filling in" any low-probability density regions between peaks in the data distribution. In contrast, at least in principle, the JS distribution which underlies GANs is sensitive both to placing weight where there is data since it has information about $D_{KL}(p_{data}||p_\theta)$ and to not placing weight where no data has been observed (i.e. in low-probability density regions) since it has information about $D_{KL}(p_\theta||p_{data})$.\\
+In practice, $D_{KL}(p_{data}||p_\theta)$ can be calculated easily directly from the data using sampling. On the other hand, $D_{KL}(p_\theta ||p_{data})$ is impossible to compute since we do not know $p_{data})(\mx)$. In particular, this integral cannot be calculated using sampling since we cannot evaluate $p_{data}(\mx)$ at the locations of the fantasy particles. 
+\subsubsection{This is where adversarial learning comes into play and where it has the advantage}
+The idea of adversarial learning is to circumnavigate this difficulty by using an adversarial learning procedure.  Recall, that $D_{KL}(p_\theta ||p_{data})$ is large when the model artificially over-weighs low-density regions near real peaks.
+\begin{mybox}{First idea of adversarial learning}
+	Adversarial learning accomplishes this same task by teaching a discriminator network to distinguish between real data points and samples generated from the model. By punishing the model for generating points that can be easily discriminated from the data, adversarial learning decreases the weight of regions in the model space that are far away from data points - regions that inevitably arise when maximizing likelihood. This core intuition implicitly underlies many adversarial training algorithms.
+\end{mybox}
+
+
+\subsection{Generative models and adversarial learning}
+\label{subsec:vaeGanAdversarial}
+We now give a high-level introduction to the main idea behind GANs and discuss how they overcome some of these limitations, simultaneously highlighting both the power of GANs and some of the difficulties.
 
 
 
+
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{gfx/GAN}
+	\caption{ A GAN consists of two differentiable functions (usually represented as DNNs): A generator function $G(\mathbf{z};\theta_G)$ that takes as an input a $\mathbf{z}$ sampled from some prior on the latent space and outputs a point $\mx$. The generator function (NN) has parameters $\theta_G$. The discriminator function $D(\mx;\theta_D)$ discriminates between $\mx$ from the data and samples from the model: $\mx = G(\mathbf{z};\theta_G)$ The two networks are trained by "playing a game" where the discriminator is trained to distinguish between synthetic and real examples while the generator is trained to try to fool the discriminator. Importantly, the cost function for the discriminator depends on the generator parameters and vice versa.}
+	\label{fig:gan}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Variational Autoencoders}
+\label{subsec:vaeGanVAEs}
+We now show how VAEs intergrate the variational methods from \ref{sec:varMFT} with deep, differentiable neural networks introduced in \ref{sec:dnn} and \ref{sec:dnn2} to build more powerful generative models that move beyond expectation maximization \ref{subsec:varMFTEM}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Generative Adversarial Networks in detail}
+\label{sec:gan}
 
 
 
