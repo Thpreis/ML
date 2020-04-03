@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  3 APR 2020 16:11
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.22)  3 APR 2020 17:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8379,17 +8379,53 @@ Chapter 4.
 
 
 ]
+Overfull \hbox (0.78732pt too wide) in paragraph at lines 3--4
+\TU/TeXGyrePagella(0)/m/n/10.95 statistical physics interpretations in terms of
+ transfer matrices. Recently,
+ []
+
 Chapter 5.
 [145] [146
 
 
 ]
-Overfull \hbox (25.70038pt too wide) in paragraph at lines 12--14
+Underfull \hbox (badness 10000) in paragraph at lines 34--39
+
+ []
+
+
+Overfull \hbox (17.19962pt too wide) in paragraph at lines 34--39
+\TU/TeXGyrePagella(0)/m/n/10.95 Almost all the techniques discussed here rely o
+n optimizing a pre-specified
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--39
+
+ []
+
+
+Overfull \hbox (10.97266pt too wide) in paragraph at lines 40--41
+[]\TU/TeXGyrePagella(0)/m/n/10.95 Automating prediction from lots of labelled e
+xamples in a narrowly-
+ []
+
+Chapter 6.
+[147] [148
+
+
+]
+Chapter 7.
+[149] [150
+
+
+]
+Overfull \hbox (25.70038pt too wide) in paragraph at lines 70--72
 []\TU/TeXGyrePagella(0)/m/n/10.95 Connected correlation functions describe n-po
 int correlations between
  []
 
-[147]) [148]
+[151]) [152]
 \tf@thm=\write14
 \openout14 = `MLnotes.thm'.
 
@@ -8398,7 +8434,12 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 164.
  (./MLnotes.aux (./FrontBackmatter/Titlepage.aux)
 (./FrontBackmatter/Contents.aux) (./Chapters/Introduction.aux)
 (./Chapters/Statistics.aux) (./Chapters/Supervised.aux)
-(./Chapters/Unsupervised.aux) (./Chapters/Problems.aux))
+(./Chapters/Unsupervised.aux) (./Chapters/Problems.aux)
+
+Package mparhack Warning: Marginpars may have changed.
+(mparhack)                Rerun to get them right.
+
+)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 164.
 
 
@@ -8655,12 +8696,12 @@ Package logreq Info: Writing requests to 'MLnotes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 60162 strings out of 493007
- 1242377 string characters out of 6136718
+ 60167 strings out of 493007
+ 1242459 string characters out of 6136718
  2036719 words of memory out of 5000000
- 63074 multiletter control sequences out of 15000+600000
+ 63079 multiletter control sequences out of 15000+600000
  551866 words of font info for 183 fonts, out of 8000000 for 9000
  1352 hyphenation exceptions out of 8191
  87i,23n,138p,10510b,5676s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on MLnotes.pdf (156 pages).
+Output written on MLnotes.pdf (160 pages).

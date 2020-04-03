@@ -1,5 +1,63 @@
 \chapter{Topic to work on}
 \section{Temporal/Sequential Data}
+What are techniques for dealing with temporal or sequential data. A powerful class of models for sequential data called Hidden Markov Models that utilize dynamical programming techniques have natural statistical physics interpretations in terms of transfer matrices. Recently, Recurrent NNs (RNNs) have become an important and powerful tool for dealing with sequence data. RNNs generalize many of the ideas discussed in \ref{sec:dnn} to deal with temporal data.
+\section{Reinforcement learning}
+Many of the most exciting developments in the last five years have come from combining reinforcement learning with DNNs. RL traces its origins to behaviourist psychology, when it was conceived as a way to explain and study reward-based decision making. RL is a field of ML, in which an angent learns how to master performing a specific task through an interaction with its environment. Depending on the reward it receives, the agent chooses to take an action affecting the environment, which in turn determines the value of the next received reward, and so on. The long-term goal of the agent is to maximize the cumulative expected return, thus improving its performance in the longer run.
+
+\section{Support Vector Machines (SVMs) and Kernel Methods}
+SVMs and kernel methods are a powerful set of techniques that work well when the amount of training data is limited.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Philosophical discussion of intelligence and consciousness}
+AI, by design, is an ambiguous term that mixes aspirations with reality. It also conflates the statistical ideas that form the basis of modern ML with the more commonplace notions about what humans and behavioural scientists mean by intelligence. See \href{https://arxiv.org/abs/1604.00289}{Lake et al.} for an enlightening and important modern discussion of this distinction from a quantitative cognitive science point of view as well as \href{https://www.rand.org/pubs/papers/P3244.html}{Dreyfus} for a surprisingly relevant philosophy-based critique from $1965$.\\
+\\
+Almost all the techniques discussed here rely on optimizing a pre-specified objective function on a given dataset. Yet, we know that for large, complex models changing the data distribution or the goal can lead to an immediate degradation of performance. Deep networks have poor generalizations to even a sightly different context (the infamous Validation-Test set mismatch). This inability to abstract and generalize is a common criticism lobbied against branding modern ML techniques as AI (See Lake).\\
+\\
+The "Singularity" may not be coming but the advances in computing and the availability of large data sets likely ensure that the kind of statistical learning frameworks discussed are here to stay. Rather than a AGI, the kind of techniques presented here seem to be best suited for three important tasks:
+\begin{enumerate}
+	\item Automating prediction from lots of labelled examples in a narrowly-defined setting,
+	\item learning how to parametrize and capture the correlations of complex probability distributions, and
+	\item finding policies for tasks with well-defined goals and clear rules.
+\end{enumerate}
+
+
+
+\chapter{Social implication of ML}
+Caution is in order when applying ML. Without foresight and accountability, the scale and scope of modern ML algorithms can lead to large scale unaccountable and undemocratic outcomes that can reinforce or even worsen existing inequality and inequities.\footnote{See book: O’Neil, Cathy (2017), Weapons of math destruction: How big
+	data increases inequality and threatens democracy (Broad-
+	way Books).}
+When ML is used in a social context, abstract statistical relationships have real social consequences. False positives can mean the difference between life and death (e.g. signature drone strikes). ML algorithms, like al techniques, have important limitations and should be employed with great caution.\\
+All algorithms involve inherent tradeoffs in fairness, \href{https://arxiv.org/abs/1609.05807}{see}. It is farm from clear how to make algorithms fair for all people involved. This is even more true with methods like DL that are hard to interpret. All ML algorithms have implicit assumptions and choices reflected in the datasets we use to the kind of functions we choose to optimize. It is important to remember that there is no "view from nowhere", compare \href{https://course.ccs.neu.edu/cs5150f14/readings/adam-artificialknowing.pdf}{1} and \href{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3078224}{2} - all ML algorithms reflect a point of view and a set of assumptions about the world we live in.
+
+
+
+
+
+
+
+
 \chapter{Ideas for problems to work on}
 \section{Physics problems}
 \subsection{Cosmology}
