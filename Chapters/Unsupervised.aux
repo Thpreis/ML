@@ -196,21 +196,46 @@
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.2}{Generative models and adversarial learning}}{135}{subsection.3.6.2}}
 \newlabel{subsec:vaeGanAdversarial}{{3.6.2}{135}{Generative models and adversarial learning}{subsection.3.6.2}{}}
 \mph@setcol{ii:135}{\mph@nr}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.2.1}{Quintessence of GANs}}{136}{subsubsection.3.6.2.1}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces  A GAN consists of two differentiable functions (usually represented as DNNs): A generator function $G(\mathbf {z};\mittheta _G)$ that takes as an input a $\mathbf {z}$ sampled from some prior on the latent space and outputs a point $\mathbf {x}$. The generator function (NN) has parameters $\mittheta _G$. The discriminator function $D(\mathbf {x};\mittheta _D)$ discriminates between $\mathbf {x}$ from the data and samples from the model: $\mathbf {x}= G(\mathbf {z};\mittheta _G)$ The two networks are trained by "playing a game" where the discriminator is trained to distinguish between synthetic and real examples while the generator is trained to try to fool the discriminator. Importantly, the cost function for the discriminator depends on the generator parameters and vice versa.\relax }}{136}{figure.caption.20}}
 \newlabel{fig:gan}{{3.5}{136}{A GAN consists of two differentiable functions (usually represented as DNNs): A generator function $G(\mathbf {z};\theta _G)$ that takes as an input a $\mathbf {z}$ sampled from some prior on the latent space and outputs a point $\mx $. The generator function (NN) has parameters $\theta _G$. The discriminator function $D(\mx ;\theta _D)$ discriminates between $\mx $ from the data and samples from the model: $\mx = G(\mathbf {z};\theta _G)$ The two networks are trained by "playing a game" where the discriminator is trained to distinguish between synthetic and real examples while the generator is trained to try to fool the discriminator. Importantly, the cost function for the discriminator depends on the generator parameters and vice versa.\relax }{figure.caption.20}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.3}{Variational Autoencoders}}{136}{subsection.3.6.3}}
-\newlabel{subsec:vaeGanVAEs}{{3.6.3}{136}{Variational Autoencoders}{subsection.3.6.3}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.7}{Generative Adversarial Networks in detail}}{136}{section.3.7}}
-\newlabel{sec:gan}{{3.7}{136}{Generative Adversarial Networks in detail}{section.3.7}{}}
 \mph@setcol{ii:136}{\mph@nr}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.2.2}{The cost function of adversarial training}}{137}{subsubsection.3.6.2.2}}
+\newlabel{subsubsec:vaeGanAdversarialCostfct}{{3.6.2.2}{137}{The cost function of adversarial training}{subsubsection.3.6.2.2}{}}
+\newlabel{eq:vaeGanCostfct1}{{3.44}{137}{The cost function of adversarial training}{equation.3.6.44}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.3}{Variational Autoencoders}}{137}{subsection.3.6.3}}
+\newlabel{subsec:vaeGanVAEs}{{3.6.3}{137}{Variational Autoencoders}{subsection.3.6.3}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.3.1}{VAEs as variational methods}}{137}{subsubsection.3.6.3.1}}
+\mph@setcol{ii:137}{\mph@nr}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces VAEs learn a joint distribution $p_\mittheta (\mathbf {x},\mathbf {z})$ between latent variables $\mathbf {z}$ with prior distribution $p(\mathbf {z})$ and data $\mathbf {x}$. The conditional distribution $p_\mittheta (\mathbf {x}|\mathbf {z})$ can be thought of as a stochastic "decoder" that maps latent variables to new examples. The stochastic "encoder" $q_\mittheta (\mathbf {z}|\mathbf {x})$ approximates the true but intractable $p_\mittheta (\mathbf {z}|\mathbf {x})$ - much like mean-field theories in stat. phys. approximate true distributions with analytically tractable approximations. \relax }}{138}{figure.caption.21}}
+\newlabel{fig:vae1}{{3.6}{138}{VAEs learn a joint distribution $p_\theta (\mx ,\mz )$ between latent variables $\mz $ with prior distribution $p(\mz )$ and data $\mx $. The conditional distribution $p_\theta (\mx |\mz )$ can be thought of as a stochastic "decoder" that maps latent variables to new examples. The stochastic "encoder" $q_\theta (\mz |\mx )$ approximates the true but intractable $p_\theta (\mz |\mx )$ - much like mean-field theories in stat. phys. approximate true distributions with analytically tractable approximations. \relax }{figure.caption.21}{}}
+\mph@setcol{ii:138}{\mph@nr}
+\newlabel{eq:vaeGANELBO}{{3.48}{139}{VAEs as variational methods}{equation.3.6.48}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.3.2}{Training via the reparametrization trick}}{139}{subsubsection.3.6.3.2}}
+\newlabel{subsubsec:vaeGanVAETraining}{{3.6.3.2}{139}{Training via the reparametrization trick}{subsubsection.3.6.3.2}{}}
+\mph@setcol{ii:139}{\mph@nr}
+\mph@setcol{ii:140}{\mph@nr}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces \itshape  Computational flow of VAEs.\relax }}{141}{figure.caption.22}}
+\newlabel{fig:vae2}{{3.7}{141}{\itshape Computational flow of VAEs.\relax }{figure.caption.22}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.3.3}{Connection to the information bottleneck}}{141}{subsubsection.3.6.3.3}}
+\mph@setcol{ii:141}{\mph@nr}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.4}{VAE with Gaussian latent variables and Gaussian encoder}}{142}{subsection.3.6.4}}
+\newlabel{subsec:vaeGaussian}{{3.6.4}{142}{VAE with Gaussian latent variables and Gaussian encoder}{subsection.3.6.4}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.4.1}{Implementing the Gaussian VAE}}{142}{subsubsection.3.6.4.1}}
+\newlabel{eq:vaeKLgaussian}{{3.58}{142}{Implementing the Gaussian VAE}{equation.3.6.58}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.4.2}{Insights from the practical implementations}}{142}{subsubsection.3.6.4.2}}
+\mph@setcol{ii:142}{\mph@nr}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.7}{Generative Adversarial Networks in detail}}{143}{section.3.7}}
+\newlabel{sec:gan}{{3.7}{143}{Generative Adversarial Networks in detail}{section.3.7}{}}
+\mph@setcol{ii:143}{\mph@nr}
 \@setckpt{Chapters/Unsupervised}{
-\setcounter{page}{137}
-\setcounter{equation}{43}
-\setcounter{enumi}{4}
+\setcounter{page}{144}
+\setcounter{equation}{58}
+\setcounter{enumi}{3}
 \setcounter{enumii}{3}
 \setcounter{enumiii}{2}
 \setcounter{enumiv}{0}
-\setcounter{footnote}{7}
+\setcounter{footnote}{9}
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
 \setcounter{chapter}{3}
@@ -219,7 +244,7 @@
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{5}
+\setcounter{figure}{7}
 \setcounter{table}{0}
 \setcounter{tabx@nest}{0}
 \setcounter{listtotal}{0}
@@ -344,9 +369,9 @@
 \setcounter{lstnumber}{1}
 \setcounter{listings}{0}
 \setcounter{loldepth}{1}
-\setcounter{Item}{171}
+\setcounter{Item}{178}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{104}
+\setcounter{bookmark@seq@number}{105}
 \setcounter{tcbbreakpart}{1}
 \setcounter{tcblayer}{0}
 \setcounter{tcbrastercolumn}{0}

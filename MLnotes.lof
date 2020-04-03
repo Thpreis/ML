@@ -50,4 +50,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {3.5}{\ignorespaces A GAN consists of two differentiable functions (usually represented as DNNs): A generator function $G(\mathbf {z};\mittheta _G)$ that takes as an input a $\mathbf {z}$ sampled from some prior on the latent space and outputs a point $\mathbf {x}$. The generator function (NN) has parameters $\mittheta _G$. The discriminator function $D(\mathbf {x};\mittheta _D)$ discriminates between $\mathbf {x}$ from the data and samples from the model: $\mathbf {x}= G(\mathbf {z};\mittheta _G)$ The two networks are trained by "playing a game" where the discriminator is trained to distinguish between synthetic and real examples while the generator is trained to try to fool the discriminator. Importantly, the cost function for the discriminator depends on the generator parameters and vice versa.\relax }}{136}{figure.caption.20}
 \defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.6}{\ignorespaces VAEs learn a joint distribution $p_\mittheta (\mathbf {x},\mathbf {z})$ between latent variables $\mathbf {z}$ with prior distribution $p(\mathbf {z})$ and data $\mathbf {x}$. The conditional distribution $p_\mittheta (\mathbf {x}|\mathbf {z})$ can be thought of as a stochastic "decoder" that maps latent variables to new examples. The stochastic "encoder" $q_\mittheta (\mathbf {z}|\mathbf {x})$ approximates the true but intractable $p_\mittheta (\mathbf {z}|\mathbf {x})$ - much like mean-field theories in stat. phys. approximate true distributions with analytically tractable approximations. \relax }}{138}{figure.caption.21}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.7}{\ignorespaces \itshape Computational flow of VAEs.\relax }}{141}{figure.caption.22}
+\defcounter {refsection}{0}\relax 
+\ttl@tocsep 
+\defcounter {refsection}{0}\relax 
 \ttl@tocsep 

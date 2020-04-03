@@ -406,22 +406,44 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.6.2}{Generative models and adversarial learning}}{135}{subsection.3.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6.3}{Variational Autoencoders}}{136}{subsection.3.6.3}
+\contentsline {subsubsection}{\numberline {3.6.2.1}{Quintessence of GANs}}{136}{subsubsection.3.6.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.7}{Generative Adversarial Networks in detail}}{136}{section.3.7}
+\contentsline {subsubsection}{\numberline {3.6.2.2}{The cost function of adversarial training}}{137}{subsubsection.3.6.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}{Ideas for problems to work on}}{137}{chapter.4}
+\contentsline {subsection}{\numberline {3.6.3}{Variational Autoencoders}}{137}{subsection.3.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}{Physics problems}}{137}{section.4.1}
+\contentsline {subsubsection}{\numberline {3.6.3.1}{VAEs as variational methods}}{137}{subsubsection.3.6.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}{Cosmology}}{137}{subsection.4.1.1}
+\contentsline {subsubsection}{\numberline {3.6.3.2}{Training via the reparametrization trick}}{139}{subsubsection.3.6.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}{QFT}}{137}{subsection.4.1.2}
+\contentsline {subsubsection}{\numberline {3.6.3.3}{Connection to the information bottleneck}}{141}{subsubsection.3.6.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}{Ai safety}}{138}{section.4.2}
+\contentsline {subsection}{\numberline {3.6.4}{VAE with Gaussian latent variables and Gaussian encoder}}{142}{subsection.3.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}{Questions}}{138}{subsection.4.2.1}
+\contentsline {subsubsection}{\numberline {3.6.4.1}{Implementing the Gaussian VAE}}{142}{subsubsection.3.6.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}{Knobel-problems}}{138}{section.4.3}
+\contentsline {subsubsection}{\numberline {3.6.4.2}{Insights from the practical implementations}}{142}{subsubsection.3.6.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}{Ideas}}{138}{subsection.4.3.1}
+\contentsline {section}{\numberline {3.7}{Generative Adversarial Networks in detail}}{143}{section.3.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}{Topic to work on}}{145}{chapter.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}{Temporal/Sequential Data}}{145}{section.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}{Ideas for problems to work on}}{147}{chapter.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}{Physics problems}}{147}{section.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1.1}{Cosmology}}{147}{subsection.5.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1.2}{QFT}}{147}{subsection.5.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}{Ai safety}}{148}{section.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2.1}{Questions}}{148}{subsection.5.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.3}{Knobel-problems}}{148}{section.5.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3.1}{Ideas}}{148}{subsection.5.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.4}{ML questions}}{148}{section.5.4}
