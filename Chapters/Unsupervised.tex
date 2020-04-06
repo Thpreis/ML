@@ -980,9 +980,9 @@ The equivalence follows from the the positivity of KL-divergence and the fact th
 \subsubsection{On the differences and similarities of maximizing likelihood and GAN-methods}
 This difference in objectives underlies the difference in behaviour between GANs and likelihood based generative models. To see this, we can compare the behaviour of the two KL-divergences $D_{KL}(p_{data}||p_\theta)$ and $D_{KL}(p_\theta ||p_{data})$. Though both of these KL-divergences measure similarities between the two distributions, they are sensitive to very different things.
 \\
-$D_{KL}(p_\theta ||p{data})$ is insensitive to setting $p_\theta \approx 0$ even when $p_{data}\neq 0$ whereas $D_{KL}(p_{data}||p_\theta)$ punishes this harshly. In contrast, $D_{KL}(p_{data}||p_\theta)$ is insensitive to placing weight in the model distribution in regions where $p_{data}\approx 0$ whereas $D_{KL}(p_\theta||p_{data})$ punished this harshly. In other words, $D_{KL}(p_{data}||p_\theta)$ prefers models that have a high probability in regions with lots of training data points whereas $D_{KL}(p_\theta || p_{data})$ punishes models for putting high probability where there is no data.\\
+$D_{KL}(p_\theta ||p_{data})$ is insensitive to setting $p_\theta \approx 0$ even when $p_{data}\neq 0$ whereas $D_{KL}(p_{data}||p_\theta)$ punishes this harshly. In contrast, $D_{KL}(p_{data}||p_\theta)$ is insensitive to placing weight in the model distribution in regions where $p_{data}\approx 0$ whereas $D_{KL}(p_\theta||p_{data})$ punished this harshly. In other words, $D_{KL}(p_{data}||p_\theta)$ prefers models that have a high probability in regions with lots of training data points whereas $D_{KL}(p_\theta || p_{data})$ punishes models for putting high probability where there is no data.\\
 This suggests that the way likelihood-based methods are most likely to fail is by improperly "filling in" any low-probability density regions between peaks in the data distribution. In contrast, at least in principle, the JS distribution which underlies GANs is sensitive both to placing weight where there is data since it has information about $D_{KL}(p_{data}||p_\theta)$ and to not placing weight where no data has been observed (i.e. in low-probability density regions) since it has information about $D_{KL}(p_\theta||p_{data})$.\\
-In practice, $D_{KL}(p_{data}||p_\theta)$ can be calculated easily directly from the data using sampling. On the other hand, $D_{KL}(p_\theta ||p_{data})$ is impossible to compute since we do not know $p_{data})(\mx)$. In particular, this integral cannot be calculated using sampling since we cannot evaluate $p_{data}(\mx)$ at the locations of the fantasy particles. 
+In practice, $D_{KL}(p_{data}||p_\theta)$ can be calculated easily directly from the data using sampling. On the other hand, $D_{KL}(p_\theta ||p_{data})$ is impossible to compute since we do not know $p_{data}(\mx)$. In particular, this integral cannot be calculated using sampling since we cannot evaluate $p_{data}(\mx)$ at the locations of the fantasy particles. 
 \subsubsection{This is where adversarial learning comes into play and where it has the advantage}
 The idea of adversarial learning is to circumnavigate this difficulty by using an adversarial learning procedure.  Recall, that $D_{KL}(p_\theta ||p_{data})$ is large when the model artificially over-weighs low-density regions near real peaks.
 \begin{mybox}{First idea of adversarial learning}
@@ -1165,7 +1165,73 @@ This analytic expression allows us to implement the Gaussian VAE in a straight f
 
 \section{Generative Adversarial Networks in detail}
 \label{sec:gan}
+\subsection{Introduction - recap of generative models using MLE}
+A GAN is a generative model, where generative refers to any model that takes a training set, consisting of samples drawn
+from a distribution $p_{data}$, and learns to represent an estimate of that distribution
+somehow. The result is a probability distribution $p_{model}$. In some cases, the
+model estimates $p_{model}$ explicitly, in other cases, the
+model is only able to generate samples from $p_{model}$. Some
+models are able to do both. GANs focus primarily on sample generation, though
+it is possible to design GANs that can do both.
+\subsubsection{MLE}
+The basic idea of maximum likelihood, as explained in \ref{subsubsec:bayesEstMLE} is to define a model that provides an
+estimate of a probability distribution, parametrized by parameters $\mt$. The maximum likelihood process consists ot taking several samples from the data generating distribution to form a training set, then pushing up on the probability the model assigns to those points, in order to maximize the likelihood of the training data
+\bse 
+\mt^* = \arg \max_{\mt} \mathbb{E}_{x \sim p_{data}} \log p_{model}(\mx |\mt).
+\ese 
+We can also think of MLE as minimizing the KL divergence between the data generating distribution and the model
+\be 
+\label{eq:ganMLE}
+\mt^* = \arg \min_{\mt} D_{KL}(p_{data}(\mx) ||p_{model}(\mx ;\mt)).
+\ee 
+If we were able to do this precisely, then if $p_{data}$ lies within the family of distributions $p_{model}(\mx;\mt)$. the model would recover $p_{data}$ exactly. In practice, we do not have access to $p_{data}$ itself, but only to a training set consisting of $m$ samples from $p_{data}$. We use these to define $\hat{p}_{data}$, an \emph{empirical distribution} that places mass only on exactly those $m$ points, approximating $p_{data}$. Minimizing the KL divergence between $\hat{p}_{data}$ and $p_{model}$ is exactly equivalent to maximizing the log-likelihood of the training set.
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{gfx/MLEmodels}
+	\caption{ Deep generative models that can learn via the principle of MLE differ w.r.t. how they represent or approximate the likelihood. On the left branch, models construct an explicit density $p_{model}(\mx;\mt)$, and thus an explicit likelihood which can be maximized. Among these explicit density models, the density may be computationally tractable, or it may be intractable, meaning that to maximize the likelihood it is necessary to make either variational approximations or MC approximations (or both). On the right branch, the model does not explicitly represent a probability distribution over the space where the data lies. Instead, the model provides some way of interacting less directly with this probability distribution. Typically the indirect means of interacting with the probability distribution is the ability to draw samples from it. Some of of these implicit models that offer the ability to sample from the distribution do so using a Markov Chain; the model defines a way to stochastically transform an existing sample in order to obtain another sample from the same distribution. Others are able to generate a sample in a single step, starting without any input. While the models used for GANs can sometimes be constructed to define an explicit density, the training algorithm for GANs makes use only of the model's ability to generate samples. GANs are thus trained using the strategy from the rightmost leaf of the tree: using an implicit model that samples directly from the distribution represented by the model.}
+	\label{fig:mlemodels}
+\end{figure}
+
+
+
+
+\subsubsection{Comparing GANs to other generative models}
+In summary, GANs were designed to avoid many disadvantages associated with other generative models:
+\begin{enumerate}
+	\item The design of the generator function has very few restricitions. This is an advantage relative to Boltzmann machines, for which few probability distributions admit tractable MC sampling.
+	\item No Markov chains are needed, advantage relative to Boltzmann machines.
+	\item No variational bound is needed, and specific model families usable within the GAN framework are already known to be universal approximators, i.e. GANS are know to be asymptotically consistent, which is not proven for VAEs.
+\end{enumerate}
+
+
+\subsection{How do GANs work ?}
+\subsubsection{The GAN framework}
+The basic idea of GANs is to set up a game between two players. One of them is called the \emph{generator}. The generator creates samples that are intended to come from the same distribution as the training data. The other player is the \emph{discriminator}. The discriminator examines samples to determine whether they are real or fake. The discriminator learns using traditional supervised learning techniques, dividing inputs into two classes (real or fake). The generator is trained to fool the discriminator. We can think of the generator as being like a counterfeiter, trying to make fake money, and the discriminator as being like police, trying to allow legitimate money and catch counterfeit money. To succeed in this game, the counterfeiter must learn to make money that is indistinguishable form genuine money, and the generator network must learn to create samples that are drawn from the same distribution as the training data. This process is illustrated in figure \ref{fig:gan1}.\\
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{gfx/gan1}
+	\caption{The GAN framework pits two adversaries against each other in a game. Each player is represented by a differentiable function controlled by a set of parameters. Typically  these functioNs. The game plays out in two scenarious. In one scenario, training examples $\mx$ are randomly sampled from the training set and used as input for the first player, the discriminator, represented by the function $D$. The goal of the discriminator is to output the probability that is input is real rather than fake, under the assumption that half of the inputs it is ever shwon are real and half are fake. In this first scenario, the goal of the discriminator is for $D(\mx)$ to be near $1$. In the second scenario, input $\mz$ to the generator are randomly sampled from the modle's prior over the latent variables. The discriminator then receives input $G(\mz)$, a fake sampled created by the generator. In this scenario, both players participate. The discriminator strives to make $D(G(\mz))$ approach $0$ while the generative strives to make the same quantity approach $1$. If both models have sufficient capacity, then the Nahs equilibrium of this game corresponds to the $G(\mz)$ being drawn from the same distribution as the training data, and $D(\mx)=\half$ for all $\mx$.}
+	\label{fig:gan1}
+\end{figure}
+Formally, GANs are a structured probabilistic model containing latent variables $z$ and observed variables $\mx$. 
+The two players in the game are represented by two functions, each of which is differentiable both w.r.t. its inputs and w.r.t. its parameters. The discriminator is a function $D$ that takes $\mx$ as input and uses $\mt^{(D)}$ as parameters. The generator is defined by a function $G$ that takes $\mz$ as input and uses $\mt^{(G)}$ as parameters. Both players have cost functions that are defined in terms of both players' parameters. The discriminator wishes to minimize $J^{(D)}(\mt^{(D)}, \mt^{(G)})$ and must do so while controlling only $\mt^{(D)}$. The generator wishes to minimize $J^{(G)}(\mt^{(D)},\mt^{(G)})$ and must do so while controlling only $\mt^{(G)}$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ \subsection{..}
+In GANs, you have two NNs playing a game against each other, the discriminator and the generator. The generator is generating new samples whilst the discriminator has to discriminate the fake from the real ones, compare figure \ref{fig:gan}. The discriminator tries to be as close as possible to $1$, signifying that it is a real datapoint which stemmed from the real data set. The generator on the other hand is a map from the latent space to the space of data points, i.e. $G(z)=x$, where $x$ becomes the input of the discriminator $D(x)=D(G(z))$. Now, the generator tries to get $D(G(z))\rightarrow1$, as it wants to be as close as possible to the real image, whilst the discriminator wants to distinguish fake from real images as good as possible, i.e. $D(G(z))\rightarrow 0$. Note that $z$ is sampled from a prior distribution with a latent noise, which allows the generator to generate many different images.
 
 
 

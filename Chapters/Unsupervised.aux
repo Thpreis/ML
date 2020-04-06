@@ -227,10 +227,24 @@
 \mph@setcol{ii:142}{\mph@nr}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.7}{Generative Adversarial Networks in detail}}{143}{section.3.7}}
 \newlabel{sec:gan}{{3.7}{143}{Generative Adversarial Networks in detail}{section.3.7}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.7.1}{Introduction - recap of generative models using MLE}}{143}{subsection.3.7.1}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.1.1}{MLE}}{143}{subsubsection.3.7.1.1}}
+\newlabel{eq:ganMLE}{{3.59}{143}{MLE}{equation.3.7.59}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.1.2}{Comparing GANs to other generative models}}{143}{subsubsection.3.7.1.2}}
 \mph@setcol{ii:143}{\mph@nr}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces  Deep generative models that can learn via the principle of MLE differ w.r.t. how they represent or approximate the likelihood. On the left branch, models construct an explicit density $p_{model}(\mathbf {x};\mathbf {θ})$, and thus an explicit likelihood which can be maximized. Among these explicit density models, the density may be computationally tractable, or it may be intractable, meaning that to maximize the likelihood it is necessary to make either variational approximations or MC approximations (or both). On the right branch, the model does not explicitly represent a probability distribution over the space where the data lies. Instead, the model provides some way of interacting less directly with this probability distribution. Typically the indirect means of interacting with the probability distribution is the ability to draw samples from it. Some of of these implicit models that offer the ability to sample from the distribution do so using a Markov Chain; the model defines a way to stochastically transform an existing sample in order to obtain another sample from the same distribution. Others are able to generate a sample in a single step, starting without any input. While the models used for GANs can sometimes be constructed to define an explicit density, the training algorithm for GANs makes use only of the model's ability to generate samples. GANs are thus trained using the strategy from the rightmost leaf of the tree: using an implicit model that samples directly from the distribution represented by the model.\relax }}{144}{figure.caption.23}}
+\newlabel{fig:mlemodels}{{3.8}{144}{Deep generative models that can learn via the principle of MLE differ w.r.t. how they represent or approximate the likelihood. On the left branch, models construct an explicit density $p_{model}(\mx ;\mt )$, and thus an explicit likelihood which can be maximized. Among these explicit density models, the density may be computationally tractable, or it may be intractable, meaning that to maximize the likelihood it is necessary to make either variational approximations or MC approximations (or both). On the right branch, the model does not explicitly represent a probability distribution over the space where the data lies. Instead, the model provides some way of interacting less directly with this probability distribution. Typically the indirect means of interacting with the probability distribution is the ability to draw samples from it. Some of of these implicit models that offer the ability to sample from the distribution do so using a Markov Chain; the model defines a way to stochastically transform an existing sample in order to obtain another sample from the same distribution. Others are able to generate a sample in a single step, starting without any input. While the models used for GANs can sometimes be constructed to define an explicit density, the training algorithm for GANs makes use only of the model's ability to generate samples. GANs are thus trained using the strategy from the rightmost leaf of the tree: using an implicit model that samples directly from the distribution represented by the model.\relax }{figure.caption.23}{}}
+\mph@setcol{ii:144}{\mph@nr}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.7.2}{How do GANs work ?}}{145}{subsection.3.7.2}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.2.1}{The GAN framework}}{145}{subsubsection.3.7.2.1}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.7.3}{..}}{145}{subsection.3.7.3}}
+\mph@setcol{ii:145}{\mph@nr}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces The GAN framework pits two adversaries against each other in a game. Each player is represented by a differentiable function controlled by a set of parameters. Typically these functioNs. The game plays out in two scenarious. In one scenario, training examples $\mathbf {x}$ are randomly sampled from the training set and used as input for the first player, the discriminator, represented by the function $D$. The goal of the discriminator is to output the probability that is input is real rather than fake, under the assumption that half of the inputs it is ever shwon are real and half are fake. In this first scenario, the goal of the discriminator is for $D(\mathbf {x})$ to be near $1$. In the second scenario, input $\mathbf {z}$ to the generator are randomly sampled from the modle's prior over the latent variables. The discriminator then receives input $G(\mathbf {z})$, a fake sampled created by the generator. In this scenario, both players participate. The discriminator strives to make $D(G(\mathbf {z}))$ approach $0$ while the generative strives to make the same quantity approach $1$. If both models have sufficient capacity, then the Nahs equilibrium of this game corresponds to the $G(\mathbf {z})$ being drawn from the same distribution as the training data, and $D(\mathbf {x})=\frac  {1}{2}$ for all $\mathbf {x}$.\relax }}{146}{figure.caption.24}}
+\newlabel{fig:gan1}{{3.9}{146}{The GAN framework pits two adversaries against each other in a game. Each player is represented by a differentiable function controlled by a set of parameters. Typically these functioNs. The game plays out in two scenarious. In one scenario, training examples $\mx $ are randomly sampled from the training set and used as input for the first player, the discriminator, represented by the function $D$. The goal of the discriminator is to output the probability that is input is real rather than fake, under the assumption that half of the inputs it is ever shwon are real and half are fake. In this first scenario, the goal of the discriminator is for $D(\mx )$ to be near $1$. In the second scenario, input $\mz $ to the generator are randomly sampled from the modle's prior over the latent variables. The discriminator then receives input $G(\mz )$, a fake sampled created by the generator. In this scenario, both players participate. The discriminator strives to make $D(G(\mz ))$ approach $0$ while the generative strives to make the same quantity approach $1$. If both models have sufficient capacity, then the Nahs equilibrium of this game corresponds to the $G(\mz )$ being drawn from the same distribution as the training data, and $D(\mx )=\half $ for all $\mx $.\relax }{figure.caption.24}{}}
+\mph@setcol{ii:146}{\mph@nr}
 \@setckpt{Chapters/Unsupervised}{
-\setcounter{page}{144}
-\setcounter{equation}{58}
+\setcounter{page}{147}
+\setcounter{equation}{59}
 \setcounter{enumi}{3}
 \setcounter{enumii}{3}
 \setcounter{enumiii}{2}
@@ -240,11 +254,11 @@
 \setcounter{part}{0}
 \setcounter{chapter}{3}
 \setcounter{section}{7}
-\setcounter{subsection}{0}
+\setcounter{subsection}{3}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{7}
+\setcounter{figure}{9}
 \setcounter{table}{0}
 \setcounter{tabx@nest}{0}
 \setcounter{listtotal}{0}
@@ -369,9 +383,9 @@
 \setcounter{lstnumber}{1}
 \setcounter{listings}{0}
 \setcounter{loldepth}{1}
-\setcounter{Item}{178}
+\setcounter{Item}{181}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{105}
+\setcounter{bookmark@seq@number}{108}
 \setcounter{tcbbreakpart}{1}
 \setcounter{tcblayer}{0}
 \setcounter{tcbrastercolumn}{0}

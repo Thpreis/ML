@@ -426,32 +426,44 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.7}{Generative Adversarial Networks in detail}}{143}{section.3.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}{Topic to work on}}{145}{chapter.4}
+\contentsline {subsection}{\numberline {3.7.1}{Introduction - recap of generative models using MLE}}{143}{subsection.3.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}{Temporal/Sequential Data}}{145}{section.4.1}
+\contentsline {subsubsection}{\numberline {3.7.1.1}{MLE}}{143}{subsubsection.3.7.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}{Reinforcement learning}}{145}{section.4.2}
+\contentsline {subsubsection}{\numberline {3.7.1.2}{Comparing GANs to other generative models}}{143}{subsubsection.3.7.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}{Support Vector Machines (SVMs) and Kernel Methods}}{145}{section.4.3}
+\contentsline {subsection}{\numberline {3.7.2}{How do GANs work ?}}{145}{subsection.3.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}{Philosophical discussion of intelligence and consciousness}}{147}{chapter.5}
+\contentsline {subsubsection}{\numberline {3.7.2.1}{The GAN framework}}{145}{subsubsection.3.7.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}{Social implication of ML}}{149}{chapter.6}
+\contentsline {subsection}{\numberline {3.7.3}{..}}{145}{subsection.3.7.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}{Ideas for problems to work on}}{151}{chapter.7}
+\contentsline {chapter}{\numberline {4}{Topic to work on}}{147}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.1}{Physics problems}}{151}{section.7.1}
+\contentsline {section}{\numberline {4.1}{Temporal/Sequential Data}}{147}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.1.1}{Cosmology}}{151}{subsection.7.1.1}
+\contentsline {section}{\numberline {4.2}{Reinforcement learning}}{147}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.1.2}{QFT}}{151}{subsection.7.1.2}
+\contentsline {section}{\numberline {4.3}{Support Vector Machines (SVMs) and Kernel Methods}}{147}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.2}{Ai safety}}{152}{section.7.2}
+\contentsline {chapter}{\numberline {5}{Philosophical discussion of intelligence and consciousness}}{149}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.2.1}{Questions}}{152}{subsection.7.2.1}
+\contentsline {chapter}{\numberline {6}{Social implication of ML}}{151}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.3}{Knobel-problems}}{152}{section.7.3}
+\contentsline {chapter}{\numberline {7}{Ideas for problems to work on}}{153}{chapter.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.3.1}{Ideas}}{152}{subsection.7.3.1}
+\contentsline {section}{\numberline {7.1}{Physics problems}}{153}{section.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.4}{ML questions}}{152}{section.7.4}
+\contentsline {subsection}{\numberline {7.1.1}{Cosmology}}{153}{subsection.7.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.1.2}{QFT}}{153}{subsection.7.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.2}{Ai safety}}{154}{section.7.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.2.1}{Questions}}{154}{subsection.7.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.3}{Knobel-problems}}{154}{section.7.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.3.1}{Ideas}}{154}{subsection.7.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.4}{ML questions}}{154}{section.7.4}
